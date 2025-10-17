@@ -1,4 +1,6 @@
-## Python Basics
+# Python Cheat Sheet Study Guide - UPDATED 10/17/2025
+
+## Basics
 
 ### Variables \& Data Types
 
@@ -371,6 +373,134 @@ for food, price in zip(foods, prices):
 ```
 
 
+## Functional Programming
+
+### Lambda Functions
+
+```python
+# Basic lambda syntax
+# lambda parameters: expression
+
+# Regular function
+def calculate_tax(price):
+    return price * 0.07
+
+# Lambda equivalent
+calculate_tax = lambda price: price * 0.07
+print(calculate_tax(15))  # 1.05
+
+# Lambda for sorting
+products = [
+    {'name': 'laptop', 'price': 999.99},
+    {'name': 'mouse', 'price': 64.99},
+    {'name': 'keyboard', 'price': 129.99}
+]
+
+# Sort by price (descending)
+sorted_products = sorted(products, key=lambda p: p["price"], reverse=True)
+
+# Sort by multiple criteria
+by_category_name = sorted(products, key=lambda p: (p['category'], p['name']))
+```
+
+
+### Map Function
+
+```python
+# Map applies a function to each item in a list
+numbers = [1, 2, 3, 4, 5]
+
+# Traditional approach
+def double_nums(alist):
+    output = []
+    for num in alist:
+        output.append(num * 2)
+    return output
+
+# Using map with lambda
+doubled = list(map(lambda num: num * 2, numbers))
+print(doubled)  # [2, 4, 6, 8, 10]
+
+# Map with complex data
+users = [
+    {'name': 'PETER COTTONTAIL', 'email': 'PCOTTON@EMAIL.COM'},
+    {'name': 'TONY STARK', 'email': 'TONYS@EMAIL.COM'}
+]
+
+# Normalize data
+def normalize_user(user):
+    return {
+        'name': user['name'].title(),
+        'email': user['email'].lower(),
+        'username': user['name'].split()[^0].lower()
+    }
+
+normalized_users = list(map(normalize_user, users))
+```
+
+
+### Filter Function
+
+```python
+# Filter creates a new list based on a condition
+numbers = [1, 2, 3, 4, 5]
+
+# Traditional approach
+def only_evens(nums):
+    output = []
+    for num in nums:
+        if num % 2 == 0:
+            output.append(num)
+    return output
+
+# Using filter with lambda
+evens = list(filter(lambda num: num % 2 == 0, numbers))
+print(evens)  # [2, 4]
+
+# Filter with user-defined function
+def is_even(num):
+    return num % 2 == 0
+
+evens = list(filter(is_even, numbers))
+
+# Real-world example
+books = [
+    {'title': 'Python Programming', 'rating': 4.5, 'available': True},
+    {'title': 'Web Development', 'rating': 3.8, 'available': False},
+    {'title': 'Data Science', 'rating': 4.9, 'available': True}
+]
+
+# Find available books with rating >= 4.0
+quality_books = list(filter(lambda book: book['available'] and book['rating'] >= 4.0, books))
+```
+
+
+### List Comprehensions
+
+```python
+# Syntax: [expression for item in list if condition]
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+
+# Double all numbers
+doubled = [num * 2 for num in numbers]
+
+# Get only evens
+evens = [num for num in numbers if num % 2 == 0]
+
+# Double only evens (combining map + filter)
+doubled_evens = [num * 2 for num in numbers if num % 2 == 0]
+
+# Combining with functions
+def double_only_evens(nums):
+    return [num * 2 for num in nums if num % 2 == 0]
+
+# Dictionary comprehension
+squared_dict = {x: x**2 for x in range(5)}
+# {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+```
+
+
 ## Object-Oriented Programming
 
 ### Class Basics
@@ -449,6 +579,212 @@ warrior.attack(enemy)       # Complex implementation hidden
 ```
 
 
+## Advanced Data Structures
+
+### Stacks (LIFO - Last In, First Out)
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Stack:
+    def __init__(self):
+        self.head = None  # Top of stack
+        self.tail = None  # Bottom of stack
+        self.size = 0
+    
+    def is_empty(self):
+        return self.head is None
+    
+    def push(self, item):
+        """Add item to top of stack - O(1)"""
+        new_node = Node(item)
+        
+        if self.is_empty():
+            self.head = new_node
+            self.tail = new_node
+        else:
+            new_node.next = self.head
+            self.head = new_node
+        
+        self.size += 1
+    
+    def pop(self):
+        """Remove and return top item - O(1)"""
+        if self.is_empty():
+            return None
+        
+        item = self.head.data
+        self.head = self.head.next
+        
+        if self.head is None:
+            self.tail = None
+        
+        self.size -= 1
+        return item
+    
+    def peek(self):
+        """View top item without removing - O(1)"""
+        if self.is_empty():
+            return None
+        return self.head.data
+
+# Using Python list as stack (simpler)
+stack = []
+stack.append(1)    # Push - O(1)
+stack.append(2)
+stack.append(3)
+top = stack.pop()  # Pop - O(1)
+peek = stack[-1]   # Peek - O(1)
+```
+
+
+### Queues (FIFO - First In, First Out)
+
+```python
+from collections import deque
+
+# Using deque for efficient queue operations
+queue = deque()
+
+# Enqueue (add to end) - O(1)
+queue.append("first")
+queue.append("second")
+queue.append("third")
+
+print(f"Queue: {queue}")
+
+# Dequeue (remove from front) - O(1)
+front_item = queue.popleft()  # IMPORTANT: O(1) time
+print(f"Dequeued: {front_item}")
+print(f"Queue after: {queue}")
+
+# Peek front
+if queue:
+    front = queue[^0]  # O(1)
+
+# Note: Regular list pop(0) is O(n) - DON'T USE for queues
+```
+
+
+## Linked Lists
+
+### Node \& LinkedList Implementation
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+    
+    def is_empty(self):
+        return self.head is None
+    
+    def append(self, data):
+        """Add node to end - O(1) with tail"""
+        new_node = Node(data)
+        if self.is_empty():
+            self.head = new_node
+            self.tail = new_node
+            return
+        
+        self.tail.next = new_node
+        self.tail = new_node
+    
+    def traverse(self):
+        """Visit all nodes - O(n)"""
+        current = self.head
+        while current:
+            print(current.data)
+            current = current.next
+    
+    def insert_at_position(self, position, data):
+        """Insert at specific position - O(n)"""
+        new_node = Node(data)
+        current = self.head
+        counter = 1
+        while counter < position:
+            current = current.next
+            counter += 1
+        new_node.next = current.next
+        current.next = new_node
+    
+    def delete_at_position(self, position):
+        """Delete at specific position - O(n)"""
+        current = self.head
+        counter = 1
+        while counter < position:
+            current = current.next
+            counter += 1
+        node_to_delete = current.next
+        current.next = node_to_delete.next
+    
+    def get_at_position(self, position):
+        """Get node at position - O(n)"""
+        current = self.head
+        counter = 1
+        while counter < position and current:
+            current = current.next
+            counter += 1
+        return current.data if current else None
+```
+
+
+### Real-World Example: Music Playlist
+
+```python
+from linked_list import Node, LinkedList
+
+class Song:
+    def __init__(self, title, artist, duration):
+        self.title = title
+        self.artist = artist
+        self.duration = duration
+
+class MusicPlaylist:
+    def __init__(self, name):
+        self.name = name
+        self.songs = LinkedList()
+        self.current_position = -1
+    
+    def add_song(self, title, artist, duration):
+        song = Song(title, artist, duration)
+        self.songs.append(song)
+    
+    def display(self):
+        """Show all songs in playlist"""
+        print(f"============= {self.name} =============")
+        current = self.songs.head
+        counter = 1
+        while current:
+            print(f"{counter}.) {current.data.title} - {current.data.artist}")
+            current = current.next
+            counter += 1
+    
+    def play_song_at_position(self, position):
+        song = self.songs.get_at_position(position)
+        self.current_position = position
+        if song:
+            print(f"Now playing: {song.title} by {song.artist}")
+        else:
+            print("Song not found")
+
+# Usage
+playlist = MusicPlaylist("My Favorites")
+playlist.add_song("Bohemian Rhapsody", "Queen", "5:55")
+playlist.add_song("Stairway to Heaven", "Led Zeppelin", "8:02")
+playlist.display()
+playlist.play_song_at_position(1)
+```
+
+
 ## Time Complexity (Big O)
 
 ### Common Time Complexities
@@ -494,61 +830,11 @@ mydict[key]         # O(1) - access
 mydict[key] = val   # O(1) - add/modify
 del mydict[key]     # O(1) - remove
 key in mydict       # O(1) - membership check
-```
 
-
-## Linked Lists
-
-### Node \& LinkedList Implementation
-
-```python
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-
-class LinkedList:
-    def __init__(self):
-        self.head = None
-        self.tail = None
-    
-    def is_empty(self):
-        return self.head is None
-    
-    def append(self, data):
-        new_node = Node(data)
-        if self.is_empty():
-            self.head = new_node
-            self.tail = new_node
-            return
-        
-        self.tail.next = new_node
-        self.tail = new_node
-    
-    def traverse(self):
-        current = self.head
-        while current:
-            print(current.data)
-            current = current.next
-    
-    def insert_at_position(self, position, data):
-        new_node = Node(data)
-        current = self.head
-        counter = 1
-        while counter < position:
-            current = current.next
-            counter += 1
-        new_node.next = current.next
-        current.next = new_node
-    
-    def delete_at_position(self, position):
-        current = self.head
-        counter = 1
-        while counter < position:
-            current = current.next
-            counter += 1
-        node_to_delete = current.next
-        current.next = node_to_delete.next
+# Sets
+myset.add(x)        # O(1) - add element
+x in myset          # O(1) - membership check
+myset.remove(x)     # O(1) - remove element
 ```
 
 
@@ -615,173 +901,271 @@ mylist.sort()          # Sort in-place
 
 
 ***
-## Practice Challenges
 
-### Challenge 1: Smart Shopping List Manager
+## PRACTICE CHALLENGES (UPDATED)
 
-**Difficulty: Beginner**
+Test your understanding with these progressively challenging exercises:
+
+### Challenge 1: Product Inventory Manager (Functional Programming)
+
+**Difficulty: Beginner-Intermediate**
 
 ```python
 """
-Create a shopping list manager that:
-1. Allows adding items with quantities and prices
-2. Prevents duplicate items (update quantity instead)
-3. Shows total cost of all items
-4. Finds the most expensive item
-5. Removes items by name
-6. Shows items sorted by price (high to low)
+You have a product inventory as a list of dictionaries:
+products = [
+    {'name': 'Wireless Headphones', 'price': 89.99, 'category': 'Electronics', 'stock': 45},
+    {'name': 'Coffee Maker', 'price': 129.99, 'category': 'Appliances', 'stock': 12},
+    {'name': 'Running Shoes', 'price': 79.99, 'category': 'Sports', 'stock': 23},
+    {'name': 'Bluetooth Speaker', 'price': 59.99, 'category': 'Electronics', 'stock': 67}
+]
 
-Example Usage:
-add_item("apple", quantity=5, price=1.50)
-add_item("banana", quantity=3, price=0.75)
-total_cost()  # Returns 9.75
-most_expensive()  # Returns ("apple", 7.50)
+Tasks:
+1. Use sorted() with lambda to sort by price (highest first)
+2. Use sorted() with lambda to sort by category, then name alphabetically
+3. Use map() with lambda to apply 7% tax to all prices
+4. Use filter() with lambda to find products with stock < 20
+5. Use list comprehension to create list of product names in Electronics category
+6. Chain map and filter to get prices of Electronics items, then apply 10% discount
+
+Bonus: Combine all into a pipeline that:
+- Filters low-stock items
+- Applies discount
+- Sorts by discounted price
+- Returns just names and final prices
 """
 ```
 
-**Concepts tested:** Dictionaries, functions, loops, sorting, max/min operations
+**Concepts tested:** Lambda functions, map, filter, sorted, list comprehensions, functional chaining
 
-### Challenge 2: Grade Book Analyzer
+### Challenge 2: Employee Salary Processor
 
 **Difficulty: Intermediate**
 
 ```python
 """
-Build a gradebook system with a Student class that:
-1. Stores student name and list of assignments (dict with assignment: score)
-2. Calculates weighted average (tests=50%, homework=30%, projects=20%)
-3. Determines letter grade (A: 90+, B: 80-89, C: 70-79, D: 60-69, F: <60)
-4. Tracks grade trends (improving/declining based on last 3 assignments)
-5. Compares two students and returns who has better average
-6. Implements __str__ method for pretty printing
+Given employee data:
+employees = [
+    {'name': 'Alice Johnson', 'job': 'Developer', 'salary': 75000},
+    {'name': 'Bob Smith', 'job': 'Designer', 'salary': 65000},
+    {'name': 'Carol Davis', 'job': 'Manager', 'salary': 85000}
+]
 
-Create a GradeBook class that:
-1. Manages multiple students (dict with name: Student object)
-2. Finds top N students
-3. Calculates class average
-4. Shows students below class average
-5. Exports report to formatted string
+Use ONLY functional programming (map/filter/lambda/comprehensions):
+1. Apply 7% raise to all employees
+2. Filter employees earning > $70,000
+3. Create new dicts with 'annual_bonus' = salary * 0.15
+4. Generate formatted strings: "Name (Job): $Salary"
+5. Find average salary using sum() and len()
+6. Group employees by job title using dictionary comprehension
+
+Constraint: NO traditional for loops allowed!
 """
 ```
 
-**Concepts tested:** OOP, encapsulation, dictionaries, list comprehension, statistical analysis
+**Concepts tested:** Functional programming paradigm, data transformation, lambda expressions
 
-### Challenge 3: Task Priority Queue
-
-**Difficulty: Intermediate-Advanced**
-
-```python
-"""
-Implement a TaskQueue class using a LinkedList that:
-1. Each task has: name, priority (1-5), deadline (string), status
-2. insert_task() - adds task in priority order (5 = highest)
-3. complete_task() - marks first incomplete task as done
-4. show_pending() - displays only incomplete tasks
-5. overdue_tasks() - returns tasks past deadline (you choose date format)
-6. delete_task(name) - removes specific task
-7. reorder_priorities() - auto-adjust priorities based on deadline proximity
-
-Time complexity requirement: 
-- Insert: O(n) acceptable
-- Complete: O(1)
-- Show pending: O(n)
-"""
-```
-
-**Concepts tested:** Linked lists, OOP, custom sorting, time complexity awareness
-
-### Challenge 4: Text Analysis Engine
+### Challenge 3: Music Playlist with Linked List
 
 **Difficulty: Advanced**
 
 ```python
 """
-Create a TextAnalyzer class that processes text files and provides:
+Implement a MusicPlaylist class using LinkedList that supports:
 
-1. word_frequency() - returns dict of word: count (case-insensitive)
-2. most_common_words(n) - returns top n words (exclude common words: the, a, an, is, etc.)
-3. sentence_count() - counts sentences (. ! ?)
-4. average_word_length() - calculates average length
-5. find_longest_words(n) - returns n longest unique words
-6. reading_time() - estimates time (avg 200 words/minute)
-7. lexical_diversity() - unique words / total words ratio
-8. word_pairs() - finds most common two-word combinations
+1. add_song(title, artist, duration) - adds to end
+2. insert_song(position, title, artist, duration) - insert at position
+3. remove_song(title) - removes by title
+4. play_next() - moves to next song in playlist
+5. play_previous() - moves to previous song
+6. shuffle() - randomizes order (challenging with linked list!)
+7. repeat_mode(mode) - supports "off", "one", "all"
+8. current_song() - returns currently playing song
+9. total_duration() - sums all song durations (format: MM:SS)
+10. find_by_artist(artist) - returns all songs by artist
 
-Optimization requirement:
-- Use sets for unique word tracking
-- Use dictionaries for O(1) lookups
-- Implement caching for expensive operations
+Additional requirements:
+- Track current position in playlist
+- Support removing current song (auto-advance to next)
+- Handle edge cases (empty playlist, invalid position)
+- Implement __str__() for pretty printing
+
+Time complexity goals:
+- add_song: O(1)
+- play_next/previous: O(1)
+- remove_song: O(n)
+- shuffle: O(n)
 """
 ```
 
-**Concepts tested:** String manipulation, sets, dictionaries, algorithm optimization, data analysis
+**Concepts tested:** Linked lists, OOP, doubly linked lists (bonus), state management, edge cases
 
-### Challenge 5: Music Playlist Manager (Advanced OOP)
+### Challenge 4: Stack-Based Expression Evaluator
 
 **Difficulty: Advanced**
 
 ```python
 """
-Build a music streaming system with inheritance and polymorphism:
+Create an expression evaluator using a Stack data structure:
 
-Base class: MediaItem (attributes: title, artist, duration)
-Child classes: Song, Podcast, Audiobook
-
-Playlist class that:
-1. Supports different media types
-2. Shuffle() - randomize order
-3. sort_by(criteria) - sort by title, artist, or duration
-4. total_duration() - sum of all items (handle different time formats)
-5. create_subset(duration_limit) - generate playlist under time limit
-6. remove_duplicates() - keep only unique items
-7. merge(other_playlist) - combine two playlists intelligently
-
-User class that:
-1. Has multiple playlists
-2. favorite_artists() - returns top 3 most frequent artists
-3. listening_history - tracks plays with timestamps
-4. recommend() - suggests songs based on history (simple algorithm)
+Implement:
+1. evaluate(expression) - evaluates postfix notation (RPN)
+   Example: "5 3 + 2 *" = 16
+   
+2. infix_to_postfix(expression) - converts standard to RPN
+   Example: "5 + 3 * 2" = "5 3 2 * +"
+   
+3. check_balanced_parentheses(expression) - validates brackets
+   Example: "((5 + 3) * 2)" = True
+   Example: "((5 + 3)" = False
+   
+4. undo_redo_calculator() - calculator with undo/redo using two stacks
+   Commands: ADD, SUB, MULT, DIV, UNDO, REDO
 
 Requirements:
-- Implement __eq__ for comparing media items
-- Use polymorphism for different play() behaviors
-- Handle edge cases (empty playlists, invalid durations)
+- Implement your own Stack class (no list built-ins for stack operations)
+- Handle operator precedence for infix_to_postfix
+- Support (), [], {} for balanced check
+- Calculator must maintain history
+
+Example calculator session:
+>>> calc = UndoRedoCalculator()
+>>> calc.perform("ADD", 5)  # Result: 5
+>>> calc.perform("MULT", 3)  # Result: 15
+>>> calc.perform("SUB", 2)   # Result: 13
+>>> calc.undo()              # Result: 15
+>>> calc.undo()              # Result: 5
+>>> calc.redo()              # Result: 15
 """
 ```
 
-**Concepts tested:** Advanced OOP (inheritance, polymorphism, special methods), data structures, algorithm design, real-world system modeling
+**Concepts tested:** Stacks, algorithm implementation, parsing, state management, LIFO operations
 
-### Challenge 6: Cache System with Time Complexity
+### Challenge 5: Task Queue Management System
+
+**Difficulty: Advanced**
+
+```python
+"""
+Build a task management system using Queue (deque) and Priority concepts:
+
+Implement TaskManager class:
+1. add_task(name, priority, deadline) - adds task to appropriate queue
+2. complete_next_task() - processes highest priority task first
+3. view_upcoming(n) - shows next n tasks without removing
+4. reschedule_task(name, new_deadline) - updates task deadline
+5. cancel_task(name) - removes task from queues
+6. tasks_by_priority(priority) - filters and returns tasks
+7. overdue_tasks() - returns tasks past deadline
+8. task_report() - generates formatted summary
+
+Architecture:
+- Use 3 separate queues: high_priority, medium_priority, low_priority
+- Always process high before medium, medium before low
+- Track completed tasks with timestamps
+- Implement deadline parsing (string format: "YYYY-MM-DD")
+
+Additional features:
+- Auto-escalate priority if deadline approaching (< 2 days)
+- Track average completion time per priority level
+- Prevent duplicate task names
+- Implement task dependencies (task B requires task A completed first)
+
+Time complexity requirements:
+- add_task: O(1)
+- complete_next_task: O(1)
+- find/cancel_task: O(n) acceptable
+"""
+```
+
+**Concepts tested:** Queues, deque operations, priority management, real-world system design, FIFO
+
+### Challenge 6: Text Analysis Engine (Functional + OOP)
+
+**Difficulty: Advanced**
+
+```python
+"""
+Create a TextAnalyzer class combining functional programming and OOP:
+
+Implement using METHOD CHAINING:
+analyzer = TextAnalyzer(text)
+    .remove_stopwords()
+    .lowercase()
+    .get_word_frequency()
+    .filter_by_min_count(3)
+    .sort_by_frequency()
+    .get_results()
+
+Methods:
+1. remove_stopwords() - removes common words (the, a, is, etc.)
+2. lowercase() - converts all text to lowercase
+3. get_word_frequency() - counts word occurrences
+4. filter_by_min_count(n) - keeps words appearing >= n times
+5. sort_by_frequency(descending=True) - sorts results
+6. most_common_pairs() - finds frequent two-word combinations
+7. reading_level() - calculates Flesch reading score
+8. sentiment_score() - basic positive/negative word counting
+9. export_to_dict() - returns data as dictionary
+10. visualize_top(n) - creates ASCII bar chart of top n words
+
+Requirements:
+- Use map/filter/comprehensions where possible
+- Support method chaining (return self)
+- Implement __repr__() for object inspection
+- Cache expensive operations
+- Handle punctuation and special characters
+
+Bonus challenge:
+- Compare two texts and find common vocabulary
+- Generate word cloud data structure (word + size)
+- Identify sentences containing specific patterns using regex
+"""
+```
+
+**Concepts tested:** OOP, functional programming, method chaining, data analysis, string manipulation
+
+### Challenge 7: Custom Iterator with Generator Functions
 
 **Difficulty: Expert**
 
 ```python
 """
-Implement an LRU (Least Recently Used) Cache:
+Implement custom iterators and generators:
+
+1. fibonacci_generator(n) - yields first n Fibonacci numbers
+   Usage: for num in fibonacci_generator(10): print(num)
+
+2. LinkedListIterator - make LinkedList iterable
+   Usage: for item in my_linked_list: print(item)
+
+3. chunk_iterator(data, size) - yields chunks of specified size
+   Example: list(chunk_iterator([1,2,3,4,5], 2)) = [[1,2], [3,4], [^5]]
+
+4. infinite_sequence(start, step) - infinite generator with takewhile
+   Usage: from itertools import takewhile
+          nums = takewhile(lambda x: x < 100, infinite_sequence(0, 5))
+
+5. nested_dict_walker(d) - recursively walks nested dictionaries
+   Yields (key_path, value) tuples
+   Example: {'a': {'b': 1, 'c': 2}} yields ('a.b', 1), ('a.c', 2)
+
+6. Custom range with float support: frange(start, stop, step=0.1)
 
 Requirements:
-1. Fixed capacity (set at initialization)
-2. get(key) - retrieve value, mark as recently used - O(1)
-3. put(key, value) - add/update, evict LRU if full - O(1)
-4. delete(key) - remove specific item - O(1)
-5. clear() - empty cache - O(1)
-6. most_used() - return key with highest access count
-7. cache_hit_rate() - percentage of successful gets
+- Use yield keyword (no manual iterator protocol)
+- Support both for-loop and next() usage
+- Handle StopIteration properly
+- Implement __iter__() and __next__() for LinkedList
 
-Implementation constraints:
-- Use dictionary + doubly linked list for O(1) operations
-- Track access frequency for each item
-- Implement custom Node class for doubly linked list
-- Thread-safety not required but consider the design
-
-Test your implementation:
-- Verify all operations are O(1)
-- Test eviction policy works correctly
-- Handle edge cases (capacity=1, duplicate puts, etc.)
+Advanced challenge:
+- Create bidirectional iterator (forward and backward)
+- Implement iterator with peek() method (look ahead without consuming)
+- Create iterator pipeline: filter -> map -> take(n)
 """
 ```
 
-**Concepts tested:** Advanced data structures, time complexity analysis, doubly linked lists, hash tables, system design
+**Concepts tested:** Generators, iterators, yield, lazy evaluation, advanced Python patterns
 
 ***
 
@@ -813,4 +1197,11 @@ evens = [x for x in numbers if x % 2 == 0]
 
 # Dictionary comprehension
 squared_dict = {x: x**2 for x in range(5)}
+
+# Combining map + filter (functional approach)
+result = list(map(lambda x: x * 2, filter(lambda x: x % 2 == 0, numbers)))
+
+# Equivalent list comprehension (more Pythonic)
+result = [x * 2 for x in numbers if x % 2 == 0]
 ```
+
