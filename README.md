@@ -1,8 +1,4 @@
-# Python Cheat Sheet -
-
-Update now includes **Regular Expressions (Regex)**, **Control Flow**, and all foundational Python concepts.
-
-## Python Basics
+Python Cheat Sheet -
 
 ### Variables \& Data Types
 
@@ -17,6 +13,11 @@ is_active = True
 type(variable)  # Returns the type
 isinstance(value, int)  # Check if value is int
 isinstance(value, (int, float))  # Check multiple types
+
+# Type conversion (casting)
+age_string = str(age)
+price_int = int(price)  # 3
+number_from_string = int("42")
 ```
 
 
@@ -31,6 +32,9 @@ age = int(input("Enter age: "))  # Convert to integer
 print("Hello")
 print(f"Hello, {name}!")  # f-string formatting
 print(f"Average: {total/count:.2f}")  # 2 decimal places
+
+# String concatenation
+print("Hello, " + name + "!")  # Less preferred
 ```
 
 
@@ -56,35 +60,8 @@ else:
 # Logical operators: and, or, not
 if age >= 18 and has_license:
     print("Can drive")
-```
 
-
-### Truthy \& Falsy Values
-
-```python
-# Falsy: 0, "", [], {}, (), None, False
-grocery_list = []
-if grocery_list:
-    print("Time to shop")
-else:
-    print("Nothing to buy")
-
-# Multiple conditions with and/or
-age = 25
-is_weekend = True
-
-if age >= 18 and is_weekend:
-    print("Can enter club on weekend")
-    
-# NOT operator reverses truth
-if not is_weekend:
-    print("It's a weekday")
-```
-
-
-### Grade Evaluation Example
-
-```python
+# Grade evaluation example
 score = int(input("Enter your test score: "))
 
 if score >= 90 and score <= 100:
@@ -102,6 +79,20 @@ else:
 ```
 
 
+### Truthy \& Falsy Values
+
+```python
+# Falsy: 0, "", [], {}, (), None, False
+grocery_list = []
+if grocery_list:
+    print("Time to shop")
+else:
+    print("Nothing to buy")
+
+# Truthy: Any non-zero number, non-empty string, non-empty collection
+```
+
+
 ## Loops
 
 ### While Loops
@@ -112,6 +103,13 @@ counter = 1
 while counter <= 5:
     print(counter)
     counter += 1
+
+# Countdown example
+number = 10
+while number >= 1:
+    print(number)
+    number = number - 1
+print("Blast Off!")
 
 # Infinite loop with break
 while True:
@@ -127,13 +125,6 @@ while count < 5:
     if count == 3:
         continue
     print(count)  # Skips printing 3
-
-# Countdown example
-number = 10
-while number >= 1:
-    print(number)
-    number = number - 1
-print("Blast Off!")
 ```
 
 
@@ -142,6 +133,12 @@ print("Blast Off!")
 ```python
 # Loop through range
 for i in range(5):  # 0 to 4
+    print(i)
+
+for i in range(1, 6):  # 1 to 5
+    print(i)
+
+for i in range(0, 10, 2):  # 0, 2, 4, 6, 8 (step of 2)
     print(i)
 
 # Loop through list
@@ -218,18 +215,18 @@ if item in mylist:         # O(n) - linear search
 student = {"name": "Maya", "age": 22, "major": "CS"}
 empty_dict = {}
 
-# Accessing values
-student["name"]                    # Direct access - O(1)
-student.get("age")                 # Safe access - O(1)
+# Accessing values - O(1)
+student["name"]                    # Direct access
+student.get("age")                 # Safe access
 student.get("grade", "N/A")        # With default value
 
-# Adding/Modifying
-student["age"] = 28                # O(1)
-student["gpa"] = 3.8              # O(1)
+# Adding/Modifying - O(1)
+student["age"] = 28
+student["gpa"] = 3.8
 
-# Removing
-del student["major"]               # O(1)
-removed = student.pop("age")       # O(1)
+# Removing - O(1)
+del student["major"]
+removed = student.pop("age")
 
 # Membership check - O(1) constant time
 if "name" in student:
@@ -281,10 +278,6 @@ library = {
         "title": "1984",
         "author": "George Orwell",
         "year": 1949
-    },
-    "book2": {
-        "title": "Brave New World",
-        "author": "Aldous Huxley"
     }
 }
 ```
@@ -312,6 +305,12 @@ def divide_with_remainder(dividend, divisor):
 # Using returned values
 result = add(5, 8)
 q, r = divide_with_remainder(10, 3)
+
+# Rectangle area calculation
+def rectangle_area(length, width):
+    area = length * width
+    print(f"The area is {area}")
+    return area
 ```
 
 
@@ -325,17 +324,28 @@ def introduce(name, title="Mr./Mrs"):
 introduce("Bob")              # Uses default
 introduce("Sally", "Mrs.")    # Override default
 
-# Multiple default parameters
-def calculate_interest(principal, rate=0.05, years=1):
-    return principal * (1 + rate) ** years
-
-# Positional vs keyword arguments
-introduce("John", "Mr.")           # Positional
-introduce(name="John", title="Mr.") # Keyword
-
 # Format phone number with defaults
 def format_phone_number(number, country_code="+1"):
     return f"{country_code}-{number}"
+
+# Temperature conversion
+def celsius_to_fahrenheit(celsius):
+    fahrenheit = (celsius * 9/5) + 32
+    return fahrenheit
+
+# Compound interest calculator
+def calculate_compound_interest(principal, rate=0.05, compounding_period=1, years=1):
+    # A = P(1 + r/n)^nt
+    amount = principal * (1 + rate/compounding_period) ** (compounding_period * years)
+    return amount
+
+# List statistics
+def list_statistics(numbers):
+    total = sum(numbers)
+    average = total / len(numbers)
+    maximum = max(numbers)
+    minimum = min(numbers)
+    return total, average, maximum, minimum
 ```
 
 
@@ -353,7 +363,7 @@ text.title()      # "  Hello World!  "
 
 # Whitespace
 text.strip()      # "HeLlo WOrLd!" - remove leading/trailing
-text.strip("!")   # Remove specific characters
+text.strip("!@#$%^&*() ")   # Remove specific characters
 
 # Testing
 "12345".isdigit()          # True - all digits
@@ -408,6 +418,7 @@ set1 - set2               # Same as difference
 allan_hobbies = {"coding", "gaming", "reading"}
 peter_hobbies = {"gaming", "hiking", "reading"}
 common_interests = allan_hobbies.intersection(peter_hobbies)
+# {'gaming', 'reading'}
 ```
 
 
@@ -479,6 +490,9 @@ re.findall(r"\s", "hello world")  # [' ']
 
 # . - wildcard (any character except newline)
 re.findall(r".", "abc")  # ['a', 'b', 'c']
+
+# \b - word boundary
+re.findall(r"\bcat\b", "cat cats scatter")  # ['cat']
 ```
 
 
@@ -502,8 +516,8 @@ re.findall(r"\d{3}", "123 45 6789")  # ['123', '678']
 re.findall(r"\d{2,4}", "1 12 123 1234 12345")
 # ['12', '123', '1234', '1234']
 
-# \b - word boundary
-re.findall(r"\bcat\b", "cat cats scatter")  # ['cat']
+# Find phone numbers
+re.findall(r"\d{3}-\d{4}", "Call me at 555-1234")  # ['555-1234']
 ```
 
 
@@ -557,7 +571,7 @@ cleaned = re.sub(r"\d{3}-\d{4}", "[PHONE REMOVED]", feedback)
 ### Compile (Store Patterns)
 
 ```python
-# Compile for reuse
+# Compile for reuse and efficiency
 email_pattern = re.compile(r"[a-zA-Z0-9._+-]+@[a-zA-Z_]+\.[a-z]{2,3}")
 
 # Use compiled pattern
@@ -566,6 +580,209 @@ text2 = "Contact: sarah@company.org"
 
 emails1 = email_pattern.findall(text1)
 emails2 = email_pattern.findall(text2)
+
+# Multiple space cleanup
+space_pattern = re.compile(r"\s{2,}")
+cleaned = space_pattern.sub(" ", "Too    many     spaces")
+```
+
+
+## APIs \& HTTP Requests
+
+### API Basics
+
+```python
+import requests
+
+# GET request - retrieve data from server
+def send_request():
+    '''Making a request to the JSONPlaceholder API'''
+    
+    # Step 1: Define URL and endpoint
+    url = "https://jsonplaceholder.typicode.com"
+    endpoint = "/posts"
+    
+    # Step 2: Make the request
+    response = requests.get(url + endpoint)
+    
+    # Step 3: Check status code
+    print(response.status_code)  # 200 = success
+    
+    # Step 4: Parse JSON data
+    data = response.json()
+    print(data)
+
+send_request()
+```
+
+
+### HTTP Methods (CRUD Operations)
+
+```python
+import requests
+
+# POST - Create data in database
+def create_new_post():
+    '''Endpoint to send a POST request to the JSONPlaceholder API'''
+    
+    url = "https://jsonplaceholder.typicode.com/posts"
+    
+    # Create request body (data to send)
+    new_post = {
+        "title": "My new post",
+        "body": "This is the content",
+        "userId": 1
+    }
+    
+    # Sending a POST request
+    response = requests.post(url, json=new_post)
+    
+    if response.status_code == 201:  # 201 = Created
+        print("Post created successfully!")
+        print(response.json())
+
+# GET - Read/retrieve data from database
+def get_posts():
+    response = requests.get("https://jsonplaceholder.typicode.com/posts")
+    posts = response.json()
+    return posts
+
+# PUT - Update existing data in database
+def update_post(post_id, updated_data):
+    url = f"https://jsonplaceholder.typicode.com/posts/{post_id}"
+    response = requests.put(url, json=updated_data)
+    return response.json()
+
+# DELETE - Remove data from database
+def delete_post(post_id):
+    url = f"https://jsonplaceholder.typicode.com/posts/{post_id}"
+    response = requests.delete(url)
+    return response.status_code  # 204 = No Content (success)
+```
+
+
+### Query Parameters
+
+```python
+import requests
+
+def query_params():
+    '''Testing using query parameters, sending info through the url'''
+    
+    # Query parameters come after '?'
+    # Organized in key=value pairs
+    # Often used for filtering, sorting, sending quick data
+    
+    url = "https://jsonplaceholder.typicode.com/posts"
+    
+    # Method 1: Add to URL directly
+    response = requests.get(url + "?userId=1")
+    
+    # Method 2: Use params dictionary (preferred)
+    params = {
+        "userId": 1,
+        "title": "some title"
+    }
+    response = requests.get(url, params=params)
+    
+    print(response.json())
+```
+
+
+### Headers
+
+```python
+import requests
+
+def send_with_headers():
+    # Headers store additional information about our request
+    # Examples: date format, credentials, authorization tokens
+    
+    url = "https://jsonplaceholder.typicode.com/posts"
+    
+    headers = {
+        "Content-Type": "application/json",
+        "User-Agent": "My-App/1.0",
+        # "Authorization": "Bearer <token>"  # For authenticated requests
+    }
+    
+    response = requests.get(url, headers=headers)
+    return response.json()
+```
+
+
+### HTTP Status Codes
+
+```python
+# 2xx - Success
+# 200 OK - Request was successful
+# 201 Created - Successful creation
+# 204 No Content - Request successful, no data returned
+
+# 3xx - Redirection
+# 301 Moved Permanently - Continuous redirection
+
+# 4xx - Client Error (Your mistake)
+# 400 Bad Request - Malformed or missing data
+# 401 Unauthorized - You don't have proper credentials
+# 404 Not Found - The resource does not exist
+# 429 Too Many Requests - Exceeded max requests
+
+# 5xx - Server Error (Their problem)
+# 500 Internal Server Error - Something broke on their end
+# 503 Service Unavailable - Temporarily down for maintenance
+# 504 Gateway Timeout - Server took too long to respond
+```
+
+
+### Real-World API Example
+
+```python
+import requests
+
+def get_random_dog():
+    """
+    Fetches a random dog image from Dog CEO API
+    """
+    # 1. Make a GET request to the API
+    response = requests.get("https://dog.ceo/api/breeds/image/random")
+    
+    # 2. Get the JSON response
+    data = response.json()
+    
+    # 3. Print the image URL
+    print(f"Random dog image: {data['message']}")
+    return data['message']
+
+# Test your function
+get_random_dog()
+```
+
+
+### Virtual Environment Setup
+
+```python
+# Creating Virtual Environment
+# Windows:
+# python -m venv venv
+
+# Mac:
+# python3 -m venv venv
+
+# Activating Virtual Environment
+# Windows:
+# venv\Scripts\activate
+
+# Mac:
+# source venv/bin/activate
+
+# Confirm active by seeing (venv) next to user in terminal
+
+# Installing packages
+# pip install requests
+
+# Check installs
+# pip list  # Lists out all installed packages
 ```
 
 
@@ -601,6 +818,10 @@ by_category_name = sorted(products, key=lambda p: (p['category'], p['name']))
 # Lambda with conditionals (ternary operator)
 check_even = lambda x: "even" if x % 2 == 0 else "odd"
 print(check_even(4))  # "even"
+
+# Lambda with two parameters
+multiply = lambda x, y: x * y
+print(multiply(5, 3))  # 15
 ```
 
 
@@ -672,6 +893,14 @@ books = [
 
 # Find available books with rating >= 4.0
 quality_books = list(filter(lambda book: book['available'] and book['rating'] >= 4.0, books))
+
+# Filter valid transactions
+transactions = [
+    {'amount': 100, 'valid': True},
+    {'amount': -50, 'valid': False},
+    {'amount': 75, 'valid': True}
+]
+valid_trans = list(filter(lambda t: t['valid'], transactions))
 ```
 
 
@@ -694,16 +923,23 @@ doubled_evens = [num * 2 for num in numbers if num % 2 == 0]
 # Real-world data processing
 employees = [
     {'name': 'Alice', 'job': 'Developer', 'salary': 75000},
-    {'name': 'Bob', 'job': 'Designer', 'salary': 65000}
+    {'name': 'Bob', 'job': 'Designer', 'salary': 65000},
+    {'name': 'Charlie', 'job': 'Developer', 'salary': 80000}
 ]
 
 # High-earning developers
 high_devs = [emp['name'] for emp in employees 
              if emp['job'] == 'Developer' and emp['salary'] > 70000]
+# ['Alice', 'Charlie']
 
 # Dictionary comprehension
 squared_dict = {x: x**2 for x in range(5)}
 # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+
+# Efficiency comparison:
+# List Comprehensions (fastest)
+# User Defined Functions (good for complex logic)
+# Map and Filter (good for functional programming style)
 ```
 
 
@@ -724,6 +960,7 @@ class Student:
         print(f"My name is {self.name} and I am {self.age}")
     
     def grade_avg(self):
+        '''Returns the average of a student's grades'''
         return sum(self.grades) / len(self.grades)
     
     def add_grade(self, grade):
@@ -775,7 +1012,7 @@ class User:
             self._password = new_password
             return "Password changed"
         else:
-            return "Invalid password"
+            return "Invalid password - must be 8+ chars with !"
 
 # Usage
 user = User("alice", "alice@email.com", "pass!123")
@@ -823,12 +1060,64 @@ class Mage(Character):
         opponent.health -= self.attack_power
         print(f"{self.name} casts a spell!")
 
+class EvilWizard(Character):
+    def __init__(self):
+        super().__init__("Evil Wizard", health=200, attack_power=25)
+    
+    def regenerate(self):
+        self.health += 10
+        print(f"{self.name} regenerates! Health: {self.health}")
+
 # Usage - Abstraction (simple interface, complex implementation hidden)
 warrior = Warrior("Conan")
 mage = Mage("Gandalf")
+boss = EvilWizard()
 
 warrior.attack(mage)  # Different behavior for each class
 warrior.special_attack(mage)
+boss.regenerate()
+```
+
+
+### Class Variables \& Instance Variables
+
+```python
+class Car:
+    # Class variable - shared by all instances
+    wheels = 4
+    
+    def __init__(self, make, model, year, fuel=100):
+        # Instance variables - unique to each object
+        self.make = make
+        self.model = model
+        self.year = year
+        self.fuel = fuel
+    
+    def start_engine(self):
+        print(f"{self.make} {self.model} engine started!")
+    
+    def drive(self, miles):
+        fuel_used = miles * 0.05
+        if self.fuel >= fuel_used:
+            self.fuel -= fuel_used
+            print(f"Drove {miles} miles. Fuel remaining: {self.fuel:.2f}")
+        else:
+            print("Not enough fuel!")
+    
+    def refuel(self):
+        self.fuel = 100
+        print("Tank refilled!")
+
+# Child class with inheritance
+class Toyota(Car):
+    def __init__(self, model, year, color, fuel=100):
+        super().__init__("Toyota", model, year, fuel)
+        self.color = color
+
+# Usage
+my_car = Toyota("Camry", 2020, "Blue")
+my_car.start_engine()
+my_car.drive(50)
 ```
 
 
@@ -852,7 +1141,7 @@ class Stack:
         return self.head is None
     
     def push(self, item):
-        """Add item to top of stack - O(1)"""
+        '''Adding an item to the top of the stack (head)'''
         new_node = Node(item)
         
         if self.is_empty():
@@ -860,18 +1149,19 @@ class Stack:
             self.tail = new_node
         else:
             new_node.next = self.head
-            self.head = new_node
+            self.head = new_node  # Add to the head (top of the stack)
         
         self.size += 1
     
     def pop(self):
-        """Remove and return top item - O(1)"""
+        '''Remove that last thing that was added to stack, and return it (head)'''
         if self.is_empty():
             return None
         
         item = self.head.data
         self.head = self.head.next
         
+        # If stack becomes empty, reset tail
         if self.head is None:
             self.tail = None
         
@@ -879,7 +1169,7 @@ class Stack:
         return item
     
     def peek(self):
-        """View top item without removing - O(1)"""
+        '''View top item in the stack without removing it'''
         if self.is_empty():
             return None
         return self.head.data
@@ -919,6 +1209,16 @@ if queue:
     front = queue[^0]  # O(1)
 
 # Note: Regular list pop(0) is O(n) - DON'T USE for queues
+# Python builtin stack is just a python list
+# append() adds to the end of the list (aka top of the stack) - O(1)
+# pop() removes the last thing added from the list - O(1)
+# list[-1] is equivalent to peek (Look at the last item) - O(1)
+
+# Why can't lists behave like a queue?
+# append() adds to the end of the list (aka end of the queue) - O(1)
+# pop(0) removes the first item but happens slowly - O(n) BIG PROBLEM
+# list[^0] is equivalent to peek (Looking at the first item) - O(1)
+
 # Always use deque for queue operations!
 ```
 
@@ -930,88 +1230,120 @@ if queue:
 ```python
 class Node:
     def __init__(self, data):
+        # data is the information we want to store in the node
         self.data = data
+        # next is a pointer (or reference) to the next node in the list
+        # Initially it's None because when we create a node it doesn't point to anything
         self.next = None
 
 class LinkedList:
     def __init__(self):
+        # head is the first node in the list
+        # If the list is empty, head will be none
         self.head = None
+        
+        # tail is the last node in the list
+        # If the list is empty, tail will be none
+        # tail is used to make adding new nodes faster
         self.tail = None
     
+    # Check if the linked list is empty
     def is_empty(self):
         return self.head is None
     
     def append(self, data):
-        """Add node to end - O(1) with tail"""
+        '''Add node to end - O(1) with tail'''
+        # Step 1: Create a new node with the data
         new_node = Node(data)
+        
+        # Step 2: If the list is empty, the new node becomes both head and tail
         if self.is_empty():
             self.head = new_node
             self.tail = new_node
             return
         
+        # Step 3: If the list already has nodes
+        # Link the current tail to the new node
         self.tail.next = new_node
+        
+        # Step 4: Move the tail pointer to point to the new node (the new end of the list)
         self.tail = new_node
     
     def traverse(self):
-        """Visit all nodes - O(n)"""
+        '''Visit all nodes - O(n)'''
+        # CASE 1: If the list is empty, let the user know
         if self.is_empty():
             print("List is empty")
             return
         
+        # CASE 2: Start from the head and keep following the 'next' until there's no more nodes
+        # Step 1: Create a 'current' marker pointing to the same node as the head
         current = self.head
+        
+        # Step 2: Display data of that node and move to the next node
         while current:
             print(current.data)
             current = current.next
     
     def insert_at_position(self, position, data):
-        """Insert at specific position - O(n)"""
+        '''Insert at specific position - O(n)'''
+        # Create the node with the data
         new_node = Node(data)
         
-        # Case 1: Insert at beginning
+        # Case 1: Insert at the very beginning of the list (before the head)
         if position == 1:
             new_node.next = self.head
             self.head = new_node
+            
+            # If the list was empty, update the tail too
             if self.tail is None:
                 self.tail = new_node
             return
         
-        # Case 2: Insert elsewhere
+        # Case 2: Insert somewhere else in the list
         current = self.head
         counter = 1
         
+        # Move to the current just before the desired position
         while counter < position - 1 and current:
             current = current.next
             counter += 1
         
+        # Insert the new node into the chain
         new_node.next = current.next
         current.next = new_node
     
     def delete_at_position(self, position):
-        """Delete at specific position - O(n)"""
+        '''Delete at specific position - O(n)'''
+        # Case 1: If list is empty
         if self.is_empty():
             print("List is empty")
             return
         
-        # Case 1: Delete head
+        # Case 2: Deleting the head (first node)
         if position == 1:
             self.head = self.head.next
+            
+            # If the list becomes empty, reset the tail as well
             if self.head is None:
                 self.tail = None
             return
         
-        # Case 2: Delete elsewhere
+        # Case 3: Deleting at any other position
         current = self.head
         counter = 1
         
+        # Move to the node just before the one we want to delete
         while counter < position - 1 and current:
             current = current.next
             counter += 1
         
         if current and current.next:
             node_to_delete = current.next
+            # Skip over the deleted node
             current.next = node_to_delete.next
             
-            # If deleting last node, update tail
+            # If deleting the last node, update the tail
             if current.next is None:
                 self.tail = current
     
@@ -1022,7 +1354,19 @@ class LinkedList:
         while counter < position and current:
             current = current.next
             counter += 1
+        # If position is out of range
         return current.data if current else None
+
+# Create a new linked list
+songs = LinkedList()
+
+# Append items
+songs.append("Song 1")
+songs.append("Song 2")
+songs.append("Song 3")
+
+# Print list contents
+songs.traverse()
 ```
 
 
@@ -1048,7 +1392,7 @@ class MusicPlaylist:
         self.songs.append(song)
     
     def display(self):
-        """Show all songs in playlist"""
+        '''Show all the songs and artists in my playlist'''
         print(f"============= {self.name} =============")
         current = self.songs.head
         counter = 1
@@ -1074,6 +1418,11 @@ class MusicPlaylist:
         if self.current_position > 1:
             self.current_position -= 1
             self.play_song_at_position(self.current_position)
+    
+    def remove_current_song(self):
+        if self.current_position != -1:
+            self.songs.delete_at_position(self.current_position)
+            self.display()
 
 # Usage
 playlist = MusicPlaylist("My Favorites")
@@ -1090,27 +1439,36 @@ playlist.next_song()
 ### Common Time Complexities
 
 ```python
-# O(1) - Constant
+# O(1) - Constant (most efficient)
 x = 10
 y = x + 1
 dict_value = my_dict["key"]
+mylist[^5]  # Access by index
 
 # O(log n) - Logarithmic
-# Binary search
+# Binary search - faster than linear search
 
 # O(n) - Linear
 for item in alist:
     print(item)
 
+# For every piece of input there is a corresponding operation
+
 # O(n log n) - Linear Logarithmic
 sorted_list = sorted(mylist)
 mylist.sort()
+# Try to avoid sorting if at all possible
 
-# O(n²) - Quadratic (nested loops)
+# O(n²) - Quadratic (stem from nested linear operations)
+# O(n) inside O(n)
 for num1 in nums:
     for num2 in nums:
         if num1 + num2 == target:
             return (num1, num2)
+
+# Even though I have two stacked O(n) operations
+# The overall time complexity is still O(n)
+# Because we don't multiply different operations
 ```
 
 
@@ -1124,12 +1482,15 @@ mylist.insert(i, x) # O(n) - insert at position
 mylist.pop()        # O(1) - remove last
 mylist.pop(i)       # O(n) - remove by index
 x in mylist         # O(n) - membership check
+mylist.count(x)     # O(n) - count occurrences
+mylist.index(x)     # O(n) - find index
 
 # Dictionaries (Hash Tables)
 mydict[key]         # O(1) - access
 mydict[key] = val   # O(1) - add/modify
 del mydict[key]     # O(1) - remove
 key in mydict       # O(1) - membership check
+mydict.get(key)     # O(1) - safe access
 
 # Sets
 myset.add(x)        # O(1) - add element
@@ -1217,328 +1578,254 @@ type(variable)
 
 ## COMPREHENSIVE PRACTICE CHALLENGES
 
-### Challenge 1: Data Cleaning with Regex
+### Challenge 1: Weather API Data Analyzer
 
-**Difficulty: Beginner**
+**Difficulty: Beginner-Intermediate**
 
 ```python
 """
-You have messy customer feedback data. Use regex to:
+Build a weather data fetcher and analyzer using the OpenWeatherMap API:
 
-feedback_list = [
-    "Great service! Call me at 555-1234. Email: john@email.com",
-    "Terrible    experience    with   extra   spaces!!!",
-    "My order #12345 arrived on 12/25/2024. Phone: 555-9876"
-]
+Requirements:
+1. Create get_weather(city) function that fetches data from API
+2. Parse JSON response and extract: temperature, humidity, description
+3. Handle HTTP errors (404 for invalid city, 401 for bad API key)
+4. Store weather data in a dictionary with city as key
+5. calculate_average_temp(cities_list) - fetch multiple cities, return average
+6. find_hottest_city(cities_list) - return city with highest temp
+7. Use query parameters to specify units (metric/imperial)
+8. Add headers for API key authentication
 
-Tasks:
-1. Remove all phone numbers (format: ###-####) and replace with "[REDACTED]"
-2. Clean up multiple spaces (2+) into single spaces
-3. Extract all email addresses
-4. Extract all dates (format: MM/DD/YYYY)
-5. Extract order numbers (format: #followed by 5 digits)
-6. Count exclamation marks in each feedback
-7. Find feedback containing words starting with 'T' or 't'
+Bonus:
+- Cache API responses using a dictionary (don't refetch same city)
+- Use regex to validate city names (letters and spaces only)
+- Create a Weather class with get_forecast() method
+- Handle 429 (too many requests) with retry logic
 
-Bonus: Create a clean_feedback() function that takes raw feedback 
-and returns a sanitized dictionary with extracted data
+Concepts: APIs, JSON, dictionaries, error handling, functions, classes
 """
 ```
 
-**Concepts tested:** Regex patterns, metacharacters, quantifiers, character sets, groups, re.sub(), re.findall()
+**Concepts tested:** API integration, HTTP requests, JSON parsing, error handling, dictionaries, functions
 
-### Challenge 2: Smart Product Inventory (Functional + OOP)
+### Challenge 2: Data Cleaning with Regex \& APIs
 
 **Difficulty: Intermediate**
 
 ```python
 """
-Build an inventory system combining functional programming and OOP:
+Build a user registration system that validates and cleans data:
 
-Create Product class with:
-- Attributes: name, category, price, stock, supplier
+Create UserValidator class:
+1. validate_email(email) - use regex pattern
+2. validate_phone(phone) - accepts formats: 555-1234, (555) 123-4567
+3. validate_password(password) - min 8 chars, 1 uppercase, 1 number, 1 special
+4. clean_username(username) - remove extra spaces, special chars
+5. normalize_data(user_dict) - cleans all fields at once
+
+Create UserAPI class:
+1. register_user(user_data) - POST request to fake API
+2. get_user(user_id) - GET request
+3. update_user(user_id, data) - PUT request
+4. delete_user(user_id) - DELETE request
+
+Integration:
+- Validate all data before sending to API
+- Use regex to clean phone numbers to standard format
+- Use re.sub() to remove HTML tags from user input
+- Log all failed validations to a dictionary
+
+Test data:
+dirty_users = [
+    {'email': 'bad_email', 'phone': '5551234', 'password': 'weak'},
+    {'email': 'good@test.com', 'phone': '(555) 123-4567', 'password': 'Strong123!'}
+]
+"""
+```
+
+**Concepts tested:** Regex patterns, validation, APIs, OOP, error handling, data cleaning
+
+### Challenge 3: E-commerce Product Manager (Functional + OOP + APIs)
+
+**Difficulty: Advanced**
+
+```python
+"""
+Build complete e-commerce system combining multiple concepts:
+
+Product class:
+- Attributes: id, name, category, price, stock, supplier_id
 - Methods: restock(), sell(), apply_discount()
-- Property decorators for calculated fields
+- Validation: price > 0, stock >= 0
 
-Create Inventory class with:
-- Uses dictionary to store products (key: product_id)
-- filter_products(criteria) - uses lambda/filter
-- sort_products(by="price", descending=False) - uses lambda/sorted
+Inventory class:
+- products = {} (dictionary storage)
+- filter_products(**criteria) - use lambda/filter
+- sort_products(by="price", descending=False) - lambda/sorted
 - low_stock_alert(threshold=10) - list comprehension
 - total_value() - map + sum
 - category_report() - dictionary comprehension
-- bulk_discount(category, percentage) - map with conditional
 
-Requirements:
-- Use map() to apply 7% tax to all product prices
-- Use filter() to find products with stock < threshold
-- Use list comprehension for fast queries
-- Use lambda for custom sorting (price, name, stock)
-- Implement __str__ and __repr__ for Product class
+ProductAPI class:
+- fetch_products() - GET from API
+- create_product(data) - POST to API
+- update_stock(product_id, quantity) - PUT
+- delete_product(product_id) - DELETE
+- search_products(query) - GET with query parameters
 
-Test with:
-products = [
-    {'id': 1, 'name': 'Laptop', 'category': 'Electronics', 'price': 999, 'stock': 5},
-    {'id': 2, 'name': 'Mouse', 'category': 'Electronics', 'price': 25, 'stock': 50},
-    {'id': 3, 'name': 'Desk', 'category': 'Furniture', 'price': 299, 'stock': 8}
-]
-"""
-```
-
-**Concepts tested:** OOP, lambda, map, filter, list comprehensions, encapsulation, property decorators
-
-### Challenge 3: Log File Analyzer with Regex
-
-**Difficulty: Intermediate-Advanced**
-
-```python
-"""
-Parse and analyze server log files using regex:
-
-Sample log entry:
-"[2024-10-21 14:23:45] ERROR 192.168.1.100 - Failed login attempt from user: admin@company.com"
-"[2024-10-21 14:25:12] INFO 10.0.0.5 - Successful request /api/users?id=12345"
-"[2024-10-21 14:26:33] WARNING 172.16.0.1 - High memory usage (87%)"
-
-Create LogAnalyzer class that:
-1. parse_log_entry(line) - extract timestamp, level, IP, message using groups
-2. find_all_ips() - extract unique IP addresses (use set)
-3. error_count() - count ERROR entries
-4. filter_by_time_range(start_hour, end_hour) - filter logs
-5. find_failed_logins() - extract user emails from failed login attempts
-6. extract_api_requests() - find all API endpoints called
-7. suspicious_activity() - IPs with >5 failed attempts (use dictionary counter)
-8. export_report() - formatted summary with statistics
-
-Regex patterns needed:
-- Timestamp: \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}
-- IP addresses: IPv4 pattern
-- Email addresses: email pattern
-- Log levels: ERROR|WARNING|INFO
-- API endpoints: /api/\w+
-
-Use re.compile() for efficiency
-"""
-```
-
-**Concepts tested:** Advanced regex, groups, character sets, quantifiers, OOP, dictionaries, sets
-
-### Challenge 4: Music Streaming Service (Advanced OOP)
-
-**Difficulty: Advanced**
-
-```python
-"""
-Build complete music streaming system using inheritance and polymorphism:
-
-Base classes:
-- MediaItem (title, artist, duration, plays_count)
-- Playlist (name, items[], owner)
-
-Child classes:
-- Song (inherits MediaItem) + album, genre
-- Podcast (inherits MediaItem) + episode_number, show_name
-- Audiobook (inherits MediaItem) + narrator, chapter
-
-User class:
-- playlists[], listening_history[]
-- create_playlist(), add_to_playlist()
-- play(media_item) - increments play_count
-- get_recommendations() - based on history
-
-StreamingService class (manages everything):
-- users{}, media_library{}
-- add_user(), add_media()
-- search(query) - searches titles, artists (regex)
-- trending() - top 10 most played items
-- generate_report() - statistics by category
-
-Requirements:
-- Implement __eq__ to compare media items
-- Use polymorphism for different play() behaviors
-- Linked list for playlist (insert, delete, traverse)
-- Queue for play queue using deque
-- Dictionary for O(1) user/media lookup
-- Use filter() to search by genre
-- Use map() to normalize all titles to title case
-- Track play history with timestamps
+Tasks:
+1. Fetch products from JSONPlaceholder or fake API
+2. Use map() to apply 7% tax to all prices
+3. Use filter() to find products with stock < threshold
+4. Use regex to validate product names (alphanumeric + spaces)
+5. Sort products by multiple criteria using lambda
+6. Generate sales report with total revenue
 
 Advanced features:
-- shuffle() - randomize playlist order
-- sort_playlist(by="plays", "duration", "title")
-- remove_duplicates() from playlist
-- merge_playlists()
-- auto_playlist(genre, min_duration) - creates playlist based on criteria
+- Cache API responses for 5 minutes
+- Implement retry logic for failed API calls
+- Use functional programming to process bulk operations
+- Create decorator for logging all API calls
 """
 ```
 
-**Concepts tested:** Advanced OOP (inheritance, polymorphism, encapsulation), linked lists, queues, dictionaries, functional programming, regex
+**Concepts tested:** OOP, APIs, functional programming, lambda, map, filter, dictionaries, regex, error handling
 
-### Challenge 5: Grade Management System
-
-**Difficulty: Intermediate**
-
-```python
-"""
-Create comprehensive grade tracking system:
-
-Student class:
-- name, student_id, courses{}
-- add_grade(course, score)
-- calculate_gpa() - weighted by credits
-- get_transcript() - formatted string
-- academic_standing() - Dean's List, Probation, Good Standing
-
-Course class:
-- name, code, credits, students[]
-- add_student()
-- drop_student()
-- class_average()
-- grade_distribution() - returns {A: count, B: count, ...}
-- curve_grades(adjustment) - add points to all
-
-GradeBook class (manages all):
-- students{}, courses{}
-- top_students(n) - returns top n by GPA
-- failing_students() - GPA < 2.0
-- honor_roll() - GPA >= 3.5
-- course_rankings() - sort courses by average
-- generate_reports()
-- export_to_dict() for saving
-
-Validation:
-- Use try-except for invalid grades
-- Use regex to validate student_id format (e.g., "STU-12345")
-- Use control flow for grade letter assignment
-
-Features:
-- List comprehension for filtering students
-- Dictionary comprehension for grade distribution
-- Lambda for custom sorting
-- Encapsulation with getters/setters
-"""
-```
-
-**Concepts tested:** OOP, encapsulation, dictionaries, list comprehensions, exception handling, regex validation, control flow
-
-### Challenge 6: Task Queue System with Priority
-
-**Difficulty: Advanced**
-
-```python
-"""
-Build task management system using stacks and queues:
-
-Task class:
-- name, priority (1-5), deadline, status, dependencies[]
-- mark_complete()
-- is_overdue()
-- can_start() - checks if dependencies complete
-
-TaskManager class:
-- high_priority = Queue (deque)
-- medium_priority = Queue (deque)
-- low_priority = Queue (deque)
-- completed = Stack (for undo functionality)
-- task_history = LinkedList (maintains order)
-
-Methods:
-1. add_task(name, priority, deadline) - adds to correct queue
-2. get_next_task() - processes highest priority first
-3. complete_task(task) - moves to completed stack
-4. undo_complete() - pops from stack, returns to queue
-5. reschedule(task, new_priority)
-6. cancel_task(name)
-7. view_upcoming(n) - shows next n without removing
-8. overdue_report() - uses filter() with date comparison
-9. dependency_check(task) - ensures dependencies met
-10. auto_escalate() - bump priority if deadline < 2 days
-
-Statistics:
-- average_completion_time()
-- tasks_by_category()
-- productivity_score()
-
-Requirements:
-- Use deque for all queues (O(1) operations)
-- Use custom Stack class (implemented with linked list)
-- Use regex to parse deadline strings
-- Use datetime for date comparisons
-- Implement time complexity: add O(1), get_next O(1), search O(n)
-- Use dictionary to track task IDs for fast lookup
-
-Advanced:
-- Topological sort for task dependencies
-- Serialize to JSON for persistence
-- Load from file and rebuild data structures
-"""
-```
-
-**Concepts tested:** Queues (deque), stacks, linked lists, OOP, datetime, regex, dictionaries, time complexity, algorithms
-
-### Challenge 7: Text Processing Pipeline
+### Challenge 4: Music Streaming Service (Complete System)
 
 **Difficulty: Expert**
 
 ```python
 """
-Create advanced text analysis system combining multiple concepts:
+Build a complete music streaming service combining all concepts:
 
-TextProcessor class:
-Pipeline methods (return self for chaining):
-1. load(text or filename)
-2. clean() - remove special chars, normalize spaces (regex)
-3. tokenize() - split into words
-4. remove_stopwords(words_list) - filter out common words
-5. stem_words() - basic stemming (remove -ing, -ed)
-6. count_words() - frequency dictionary
-7. find_patterns(regex_pattern) - custom pattern matching
-8. extract_entities() - find emails, phones, URLs, dates (regex)
+Base classes:
+- MediaItem(title, artist, duration, plays_count)
+- Playlist(name, owner) using LinkedList
 
-Analysis methods:
-1. word_frequency(top_n) - returns top n words
-2. reading_level() - Flesch reading score calculation
-3. sentiment_score() - basic positive/negative word counting
-4. most_common_pairs() - bigrams
-5. find_sentences() - split on sentence boundaries (regex)
-6. sentence_complexity() - avg words per sentence
-7. lexical_diversity() - unique/total ratio
-8. keyword_extraction(n) - TF-IDF basic implementation
+Child classes:
+- Song(MediaItem) + album, genre
+- Podcast(MediaItem) + episode_number
+- Implement polymorphism for play() method
 
-Comparison features:
-9. compare_texts(text1, text2) - similarity score
-10. common_vocabulary(text1, text2) - intersection
-11. unique_to_each(text1, text2) - difference
+User class:
+- playlists (Stack for recently viewed)
+- listening_history (Queue with deque)
+- play(media) - increments play_count
+- get_recommendations() - based on history
 
-Requirements:
-- Use regex extensively for parsing
-- Use dictionaries for O(1) word lookups
-- Use sets for unique word operations
-- Use list comprehensions for transformations
-- Implement method chaining (return self)
-- Cache expensive operations (use @property)
-- Handle file I/O with exception handling
-- Use functional programming where appropriate
+StreamingAPI class:
+- fetch_songs(genre) - GET with query params
+- create_playlist(user_id, data) - POST
+- add_to_playlist(playlist_id, song_id) - PUT
+- get_trending() - GET top songs
+- search(query, filters) - GET with multiple params
 
-Advanced patterns:
-- Named entity recognition (basic with regex)
-- Email/URL extraction with complex patterns
-- Date parsing (multiple formats)
-- Phone number normalization
-- Hash tags and mentions extraction
+Analytics:
+- Use map() to extract all genres from library
+- Use filter() to find songs with plays > 1000
+- Use regex to parse duration strings ("3:45" to seconds)
+- List comprehension for fast queries
+- Lambda for custom sorting
 
-Example usage:
-processor = TextProcessor()
-result = (processor
-    .load("article.txt")
-    .clean()
-    .remove_stopwords(['the', 'a', 'is'])
-    .count_words()
-    .get_results())
+Features:
+1. Fetch songs from MusicBrainz API or iTunes API
+2. Parse JSON and create Song objects
+3. Implement shuffle() using random + linked list
+4. Queue system for up-next songs
+5. Stack for navigation history
+6. Regex to validate song titles (remove special chars)
+7. API integration with error handling
+8. Functional programming for data transformations
+
+Data structures:
+- LinkedList for playlists (insert, delete, traverse)
+- Stack for recently played
+- Queue for play queue
+- Dictionary for O(1) user/media lookup
+- Set for tracking unique genres
+
+Time complexity requirements:
+- add to playlist: O(1)
+- play next song: O(1)
+- search by title: O(n)
+- get user stats: O(1)
 """
 ```
 
-**Concepts tested:** Advanced regex, OOP, method chaining, dictionaries, sets, functional programming, file I/O, exception handling, caching, text algorithms
+**Concepts tested:** Complete integration - APIs, OOP (inheritance/polymorphism), linked lists, stacks, queues, functional programming, regex, dictionaries, error handling, JSON parsing
+
+### Challenge 5: Social Media CLI App (Comprehensive)
+
+**Difficulty: Expert**
+
+```python
+"""
+Create a complete social media application:
+
+User class (Encapsulation):
+- _username, _email, _password (protected)
+- friends (list), posts (list)
+- Getters/setters with validation (regex for email)
+- add_friend(), create_post(), display_posts()
+
+Post class:
+- content, timestamp, likes (int), comments (list)
+- like(), add_comment(), edit() methods
+
+SocialMediaAPI:
+- register(user_data) - POST
+- login(credentials) - POST, returns token
+- get_posts(user_id, limit) - GET with query params
+- create_post(token, content) - POST with auth headers
+- like_post(post_id) - PUT
+- add_comment(post_id, text) - POST
+- get_friends(user_id) - GET
+- send_friend_request(user_id) - POST
+
+Features:
+1. Regex validation for:
+   - Email: pattern with @ and domain
+   - Username: alphanumeric, 3-20 chars
+   - Password: min 8 chars, uppercase, number, special char
+   
+2. API integration:
+   - Use requests library
+   - Handle authentication tokens in headers
+   - Query parameters for filtering/pagination
+   - Error handling for all status codes
+   
+3. Functional programming:
+   - Use map() to process multiple posts
+   - Use filter() to find posts by hashtag
+   - Lambda for sorting by likes/timestamp
+   - List comprehension for fast queries
+
+4. Data structures:
+   - Dictionary for user cache (O(1) lookup)
+   - Set for unique hashtags
+   - Stack for navigation history
+   - Queue for notifications
+
+5. Advanced features:
+   - Search posts using regex patterns
+   - Extract hashtags from content with regex
+   - Clean user input (remove extra spaces, HTML tags)
+   - Implement pagination for API requests
+   - Cache API responses to reduce calls
+
+CLI Menu:
+1. Register/Login
+2. Create Post
+3. View Feed
+4. Add Friend
+5. Search Users (regex)
+6. View Profile
+7. Logout
+"""
+```
+
+**Concepts tested:** Complete Python mastery - OOP (all 4 pillars), APIs, regex, functional programming, data structures, error handling, validation, JSON, authentication
 
 ***
 
@@ -1586,4 +1873,15 @@ result = [x * 2 for x in numbers if x % 2 == 0]
 - Dict add/remove: O(1)
 - Set membership: O(1)
 - List membership: O(n)
+- Sorting: O(n log n)
+
+**API Best Practices:**
+
+- Always use virtual environments
+- Handle all HTTP status codes
+- Use query parameters for filtering
+- Store credentials securely (never hardcode)
+- Implement retry logic for failed requests
+- Cache responses when appropriate
+- Validate all data before sending
 
