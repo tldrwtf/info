@@ -4555,8 +4555,6 @@ if __name__ == "__main__":
 
 ## REAL-WORLD DATA STRUCTURE APPLICATION: MUSIC PLAYLIST
 
-**Based on:** Python-Linked-Lists-Continued repository[^14_1]
-
 ```python
 # ========== COMPLETE MUSIC PLAYLIST SYSTEM ==========
 
@@ -6381,8 +6379,6 @@ print(f"Loop: {loop_time:.4f}s")
 
 
 ## COMPLETE APIs \& HTTP REQUESTS GUIDE
-
-**Based on repositories:** Intro-to-APIs, API-Authentication-Spotify-, Poke-API-Game[^17_1]
 
 ### API Fundamentals
 
