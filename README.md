@@ -1,4 +1,5 @@
-# MASTER QUICK REFERENCE CHEAT SHEET
+# Python Programming Quick Reference
+For a comprehensive breakdown of the below topics, [view the comprehensive study guide](<Python Study Guide.md>)
 
 ## SYNTAX REFERENCE
 
