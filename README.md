@@ -1,5 +1,5 @@
 # Python Programming Quick Reference
-For a comprehensive breakdown of the below topics, [view the comprehensive study guide](<README2.md>)
+For a comprehensive breakdown of the below topics, [view the comprehensive study guide](https://github.n3u.dev/README2)
 
 ## SYNTAX REFERENCE
 
