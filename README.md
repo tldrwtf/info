@@ -1,6 +1,3 @@
-Edit : There will be no updates or changes made anymore. Blame JN
-
-
 # Python Programming Quick Reference
 For a comprehensive breakdown of the below topics, [view the comprehensive study guide](https://github.n3u.dev/README2)
 
