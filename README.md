@@ -80,7 +80,7 @@ for num in range(10):
 ```python
 # Creation & Access
 movies = ["Inception", "Matrix"]
-first = movies[^0]
+first = movies[0]
 last = movies[-1]
 slice_result = movies[1:3]
 
