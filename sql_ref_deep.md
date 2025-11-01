@@ -674,7 +674,7 @@ TRUNCATE TABLE temporary_table;  -- Faster
 
 ***
 
-## SQL Best Practices \& Interview Tips
+## SQL Best Practices & Interview Tips
 
 ### Performance Optimization
 
