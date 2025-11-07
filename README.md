@@ -1,4 +1,5 @@
 # Python Learning - Complete Cheat Sheet Collection by [tldrwtf](https://github.com/tldrwtf)
+If you found any of this information useful, leaving a star on this repository would be highly appreciated!
 
 ---
 
