@@ -935,9 +935,9 @@ def resource_generator():
 
 ## See Also
 
-- **Functional_Programming_Cheat_Sheet.md** - Map, filter, and functional concepts
-- **Data_Structures_Cheat_Sheet.md** - Lists and data structures
-- **Python_Basics_Cheat_Sheet.md** - Loops and control flow
+- [Functional_Programming_Cheat_Sheet](./Functional_Programming_Cheat_Sheet.md) - Map, filter, and functional concepts
+- [Data_Structures_Cheat_Sheet](./Data_Structures_Cheat_Sheet.md) - Lists and data structures
+- [Python_Basics_Cheat_Sheet](./**Python_Basics_Cheat_Sheet.md**) - Loops and control flow
 
 ---
 
@@ -954,4 +954,4 @@ Iterators and generators are powerful tools for efficient data processing:
 - Generators are **single-use** - exhausted after iteration
 - **Pipeline** generators for efficient data processing
 
-Master iterators and generators to write memory-efficient, elegant Python code!
+---
