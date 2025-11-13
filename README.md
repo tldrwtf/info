@@ -1,5 +1,5 @@
 # Python Learning - Complete Cheat Sheet Collection by [tldrwtf](https://github.com/tldrwtf)
-If you found any of this information useful, leaving a star on this repository would be highly appreciated!
+If you found any of this information useful, leaving a star on this repository would be highly appreciated! 
 
 ---
 
@@ -132,21 +132,131 @@ If you found any of this information useful, leaving a star on this repository w
 
 ---
 
+### 9. [File Operations](./File_Operations_Cheat_Sheet.md)
+
+**Reading, writing, and managing files**
+
+- File Modes (read, write, append, binary)
+- Reading Files (line by line, chunks)
+- Writing Files (text, binary)
+- CSV Operations (csv module, DictReader/Writer)
+- JSON Operations (json.dump, json.load)
+- Path Operations (pathlib module)
+- File System Operations (os module)
+- Best Practices (context managers, encoding)
+
+**Best for:** File I/O, data processing, working with CSV/JSON
+
+---
+
+### 10. [Error Handling & Exceptions](./Error_Handling_Cheat_Sheet.md)
+
+**Exception handling and debugging techniques**
+
+- Try/Except/Else/Finally
+- Common Built-in Exceptions
+- Raising Exceptions
+- Custom Exceptions
+- Exception Chaining
+- Context Managers (with statement)
+- Error Handling Best Practices
+
+**Best for:** Writing robust code, handling errors gracefully
+
+---
+
+### 11. [Decorators](./Decorators_Cheat_Sheet.md)
+
+**Function and class decorators**
+
+- Function Decorators
+- Decorators with Arguments
+- Class Decorators
+- Built-in Decorators (@property, @staticmethod, @classmethod)
+- functools Decorators (@wraps, @lru_cache, @singledispatch)
+- Practical Examples (timer, debug, rate limiter)
+- Best Practices
+
+**Best for:** Code reusability, aspect-oriented programming, metaprogramming
+
+---
+
+### 12. [Iterators & Generators](./Iterators_and_Generators_Cheat_Sheet.md)
+
+**Efficient iteration and lazy evaluation**
+
+- Iterator Protocol (__iter__, __next__)
+- Creating Custom Iterators
+- Generator Functions (yield keyword)
+- Generator Expressions
+- Yield From (delegation)
+- itertools Module
+- Practical Examples (large files, pipelines)
+- Best Practices
+
+**Best for:** Memory-efficient data processing, working with large datasets
+
+---
+
+### 13. [Testing & Debugging](./Testing_and_Debugging_Cheat_Sheet.md)
+
+**Writing tests and debugging code**
+
+- unittest Module
+- pytest Framework
+- Assertions and Test Structure
+- Mocking and Patching
+- Test Fixtures
+- Test Coverage
+- Debugging with pdb
+- Debugging Techniques
+
+**Best for:** Test-driven development, ensuring code quality
+
+---
+
+### 14. [Standard Library Essentials](./Standard_Library_Essentials_Cheat_Sheet.md)
+
+**Essential Python standard library modules**
+
+- collections (Counter, defaultdict, deque, namedtuple)
+- datetime (date, time, timedelta)
+- os and sys Modules
+- json Module
+- math and random Modules
+- argparse (command-line arguments)
+- Other Useful Modules (string, copy, time)
+
+**Best for:** Using built-in tools, avoiding external dependencies
+
+---
+
 ## Learning Paths
 
 ### Beginner Path
 
 1. **Python Basics** - Start here for fundamentals
 2. **Data Structures** - Learn core data structures
-3. **Functional Programming** - Write cleaner code
-4. **Regex** - Text processing basics
+3. **File Operations** - Read and write files
+4. **Error Handling** - Handle errors gracefully
+5. **Functional Programming** - Write cleaner code
+6. **Regex** - Text processing basics
 
 ### Intermediate Path
 
 1. **OOP** - Object-oriented design
-2. **APIs & Requests** - Work with external data
-3. **SQL & SQLAlchemy** - Database operations
-4. **Big O Notation** - Algorithm analysis
+2. **Decorators** - Advanced function concepts
+3. **Iterators & Generators** - Memory-efficient code
+4. **APIs & Requests** - Work with external data
+5. **SQL & SQLAlchemy** - Database operations
+6. **Big O Notation** - Algorithm analysis
+
+### Advanced Path
+
+1. **Testing & Debugging** - Write robust, testable code
+2. **Standard Library Essentials** - Master built-in modules
+3. **Decorators** - Metaprogramming techniques
+4. **Iterators & Generators** - Advanced iteration patterns
 
 ### Full Stack Path
 
@@ -161,25 +271,47 @@ Follow all guides in order for comprehensive Python knowledge
 **Working with Data:**
 
 - Lists/Arrays → Data Structures
-- Dictionaries/Hash Maps → Data Structures
+- Dictionaries/Hash Maps → Data Structures, Standard Library Essentials
 - Database Operations → SQL & SQLAlchemy
 - API Calls → APIs & Requests
+- File I/O → File Operations
+- CSV/JSON → File Operations
+- Data Processing → Iterators & Generators
 
 **Code Organization:**
 
-- Functions → Python Basics
+- Functions → Python Basics, Decorators
 - Classes → OOP
 - Design Patterns → OOP
+- Code Reuse → Decorators
+- Error Handling → Error Handling & Exceptions
+
+**Development Tools:**
+
+- Testing → Testing & Debugging
+- Debugging → Testing & Debugging
+- Mocking → Testing & Debugging
+- Standard Library → Standard Library Essentials
 
 **Text Processing:**
 
 - String Manipulation → Python Basics
 - Pattern Matching → Regex
 - Validation → Regex
+- File Reading → File Operations
 
 **Performance:**
 
 - Algorithm Analysis → Big O Notation
-- Optimization → Big O Notation, Functional Programming
+- Optimization → Big O Notation, Functional Programming, Iterators & Generators
+- Memory Efficiency → Iterators & Generators
+- Caching → Decorators
+
+**Python Features:**
+
+- Decorators → Decorators
+- Generators → Iterators & Generators
+- Context Managers → Error Handling & Exceptions, File Operations
+- Exceptions → Error Handling & Exceptions
 
 ---
