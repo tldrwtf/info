@@ -1,5 +1,23 @@
 # Big O Notation & Time Complexity - Complete Reference Guide
 
+## Quick Reference Card
+
+| Complexity | Name | Example Operation | Growth Rate |
+|------------|------|-------------------|-------------|
+| O(1) | Constant | Array access, hash lookup | Best |
+| O(log n) | Logarithmic | Binary search | Excellent |
+| O(n) | Linear | Array iteration, linear search | Good |
+| O(n log n) | Linearithmic | Merge sort, quicksort | Fair |
+| O(n²) | Quadratic | Nested loops, bubble sort | Poor |
+| O(n³) | Cubic | Triple nested loops | Bad |
+| O(2ⁿ) | Exponential | Fibonacci (naive), subsets | Very Bad |
+| O(n!) | Factorial | Permutations, traveling salesman | Worst |
+
+**Data Structure Operations:**
+- List access: O(1), search: O(n), insert/delete: O(n)
+- Dict/Set access/insert/delete: O(1) average
+- Binary Search Tree: O(log n) average
+
 ## Table of Contents
 - [What is Big O?](#what-is-big-o)
 - [Common Time Complexities](#common-time-complexities)

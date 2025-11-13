@@ -1,5 +1,23 @@
 # Object-Oriented Programming (OOP) - Complete Reference Guide
 
+## Quick Reference Card
+
+| Concept | Syntax | Purpose |
+|---------|--------|---------|
+| Define class | `class MyClass:` | Create new class |
+| Constructor | `def __init__(self):` | Initialize instance |
+| Instance attribute | `self.attr = value` | Unique to instance |
+| Class attribute | `MyClass.attr = value` | Shared by all |
+| Instance method | `def method(self):` | Operate on instance |
+| Class method | `@classmethod` | Operate on class |
+| Static method | `@staticmethod` | Independent utility |
+| Inheritance | `class Child(Parent):` | Extend parent class |
+| Call parent | `super().__init__()` | Access parent |
+| Property | `@property` | Getter method |
+| Setter | `@attr.setter` | Setter method |
+| String repr | `def __str__(self):` | String conversion |
+| Equality | `def __eq__(self, other):` | == operator |
+
 ## Table of Contents
 - [Classes & Objects](#classes--objects)
 - [Attributes & Methods](#attributes--methods)
@@ -815,26 +833,6 @@ class UserService:
     def create_user(self, user_data):
         self.db.save(user_data)
 ```
-
----
-
-## Quick Reference Card
-
-| Concept | Syntax | Purpose |
-|---------|--------|---------|
-| Define class | `class MyClass:` | Create new class |
-| Constructor | `def __init__(self):` | Initialize instance |
-| Instance attribute | `self.attr = value` | Unique to instance |
-| Class attribute | `MyClass.attr = value` | Shared by all |
-| Instance method | `def method(self):` | Operate on instance |
-| Class method | `@classmethod` | Operate on class |
-| Static method | `@staticmethod` | Independent utility |
-| Inheritance | `class Child(Parent):` | Extend parent class |
-| Call parent | `super().__init__()` | Access parent |
-| Property | `@property` | Getter method |
-| Setter | `@attr.setter` | Setter method |
-| String repr | `def __str__(self):` | String conversion |
-| Equality | `def __eq__(self, other):` | == operator |
 
 ---
 

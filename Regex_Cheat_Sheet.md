@@ -1,5 +1,26 @@
 # Regular Expressions (Regex) - Complete Reference Guide
 
+## Quick Reference Card
+
+| Pattern | Matches | Example |
+|---------|---------|---------|
+| `.` | Any character (except newline) | `a.c` matches "abc", "a2c" |
+| `\d` | Digit [0-9] | `\d{3}` matches "123" |
+| `\w` | Word character [a-zA-Z0-9_] | `\w+` matches "hello_123" |
+| `\s` | Whitespace | `\s+` matches spaces/tabs |
+| `^` | Start of string | `^Hello` matches start |
+| `$` | End of string | `world$` matches end |
+| `*` | 0 or more | `ab*` matches "a", "ab", "abb" |
+| `+` | 1 or more | `ab+` matches "ab", "abb" |
+| `?` | 0 or 1 | `ab?` matches "a", "ab" |
+| `{n}` | Exactly n times | `\d{3}` matches "123" |
+| `[abc]` | Any of a, b, or c | `[aeiou]` matches vowels |
+| `[^abc]` | Not a, b, or c | `[^0-9]` matches non-digits |
+| `(abc)` | Capture group | `(\d+)` captures digits |
+| `a|b` | a or b | `cat|dog` matches either |
+
+**Common Methods:** `re.search()`, `re.match()`, `re.findall()`, `re.sub()`, `re.split()`
+
 ## Table of Contents
 
 - [Regex Basics](#regex-basics)

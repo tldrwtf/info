@@ -1,5 +1,37 @@
 # SQL & SQLAlchemy ORM - Complete Reference Guide
 
+## Quick Reference Card
+
+### SQL Commands
+| Command | Purpose | Example |
+|---------|---------|---------|
+| CREATE TABLE | Define new table | `CREATE TABLE users (...)` |
+| INSERT | Add rows | `INSERT INTO users VALUES (...)` |
+| SELECT | Query data | `SELECT * FROM users` |
+| UPDATE | Modify rows | `UPDATE users SET ...` |
+| DELETE | Remove rows | `DELETE FROM users WHERE ...` |
+| DROP TABLE | Delete table | `DROP TABLE users` |
+
+### SQLAlchemy CRUD
+```python
+# Create
+user = User(username='Alice')
+session.add(user)
+session.commit()
+
+# Read
+users = session.query(User).all()
+user = session.query(User).filter(User.username == 'Alice').first()
+
+# Update
+user.email = 'new@email.com'
+session.commit()
+
+# Delete
+session.delete(user)
+session.commit()
+```
+
 ## Table of Contents
 - [SQL Basics](#sql-basics)
 - [DDL - Data Definition](#ddl---data-definition)
@@ -846,58 +878,6 @@ users = session.query(User.username, User.email).all()
 page = 1
 per_page = 20
 users = session.query(User).limit(per_page).offset((page - 1) * per_page).all()
-```
-
----
-
-## Quick Reference
-
-### SQL Commands
-| Command | Purpose | Example |
-|---------|---------|---------|
-| CREATE TABLE | Define new table | `CREATE TABLE users (...)` |
-| INSERT | Add rows | `INSERT INTO users VALUES (...)` |
-| SELECT | Query data | `SELECT * FROM users` |
-| UPDATE | Modify rows | `UPDATE users SET ...` |
-| DELETE | Remove rows | `DELETE FROM users WHERE ...` |
-| DROP TABLE | Delete table | `DROP TABLE users` |
-
-### SQLAlchemy CRUD
-```python
-# Create
-user = User(username='Wilson')
-session.add(user)
-session.commit()
-
-# Read
-users = session.query(User).all()
-user = session.query(User).filter(User.username == 'Wilson').first()
-
-# Update
-user.email = 'new@email.com'
-session.commit()
-
-# Delete
-session.delete(user)
-session.commit()
-```
-
-### Common Queries
-```python
-# Filter
-session.query(User).filter(User.age > 18).all()
-
-# Order
-session.query(User).order_by(User.name.desc()).all()
-
-# Limit
-session.query(User).limit(10).all()
-
-# Count
-session.query(User).count()
-
-# Join
-session.query(User).join(Post).all()
 ```
 
 ---

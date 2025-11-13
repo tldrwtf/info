@@ -1,5 +1,20 @@
 # Python Functional Programming - Complete Reference Guide
 
+## Quick Reference Card
+
+| Operation | Syntax | Example |
+|-----------|--------|---------|
+| Lambda | `lambda x: x**2` | `square = lambda x: x**2` |
+| Map | `map(func, iterable)` | `map(lambda x: x*2, [1,2,3])` |
+| Filter | `filter(func, iterable)` | `filter(lambda x: x%2==0, [1,2,3,4])` |
+| Reduce | `reduce(func, iterable)` | `reduce(lambda x,y: x+y, [1,2,3,4])` |
+| List comp | `[x for x in iterable]` | `[x*2 for x in [1,2,3]]` |
+| List filter | `[x for x in iterable if cond]` | `[x for x in [1,2,3,4] if x%2==0]` |
+| Dict comp | `{k: v for k, v in items}` | `{x: x**2 for x in range(3)}` |
+| Set comp | `{x for x in iterable}` | `{x**2 for x in [1,2,2,3]}` |
+| Generator | `(x for x in iterable)` | `(x**2 for x in range(1000000))` |
+| All/Any | `all(iterable)`, `any(iterable)` | `all(x > 0 for x in nums)` |
+
 ## Table of Contents
 - [Lambda Functions](#lambda-functions)
 - [Map](#map)
@@ -722,45 +737,6 @@ total = reduce(
 # List comprehension (best balance)
 total = sum(x**2 for x in numbers if x % 2 == 0)
 # total = 220
-```
-
----
-
-## Quick Reference Card
-
-| Operation | Syntax | Returns |
-|-----------|--------|---------|
-| Lambda | `lambda x: x**2` | Function |
-| Map | `map(func, iterable)` | Iterator |
-| Filter | `filter(func, iterable)` | Iterator |
-| Reduce | `reduce(func, iterable)` | Single value |
-| List comp | `[x for x in iterable]` | List |
-| Dict comp | `{k: v for k, v in items}` | Dictionary |
-| Set comp | `{x for x in iterable}` | Set |
-| Generator | `(x for x in iterable)` | Generator |
-
-### Cheat Sheet
-
-```python
-# Map - Transform all items
-list(map(lambda x: x*2, [1,2,3]))  # [2, 4, 6]
-
-# Filter - Keep items that match
-list(filter(lambda x: x%2==0, [1,2,3,4]))  # [2, 4]
-
-# Reduce - Combine all items
-from functools import reduce
-reduce(lambda x,y: x+y, [1,2,3,4])  # 10
-
-# List comprehension
-[x*2 for x in [1,2,3]]  # [2, 4, 6]
-[x for x in [1,2,3,4] if x%2==0]  # [2, 4]
-
-# Dict comprehension
-{x: x**2 for x in range(3)}  # {0: 0, 1: 1, 2: 4}
-
-# Set comprehension
-{x**2 for x in [1,2,2,3]}  # {1, 4, 9}
 ```
 
 ---
