@@ -1,5 +1,17 @@
 # Python Data Structures - Complete Reference Guide
 
+## Quick Reference Card
+
+| Data Structure | Creation | Add | Remove | Access | Use Case |
+|----------------|----------|-----|--------|--------|----------|
+| List | `[1, 2, 3]` | `.append(x)` | `.remove(x)` | `list[0]` | Ordered, mutable collection |
+| Dictionary | `{"a": 1}` | `dict["key"] = val` | `del dict["key"]` | `dict["key"]` | Key-value pairs |
+| Set | `{1, 2, 3}` | `.add(x)` | `.remove(x)` | N/A | Unique elements |
+| Tuple | `(1, 2, 3)` | N/A (immutable) | N/A (immutable) | `tuple[0]` | Immutable sequence |
+| Deque | `deque([1,2])` | `.append(x)` | `.pop()` | `deque[0]` | Stack/Queue |
+| Stack | `list()` | `.append(x)` | `.pop()` | `stack[-1]` | LIFO operations |
+| Queue | `deque()` | `.append(x)` | `.popleft()` | `queue[0]` | FIFO operations |
+
 ## Table of Contents
 - [Lists](#lists)
 - [Dictionaries](#dictionaries)
@@ -658,51 +670,6 @@ size = len(queue)
 | Lookup Speed | O(n) | O(1) | O(1) | O(n) |
 
 *Dictionaries are ordered as of Python 3.7+
-
----
-
-## Quick Reference
-
-### List
-```python
-my_list = [1, 2, 3]
-my_list.append(4)              # Add to end
-my_list.insert(0, 0)          # Insert at index
-my_list.remove(2)             # Remove by value
-my_list.pop()                 # Remove from end
-my_list[0]                    # Access by index
-[x*2 for x in my_list]        # List comprehension
-```
-
-### Dictionary
-```python
-my_dict = {"a": 1, "b": 2}
-my_dict["c"] = 3              # Add/update
-my_dict.get("a", 0)           # Safe access
-del my_dict["b"]              # Remove
-my_dict.keys()                # Get keys
-my_dict.values()              # Get values
-my_dict.items()               # Get key-value pairs
-```
-
-### Set
-```python
-my_set = {1, 2, 3}
-my_set.add(4)                 # Add element
-my_set.remove(2)              # Remove element
-{1, 2} | {2, 3}              # Union: {1, 2, 3}
-{1, 2} & {2, 3}              # Intersection: {2}
-{1, 2} - {2, 3}              # Difference: {1}
-```
-
-### Tuple
-```python
-my_tuple = (1, 2, 3)
-my_tuple[0]                   # Access (immutable!)
-a, b, c = my_tuple            # Unpacking
-my_tuple.count(2)             # Count occurrences
-my_tuple.index(3)             # Find index
-```
 
 ---
 

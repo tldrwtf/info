@@ -1,5 +1,22 @@
 # Python Basics - Complete Reference Guide
 
+## Quick Reference Card
+
+| Operation | Syntax | Example |
+|-----------|--------|---------|
+| Variable | `name = value` | `age = 25` |
+| String format | `f"text {var}"` | `f"Hello {name}"` |
+| If statement | `if condition:` | `if age >= 18:` |
+| For loop | `for item in iterable:` | `for i in range(5):` |
+| While loop | `while condition:` | `while count < 10:` |
+| Function | `def name(params):` | `def greet(name):` |
+| Return | `return value` | `return result` |
+| Input | `input(prompt)` | `name = input("Name: ")` |
+| Print | `print(value)` | `print("Hello")` |
+| List | `[item1, item2]` | `nums = [1, 2, 3]` |
+| Dictionary | `{key: value}` | `user = {"name": "Alice"}` |
+| Comment | `# comment` | `# This is a comment` |
+
 ## Table of Contents
 
 - [Variables & Data Types](#variables--data-types)

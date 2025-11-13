@@ -1,5 +1,22 @@
 # APIs & HTTP Requests - Complete Reference Guide
 
+## Quick Reference Card
+
+| Component | Syntax | Example |
+|-----------|--------|---------|
+| GET request | `requests.get(url)` | `requests.get('https://api.example.com/data')` |
+| POST request | `requests.post(url, json=data)` | `requests.post(url, json={'key': 'value'})` |
+| PUT request | `requests.put(url, json=data)` | `requests.put(url, json={'key': 'value'})` |
+| DELETE request | `requests.delete(url)` | `requests.delete('https://api.example.com/item/1')` |
+| Query params | `params={'key': 'value'}` | `requests.get(url, params={'page': 1})` |
+| Headers | `headers={'key': 'value'}` | `headers={'Authorization': 'Bearer token'}` |
+| JSON response | `response.json()` | `data = response.json()` |
+| Status code | `response.status_code` | `if response.status_code == 200:` |
+| Check success | `response.ok` | `if response.ok:` |
+| Timeout | `timeout=seconds` | `requests.get(url, timeout=5)` |
+
+**Common Status Codes:** 200 (OK), 201 (Created), 400 (Bad Request), 401 (Unauthorized), 404 (Not Found), 500 (Server Error)
+
 ## Table of Contents
 - [API Basics](#api-basics)
 - [HTTP Methods](#http-methods)
@@ -773,53 +790,6 @@ def delete_post(post_id):
 # post = get_post(1)
 # update_post(1, "Updated Title", "Updated content")
 # delete_post(1)
-```
-
----
-
-## Quick Reference Card
-
-### HTTP Methods
-| Method | Purpose | Has Body |
-|--------|---------|----------|
-| GET | Retrieve data | No |
-| POST | Create data | Yes |
-| PUT | Replace data | Yes |
-| PATCH | Update data | Yes |
-| DELETE | Remove data | No |
-
-### Common Status Codes
-| Code | Meaning |
-|------|---------|
-| 200 | OK |
-| 201 | Created |
-| 400 | Bad Request |
-| 401 | Unauthorized |
-| 404 | Not Found |
-| 500 | Server Error |
-
-### Request Components
-```python
-import requests
-
-response = requests.get(
-    "https://api.example.com/data",
-    params={"key": "value"},           # Query parameters
-    headers={"Authorization": "..."},  # Headers
-    json={"data": "value"},            # JSON body
-    timeout=5,                         # Timeout
-    auth=("user", "pass")              # Authentication
-)
-```
-
-### Response Properties
-```python
-response.status_code  # 200
-response.ok          # True/False
-response.json()      # Parse JSON
-response.text        # Text content
-response.headers     # Response headers
-response.cookies     # Cookies
 ```
 
 ---
