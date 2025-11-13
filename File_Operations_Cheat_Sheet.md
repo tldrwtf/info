@@ -816,9 +816,9 @@ files = manager.list_files()
 
 ## See Also
 
-- **Error_Handling_Cheat_Sheet.md** - Exception handling for file operations
-- **Python_Basics_Cheat_Sheet.md** - Python fundamentals
-- **Standard_Library_Essentials_Cheat_Sheet.md** - More useful modules
+- [Error_Handling_Cheat_Sheet](./Error_Handling_Cheat_Sheet.md) - Exception handling for file operations
+- [Python_Basics_Cheat_Sheet](./Python_Basics_Cheat_Sheet.md) - Python fundamentals
+- [Standard_Library_Essentials_Cheat_Sheet](./Standard_Library_Essentials_Cheat_Sheet.md) - More useful modules
 
 ---
 
@@ -834,4 +834,4 @@ File operations are fundamental to Python programming:
 - Use **JSON** for configuration and data interchange
 - Choose appropriate **file modes** for your use case
 
-Master these file operations to build robust applications that interact with the file system effectively!
+---
