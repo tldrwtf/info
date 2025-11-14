@@ -840,9 +840,9 @@ except Exception as e:
 
 ## See Also
 
-- **File_Operations_Cheat_Sheet.md** - File handling with error handling
-- **Python_Basics_Cheat_Sheet.md** - Python fundamentals
-- **Testing_and_Debugging_Cheat_Sheet.md** - Testing exception handling
+- **[File Operations Cheat Sheet](./File_Operations_Cheat_Sheet.md)** - File handling with error handling
+- **[Python Basics Cheat Sheet](./Python_Basics_Cheat_Sheet.md)** - Python fundamentals
+- **[Testing and Debugging Cheat Sheet](./Testing_and_Debugging_Cheat_Sheet.md)** - Testing exception handling
 
 ---
 
@@ -860,4 +860,4 @@ Exception handling is crucial for robust Python programs:
 - **Log exceptions** appropriately
 - **Don't silence** exceptions without good reason
 
-Master exception handling to write resilient, production-ready Python code!
+---
