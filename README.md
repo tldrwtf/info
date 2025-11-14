@@ -116,7 +116,73 @@ If you found any of this information useful, leaving a star on this repository w
 
 ---
 
-### 8. [Big O Notation & Time Complexity](./Big_O_Notation_Cheat_Sheet.md)
+### 8. [SQLAlchemy Relationships](./SQLAlchemy_Relationships_Guide.md)
+
+**Advanced ORM relationship patterns**
+
+- One-to-Many Relationships
+- Many-to-One Relationships
+- One-to-One Relationships
+- Many-to-Many Relationships
+- Association Objects
+- Self-Referential Relationships
+- Lazy Loading Strategies
+- Cascade Operations
+
+**Best for:** Complex database relationships, data modeling, advanced SQLAlchemy
+
+---
+
+### 9. [Flask REST API Development](./Flask_REST_API_Development_Guide.md)
+
+**Building RESTful APIs with Flask**
+
+- Flask Application Factory Pattern
+- Blueprints & Route Organization
+- Database Configuration
+- SQLAlchemy Models
+- Marshmallow Schemas
+- CRUD Operations
+- Error Handling
+- Testing APIs
+
+**Best for:** Building web APIs, full-stack development, microservices
+
+---
+
+### 10. [API Authentication](./API_Authentication_Guide.md)
+
+**Securing APIs with various authentication methods**
+
+- API Keys
+- Bearer Tokens
+- Basic Authentication
+- OAuth 2.0 (Spotify, GitHub examples)
+- JWT (JSON Web Tokens)
+- Session-Based Authentication
+- Security Best Practices
+
+**Best for:** API security, user authentication, OAuth integrations
+
+---
+
+### 11. [Python CLI Applications](./Python_CLI_Applications_Guide.md)
+
+**Building command-line interface applications**
+
+- User Input & Validation
+- Command-Line Arguments (argparse)
+- Interactive Menus
+- CLI with Database (ORM)
+- Formatting Output (tabulate, rich, colorama)
+- Error Handling
+- Complete CLI Examples
+
+**Best for:** CLI tools, automation scripts, interactive applications
+
+---
+
+### 12. [Big O Notation & Time Complexity](./Big_O_Notation_Cheat_Sheet.md)
 
 **Algorithm analysis and optimization**
 
@@ -132,7 +198,7 @@ If you found any of this information useful, leaving a star on this repository w
 
 ---
 
-### 9. [File Operations](./File_Operations_Cheat_Sheet.md)
+### 13. [File Operations](./File_Operations_Cheat_Sheet.md)
 
 **Reading, writing, and managing files**
 
@@ -149,7 +215,7 @@ If you found any of this information useful, leaving a star on this repository w
 
 ---
 
-### 10. [Error Handling & Exceptions](./Error_Handling_Cheat_Sheet.md)
+### 14. [Error Handling & Exceptions](./Error_Handling_Cheat_Sheet.md)
 
 **Exception handling and debugging techniques**
 
@@ -165,7 +231,7 @@ If you found any of this information useful, leaving a star on this repository w
 
 ---
 
-### 11. [Decorators](./Decorators_Cheat_Sheet.md)
+### 15. [Decorators](./Decorators_Cheat_Sheet.md)
 
 **Function and class decorators**
 
@@ -181,7 +247,7 @@ If you found any of this information useful, leaving a star on this repository w
 
 ---
 
-### 12. [Iterators & Generators](./Iterators_and_Generators_Cheat_Sheet.md)
+### 16. [Iterators & Generators](./Iterators_and_Generators_Cheat_Sheet.md)
 
 **Efficient iteration and lazy evaluation**
 
@@ -198,7 +264,7 @@ If you found any of this information useful, leaving a star on this repository w
 
 ---
 
-### 13. [Testing & Debugging](./Testing_and_Debugging_Cheat_Sheet.md)
+### 17. [Testing & Debugging](./Testing_and_Debugging_Cheat_Sheet.md)
 
 **Writing tests and debugging code**
 
@@ -215,7 +281,7 @@ If you found any of this information useful, leaving a star on this repository w
 
 ---
 
-### 14. [Standard Library Essentials](./Standard_Library_Essentials_Cheat_Sheet.md)
+### 18. [Standard Library Essentials](./Standard_Library_Essentials_Cheat_Sheet.md)
 
 **Essential Python standard library modules**
 
@@ -255,10 +321,33 @@ If you found any of this information useful, leaving a star on this repository w
 
 1. **Testing & Debugging** - Write robust, testable code
 2. **Standard Library Essentials** - Master built-in modules
-3. **Decorators** - Metaprogramming techniques
-4. **Iterators & Generators** - Advanced iteration patterns
+3. **SQLAlchemy Relationships** - Advanced database patterns
+4. **API Authentication** - Secure your APIs
+5. **Decorators** - Metaprogramming techniques
+6. **Iterators & Generators** - Advanced iteration patterns
 
-### Full Stack Path
+### Full Stack Web Development Path
+
+1. **Python Basics** - Foundation
+2. **OOP** - Object-oriented programming
+3. **SQL & SQLAlchemy** - Database basics
+4. **SQLAlchemy Relationships** - Advanced relationships
+5. **Flask REST API Development** - Build APIs
+6. **API Authentication** - Secure APIs
+7. **APIs & Requests** - Consume APIs
+8. **Testing & Debugging** - Test your applications
+
+### CLI Development Path
+
+1. **Python Basics** - Foundation
+2. **Data Structures** - Core structures
+3. **File Operations** - File I/O
+4. **SQL & SQLAlchemy** - Database operations
+5. **Python CLI Applications** - Build interactive CLIs
+6. **Error Handling** - Robust error handling
+7. **Testing & Debugging** - Test your tools
+
+### Complete Python Mastery
 
 Follow all guides in order for comprehensive Python knowledge
 
@@ -272,8 +361,8 @@ Follow all guides in order for comprehensive Python knowledge
 
 - Lists/Arrays → Data Structures
 - Dictionaries/Hash Maps → Data Structures, Standard Library Essentials
-- Database Operations → SQL & SQLAlchemy
-- API Calls → APIs & Requests
+- Database Operations → SQL & SQLAlchemy, SQLAlchemy Relationships
+- API Calls → APIs & Requests, API Authentication
 - File I/O → File Operations
 - CSV/JSON → File Operations
 - Data Processing → Iterators & Generators
@@ -292,6 +381,7 @@ Follow all guides in order for comprehensive Python knowledge
 - Debugging → Testing & Debugging
 - Mocking → Testing & Debugging
 - Standard Library → Standard Library Essentials
+- CLI Tools → Python CLI Applications
 
 **Text Processing:**
 
@@ -313,5 +403,29 @@ Follow all guides in order for comprehensive Python knowledge
 - Generators → Iterators & Generators
 - Context Managers → Error Handling & Exceptions, File Operations
 - Exceptions → Error Handling & Exceptions
+
+**Web Development:**
+
+- REST APIs → Flask REST API Development, APIs & Requests
+- Authentication → API Authentication
+- Database Models → SQL & SQLAlchemy, SQLAlchemy Relationships
+- API Security → API Authentication
+- Flask Blueprints → Flask REST API Development
+
+**Application Development:**
+
+- CLI Applications → Python CLI Applications
+- Command-Line Arguments → Python CLI Applications, Standard Library Essentials
+- Interactive Menus → Python CLI Applications
+- User Input Validation → Python CLI Applications, Regex
+
+**Database & ORM:**
+
+- Basic CRUD → SQL & SQLAlchemy
+- Relationships → SQLAlchemy Relationships
+- One-to-Many → SQLAlchemy Relationships
+- Many-to-Many → SQLAlchemy Relationships
+- Association Tables → SQLAlchemy Relationships
+- Lazy Loading → SQLAlchemy Relationships
 
 ---

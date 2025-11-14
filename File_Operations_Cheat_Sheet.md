@@ -816,9 +816,9 @@ files = manager.list_files()
 
 ## See Also
 
-- **Error_Handling_Cheat_Sheet.md** - Exception handling for file operations
-- **Python_Basics_Cheat_Sheet.md** - Python fundamentals
-- **Standard_Library_Essentials_Cheat_Sheet.md** - More useful modules
+- **[Error Handling Cheat Sheet](./Error_Handling_Cheat_Sheet.md)** - Exception handling for file operations
+- **[Python Basics Cheat Sheet](./Python_Basics_Cheat_Sheet.md)** - Python fundamentals
+- **[Standard Library Essentials Cheat Sheet](./Standard_Library_Essentials_Cheat_Sheet.md)** - More useful modules
 
 ---
 
