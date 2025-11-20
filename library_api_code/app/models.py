@@ -36,8 +36,8 @@ class Loans(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), nullable=False)
-    loan_date: Mapped[date] = mapped_column(Date, default=datetime.now())
-    deadline: Mapped[date] = mapped_column(Date, default=datetime.now() + timedelta(days=14))
+    loan_date: Mapped[date] = mapped_column(Date, default=datetime.now)
+    deadline: Mapped[date] = mapped_column(Date, default=lambda: datetime.now() + timedelta(days=14))
     return_date: Mapped[date] = mapped_column(Date, nullable=True)
 
     user: Mapped['Users'] = relationship('Users', back_populates='loans')

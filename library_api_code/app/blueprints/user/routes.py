@@ -16,6 +16,10 @@ def login():
     data = login_schema.load(request.json) #JSON -> Python
   except ValidationError as e:
     return jsonify(e.messages), 400 #Returning the error as a response so the client can see whats wrong with the status code
+
+  # Ensure both 'email' and 'password' are present after schema validation
+  if 'email' not in data or 'password' not in data:
+    return jsonify({"error": "Both 'email' and 'password' fields are required."}), 400
   
   user = db.session.query(Users).where(Users.email==data['email']).first() #Search my db for a user with the email in the request
 

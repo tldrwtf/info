@@ -34,7 +34,7 @@ Building a library app
 Entities:
 user - id PK, email VC, first_name VC, last_name VC, password VC, DOB DATE, address VC, role VC
 
-loan - id PKm user_id FK, borrow_date, return_date, deadline
+loan - id PK user_id FK, borrow_date, return_date, deadline
 
 loan_book - loan_id FK, book_id FK
 

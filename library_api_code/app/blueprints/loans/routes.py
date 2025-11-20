@@ -53,7 +53,7 @@ def remove_book(loan_id, book_id):
             'books': books_schema.dump(loan.books) #using the books_schema to serialize the list of books related to the loan
         }), 200
     
-    return jsonify("This book is no on the loan"), 400
+    return jsonify("This book is not on the loan"), 400
 
 
 @loans_bp.route('', methods=['GET'])
