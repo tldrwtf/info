@@ -297,6 +297,77 @@ If you found any of this information useful, leaving a star on this repository w
 
 ---
 
+### 19. [Linked Lists and Custom Data Structures](./Linked_Lists_and_Custom_Data_Structures_Guide.md)
+
+**Building data structures from scratch**
+
+- Node Implementation
+- LinkedList Class with Operations
+- Stack Implementation (LIFO)
+- Queue Implementation (FIFO)
+- Time Complexity Analysis
+- Practical Applications (music playlists, browser history)
+- Optimization Techniques
+- When to Use Each Structure
+
+**Best for:** Understanding data structures, technical interviews, custom implementations
+
+---
+
+### 20. [OAuth2 and Token Management](./OAuth2_and_Token_Management_Guide.md)
+
+**Implementing OAuth2 authentication flows**
+
+- Client Credentials Flow
+- Base64 Encoding for Credentials
+- Token Acquisition and Storage
+- Bearer Token Usage
+- Token Lifecycle Management
+- Error Handling
+- Security Best Practices
+- Complete Implementation Examples
+
+**Best for:** API authentication, third-party integrations, secure token management
+
+---
+
+### 21. [SQLAlchemy Advanced Patterns](./SQLAlchemy_Advanced_Patterns_Guide.md)
+
+**Advanced ORM patterns and production best practices**
+
+- Session Management Patterns
+- Query Optimization (avoiding N+1 queries)
+- Complex Relationships
+- Association Objects vs Association Tables
+- Self-Referential Relationships
+- Lazy Loading Strategies
+- Cascade Operations
+- Transaction Handling
+- Production Patterns
+
+**Best for:** Production applications, performance optimization, complex data models
+
+---
+
+### 22. [Flask Advanced Features](./Flask_Advanced_Features_Guide.md)
+
+**Advanced Flask patterns for production applications**
+
+- Rate Limiting with Flask-Limiter
+- Caching with Flask-Caching
+- Pagination Patterns
+- Advanced Blueprint Architecture
+- Request Validation with Marshmallow
+- Error Handling Middleware
+- Application Factory Pattern
+- JWT Authentication
+- CORS Configuration
+- Production Best Practices
+
+**Best for:** Production Flask applications, API optimization, scalable architecture
+
+---
+
 ## Learning Paths
 
 ### Beginner Path
@@ -321,10 +392,10 @@ If you found any of this information useful, leaving a star on this repository w
 
 1. **Testing & Debugging** - Write robust, testable code
 2. **Standard Library Essentials** - Master built-in modules
-3. **SQLAlchemy Relationships** - Advanced database patterns
-4. **API Authentication** - Secure your APIs
-5. **Decorators** - Metaprogramming techniques
-6. **Iterators & Generators** - Advanced iteration patterns
+3. **Linked Lists and Custom Data Structures** - Build data structures from scratch
+4. **SQLAlchemy Advanced Patterns** - Production ORM patterns
+5. **OAuth2 and Token Management** - Advanced authentication
+6. **Flask Advanced Features** - Production Flask patterns
 
 ### Full Stack Web Development Path
 
@@ -332,24 +403,34 @@ If you found any of this information useful, leaving a star on this repository w
 2. **OOP** - Object-oriented programming
 3. **SQL & SQLAlchemy** - Database basics
 4. **SQLAlchemy Relationships** - Advanced relationships
-5. **Flask REST API Development** - Build APIs
-6. **API Authentication** - Secure APIs
-7. **APIs & Requests** - Consume APIs
-8. **Testing & Debugging** - Test your applications
+5. **SQLAlchemy Advanced Patterns** - Production patterns and optimization
+6. **Flask REST API Development** - Build APIs
+7. **Flask Advanced Features** - Rate limiting, caching, pagination
+8. **API Authentication** - Secure APIs
+9. **OAuth2 and Token Management** - OAuth2 flows and token lifecycle
+10. **APIs & Requests** - Consume APIs
+11. **Testing & Debugging** - Test your applications
 
 ### CLI Development Path
 
 1. **Python Basics** - Foundation
 2. **Data Structures** - Core structures
-3. **File Operations** - File I/O
-4. **SQL & SQLAlchemy** - Database operations
-5. **Python CLI Applications** - Build interactive CLIs
-6. **Error Handling** - Robust error handling
-7. **Testing & Debugging** - Test your tools
+3. **Linked Lists and Custom Data Structures** - Custom implementations
+4. **File Operations** - File I/O
+5. **SQL & SQLAlchemy** - Database operations
+6. **SQLAlchemy Advanced Patterns** - Session management and optimization
+7. **Python CLI Applications** - Build interactive CLIs
+8. **Error Handling** - Robust error handling
+9. **Testing & Debugging** - Test your tools
 
-### Complete Python Mastery
+### Data Structures & Algorithms Path
 
-Follow all guides in order for comprehensive Python knowledge
+1. **Python Basics** - Foundation
+2. **Data Structures** - Built-in structures
+3. **Linked Lists and Custom Data Structures** - Custom implementations
+4. **Big O Notation** - Time and space complexity
+5. **Functional Programming** - Efficient data transformations
+6. **Iterators & Generators** - Memory-efficient patterns
 
 ---
 
@@ -360,9 +441,11 @@ Follow all guides in order for comprehensive Python knowledge
 **Working with Data:**
 
 - Lists/Arrays → Data Structures
+- Linked Lists → Linked Lists and Custom Data Structures
+- Stacks & Queues → Linked Lists and Custom Data Structures
 - Dictionaries/Hash Maps → Data Structures, Standard Library Essentials
-- Database Operations → SQL & SQLAlchemy, SQLAlchemy Relationships
-- API Calls → APIs & Requests, API Authentication
+- Database Operations → SQL & SQLAlchemy, SQLAlchemy Relationships, SQLAlchemy Advanced Patterns
+- API Calls → APIs & Requests, API Authentication, OAuth2 and Token Management
 - File I/O → File Operations
 - CSV/JSON → File Operations
 - Data Processing → Iterators & Generators
@@ -393,9 +476,11 @@ Follow all guides in order for comprehensive Python knowledge
 **Performance:**
 
 - Algorithm Analysis → Big O Notation
-- Optimization → Big O Notation, Functional Programming, Iterators & Generators
-- Memory Efficiency → Iterators & Generators
-- Caching → Decorators
+- Optimization → Big O Notation, Functional Programming, Iterators & Generators, SQLAlchemy Advanced Patterns
+- Memory Efficiency → Iterators & Generators, Linked Lists and Custom Data Structures
+- Caching → Decorators, Flask Advanced Features
+- Query Optimization → SQLAlchemy Advanced Patterns
+- Rate Limiting → Flask Advanced Features
 
 **Python Features:**
 
@@ -407,10 +492,15 @@ Follow all guides in order for comprehensive Python knowledge
 **Web Development:**
 
 - REST APIs → Flask REST API Development, APIs & Requests
-- Authentication → API Authentication
+- Authentication → API Authentication, OAuth2 and Token Management
+- OAuth2 → OAuth2 and Token Management
+- JWT Tokens → OAuth2 and Token Management, Flask Advanced Features
 - Database Models → SQL & SQLAlchemy, SQLAlchemy Relationships
-- API Security → API Authentication
-- Flask Blueprints → Flask REST API Development
+- API Security → API Authentication, OAuth2 and Token Management
+- Flask Blueprints → Flask REST API Development, Flask Advanced Features
+- Rate Limiting → Flask Advanced Features
+- Caching → Flask Advanced Features
+- Pagination → Flask Advanced Features
 
 **Application Development:**
 
@@ -425,7 +515,20 @@ Follow all guides in order for comprehensive Python knowledge
 - Relationships → SQLAlchemy Relationships
 - One-to-Many → SQLAlchemy Relationships
 - Many-to-Many → SQLAlchemy Relationships
-- Association Tables → SQLAlchemy Relationships
-- Lazy Loading → SQLAlchemy Relationships
+- Association Tables → SQLAlchemy Relationships, SQLAlchemy Advanced Patterns
+- Lazy Loading → SQLAlchemy Relationships, SQLAlchemy Advanced Patterns
+- Session Management → SQLAlchemy Advanced Patterns
+- Query Optimization → SQLAlchemy Advanced Patterns
+- Transactions → SQLAlchemy Advanced Patterns
+- Cascade Operations → SQLAlchemy Advanced Patterns
+
+**Data Structures:**
+
+- Node Implementation → Linked Lists and Custom Data Structures
+- LinkedList → Linked Lists and Custom Data Structures
+- Stack (LIFO) → Linked Lists and Custom Data Structures
+- Queue (FIFO) → Linked Lists and Custom Data Structures
+- Time Complexity → Big O Notation, Linked Lists and Custom Data Structures
+- Custom Implementations → Linked Lists and Custom Data Structures
 
 ---
