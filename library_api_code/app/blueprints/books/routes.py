@@ -31,7 +31,7 @@ def get_books():
         query = select(Books)
         books = db.paginate(query, page=page, per_page=per_page) #Handles our pagination so we don't have to track how many items to be sending
         return books_schema.jsonify(books), 200
-    except:
+    except (TypeError, ValueError):
         books = db.session.query(Books).all()
         return books_schema.jsonify(books), 200
 
@@ -61,7 +61,9 @@ def update_book(book_id):
 @books_bp.route('/<int:book_id>', methods=['DELETE'])
 @limiter.limit("8 per day")
 def delete_book(book_id):
-    book = db.session.get(Books,book_id)
+    book = db.session.get(Books, book_id)
+    if not book:
+        return jsonify({"error": f"Book with id {book_id} not found."}), 404
     db.session.delete(book)
     db.session.commit()
     return jsonify(f"Successfully deleted book {book_id}")
