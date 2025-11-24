@@ -948,9 +948,9 @@ def test_file_operations(temp_file):
 
 ## See Also
 
-- [Error_Handling_Cheat_Sheet](./Error_Handling_Cheat_Sheet.html) - Exception handling for tests
-- [Decorators_Cheat_Sheet](./Decorators_Cheat_Sheet.html) - Decorators for test fixtures
-- [File_Operations_Cheat_Sheet](./File_Operations_Cheat_Sheet.html) - Testing file operations
+- **[Error_Handling_Cheat_Sheet](./Error_Handling_Cheat_Sheet.md)** - Exception handling for tests
+- **[Decorators_Cheat_Sheet](./Decorators_Cheat_Sheet.md)** - Decorators for test fixtures
+- **[File_Operations_Cheat_Sheet](./File_Operations_Cheat_Sheet.md)** - Testing file operations
 
 ---
 
