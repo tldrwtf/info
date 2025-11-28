@@ -417,6 +417,251 @@ print(p3)     # Point(4, 6) - Uses __str__
 p1 == Point(1, 2)  # True - Uses __eq__
 ```
 
+### Real-World Example: RPG Game with Character Classes
+
+This complete game example demonstrates inheritance, polymorphism, and method overriding in action.
+
+```python
+class Character:
+    """Base character class"""
+
+    def __init__(self, name, health, attack_power=10):
+        self.name = name
+        self.health = health
+        self.attack_power = attack_power
+        self.max_health = health
+
+    def attack(self, opponent):
+        """Basic attack method - will be overridden by child classes"""
+        opponent.health -= self.attack_power
+        print(f"{self.name} has attacked {opponent.name} with a stick for {self.attack_power} points of damage!")
+
+        if opponent.health <= 0:
+            print(f"{opponent.name} has perished!")
+        else:
+            print(f"{opponent.name} has {opponent.health} health points left")
+
+    def display_stats(self):
+        """Display character statistics"""
+        print(f"{self.name}'s stats")
+        print(f"  Health: {self.health}/{self.max_health}")
+        print(f"  Attack Power: {self.attack_power}")
+
+
+# Child class - demonstrates INHERITANCE
+class Warrior(Character):
+    """Warrior character with high health and attack"""
+
+    def __init__(self, name):
+        # Call parent __init__ with warrior-specific values
+        super().__init__(name, health=150, attack_power=20)
+
+    # POLYMORPHISM - override the attack method
+    def attack(self, opponent):
+        """Warrior's attack with unique message"""
+        opponent.health -= self.attack_power
+        print(f"{self.name} slashes at {opponent.name} with his sword, inflicting {self.attack_power} points of damage!")
+
+        if opponent.health <= 0:
+            print(f"{opponent.name} has perished!")
+        else:
+            print(f"{opponent.name} has {opponent.health} health points left")
+
+    def special_attack(self, opponent):
+        """Warrior-specific special attack - 2x damage"""
+        damage = self.attack_power * 2
+        opponent.health -= damage
+        print(f"{self.name} is beating up {opponent.name} with his special attack, inflicting {damage} points of damage!")
+
+        if opponent.health <= 0:
+            print(f"{opponent.name} has perished!")
+        else:
+            print(f"{opponent.name} has {opponent.health} health points left")
+
+
+class Mage(Character):
+    """Mage character with lower health but high attack and self-heal"""
+
+    def __init__(self, name):
+        super().__init__(name, health=90, attack_power=75)
+
+    def attack(self, opponent):
+        """Mage's attack heals self while damaging opponent"""
+        opponent.health -= self.attack_power
+
+        # Self-healing mechanic
+        heal_amount = 5
+        if self.health + heal_amount < self.max_health:
+            self.health += heal_amount
+        else:
+            self.health = self.max_health
+
+        print(f"{self.name} casts meteor strike, smashing into {opponent.name} inflicting {self.attack_power} points of damage! Also self healed by {heal_amount} points")
+
+        if opponent.health <= 0:
+            print(f"{opponent.name} has perished!")
+        else:
+            print(f"{opponent.name} has {opponent.health} health points left")
+
+
+class EvilWizard(Character):
+    """Boss character with regeneration ability"""
+
+    def __init__(self):
+        super().__init__(name="Evil Wizard", health=150, attack_power=40)
+
+    def regenerate(self):
+        """Boss-specific ability to regenerate health"""
+        heal = 5
+        self.health += heal
+        print(f"{self.name} regenerates {heal} health points! Current health: {self.health}")
+
+
+def create_character():
+    """Character creation menu"""
+    name = input("What's your name adventurer? ")
+    print(f'''
+Choose your Character
+======================
+1.) Warrior
+2.) Mage
+''')
+    choice = int(input("Choose: "))
+
+    if choice == 1:
+        return Warrior(name)
+    elif choice == 2:
+        return Mage(name)
+    else:
+        print("Invalid choice, defaulting to Warrior")
+        return Warrior(name)
+
+
+def battle(player, boss):
+    """Turn-based battle system"""
+    print(f"\n{'='*50}")
+    print(f"BATTLE: {player.name} vs {boss.name}")
+    print(f"{'='*50}\n")
+
+    while boss.health > 0 and player.health > 0:
+        print(f"""
+Your Turn
+==============
+1.) Attack
+2.) View Stats
+""")
+        choice = input("Choose action: ")
+
+        if choice == '1':
+            player.attack(boss)
+        elif choice == '2':
+            player.display_stats()
+            boss.display_stats()
+            continue  # Don't let boss attack if just viewing stats
+        else:
+            print("Invalid choice!")
+            continue
+
+        # Boss turn (if still alive)
+        if boss.health > 0:
+            boss.regenerate()
+            boss.attack(player)
+
+        print(f"\n{'-'*50}\n")
+
+    # Battle end
+    if player.health > 0:
+        print(f"\n{'='*50}")
+        print(f"{player.name} WINS!")
+        print(f"{'='*50}\n")
+    else:
+        print(f"\n{'='*50}")
+        print(f"{boss.name} wins! Game Over.")
+        print(f"{'='*50}\n")
+
+
+def main():
+    """Main game loop"""
+    print("Welcome to the RPG Battle Game!")
+    print("=" * 50)
+
+    player = create_character()
+    boss = EvilWizard()
+
+    print(f"\nYour character: {player.__class__.__name__}")
+    player.display_stats()
+
+    input("\nPress Enter to start the battle...")
+
+    battle(player, boss)
+
+
+if __name__ == "__main__":
+    main()
+```
+
+**Running the Game:**
+
+```
+$ python rpg_game.py
+
+Welcome to the RPG Battle Game!
+==================================================
+What's your name adventurer? Arthur
+
+Choose your Character
+======================
+1.) Warrior
+2.) Mage
+Choose: 1
+
+Your character: Warrior
+Arthur's stats
+  Health: 150/150
+  Attack Power: 20
+
+Press Enter to start the battle...
+
+==================================================
+BATTLE: Arthur vs Evil Wizard
+==================================================
+
+
+Your Turn
+==============
+1.) Attack
+2.) View Stats
+Choose action: 1
+Arthur slashes at Evil Wizard with his sword, inflicting 20 points of damage!
+Evil Wizard has 130 health points left
+Evil Wizard regenerates 5 health points! Current health: 135
+Evil Wizard has attacked Arthur with a stick for 40 points of damage!
+Arthur has 110 health points left
+```
+
+**What This Example Teaches:**
+
+| Concept | How It's Demonstrated |
+|---------|----------------------|
+| **Inheritance** | Warrior, Mage, and EvilWizard all inherit from Character |
+| **Polymorphism** | Each class overrides `attack()` with unique behavior |
+| **super()** | Child classes call `super().__init__()` to initialize parent |
+| **Method Overriding** | `attack()` works differently for each character type |
+| **Class-Specific Methods** | `special_attack()` for Warrior, `regenerate()` for EvilWizard |
+| **Encapsulation** | Health tracking and validation within methods |
+| **OOP Game Design** | Turn-based combat, character stats, game loop |
+
+**Why This Example is Valuable:**
+
+- **Complete, playable game:** Students can run it and see OOP in action
+- **Clear inheritance hierarchy:** Easy to see how child classes extend parent
+- **Real polymorphism:** Same method (`attack`) does different things
+- **Relatable:** Everyone understands RPG character classes
+- **Extensible:** Easy to add new character types (Archer, Rogue, etc.)
+- **Demonstrates super():** Shows proper parent class initialization
+- **Game mechanics:** Health management, damage calculation, turn order
+- **Interactive:** Menu-driven, user input, game loop
+
 ---
 
 ## Abstraction

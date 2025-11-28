@@ -940,18 +940,3 @@ def resource_generator():
 - **[Python Basics Cheat Sheet](./Python_Basics_Cheat_Sheet.md)** - Loops and control flow
 
 ---
-
-## Summary
-
-Iterators and generators are powerful tools for efficient data processing:
-- **Iterators** implement `__iter__()` and `__next__()`
-- **Generators** use `yield` keyword for simple iterators
-- **Generator expressions** provide memory-efficient alternatives to list comprehensions
-- **yield from** delegates to sub-iterators
-- **itertools** provides many useful iterator tools
-- Use generators for **large datasets** to save memory
-- Generators are **lazy** - values computed on demand
-- Generators are **single-use** - exhausted after iteration
-- **Pipeline** generators for efficient data processing
-
----

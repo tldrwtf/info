@@ -724,33 +724,118 @@ def get_weather(city, api_key):
 # weather = get_weather("London", "your_api_key")
 ```
 
-### Pokemon API
+### Pokemon API - Complete Example
+
+This real-world example demonstrates proper API integration with error handling and nested JSON parsing.
+
 ```python
 import requests
 
-def get_pokemon(identifier):
-    """Get Pokemon data by name or ID"""
-    url = f"https://pokeapi.co/api/v2/pokemon/{identifier}"
+def get_pokemon_data(pokemon_identifier):
+    """
+    Get Pokemon data from PokeAPI and extract game-relevant information.
 
+    Args:
+        pokemon_identifier: Pokemon name (str) or ID (int)
+            Examples: "pikachu", "charizard", 25, 6
+
+    Returns:
+        dict: Pokemon information with keys: name, id, hp, attack, sprite_url, type
+        None: if Pokemon not found or error occurred
+
+    Example:
+        >>> pikachu = get_pokemon_data("pikachu")
+        >>> print(f"{pikachu['name']} has {pikachu['hp']} HP")
+        pikachu has 35 HP
+    """
+
+    # Step 1: Construct URL with identifier (can be name or ID)
+    url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_identifier}"
+
+    # Step 2: Make GET request
     response = requests.get(url)
 
+    # Step 3: Check if request was successful
     if response.status_code == 200:
-        data = response.json()
-        return {
-            "name": data["name"],
-            "id": data["id"],
-            "hp": data["stats"][0]["base_stat"],
-            "attack": data["stats"][1]["base_stat"],
-            "sprite": data["sprites"]["front_default"],
-            "type": data["types"][0]["type"]["name"]
-        }
-    elif response.status_code == 404:
-        return None
-    else:
-        raise Exception(f"API error: {response.status_code}")
+        data = response.json()  # Convert JSON to Python dictionary
 
-# pikachu = get_pokemon("pikachu")
-# print(f"{pikachu['name']}: HP={pikachu['hp']}, Attack={pikachu['attack']}")
+        # Step 4: Extract relevant data from nested JSON structure
+        pokemon = {
+            "name": data['name'],
+            "id": data['id'],
+            "hp": data["stats"][0]["base_stat"],  # HP is first stat
+            "attack": data["stats"][1]["base_stat"],  # Attack is second stat
+            "sprite_url": data["sprites"]["front_default"],
+            "type": data["types"][0]["type"]["name"]  # Primary type
+        }
+        return pokemon
+
+    elif response.status_code == 404:
+        # Pokemon not found
+        print(f"Pokemon '{pokemon_identifier}' not found")
+        return None
+
+    else:
+        # Other errors
+        print(f"Failed to catch {pokemon_identifier}: Status {response.status_code}")
+        return None
+
+
+# Usage Examples:
+if __name__ == "__main__":
+    # Example 1: Get Pokemon by name
+    pikachu = get_pokemon_data("pikachu")
+    if pikachu:
+        print(f"\n{pikachu['name'].title()}")
+        print(f"   Type: {pikachu['type']}")
+        print(f"   HP: {pikachu['hp']}")
+        print(f"   Attack: {pikachu['attack']}")
+
+    # Example 2: Get Pokemon by ID
+    charizard = get_pokemon_data(6)
+    if charizard:
+        print(f"\n{charizard['name'].title()}")
+        print(f"   Type: {charizard['type']}")
+        print(f"   HP: {charizard['hp']}")
+        print(f"   Attack: {charizard['attack']}")
+
+    # Example 3: Handle invalid Pokemon
+    invalid = get_pokemon_data("invalidpokemon")
+    if not invalid:
+        print("\nPokemon not found!")
+```
+
+**Key Features of This Example:**
+
+- **Flexible input:** Works with both string names and integer IDs
+- **Error handling:** Checks status codes and returns `None` on failure
+- **Nested JSON parsing:** Extracts data from complex JSON structure
+- **Type safety:** Returns consistent dictionary structure or `None`
+- **Documentation:** Clear docstring with examples
+- **Real API:** Free API with no authentication required
+- **Relatable:** Pokemon are familiar to students
+
+**Understanding the JSON Structure:**
+
+```python
+# PokeAPI returns deeply nested JSON:
+{
+    "name": "pikachu",
+    "id": 25,
+    "stats": [
+        {"base_stat": 35, "stat": {"name": "hp"}},      # Index 0
+        {"base_stat": 55, "stat": {"name": "attack"}},   # Index 1
+        # ... more stats
+    ],
+    "sprites": {
+        "front_default": "https://...pikachu.png"
+    },
+    "types": [
+        {"type": {"name": "electric"}}  # Primary type at index 0
+    ]
+}
+
+# We navigate this structure to extract just what we need
 ```
 
 ### RESTful CRUD Operations

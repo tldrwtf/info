@@ -1,5 +1,16 @@
 # Python Learning - Complete Cheat Sheet Collection by [tldrwtf](https://github.com/tldrwtf)
-If you found any of this information useful, leaving a star on this repository would be highly appreciated! 
+If you found any of this information useful, leaving a star on this repository would be highly appreciated!
+
+---
+
+## New: Real-World Examples Added!
+
+- **RPG Battle Game** - Full inheritance and polymorphism demonstration with Character classes (Warrior/Mage)
+- **Pet Clinic System** - Complete database design with Owners, Pets, Vets, and Appointments relationships
+- **Social Media Platform** - Self-referential many-to-many relationships (users following users)
+- **Spotify OAuth2 Integration** - Production-ready API client with token management and base64 encoding
+- **Pokemon API** - Real API integration with nested JSON parsing and error handling
+- **Music Playlist Manager** - Practical linked list application with navigation features
 
 ---
 
@@ -48,6 +59,7 @@ If you found any of this information useful, leaving a star on this repository w
 - Encapsulation (public, protected, private)
 - Special/Magic Methods
 - SOLID Principles
+- **NEW:** Complete RPG Battle Game example demonstrating inheritance, polymorphism, and method overriding
 
 **Best for:** Building scalable applications, understanding design patterns
 
@@ -80,6 +92,7 @@ If you found any of this information useful, leaving a star on this repository w
 - Authentication (API Key, Bearer Token, OAuth 2.0)
 - Error Handling
 - Best Practices (sessions, retries, caching)
+- **NEW:** Enhanced Pokemon API example with nested JSON parsing and comprehensive error handling
 
 **Best for:** Working with web APIs, external data sources
 
@@ -128,6 +141,8 @@ If you found any of this information useful, leaving a star on this repository w
 - Self-Referential Relationships
 - Lazy Loading Strategies
 - Cascade Operations
+- **NEW:** Complete Pet Clinic system with Owners, Pets, Vets, and Appointments
+- **NEW:** Social Media following system with self-referential many-to-many relationships
 
 **Best for:** Complex database relationships, data modeling, advanced SQLAlchemy
 
@@ -161,6 +176,7 @@ If you found any of this information useful, leaving a star on this repository w
 - JWT (JSON Web Tokens)
 - Session-Based Authentication
 - Security Best Practices
+- **NEW:** Production-ready Spotify Client Credentials flow with token lifecycle management and base64 encoding
 
 **Best for:** API security, user authentication, OAuth integrations
 
