@@ -1,9 +1,5 @@
 # Flask Advanced Features Guide
 
-[Back to Main](./README.md)
-
----
-
 ## Table of Contents
 
 1. [Rate Limiting with Flask-Limiter](#rate-limiting-with-flask-limiter)

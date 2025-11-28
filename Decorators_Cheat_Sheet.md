@@ -1023,19 +1023,3 @@ my_function = decorator1(decorator2(my_function))
 - **Python_Basics_Cheat_Sheet.md** - Function fundamentals
 
 ---
-
-## Summary
-
-Decorators are powerful tools for modifying function and class behavior:
-- **Function decorators** wrap functions to add functionality
-- Use **@wraps** to preserve function metadata
-- **Decorator factories** allow parameterized decorators
-- **Class decorators** can modify class behavior
-- **@property** creates managed attributes
-- **@staticmethod** for utility functions
-- **@classmethod** for alternative constructors
-- **@lru_cache** for memoization
-- Keep decorators **simple and focused**
-- **Document** decorator behavior clearly
-
----

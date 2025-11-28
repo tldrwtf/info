@@ -392,6 +392,189 @@ student = Student.query.first()
 courses = student.get_courses()
 ```
 
+### Real-World Example: Pet Clinic System
+
+This complete example demonstrates a veterinary clinic database with multiple relationship types working together.
+
+```python
+from sqlalchemy import create_engine, Column, Integer, String, Date, ForeignKey, Boolean, Text
+from sqlalchemy.orm import sessionmaker, relationship, declarative_base, Mapped, mapped_column
+from datetime import date
+
+# Database setup
+Base = declarative_base()
+engine = create_engine('sqlite:///pet_clinic.db')
+Session = sessionmaker(bind=engine)
+session = Session()
+
+
+class Owners(Base):
+    """Owner model representing pet owners"""
+    __tablename__ = 'owners'
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String(100), nullable=False)
+    phone: Mapped[str] = mapped_column(String(20), nullable=False)
+    email: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
+    password: Mapped[str] = mapped_column(String(100), nullable=False)
+
+    # One-to-many relationship: One owner has many pets
+    pets: Mapped[list["Pets"]] = relationship("Pets", back_populates="owner")
+
+    def display(self):
+        print("--------- My Info ---------------")
+        print("Name:", self.name)
+        print("Email:", self.email)
+        print("Phone:", self.phone)
+
+
+class Pets(Base):
+    """Pet model representing pets in the clinic"""
+    __tablename__ = 'pets'
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String(100), nullable=False)
+    species: Mapped[str] = mapped_column(String(50), nullable=False)
+    breed: Mapped[str] = mapped_column(String(100), nullable=True)
+    age: Mapped[int] = mapped_column(Integer, nullable=True)
+    owner_id: Mapped[int] = mapped_column(Integer, ForeignKey('owners.id'), nullable=False)
+
+    # Relationships
+    owner: Mapped["Owners"] = relationship("Owners", back_populates="pets")
+    appointments: Mapped[list["Appointments"]] = relationship("Appointments", back_populates="pet")
+
+    def display(self):
+        print("Name:", self.name)
+        print("Breed:", self.breed)
+        print("Species:", self.species)
+        print("Age:", self.age)
+
+
+class Vets(Base):
+    """Veterinarian model representing clinic veterinarians"""
+    __tablename__ = 'vets'
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String(100), nullable=False)
+    specialization: Mapped[str] = mapped_column(String(100), nullable=True)
+    email: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
+
+    appointments: Mapped[list["Appointments"]] = relationship("Appointments", back_populates="vet")
+
+    def display(self):
+        print("Name:", self.name)
+        print("Specialization:", self.specialization)
+        print("Email:", self.email)
+
+
+class Appointments(Base):
+    """Appointment model - acts as association table with additional fields"""
+    __tablename__ = 'appointments'
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    pet_id: Mapped[int] = mapped_column(Integer, ForeignKey('pets.id'), nullable=False)
+    veterinarian_id: Mapped[int] = mapped_column(Integer, ForeignKey('vets.id'), nullable=False)
+    appointment_date: Mapped[date] = mapped_column(Date, nullable=False)
+    notes: Mapped[str] = mapped_column(Text, nullable=True)
+    status: Mapped[str] = mapped_column(String(20), default="Scheduled", nullable=False)
+
+    # Relationships
+    pet: Mapped["Pets"] = relationship("Pets", back_populates="appointments")
+    vet: Mapped["Vets"] = relationship("Vets", back_populates="appointments")
+
+    def display(self):
+        print("Id:", self.id)
+        print("Appointment_date:", self.appointment_date)
+        print("Vet:", self.vet.name)
+        print("Notes:", self.notes)
+        print("Status:", self.status)
+
+
+Base.metadata.create_all(engine)
+```
+
+**Using the Pet Clinic System:**
+
+```python
+# Create an owner
+owner = Owners(
+    name="John Smith",
+    phone="555-0123",
+    email="john@example.com",
+    password="password123"
+)
+
+# Create pets for the owner
+dog = Pets(
+    name="Buddy",
+    species="Dog",
+    breed="Golden Retriever",
+    age=3,
+    owner=owner
+)
+
+cat = Pets(
+    name="Whiskers",
+    species="Cat",
+    breed="Siamese",
+    age=2,
+    owner=owner
+)
+
+# Create a vet
+vet = Vets(
+    name="Dr. Sarah Johnson",
+    specialization="Small Animals",
+    email="dr.sarah@petclinic.com"
+)
+
+# Create appointments (many-to-many through association object)
+appt1 = Appointments(
+    pet=dog,
+    vet=vet,
+    appointment_date=date(2025, 12, 15),
+    notes="Annual checkup",
+    status="Scheduled"
+)
+
+appt2 = Appointments(
+    pet=cat,
+    vet=vet,
+    appointment_date=date(2025, 12, 16),
+    notes="Vaccination",
+    status="Scheduled"
+)
+
+# Save to database
+session.add_all([owner, dog, cat, vet, appt1, appt2])
+session.commit()
+
+# Query examples:
+# Get all pets for an owner
+owner_pets = owner.pets
+for pet in owner_pets:
+    print(f"{owner.name} owns {pet.name} the {pet.species}")
+
+# Get all appointments for a pet
+pet_appointments = dog.appointments
+for appt in pet_appointments:
+    print(f"{dog.name} has appointment with {appt.vet.name} on {appt.appointment_date}")
+
+# Get all patients for a vet
+vet_patients = [appt.pet for appt in vet.appointments]
+for pet in vet_patients:
+    print(f"Dr. {vet.name} will see {pet.name} (owned by {pet.owner.name})")
+```
+
+**Why This Example is Valuable:**
+
+- **Multiple relationship types:** One-to-Many (Owner→Pets, Vet→Appointments) and Many-to-Many (Pets↔Vets through Appointments)
+- **Modern SQLAlchemy:** Uses `Mapped` type hints and `mapped_column()` (SQLAlchemy 2.0 style)
+- **Association object:** Appointments table connects Pets and Vets while storing additional data (date, notes, status)
+- **Real-world scenario:** Students can relate to a pet clinic system
+- **Complete relationships:** Shows how to traverse relationships in multiple directions
+- **Practical methods:** Includes `display()` methods for user-friendly output
+
 ---
 
 ## Self-Referential Relationships
@@ -472,6 +655,129 @@ nested_reply = Comment(text='Me too!', parent=reply1)
 for reply in main_comment.replies:
     print(reply.text)
 ```
+
+### Real-World Example: Social Media Following System
+
+This example demonstrates a many-to-many self-referential relationship where users can follow other users.
+
+```python
+from sqlalchemy import create_engine, Integer, String, Float, ForeignKey, DateTime, Table, Column
+from sqlalchemy.orm import declarative_base, sessionmaker, Mapped, mapped_column, relationship
+from datetime import datetime
+
+Base = declarative_base()
+engine = create_engine('sqlite:///social_media.db')
+Session = sessionmaker(bind=engine)
+session = Session()
+
+# Many-to-many self-referential association table
+user_follows = Table(
+    'user_follows',
+    Base.metadata,
+    Column('follower_id', Integer, ForeignKey('users.id'), primary_key=True),
+    Column('following_id', Integer, ForeignKey('users.id'), primary_key=True)
+)
+
+class Users(Base):
+    """User model with self-referential many-to-many following"""
+    __tablename__ = 'users'
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    username: Mapped[str] = mapped_column(String, unique=True, nullable=False)
+    email: Mapped[str] = mapped_column(String, unique=True, nullable=False)
+    bio: Mapped[str] = mapped_column(String, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
+
+    # Self-referential many-to-many: Users follow other users
+    following: Mapped[list["Users"]] = relationship(
+        "Users",
+        secondary=user_follows,
+        primaryjoin=(user_follows.c.follower_id == id),
+        secondaryjoin=(user_follows.c.following_id == id),
+        backref="followers"
+    )
+
+    posts: Mapped[list["Posts"]] = relationship("Posts", back_populates="author")
+
+    def display(self):
+        print(f"@{self.username}")
+        print(f"Bio: {self.bio}")
+        print(f"Following: {len(self.following)}")
+        print(f"Followers: {len(self.followers)}")
+
+
+class Posts(Base):
+    """Posts belong to users"""
+    __tablename__ = 'posts'
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    content: Mapped[str] = mapped_column(String, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
+    author_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), nullable=False)
+
+    author: Mapped["Users"] = relationship("Users", back_populates="posts")
+
+
+Base.metadata.create_all(engine)
+```
+
+**Using the Social Media System:**
+
+```python
+# Create users
+alice = Users(username="alice", email="alice@example.com", bio="Python developer")
+bob = Users(username="bob", email="bob@example.com", bio="Data scientist")
+charlie = Users(username="charlie", email="charlie@example.com", bio="Web developer")
+
+# Alice follows Bob and Charlie
+alice.following.append(bob)
+alice.following.append(charlie)
+
+# Bob follows Charlie
+bob.following.append(charlie)
+
+# Charlie follows Alice (creating a follow-back relationship)
+charlie.following.append(alice)
+
+# Add to database
+session.add_all([alice, bob, charlie])
+session.commit()
+
+# Query examples:
+# Who does Alice follow?
+print(f"{alice.username} follows:")
+for user in alice.following:
+    print(f"  - @{user.username}")
+
+# Who follows Alice?
+print(f"\n{alice.username}'s followers:")
+for user in alice.followers:
+    print(f"  - @{user.username}")
+
+# Check if Alice follows Bob
+if bob in alice.following:
+    print(f"\n@{alice.username} follows @{bob.username}")
+
+# Unfollow example
+alice.following.remove(bob)
+session.commit()
+print(f"\n@{alice.username} unfollowed @{bob.username}")
+
+# Get mutual follows (users who follow each other)
+mutual_follows = set(alice.following) & set(alice.followers)
+print(f"\nMutual follows for @{alice.username}:")
+for user in mutual_follows:
+    print(f"  - @{user.username}")
+```
+
+**Why This Example is Valuable:**
+
+- **Many-to-many self-referential:** Shows how a table can have a many-to-many relationship with itself
+- **Social media pattern:** Students understand following/followers concept from real platforms
+- **Bidirectional access:** Can access both `following` and `followers` lists
+- **Complex primaryjoin/secondaryjoin:** Demonstrates how to properly configure self-referential M2M
+- **Practical operations:** Shows follow, unfollow, mutual follows, follower count
+- **Association table:** Simple junction table without extra fields (vs association object)
 
 ---
 
@@ -835,19 +1141,5 @@ def example_usage():
 - **[Flask REST API Development Guide](./Flask_REST_API_Development_Guide.md)** - Using relationships in APIs
 - **[OOP Cheat Sheet](./OOP_Cheat_Sheet.md)** - Class relationships
 - **[Data Structures Cheat Sheet](./Data_Structures_Cheat_Sheet.md)** - Data modeling concepts
-
----
-
-## Summary
-
-SQLAlchemy relationships provide powerful abstraction for database connections:
-- **One-to-Many** - Most common pattern (user → posts)
-- **Many-to-One** - Reverse of one-to-many (posts → user)
-- **One-to-One** - Unique relationships (user ↔ profile)
-- **Many-to-Many** - Complex associations (students ↔ courses)
-- **Association Objects** - Many-to-many with extra data
-- **Self-Referential** - Table references itself (employees)
-- **Lazy Loading** - Control how data is loaded
-- **Cascades** - Manage related object lifecycle
 
 ---

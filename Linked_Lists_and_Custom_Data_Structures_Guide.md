@@ -1,7 +1,5 @@
 # Linked Lists and Custom Data Structures Guide
 
-[Back to Main](./README.md)
-
 ---
 
 ## Table of Contents

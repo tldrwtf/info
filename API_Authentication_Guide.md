@@ -467,6 +467,219 @@ if __name__ == '__main__':
     app.run(debug=True)
 ```
 
+### Real-World Example: Spotify Client Credentials Flow
+
+This example demonstrates OAuth 2.0 Client Credentials Grant - used for server-to-server authentication without user login.
+
+```python
+import requests
+import base64
+from datetime import datetime, timedelta
+
+class SpotifyAPI:
+    """
+    Spotify API Client using OAuth 2.0 Client Credentials Flow
+
+    This flow is used when:
+    - Your app needs to access Spotify catalog data
+    - No user-specific data is needed (no playlists, saved tracks, etc.)
+    - Server-to-server authentication
+    """
+
+    def __init__(self, client_id, client_secret):
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.access_token = None
+        self.token_expires_at = None
+        self.token_url = "https://accounts.spotify.com/api/token"
+        self.api_base_url = "https://api.spotify.com/v1"
+
+    def get_token(self):
+        """
+        Get access token using Client Credentials Flow
+
+        Steps:
+        1. Base64 encode client_id:client_secret
+        2. Send POST request with grant_type=client_credentials
+        3. Receive access token (no refresh token in this flow)
+        """
+
+        # Step 1: Create authorization string
+        # Format: client_id:client_secret -> Base64 encode
+        auth_string = f"{self.client_id}:{self.client_secret}"
+        auth_bytes = auth_string.encode('utf-8')
+        auth_base64 = base64.b64encode(auth_bytes).decode('utf-8')
+
+        # Step 2: Prepare request
+        headers = {
+            "Authorization": f"Basic {auth_base64}",
+            "Content-Type": "application/x-www-form-urlencoded"
+        }
+
+        data = {
+            "grant_type": "client_credentials"
+        }
+
+        # Step 3: Request token
+        response = requests.post(self.token_url, headers=headers, data=data)
+
+        if response.status_code == 200:
+            token_data = response.json()
+            self.access_token = token_data['access_token']
+
+            # Calculate expiration time (tokens typically last 1 hour)
+            expires_in = token_data.get('expires_in', 3600)
+            self.token_expires_at = datetime.now() + timedelta(seconds=expires_in)
+
+            print(f"Token acquired successfully")
+            print(f"  Expires at: {self.token_expires_at.strftime('%H:%M:%S')}")
+            return self.access_token
+        else:
+            print(f"Failed to get token: {response.status_code}")
+            print(f"  Response: {response.json()}")
+            return None
+
+    def is_token_valid(self):
+        """Check if current token is still valid"""
+        if not self.access_token or not self.token_expires_at:
+            return False
+
+        # Token is valid if it hasn't expired (with 5 min buffer)
+        return datetime.now() < (self.token_expires_at - timedelta(minutes=5))
+
+    def ensure_token(self):
+        """Ensure we have a valid token, refresh if needed"""
+        if not self.is_token_valid():
+            print("Token expired or missing, getting new token...")
+            return self.get_token()
+        return self.access_token
+
+    def search_track(self, query):
+        """
+        Search for a track on Spotify
+
+        Args:
+            query: Search query (artist and/or song name)
+
+        Returns:
+            dict: First matching track or None
+        """
+        self.ensure_token()
+
+        url = f"{self.api_base_url}/search"
+        headers = {
+            "Authorization": f"Bearer {self.access_token}"
+        }
+        params = {
+            "q": query,
+            "type": "track",
+            "limit": 1
+        }
+
+        response = requests.get(url, headers=headers, params=params)
+
+        if response.status_code == 200:
+            data = response.json()
+            tracks = data.get('tracks', {}).get('items', [])
+
+            if tracks:
+                track = tracks[0]
+                return {
+                    "name": track['name'],
+                    "artist": track['artists'][0]['name'],
+                    "album": track['album']['name'],
+                    "preview_url": track.get('preview_url'),
+                    "spotify_url": track['external_urls']['spotify']
+                }
+        elif response.status_code == 401:
+            # Token expired, try one more time
+            print("Token unauthorized, refreshing...")
+            self.get_token()
+            return self.search_track(query)  # Retry once
+
+        return None
+
+    def get_artist_top_tracks(self, artist_id, country='US'):
+        """Get artist's top tracks"""
+        self.ensure_token()
+
+        url = f"{self.api_base_url}/artists/{artist_id}/top-tracks"
+        headers = {
+            "Authorization": f"Bearer {self.access_token}"
+        }
+        params = {
+            "country": country
+        }
+
+        response = requests.get(url, headers=headers, params=params)
+
+        if response.status_code == 200:
+            data = response.json()
+            tracks = []
+
+            for track in data.get('tracks', [])[:5]:  # Top 5
+                tracks.append({
+                    "name": track['name'],
+                    "popularity": track['popularity'],
+                    "preview_url": track.get('preview_url')
+                })
+
+            return tracks
+
+        return None
+
+
+# Usage Example
+if __name__ == "__main__":
+    # Initialize with credentials (store these in environment variables!)
+    from creds import client_id, client_secret
+
+    spotify = SpotifyAPI(client_id, client_secret)
+
+    # Get token
+    spotify.get_token()
+
+    # Search for a track
+    print("\nSearching for 'Bohemian Rhapsody'...")
+    track = spotify.search_track("Bohemian Rhapsody Queen")
+
+    if track:
+        print(f"\nFound: {track['name']}")
+        print(f"   Artist: {track['artist']}")
+        print(f"   Album: {track['album']}")
+        print(f"   Spotify: {track['spotify_url']}")
+
+    # Token is automatically reused for subsequent requests
+    print("\nSearching for another track...")
+    track2 = spotify.search_track("Stairway to Heaven Led Zeppelin")
+
+    if track2:
+        print(f"\nFound: {track2['name']}")
+        print(f"   Artist: {track2['artist']}")
+```
+
+**Key Differences from Authorization Code Flow:**
+
+| Client Credentials | Authorization Code |
+|-------------------|-------------------|
+| Server-to-server | User authentication |
+| No user login required | Requires user to log in |
+| No user-specific data | Access user playlists, profile, etc. |
+| Token lasts ~1 hour | Has refresh token |
+| Base64 encoded credentials | Authorization code exchange |
+| `grant_type=client_credentials` | `grant_type=authorization_code` |
+
+**Why This Example is Valuable:**
+
+- **Production-ready:** Includes token expiration handling and auto-refresh
+- **Base64 encoding:** Shows how to properly encode credentials
+- **Bearer token usage:** Demonstrates Authorization header pattern
+- **Error handling:** Handles 401 errors and token expiration
+- **OOP design:** Clean class-based API client
+- **Real API:** Students can test with actual Spotify API
+- **Token lifecycle:** Shows checking validity and refreshing when needed
+- **Multiple endpoints:** Demonstrates reusing token across requests
+
 ---
 
 ## JWT (JSON Web Tokens)
@@ -890,17 +1103,5 @@ if __name__ == '__main__':
 - **[Flask REST API Development Guide](./Flask_REST_API_Development_Guide.md)** - Building Flask APIs
 - **[Error Handling Cheat Sheet](./Error_Handling_Cheat_Sheet.md)** - Exception handling
 - **[Python Basics Cheat Sheet](./Python_Basics_Cheat_Sheet.md)** - Python fundamentals
-
----
-
-## Summary
-
-API authentication secures your endpoints:
-- **API Keys** - Simple but less secure
-- **Bearer Tokens** - Modern standard
-- **Basic Auth** - Legacy but simple
-- **OAuth 2.0** - Third-party authorization
-- **JWT** - Stateless, self-contained tokens
-- **Sessions** - Server-side state
 
 ---

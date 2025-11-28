@@ -1,7 +1,5 @@
 # OAuth2 and Token Management Guide
 
-[Back to Main](./README.md)
-
 ---
 
 ## Table of Contents
@@ -973,19 +971,6 @@ url = "https://api.example.com/token"  # Always HTTPS
 ```
 
 ---
-
-## Summary
-
-### Key Takeaways
-
-1. **OAuth2 Flow**: Understand the client credentials flow for machine-to-machine auth
-2. **Base64 Encoding**: Use for credential transport, not security
-3. **Token Caching**: Cache tokens and check expiry before fetching new ones
-4. **Bearer Tokens**: Include in Authorization header for API requests
-5. **Error Handling**: Handle all HTTP error codes appropriately
-6. **Security**: Use HTTPS, environment variables, and never log tokens
-7. **Timeouts**: Always set request timeouts
-8. **Validation**: Validate credentials and responses
 
 ### Related Resources
 
