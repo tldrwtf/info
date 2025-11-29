@@ -322,7 +322,8 @@ If you found any of this information useful, leaving a star on this repository w
 - Stack Implementation (LIFO)
 - Queue Implementation (FIFO)
 - Time Complexity Analysis
-- Practical Applications (music playlists, browser history)
+- Practical Applications (browser history, task queues)
+- **NEW:** Complete Music Playlist Manager with navigation, song management, and playback controls
 - Optimization Techniques
 - When to Use Each Structure
 
