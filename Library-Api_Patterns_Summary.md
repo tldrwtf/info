@@ -1,6 +1,28 @@
 # Library-Api Flask Patterns - Quick Summary
 ---
 
+## Table of Contents
+1. [Application Factory Pattern](#1-application-factory-pattern)
+2. [Blueprint Architecture](#2-blueprint-architecture)
+3. [Rate Limiting (Flask-Limiter)](#3-rate-limiting-flask-limiter)
+4. [Caching (Flask-Caching)](#4-caching-flask-caching)
+5. [Pagination](#5-pagination)
+6. [Marshmallow Schema Validation](#6-marshmallow-schema-validation)
+7. [JWT Authentication](#7-jwt-authentication)
+8. [SQLAlchemy Model Patterns (Modern 2.0+)](#8-sqlalchemy-model-patterns-modern-20)
+9. [Configuration Management](#9-configuration-management)
+10. [Advanced Route Patterns](#10-advanced-route-patterns)
+11. [Common HTTP Status Codes](#common-http-status-codes)
+12. [Decorator Stacking Order](#decorator-stacking-order)
+13. [Extension Initialization Pattern](#extension-initialization-pattern)
+14. [Project Structure Template](#project-structure-template)
+15. [Key Dependencies](#key-dependencies)
+16. [Best Practices Checklist](#best-practices-checklist)
+17. [Quick Start Template](#quick-start-template)
+18. [See Also](#see-also)
+
+---
+
 ## 1. Application Factory Pattern
 
 **Purpose**: Create Flask apps dynamically with environment-specific configs
