@@ -1,0 +1,4 @@
+Tasks for Mechanic Shop API
+- Route to search customer by their email
+- Route to find which mechanic worked on the most tickets
+- Turn the get_tickets route into a paginated route

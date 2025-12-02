@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid Practice Solution</title>
+    <style>
+      /* 
+           Common layouts: Holy Grail
+        */
+
+      body {
+        margin: 0;
+        font-family: sans-serif;
+      }
+
+      .container {
+        display: grid;
+        height: 100vh;
+
+        /* 
+               Grid Template Areas allows for visual layout definition
+               Header takes full width
+               Sidebar takes left, Main takes middle, Aside takes right
+               Footer takes full width
+            */
+        grid-template-areas:
+          "header header header"
+          "sidebar main aside"
+          "footer footer footer";
+
+        /* define columns: sidebar fixed, main flexible, aside fixed */
+        grid-template-columns: 200px 1fr 200px;
+
+        /* define rows: header fixed, content flexible, footer fixed */
+        grid-template-rows: 60px 1fr 60px;
+
+        gap: 10px;
+        padding: 10px;
+        background-color: #f0f0f0;
+      }
+
+      .header {
+        grid-area: header;
+        background: #ff7b7b;
+      }
+      .sidebar {
+        grid-area: sidebar;
+        background: #7b7bff;
+      }
+      .main {
+        grid-area: main;
+        background: #ffff7b;
+      }
+      .aside {
+        grid-area: aside;
+        background: #7bff7b;
+      }
+      .footer {
+        grid-area: footer;
+        background: #d3d3d3;
+      }
+
+      .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #333;
+        font-weight: bold;
+      }
+
+      /* Responsive Mobile View */
+      @media (max-width: 600px) {
+        .container {
+          grid-template-areas:
+            "header"
+            "main"
+            "sidebar"
+            "aside"
+            "footer";
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box header">Header</div>
+      <div class="box sidebar">Sidebar</div>
+      <div class="box main">Main Content</div>
+      <div class="box aside">Aside</div>
+      <div class="box footer">Footer</div>
+    </div>
+  </body>
+</html>
