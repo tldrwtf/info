@@ -12,6 +12,9 @@
 8. [APIs & HTTP Requests](#8-apis--http-requests)
 9. [SQL & Database Design](#9-sql--database-design)
 10. [Flask & ORM (Intermediate/Advanced)](#10-flask--orm-intermediateadvanced)
+11. [File I/O & Configuration](#11-file-io--configuration)
+12. [Decorators & Context Managers](#12-decorators--context-managers)
+13. [AsyncIO & Generators](#13-asyncio--generators)
 
 ---
 
@@ -293,3 +296,54 @@
 
 - **Goal:** Create a CLI or API function to schedule an appointment.
 - **Logic:** Select Pet -> Select Vet -> Choose Date -> Commit to DB.
+
+---
+
+## 11. File I/O & Configuration
+
+**Solution:** [Python_Basics/File_Ops_Solutions.py](./Practice_Solutions/Python_Basics/File_Ops_Solutions.py)
+
+### Task 11.1: Log Analyzer
+
+- **Goal:** Create a script that reads a "server.log" file line-by-line.
+- **Action:** Count how many lines contain "ERROR".
+- **Output:** Write a summary report to "log_report.txt".
+
+### Task 11.2: JSON Config Loader
+
+- **Goal:** Write a function to manage application configuration.
+- **Subtasks:**
+    1. Load `config.json` (use defaults if missing).
+    2. Update a specific setting (e.g., `theme: "dark"`).
+    3. Save the changes back to the file.
+
+---
+
+## 12. Decorators & Context Managers
+
+**Solution:** [Advanced_Python/Decorators_Context_Solutions.py](./Practice_Solutions/Advanced_Python/Decorators_Context_Solutions.py)
+
+### Task 12.1: Execution Timer Decorator
+
+- **Goal:** Create a `@timer` decorator.
+- **Behavior:** When wrapping a function, it should print "Function [name] took [x] seconds" after execution.
+
+### Task 12.2: Custom Context Manager
+
+- **Goal:** Create a class `FileManager` that behaves like the built-in `open()`.
+- **Requirement:** It must print "Opening file..." when entering the `with` block and "Closing file..." when exiting.
+
+---
+
+## 13. AsyncIO & Generators
+
+**Solution:** [Advanced_Python/Async_Generators_Solutions.py](./Practice_Solutions/Advanced_Python/Async_Generators_Solutions.py)
+
+### Task 13.1: Fibonacci Generator
+
+- **Goal:** Write a generator function `fib(limit)` that yields Fibonacci numbers one by one up to a specified count, rather than returning a list.
+
+### Task 13.2: Async API Simulation
+
+- **Goal:** Create an async function `fetch_data(id)` that waits for a random delay.
+- **Action:** Use `asyncio.gather` to run three fetches concurrently and print the results when all are done.
