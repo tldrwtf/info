@@ -21,7 +21,6 @@ If you find this resource useful, please consider leaving a star!
   - [In-Depth Guides](#in-depth-guides)
   - [Real-World Examples](#real-world-examples)
   - [Practice Assignments](#practice-assignments)
-  - [Quick Reference](#quick-reference)
 
 ---
 
