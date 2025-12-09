@@ -4,17 +4,18 @@
 
 ## Quick Reference Card
 
-| Module | Purpose | Key Components |
-|--------|---------|----------------|
-| **Orders** | E-commerce style checkout flow | `create_order`, `add_item`, `checkout` |
-| **Items** | Inventory/Asset management | `ItemDescription` (Product), `Items` (Instance) |
-| **Auth** | Security & Role management | `token_required`, `admin_required` decorators |
-| **Testing** | Automated QA | `unittest.TestCase`, `setUp`, Negative Testing |
-| **Docs** | API Documentation | `swagger.yaml`, `flask_swagger_ui` |
+| Module      | Purpose                        | Key Components                                       |
+| ----------- | ------------------------------ | ---------------------------------------------------- |
+| **Orders**  | E-commerce style checkout flow | `create_order`, `add_item`, `checkout`               |
+| **Items**   | Inventory/Asset management     | `ItemDescription` (Product), `Items` (Instance)      |
+| **Auth**    | Security & Role management     | `token_required`, `admin_required` decorators        |
+| **Testing** | Automated QA                   | `pytest` (fixtures, parametrization), fast discovery |
+| **Docs**    | API Documentation              | `swagger.yaml`, `flask_swagger_ui`                   |
 
 ---
 
 ## Table of Contents
+
 - [Library-Api Advanced Architecture Guide](#library-api-advanced-architecture-guide)
   - [Quick Reference Card](#quick-reference-card)
   - [Table of Contents](#table-of-contents)
@@ -37,12 +38,11 @@
 **Concept**: Separating the "Product Definition" from the "Physical Instance". This is crucial for tracking individual assets (like library books or warehouse items) that share common attributes.
 
 ### Structure
+
 - **ItemDescription**: Holds shared data (Name, Description, SKU, Base Price).
 - **Items**: Represents a physical unit. Links back to `ItemDescription`.
 
-### Implementation Analysis
-*Inferred from `app/blueprints/items/routes.py`*
-
+### Implementation 
 ```python
 # 1. Create the Definition first
 @items_bp.route('/description', methods=['POST'])
@@ -59,6 +59,7 @@ def create_item(description_id):
 ```
 
 **When to Use:**
+
 - When you have multiple copies of the same product.
 - When you need to track the status (lost, damaged, borrowed) of individual units.
 
@@ -69,12 +70,12 @@ def create_item(description_id):
 **Concept**: A transactional flow allowing users to build a cart (Order) and finalize it (Checkout). This differs from the direct "Loan" model by introducing a "Pending" state.
 
 ### Workflow
+
 1.  **Create Order**: Initialize a new order session.
 2.  **Add Items**: Link specific `Items` or `ItemDescriptions` to the order.
 3.  **Checkout**: Finalize the transaction, lock items, and process payment/loan.
 
 ### Code Structure
-*Based on `app/blueprints/orders/routes.py`*
 
 ```python
 # Step 1: Initialize
@@ -99,42 +100,49 @@ def checkout(order_id):
 
 ## 3. Testing Strategy
 
-**Concept**: Using `unittest` to ensure API reliability. The project follows a strict "Setup -> Execute -> Assert" pattern.
+Concept: Use `pytest` with fixtures for reliable, readable, and fast tests. The project follows a "Arrange -> Act -> Assert" pattern and relies on fixtures for setup/teardown and dependency injection.
 
-### Test Class Structure
-*Analysis of [tests/test_users.py](./library_api_code/tests/test_users.py)*
+**Key Takeaways**
+
+- Use fixtures to keep tests DRY and isolated.
+- Prefer small, focused tests that assert behavior rather than implementation details.
+
+### Example: pytest-style tests with fixtures
+
+Use a session-local or function-scoped fixture that creates the app, pushes the app context, and prepares the test database. Tests then receive a `client` fixture and operate with simple `assert` statements.
 
 ```python
-import unittest
+import pytest
 from app import create_app
+from app.models import db, Users
 
-class TestUsers(unittest.TestCase):
-    
-    def setUp(self):
-        # Runs BEFORE every single test method
-        # 1. Create a fresh app instance
-        # 2. Create a temporary database
-        # 3. Push app context
-        self.app = create_app('TestingConfig')
-        self.client = self.app.test_client()
-        
-    def test_create_user(self):
-        # Positive Test: Should succeed
-        payload = {"username": "test", "email": "test@test.com"}
-        response = self.client.post('/users', json=payload)
-        self.assertEqual(response.status_code, 201)
+@pytest.fixture
+def client():
+    app = create_app('TestingConfig')
+    ctx = app.app_context()
+    ctx.push()
+    db.create_all()
+    client = app.test_client()
+    yield client
+    db.session.remove()
+    db.drop_all()
+    ctx.pop()
 
-    def test_invalid_create(self):
-        # Negative Test: Should fail gracefully
-        payload = {} # Missing data
-        response = self.client.post('/users', json=payload)
-        self.assertEqual(response.status_code, 400)
+def test_create_user(client):
+    payload = {"username": "test", "email": "test@test.com"}
+    resp = client.post('/users', json=payload)
+    assert resp.status_code == 201
+
+def test_invalid_create(client):
+    resp = client.post('/users', json={})
+    assert resp.status_code == 400
 ```
 
-**Key Takeaways:**
-- **Isolation**: Every test starts with a clean state (`setUp`).
-- **Coverage**: Tests cover both Success (201) and Failure (400/401) scenarios.
-- **Naming**: All test methods must start with `test_`.
+Key Takeaways:
+
+- Isolation: Fixtures (like `client`) ensure each test runs in a clean state.
+- Readability: `pytest` encourages small test functions and direct `assert` statements.
+- Parametrization: Use `@pytest.mark.parametrize` to cover many inputs succinctly.
 
 ---
 
@@ -143,7 +151,6 @@ class TestUsers(unittest.TestCase):
 **Concept**: Role-Based Access Control (RBAC) using JWTs and custom decorators.
 
 ### Decorator Pattern
-*From [app/util/auth.py](./library_api_code/app/util/auth.py)*
 
 ```python
 def token_required(f):
@@ -165,23 +172,7 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decoration
 ```
-
----
-
-## 5. Practice Scenarios
-
-The repository includes specific challenges (`mechanic.txt`) to test your understanding. Try implementing these:
-
-1.  **Customer Search**: Create a route to search for a user by email (`GET /users/search?email=...`).
-2.  **Analytics Endpoint**: Find which staff member (e.g., Mechanic/Librarian) has processed the most tickets/loans.
-3.  **Pagination Upgrade**: Convert an existing "List All" route (like `get_tickets`) to use pagination parameters (`page`, `per_page`).
-
-**Goal**: These tasks reinforce the use of **Query Parameters**, **Aggregation Queries**, and **Pagination Logic**.
-
-**Solutions:**
-- [Mechanic Shop Solutions](./Practice_Solutions/Mechanic_Shop_Solutions.py)
-- [Inventory & Order Solutions](./Practice_Solutions/Inventory_Order_Solutions.py)
-
 **Useful Links:**
+
 - [Flask Documentation](https://flask.palletsprojects.com/)
 - [SQLAlchemy Documentation](https://docs.sqlalchemy.org/)

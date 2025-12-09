@@ -2,22 +2,23 @@
 
 ## Quick Reference Card
 
-| Component | Purpose | Example |
-|-----------|---------|---------|
-| Flask app factory | Create configurable app | `create_app(config_name)` |
-| Blueprint | Organize routes | `users_bp = Blueprint('users', __name__)` |
-| Route decorator | Define endpoint | `@users_bp.route('/users', methods=['POST'])` |
-| Request data | Get JSON payload | `data = request.get_json()` |
-| Marshmallow schema | Validate/serialize | `user_schema.load(data)` |
-| SQLAlchemy model | Database table | `class User(db.Model):` |
-| CRUD operations | Create, Read, Update, Delete | See examples below |
-| JSON response | Return data | `jsonify(user_schema.dump(user))` |
-| Error handling | Return errors | `return jsonify({'error': 'message'}), 400` |
-| Database session | Commit changes | `db.session.commit()` |
+| Component          | Purpose                      | Example                                       |
+| ------------------ | ---------------------------- | --------------------------------------------- |
+| Flask app factory  | Create configurable app      | `create_app(config_name)`                     |
+| Blueprint          | Organize routes              | `users_bp = Blueprint('users', __name__)`     |
+| Route decorator    | Define endpoint              | `@users_bp.route('/users', methods=['POST'])` |
+| Request data       | Get JSON payload             | `data = request.get_json()`                   |
+| Marshmallow schema | Validate/serialize           | `user_schema.load(data)`                      |
+| SQLAlchemy model   | Database table               | `class User(db.Model):`                       |
+| CRUD operations    | Create, Read, Update, Delete | See examples below                            |
+| JSON response      | Return data                  | `jsonify(user_schema.dump(user))`             |
+| Error handling     | Return errors                | `return jsonify({'error': 'message'}), 400`   |
+| Database session   | Commit changes               | `db.session.commit()`                         |
 
 **HTTP Status Codes:** 200 (OK), 201 (Created), 400 (Bad Request), 404 (Not Found), 500 (Server Error)
 
 ## Table of Contents
+
 1. [Project Structure](#project-structure)
 2. [Flask Application Factory Pattern](#flask-application-factory-pattern)
 3. [Database Configuration](#database-configuration)
@@ -34,6 +35,7 @@
 ## Project Structure
 
 ### Recommended Flask API Structure
+
 ```
 library-api/
 ├── app.py                      # Entry point
@@ -51,6 +53,7 @@ library-api/
 ```
 
 ### Why This Structure?
+
 ```python
 # Benefits:
 # - Separation of concerns
@@ -65,6 +68,7 @@ library-api/
 ## Flask Application Factory Pattern
 
 ### Creating the App Factory
+
 ```python
 # app/__init__.py
 from flask import Flask
@@ -97,6 +101,7 @@ def create_app(config_name):
 ```
 
 ### Entry Point
+
 ```python
 # app.py
 from app.models import db
@@ -109,6 +114,7 @@ if __name__ == '__main__':
 ```
 
 ### Benefits of App Factory
+
 ```python
 # 1. Multiple configurations
 dev_app = create_app('DevelopmentConfig')
@@ -131,6 +137,7 @@ def test_something():
 ## Database Configuration
 
 ### Configuration Classes
+
 ```python
 # config.py
 import os
@@ -157,6 +164,7 @@ class ProductionConfig(Config):
 ```
 
 ### Extensions Setup
+
 ```python
 # app/extensions.py
 from flask_sqlalchemy import SQLAlchemy
@@ -172,6 +180,7 @@ ma = Marshmallow()
 ## SQLAlchemy Models
 
 ### Basic Model
+
 ```python
 # app/models.py
 from .extensions import db
@@ -192,6 +201,7 @@ class User(db.Model):
 ```
 
 ### Model with Relationships
+
 ```python
 class Book(db.Model):
     """Book model"""
@@ -225,6 +235,7 @@ class Loan(db.Model):
 ## Marshmallow Schemas
 
 ### Basic Schema
+
 ```python
 # app/blueprints/user/schemas.py
 from app.extensions import ma
@@ -244,6 +255,7 @@ users_schema = UserSchema(many=True)  # For multiple users
 ```
 
 ### Schema with Validation
+
 ```python
 from marshmallow import fields, validates, ValidationError
 
@@ -273,6 +285,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
 ```
 
 ### Nested Schemas
+
 ```python
 class LoanSchema(ma.SQLAlchemyAutoSchema):
     """Loan schema with nested user and book"""
@@ -296,6 +309,7 @@ result = loan_schema.dump(loan)
 ## Blueprints
 
 ### Creating a Blueprint
+
 ```python
 # app/blueprints/user/__init__.py
 from flask import Blueprint
@@ -306,6 +320,7 @@ from . import routes  # Import routes after blueprint creation
 ```
 
 ### Registering Blueprints
+
 ```python
 # app/__init__.py
 from .blueprints.user import users_bp
@@ -320,6 +335,7 @@ def create_app(config_name):
 ```
 
 ### Blueprint Structure
+
 ```python
 # Why use blueprints?
 # 1. Organize routes by resource
@@ -337,6 +353,7 @@ def create_app(config_name):
 ## CRUD Operations
 
 ### CREATE - POST Request
+
 ```python
 # app/blueprints/user/routes.py
 from flask import request, jsonify
@@ -374,6 +391,7 @@ def create_user():
 ```
 
 ### READ - GET Requests
+
 ```python
 @users_bp.route('', methods=['GET'])
 def read_users():
@@ -395,6 +413,7 @@ def read_user(user_id):
 ```
 
 ### UPDATE - PUT/PATCH Requests
+
 ```python
 @users_bp.route('/<int:user_id>', methods=['PUT', 'PATCH'])
 def update_user(user_id):
@@ -426,6 +445,7 @@ def update_user(user_id):
 ```
 
 ### DELETE - DELETE Request
+
 ```python
 @users_bp.route('/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
@@ -450,6 +470,7 @@ def delete_user(user_id):
 ## Error Handling
 
 ### Global Error Handlers
+
 ```python
 # app/__init__.py
 def create_app(config_name):
@@ -474,6 +495,7 @@ def create_app(config_name):
 ```
 
 ### Custom Exceptions
+
 ```python
 class APIException(Exception):
     """Base API exception"""
@@ -508,6 +530,7 @@ def handle_api_exception(error):
 ## Testing Your API
 
 ### Using Postman
+
 ```python
 # Example Postman requests:
 
@@ -544,6 +567,7 @@ def handle_api_exception(error):
 ```
 
 ### Using Python Requests
+
 ```python
 import requests
 
@@ -577,45 +601,37 @@ response = requests.delete(f'{BASE_URL}/{user_id}')
 print(response.json())
 ```
 
-### Unit Testing
+### Unit Testing (pytest)
+
+Example `pytest` tests using fixtures for app and database setup:
+
 ```python
-import unittest
+import pytest
 from app import create_app
-from app.models import db, User
+from app.models import db, Users
 
-class UserTestCase(unittest.TestCase):
-    """Test case for User API"""
+@pytest.fixture
+def client():
+    app = create_app('TestingConfig')
+    ctx = app.app_context()
+    ctx.push()
+    db.create_all()
+    client = app.test_client()
+    yield client
+    db.session.remove()
+    db.drop_all()
+    ctx.pop()
 
-    def setUp(self):
-        """Set up test client and database"""
-        self.app = create_app('TestingConfig')
-        self.client = self.app.test_client()
+def test_create_user(client):
+    data = {'first_name': 'Test', 'last_name': 'User', 'email': 'test@example.com'}
+    response = client.post('/api/users', json=data)
+    assert response.status_code == 201
+    assert 'email' in response.json
 
-        with self.app.app_context():
-            db.create_all()
-
-    def tearDown(self):
-        """Clean up after tests"""
-        with self.app.app_context():
-            db.session.remove()
-            db.drop_all()
-
-    def test_create_user(self):
-        """Test creating a user"""
-        data = {
-            'first_name': 'Test',
-            'last_name': 'User',
-            'email': 'test@example.com'
-        }
-        response = self.client.post('/api/users', json=data)
-        self.assertEqual(response.status_code, 201)
-        self.assertIn('email', response.json)
-
-    def test_get_users(self):
-        """Test getting all users"""
-        response = self.client.get('/api/users')
-        self.assertEqual(response.status_code, 200)
-        self.assertIsInstance(response.json, list)
+def test_get_users(client):
+    response = client.get('/api/users')
+    assert response.status_code == 200
+    assert isinstance(response.json, list)
 ```
 
 ---
@@ -623,6 +639,7 @@ class UserTestCase(unittest.TestCase):
 ## Best Practices
 
 ### 1. Use Environment Variables
+
 ```python
 import os
 from dotenv import load_dotenv
@@ -635,6 +652,7 @@ class Config:
 ```
 
 ### 2. Pagination for Large Datasets
+
 ```python
 @users_bp.route('', methods=['GET'])
 def read_users():
@@ -657,6 +675,7 @@ def read_users():
 ```
 
 ### 3. Input Validation
+
 ```python
 @users_bp.route('', methods=['POST'])
 def create_user():
@@ -683,6 +702,7 @@ def create_user():
 ```
 
 ### 4. Database Transactions
+
 ```python
 @users_bp.route('/batch', methods=['POST'])
 def create_batch_users():
@@ -707,6 +727,7 @@ def create_batch_users():
 ```
 
 ### 5. API Versioning
+
 ```python
 # app/__init__.py
 def create_app(config_name):
@@ -722,6 +743,7 @@ def create_app(config_name):
 ```
 
 ### 6. CORS Configuration
+
 ```python
 from flask_cors import CORS
 
@@ -739,6 +761,7 @@ def create_app(config_name):
 ## Complete Example: Library API
 
 ### Requirements
+
 ```txt
 Flask==2.3.0
 Flask-SQLAlchemy==3.0.3
@@ -748,6 +771,7 @@ python-dotenv==1.0.0
 ```
 
 ### Project Setup
+
 ```bash
 # Create virtual environment
 python -m venv venv
@@ -761,6 +785,7 @@ python app.py
 ```
 
 ### API Endpoints Summary
+
 ```
 POST   /api/users          - Create a new user
 GET    /api/users          - Get all users

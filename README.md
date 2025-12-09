@@ -3,8 +3,6 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%20by-tldrwtf-blue)](https://github.com/tldrwtf)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
-Welcome to the comprehensive Python learning resource. This repository contains a curated collection of cheat sheets, in-depth guides, and production-ready examples ranging from basic syntax to advanced architectural patterns.
-
 If you find this resource useful, please consider leaving a star!
 
 ---
@@ -23,6 +21,7 @@ If you find this resource useful, please consider leaving a star!
   - [In-Depth Guides](#in-depth-guides)
   - [Real-World Examples](#real-world-examples)
   - [Practice Assignments](#practice-assignments)
+  - [Quick Reference](#quick-reference)
 
 ---
 
@@ -61,45 +60,18 @@ python app.py
 
 ---
 
-## Learning Paths
-
-Follow these curated paths based on your goals:
-
-### Beginner Path
-
-1. [Python Basics](./Python_Basics_Cheat_Sheet.md)
-2. [Data Structures](./Data_Structures_Cheat_Sheet.md)
-3. [File Operations](./File_Operations_Cheat_Sheet.md)
-4. [Error Handling](./Error_Handling_Cheat_Sheet.md)
-
-### Intermediate Path
-
-1. [Object-Oriented Programming](./OOP_Cheat_Sheet.md)
-2. [APIs & HTTP Requests](./APIs_and_Requests_Cheat_Sheet.md)
-3. [SQL & SQLAlchemy](./SQL_and_SQLAlchemy_Cheat_Sheet.md)
-4. [Functional Programming](./Functional_Programming_Cheat_Sheet.md)
-
-### Advanced Path
-
-1. [Flask Advanced Features](./Flask_Advanced_Features_Guide.md)
-2. [SQLAlchemy Advanced Patterns](./SQLAlchemy_Advanced_Patterns_Guide.md)
-3. [Testing & Debugging](./Testing_and_Debugging_Cheat_Sheet.md)
-4. [OAuth2 & Token Management](./OAuth2_and_Token_Management_Guide.md)
-
----
-
 ## Available Cheat Sheets
 
-| Topic | Description | Link |
-|-------|-------------|------|
-| **Python Basics** | Variables, Loops, Functions | [Link](./Python_Basics_Cheat_Sheet.md) |
-| **Data Structures** | Lists, Dicts, Sets, Tuples | [Link](./Data_Structures_Cheat_Sheet.md) |
-| **OOP** | Classes, Inheritance, Polymorphism | [Link](./OOP_Cheat_Sheet.md) |
-| **Regex** | Pattern Matching & Validation | [Link](./Regex_Cheat_Sheet.md) |
-| **Big O** | Time & Space Complexity | [Link](./Big_O_Notation_Cheat_Sheet.md) |
-| **Decorators** | Wrappers & Metaprogramming | [Link](./Decorators_Cheat_Sheet.md) |
+| Topic               | Description                        | Link                                     |
+| ------------------- | ---------------------------------- | ---------------------------------------- |
+| **Python Basics**   | Variables, Loops, Functions        | [Link](./Python_Basics_Cheat_Sheet.md)   |
+| **Data Structures** | Lists, Dicts, Sets, Tuples         | [Link](./Data_Structures_Cheat_Sheet.md) |
+| **OOP**             | Classes, Inheritance, Polymorphism | [Link](./OOP_Cheat_Sheet.md)             |
+| **Regex**           | Pattern Matching & Validation      | [Link](./Regex_Cheat_Sheet.md)           |
+| **Big O**           | Time & Space Complexity            | [Link](./Big_O_Notation_Cheat_Sheet.md)  |
+| **Decorators**      | Wrappers & Metaprogramming         | [Link](./Decorators_Cheat_Sheet.md)      |
 
-*(See file list for full collection)*
+_(See file list for full collection)_
 
 ---
 
@@ -111,6 +83,7 @@ For complex topics requiring architectural understanding:
 - **[Library-Api Advanced Architecture](./Library-Api_Advanced_Architecture_Guide.md)**: Analysis of the `library_api_code` reference project.
 - **[SQLAlchemy Relationships](./SQLAlchemy_Relationships_Guide.md)**: Mastering One-to-Many and Many-to-Many patterns.
 - **[API Authentication](./API_Authentication_Guide.md)**: Securing apps with JWT and OAuth2.
+- **[Safe Programming & Secrets](./Library-Api_Production_Workflow_Guide.md#6-safe-programming-environment-variables-and-private-properties)**: Practical tips on handling secrets, environment variables, and class encapsulation.
 
 ---
 
