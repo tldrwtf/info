@@ -2,24 +2,26 @@
 
 ## Quick Reference Card
 
-| Operation | Syntax | Example |
-|-----------|--------|---------|
-| Unit test class | `class Test(unittest.TestCase):` | Define test class |
-| Test method | `def test_something(self):` | Must start with test_ |
-| Assert equal | `self.assertEqual(a, b)` | Check equality |
-| Pytest test | `def test_something():` | Simple function |
-| Pytest assert | `assert a == b` | Simple assertion |
-| Run pytest | `pytest` | Run all tests |
-| Mock object | `Mock()` | Create mock |
-| Patch function | `@patch('module.func')` | Replace function |
-| Fixture | `@pytest.fixture` | Setup/teardown |
-| Breakpoint | `breakpoint()` | Start debugger (Python 3.7+) |
-| Debug command | `python -m pdb script.py` | Debug script |
+| Operation            | Syntax                    | Example                      |
+| -------------------- | ------------------------- | ---------------------------- |
+| Pytest test function | `def test_something():`   | Simple test function         |
+| Test function naming | `def test_something():`   | Must start with `test_`      |
+| Assert equal         | `assert a == b`           | Simple assertion             |
+| Pytest test          | `def test_something():`   | Simple function              |
+| Pytest assert        | `assert a == b`           | Simple assertion             |
+| Run pytest           | `pytest`                  | Run all tests                |
+| Mock object          | `Mock()`                  | Create mock                  |
+| Patch function       | `@patch('module.func')`   | Replace function             |
+| Fixture              | `@pytest.fixture`         | Setup/teardown               |
+| Breakpoint           | `breakpoint()`            | Start debugger (Python 3.7+) |
+| Debug command        | `python -m pdb script.py` | Debug script                 |
 
 > **Note:** For Python versions older than 3.7, use `import pdb; pdb.set_trace()` to start the debugger.
+
 ## Table of Contents
+
 1. [Testing Basics](#testing-basics)
-2. [unittest Module](#unittest-module)
+2. [Testing Frameworks (pytest preferred)](#testing-frameworks-pytest-preferred)
 3. [pytest Framework](#pytest-framework)
 4. [Mocking and Patching](#mocking-and-patching)
 5. [Test Coverage](#test-coverage)
@@ -94,164 +96,43 @@ def test_user_creation():
 
 ---
 
-## unittest Module
+## Testing Frameworks (pytest preferred)
 
-### Basic unittest Test
+The `unittest` library is part of the standard library and is fully supported, but `pytest` is recommended for most projects because of its simpler syntax, richer fixture system, powerful parametrization, and broad plugin ecosystem. You can run `pytest` alongside existing `unittest` tests during migration.
+
+**Learning Objectives**
+
+- Understand why `pytest` is preferred in modern Python projects.
+- Learn how to write fixtures for setup/teardown and how to parametrize tests.
+- Practice converting `unittest.TestCase` tests to `pytest` style incrementally.
+
+Quick conversion example — `unittest` to `pytest`:
 
 ```python
+# unittest style
 import unittest
-
-def add(a, b):
-    return a + b
 
 class TestMath(unittest.TestCase):
-    """Test case for math functions"""
-
-    def test_add_positive(self):
-        """Test adding positive numbers"""
+    def test_add(self):
         self.assertEqual(add(2, 3), 5)
 
-    def test_add_negative(self):
-        """Test adding negative numbers"""
-        self.assertEqual(add(-1, -1), -2)
-
-    def test_add_zero(self):
-        """Test adding zero"""
-        self.assertEqual(add(5, 0), 5)
-
-if __name__ == '__main__':
-    unittest.main()
+# pytest style (preferred)
+def test_add():
+    assert add(2, 3) == 5
 ```
 
-### Common Assertions
+Why prefer `pytest`?
 
-```python
-import unittest
+- Use plain `assert` statements — no boilerplate `TestCase` classes or `self` in tests.
+- Fixtures provide flexible setup/teardown with scoped lifetimes and composition.
+- Parametrization reduces repetitive tests and improves coverage of edge cases.
+- Excellent plugin ecosystem (`pytest-cov`, `pytest-mock`, `pytest-asyncio`, `pytest-xdist`).
 
-class TestAssertions(unittest.TestCase):
+Migration tips:
 
-    def test_equality(self):
-        self.assertEqual(1, 1)
-        self.assertNotEqual(1, 2)
-
-    def test_truthiness(self):
-        self.assertTrue(True)
-        self.assertFalse(False)
-
-    def test_none(self):
-        self.assertIsNone(None)
-        self.assertIsNotNone(42)
-
-    def test_membership(self):
-        self.assertIn(1, [1, 2, 3])
-        self.assertNotIn(4, [1, 2, 3])
-
-    def test_types(self):
-        self.assertIsInstance('hello', str)
-        self.assertNotIsInstance('hello', int)
-
-    def test_exceptions(self):
-        with self.assertRaises(ValueError):
-            int('not a number')
-
-        with self.assertRaises(ZeroDivisionError):
-            1 / 0
-
-    def test_approximate_equality(self):
-        self.assertAlmostEqual(1.0, 1.0001, places=3)
-
-    def test_greater_less(self):
-        self.assertGreater(10, 5)
-        self.assertLess(5, 10)
-        self.assertGreaterEqual(10, 10)
-        self.assertLessEqual(5, 5)
-```
-
-### setUp and tearDown
-
-```python
-import unittest
-
-class TestDatabase(unittest.TestCase):
-
-    def setUp(self):
-        """Run before each test"""
-        self.db = Database()
-        self.db.connect()
-        print('Setup complete')
-
-    def tearDown(self):
-        """Run after each test"""
-        self.db.disconnect()
-        print('Teardown complete')
-
-    def test_insert(self):
-        """Test database insert"""
-        self.db.insert('user', {'name': 'Alice'})
-        result = self.db.query('user', {'name': 'Alice'})
-        self.assertEqual(len(result), 1)
-
-    def test_delete(self):
-        """Test database delete"""
-        self.db.insert('user', {'name': 'Bob'})
-        self.db.delete('user', {'name': 'Bob'})
-        result = self.db.query('user', {'name': 'Bob'})
-        self.assertEqual(len(result), 0)
-```
-
-### Class-level Setup
-
-```python
-import unittest
-
-class TestExpensiveSetup(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        """Run once before all tests in class"""
-        cls.resource = acquire_expensive_resource()
-        print('Class setup complete')
-
-    @classmethod
-    def tearDownClass(cls):
-        """Run once after all tests in class"""
-        cls.resource.cleanup()
-        print('Class teardown complete')
-
-    def test_one(self):
-        # Use self.resource
-        pass
-
-    def test_two(self):
-        # Use self.resource
-        pass
-```
-
-### Skipping Tests
-
-```python
-import unittest
-import sys
-
-class TestSkipping(unittest.TestCase):
-
-    @unittest.skip('Not implemented yet')
-    def test_future_feature(self):
-        pass
-
-    @unittest.skipIf(sys.version_info < (3, 8), 'Requires Python 3.8+')
-    def test_new_feature(self):
-        pass
-
-    @unittest.skipUnless(sys.platform.startswith('win'), 'Windows only')
-    def test_windows_feature(self):
-        pass
-
-    def test_conditional_skip(self):
-        if not database_available():
-            self.skipTest('Database not available')
-        # Test continues if database available
-```
+- Run `pytest` as-is; it will discover both `pytest` and `unittest` tests.
+- Convert `unittest.TestCase` classes incrementally to simple functions and `pytest` fixtures.
+- Replace `setUp/tearDown` with fixtures using `yield` for teardown behavior.
 
 ---
 
