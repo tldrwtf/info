@@ -70,6 +70,10 @@ python app.py
 | **Regex**           | Pattern Matching & Validation      | [Link](./Regex_Cheat_Sheet.md)           |
 | **Big O**           | Time & Space Complexity            | [Link](./Big_O_Notation_Cheat_Sheet.md)  |
 | **Decorators**      | Wrappers & Metaprogramming         | [Link](./Decorators_Cheat_Sheet.md)      |
+| **HTML Basics**     | Tags, Structure, Attributes        | [Link](./HTML_Cheat_Sheet.md)            |
+| **CSS Basics**      | Selectors, Box Model, Colors       | [Link](./CSS_Cheat_Sheet.md)             |
+| **JS Basics**       | Vars, Types, Loops                 | [Link](./JavaScript_Basics_Cheat_Sheet.md)|
+| **JS Functions**    | Arrow funcs, Scope, Callbacks      | [Link](./JavaScript_Functions_Guide.md)   |
 
 _(See file list for full collection)_
 
@@ -84,6 +88,8 @@ For complex topics requiring architectural understanding:
 - **[SQLAlchemy Relationships](./SQLAlchemy_Relationships_Guide.md)**: Mastering One-to-Many and Many-to-Many patterns.
 - **[API Authentication](./API_Authentication_Guide.md)**: Securing apps with JWT and OAuth2.
 - **[Safe Programming & Secrets](./Library-Api_Production_Workflow_Guide.md#6-safe-programming-environment-variables-and-private-properties)**: Practical tips on handling secrets, environment variables, and class encapsulation.
+- **[Building AI-Ready APIs](./Building_AI_Ready_APIs_Guide.md)**: Designing Flask endpoints for consumption by AI agents and tools.
+- **[CSS Layout Guide](./CSS_Layout_Guide.md)**: Mastering Flexbox and Grid for modern web layouts.
 
 ---
 

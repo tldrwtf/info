@@ -15,6 +15,8 @@
 11. [File I/O & Configuration](#11-file-io--configuration)
 12. [Decorators & Context Managers](#12-decorators--context-managers)
 13. [AsyncIO & Generators](#13-asyncio--generators)
+14. [Frontend Development (HTML/CSS)](#14-frontend-development-htmlcss)
+15. [JavaScript Fundamentals](#15-javascript-fundamentals)
 
 ---
 
@@ -347,3 +349,87 @@
 
 - **Goal:** Create an async function `fetch_data(id)` that waits for a random delay.
 - **Action:** Use `asyncio.gather` to run three fetches concurrently and print the results when all are done.
+
+---
+
+## 14. Frontend Development (HTML/CSS)
+
+**Solution:** [HTML_Profile_Solution.html](./Practice_Solutions/HTML_CSS/HTML_Profile_Solution.html), [CSS_Card_Component_Solution.html](./Practice_Solutions/HTML_CSS/CSS_Card_Component_Solution.html), [Flexbox_Navbar_Solution.html](./Practice_Solutions/HTML_CSS/Flexbox_Navbar_Solution.html), [Grid_Gallery_Solution.html](./Practice_Solutions/HTML_CSS/Grid_Gallery_Solution.html)
+
+**Resources:** [HTML Cheat Sheet](./HTML_Cheat_Sheet.md), [CSS Cheat Sheet](./CSS_Cheat_Sheet.md), [CSS Layout Guide](./CSS_Layout_Guide.md)
+
+### Task 14.1: Semantic HTML Profile
+
+- **Goal:** Create a simple "About Me" page (`index.html`).
+- **Requirements:**
+    - Use semantic tags: `<header>`, `<main>`, `<section>`, `<footer>`.
+    - Include a profile image (`<img>`), a bio paragraph (`<p>`), and a list of hobbies (`<ul>`).
+
+### Task 14.2: The "Card" Component
+
+- **Goal:** Style a `<div>` to look like a UI card.
+- **CSS Requirements:**
+    - Add `padding`, `border`, and a slight `box-shadow`.
+    - Ensure the image inside fits the card width (`max-width: 100%`).
+
+### Task 14.3: Flexbox Navbar
+
+- **Goal:** Create a navigation bar.
+- **Structure:** A container with a logo on the left and links on the right.
+- **CSS:** Use `display: flex` and `justify-content: space-between`.
+
+### Task 14.4: CSS Grid Gallery
+
+- **Goal:** Create a responsive photo gallery.
+- **CSS:** Use `display: grid`, `grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))`, and `gap`.
+
+---
+
+## 15. JavaScript Fundamentals
+
+**Solution:** [JavaScript_Basics_and_Functions_Solutions.js](./Practice_Solutions/JavaScript/JavaScript_Basics_and_Functions_Solutions.js), [JavaScript_Array_Manipulation_Solutions.js](./Practice_Solutions/JavaScript/JavaScript_Array_Manipulation_Solutions.js), [JavaScript_Object_Access_Solutions.js](./Practice_Solutions/JavaScript/JavaScript_Object_Access_Solutions.js)
+
+**Resources:** [JS Basics Cheat Sheet](./JavaScript_Basics_Cheat_Sheet.md), [JS Functions Guide](./JavaScript_Functions_Guide.md)
+
+### Task 15.1: Hello World & Variables
+
+- **Goal:** Create a script (`script.js`) that logs "Hello, World!" to the console.
+- **Subtasks:**
+    1. Declare a variable `name` using `let` and assign it your name.
+    2. Use a template literal to log "Hello, [name]!".
+    3. Run it using `node script.js` (if Node is installed) or attach it to an HTML file.
+
+### Task 15.2: Simple Calculator
+
+- **Goal:** Write a function `calculate(num1, num2, operation)`.
+- **Logic:**
+    - If operation is "+", return sum.
+    - If "-", return difference.
+    - Use a `switch` statement.
+    - **Bonus:** Convert it to an arrow function.
+
+### Task 15.3: Array Manipulation
+
+- **Goal:** Practice array methods.
+- **Data:** `let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];`
+- **Subtasks:**
+    1. Filter out odd numbers (keep only evens).
+    2. Map the remaining numbers to their squares.
+    3. Log the final array.
+
+### Task 15.4: Object Access
+
+- **Goal:** Working with Objects.
+- **Data:**
+  ```javascript
+  const car = {
+      make: "Toyota",
+      model: "Corolla",
+      year: 2020,
+      features: ["AC", "Radio", "Bluetooth"]
+  };
+  ```
+- **Action:**
+    1. Log the `make` and `model` combined.
+    2. Loop through `features` and log each one.
+    3. Add a new property `mileage` with value 50000.

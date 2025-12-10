@@ -846,7 +846,7 @@ args = parser.parse_args()
 
 - **[File Operations Cheat Sheet](./File_Operations_Cheat_Sheet.md)** - pathlib and file I/O
 - **[Data Structures Cheat Sheet](./Data_Structures_Cheat_Sheet.md)** - Built-in data structures
-- [**Iterators and Generators Cheat Sheet](./Iterators_and_Generators_Cheat_Sheet.md)** - itertools module
-- **[Regular Expressions Cheat Sheet](./Regular_Expressions_Cheat_Sheet.md)** - re module details
+- **[Iterators and Generators Cheat Sheet](./Iterators_and_Generators_Cheat_Sheet.md)** - itertools module
+- **[Regex Cheat Sheet](./Regex_Cheat_Sheet.md)** - re module details
 
 ---
