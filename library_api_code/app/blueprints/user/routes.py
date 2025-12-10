@@ -7,6 +7,7 @@ from app.models import Users, db
 from app.extensions import limiter
 from werkzeug.security import generate_password_hash,check_password_hash
 from app.util.auth import encode_token, token_required
+from sqlalchemy.exc import IntegrityError
 
 @users_bp.route('/login', methods=['POST'])
 @limiter.limit("5 per 10 minute")
@@ -30,6 +31,8 @@ def login():
       "message": f"Welcome {user.first_name}",
       "token": token,
     }), 200
+  else:
+    return jsonify({"error": "Invalid credentials"}), 401
 
 
 # CREATE USER ROUTE
@@ -50,8 +53,12 @@ def create_user():
   new_user = Users(**data)
   # add User to session
   db.session.add(new_user)
-  # commit to session
-  db.session.commit()
+  try:
+    # commit to session
+    db.session.commit()
+  except IntegrityError:
+    db.session.rollback()
+    return jsonify({"message": "Email already registered"}), 409
   #Python -> JSON
   return user_schema.jsonify(new_user), 201 #Successful creation status code
 
@@ -93,12 +100,12 @@ def update_user():
     return jsonify({"message": "User not found"}), 404 
   #Validate and Deserialize the updates that they are sending in the body of the request
   try:
-    user_data = user_schema.load(request.json)
+    user_data = user_schema.load(request.json, partial=True)
   except ValidationError as e:
     return jsonify({"message": e.messages}), 400
   # for each of the values that they are sending, we will change the value of the queried object
-
-  user_data["password"] = generate_password_hash(user_data["password"]) #resetting the password key's value, to the hash of the current value
+  if "password" in user_data:
+    user_data["password"] = generate_password_hash(user_data["password"]) #resetting the password key's value, to the hash of the current value
 
   # if user_data['email']:
   #   user.email = user_data["email"]
