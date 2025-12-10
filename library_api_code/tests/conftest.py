@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Ensure the app module can be found
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import pytest
 from app import create_app
 from app.models import db as _db
