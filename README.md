@@ -9,14 +9,10 @@ If you find this resource useful, please consider leaving a star!
 
 ## Table of Contents
 
-- [Python Learning - Complete Cheat Sheet Collection](#python-learning---complete-cheat-sheet-collection)
+- [Full Stack Learning - Complete Cheat Sheet Collection](#full-stack-learning---complete-cheat-sheet-collection)
   - [Table of Contents](#table-of-contents)
   - [Quick Start](#quick-start)
   - [Repository Structure](#repository-structure)
-  - [Learning Paths](#learning-paths)
-    - [Beginner Path](#beginner-path)
-    - [Intermediate Path](#intermediate-path)
-    - [Advanced Path](#advanced-path)
   - [Available Cheat Sheets](#available-cheat-sheets)
   - [In-Depth Guides](#in-depth-guides)
   - [Real-World Examples](#real-world-examples)
