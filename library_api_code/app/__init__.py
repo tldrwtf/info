@@ -28,6 +28,14 @@ def create_app(config_name):
     limiter.init_app(app)
     cache.init_app(app)
 
+    # Import routes here to avoid circular imports and ensure routes are registered
+    # when the app is created.
+    from .blueprints.user import routes as user_routes
+    from .blueprints.books import routes as books_routes
+    from .blueprints.loans import routes as loans_routes
+    from .blueprints.orders import routes as orders_routes
+    from .blueprints.items import routes as items_routes
+    
     app.register_blueprint(users_bp, url_prefix='/users')
     app.register_blueprint(books_bp, url_prefix='/books')
     app.register_blueprint(loans_bp, url_prefix='/loans')

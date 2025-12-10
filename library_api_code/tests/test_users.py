@@ -109,4 +109,4 @@ def test_nonunique_email(client):
     }
 
     response = client.post('/users', json=payload)
-    assert response.status_code == 400
+    assert response.status_code == 409
