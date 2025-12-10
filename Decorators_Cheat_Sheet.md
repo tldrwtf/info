@@ -1018,8 +1018,8 @@ my_function = decorator1(decorator2(my_function))
 
 ## See Also
 
-- **Functional_Programming_Cheat_Sheet.md** - Lambda functions and functional concepts
-- **Object_Oriented_Programming_Cheat_Sheet.md** - Class methods and properties
-- **Python_Basics_Cheat_Sheet.md** - Function fundamentals
+- **[Functional Programming Cheat Sheet](./Functional_Programming_Cheat_Sheet.md)** - Lambda functions and functional concepts
+- **[OOP Cheat Sheet](./OOP_Cheat_Sheet.md)** - Class methods and properties
+- **[Python Basics Cheat Sheet](./Python_Basics_Cheat_Sheet.md)** - Function fundamentals
 
 ---
