@@ -43,8 +43,8 @@ python app.py
 
 ```
 /
-├── *_Cheat_Sheet.md           # Core concept cheat sheets (18 files)
-├── *_Guide.md                 # In-depth tutorials (Advanced patterns, Flask, Auth)
+├── cheatsheets/               # Core concept cheat sheets (Python, JS, CSS, SQL, etc.)
+├── guides/                    # In-depth tutorials (Advanced patterns, Flask, Auth)
 ├── Practice_Assignments_Compiled.md # Central hub for all coding challenges
 ├── Practice_Solutions/        # Full solution code for all assignments
 ├── library_api_code/          # Production-grade Flask Application
@@ -59,16 +59,19 @@ python app.py
 
 | Topic               | Description                        | Link                                     |
 | ------------------- | ---------------------------------- | ---------------------------------------- |
-| **Python Basics**   | Variables, Loops, Functions        | [Link](./Python_Basics_Cheat_Sheet.md)   |
-| **Data Structures** | Lists, Dicts, Sets, Tuples         | [Link](./Data_Structures_Cheat_Sheet.md) |
-| **OOP**             | Classes, Inheritance, Polymorphism | [Link](./OOP_Cheat_Sheet.md)             |
-| **Regex**           | Pattern Matching & Validation      | [Link](./Regex_Cheat_Sheet.md)           |
-| **Big O**           | Time & Space Complexity            | [Link](./Big_O_Notation_Cheat_Sheet.md)  |
-| **Decorators**      | Wrappers & Metaprogramming         | [Link](./Decorators_Cheat_Sheet.md)      |
-| **HTML Basics**     | Tags, Structure, Attributes        | [Link](./HTML_Cheat_Sheet.md)            |
-| **CSS Basics**      | Selectors, Box Model, Colors       | [Link](./CSS_Cheat_Sheet.md)             |
-| **JS Basics**       | Vars, Types, Loops                 | [Link](./JavaScript_Basics_Cheat_Sheet.md)|
-| **JS Functions**    | Arrow funcs, Scope, Callbacks      | [Link](./JavaScript_Functions_Guide.md)   |
+| **Python Basics**   | Variables, Loops, Functions        | [Link](cheatsheets/Python_Basics_Cheat_Sheet.md)   |
+| **Data Structures** | Lists, Dicts, Sets, Tuples         | [Link](cheatsheets/Data_Structures_Cheat_Sheet.md) |
+| **OOP**             | Classes, Inheritance, Polymorphism | [Link](cheatsheets/OOP_Cheat_Sheet.md)             |
+| **Regex**           | Pattern Matching & Validation      | [Link](cheatsheets/Regex_Cheat_Sheet.md)           |
+| **Big O**           | Time & Space Complexity            | [Link](cheatsheets/Big_O_Notation_Cheat_Sheet.md)  |
+| **Decorators**      | Wrappers & Metaprogramming         | [Link](cheatsheets/Decorators_Cheat_Sheet.md)      |
+| **Functional Prog** | Lambda, Map, Filter, Reduce        | [Link](cheatsheets/Functional_Programming_Cheat_Sheet.md)|
+| **HTML Basics**     | Tags, Structure, Attributes        | [Link](cheatsheets/HTML_Cheat_Sheet.md)            |
+| **CSS Basics**      | Selectors, Box Model, Colors       | [Link](cheatsheets/CSS_Cheat_Sheet.md)             |
+| **JS Basics**       | Vars, Types, Loops                 | [Link](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)|
+| **JS Objects**      | Arrays, Objects, JSON              | [Link](cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md)|
+| **JS Functions**    | Arrow funcs, Scope, Callbacks      | [Link](guides/JavaScript_Functions_Guide.md)   |
+| **APIs**            | REST, JSON, Requests               | [Link](cheatsheets/APIs_and_Requests_Cheat_Sheet.md)|
 
 _(See file list for full collection)_
 
@@ -78,13 +81,18 @@ _(See file list for full collection)_
 
 For complex topics requiring architectural understanding:
 
-- **[Flask REST API Development](./Flask_REST_API_Development_Guide.md)**: Building scalable web APIs.
-- **[Library-Api Advanced Architecture](./Library-Api_Advanced_Architecture_Guide.md)**: Analysis of the `library_api_code` reference project.
-- **[SQLAlchemy Relationships](./SQLAlchemy_Relationships_Guide.md)**: Mastering One-to-Many and Many-to-Many patterns.
-- **[API Authentication](./API_Authentication_Guide.md)**: Securing apps with JWT and OAuth2.
-- **[Safe Programming & Secrets](./Library-Api_Production_Workflow_Guide.md#6-safe-programming-environment-variables-and-private-properties)**: Practical tips on handling secrets, environment variables, and class encapsulation.
-- **[Building AI-Ready APIs](./Building_AI_Ready_APIs_Guide.md)**: Designing Flask endpoints for consumption by AI agents and tools.
-- **[CSS Layout Guide](./CSS_Layout_Guide.md)**: Mastering Flexbox and Grid for modern web layouts.
+- **[Flask REST API Development](guides/Flask_REST_API_Development_Guide.md)**: Building scalable web APIs.
+- **[Library-Api Advanced Architecture](guides/Library-Api_Advanced_Architecture_Guide.md)**: Analysis of the `library_api_code` reference project.
+- **[SQLAlchemy Relationships](guides/SQLAlchemy_Relationships_Guide.md)**: Mastering One-to-Many and Many-to-Many patterns.
+- **[SQLAlchemy CRUD](guides/SQLAlchemy_CRUD_Guide.md)**: Create, Read, Update, Delete operations in depth.
+- **[Advanced SQL Queries](guides/SQL_Advanced_Queries_Guide.md)**: Joins, Subqueries, and Optimization.
+- **[API Authentication](guides/API_Authentication_Guide.md)**: Securing apps with JWT and OAuth2.
+- **[Python CLI Applications](guides/Python_CLI_Applications_Guide.md)**: Building interactive command-line tools.
+- **[Building AI-Ready APIs](guides/Building_AI_Ready_APIs_Guide.md)**: Designing Flask endpoints for consumption by AI agents and tools.
+- **[Flask AI Tools Integration](guides/Flask_AI_Tools_Integration_Guide.md)**: Integrating LLMs and AI services into Flask apps.
+- **[CSS Layout Guide](guides/CSS_Layout_Guide.md)**: Mastering Flexbox and Grid for modern web layouts.
+- **[DOM Manipulation](guides/DOM_Manipulation_Guide.md)**: Interacting with the webpage using JavaScript.
+- **[Portfolio Development](guides/Portfolio_Web_Development_Guide.md)**: Building a personal developer portfolio.
 
 ---
 
@@ -104,7 +112,7 @@ Explore production-ready code in the `library_api_code/` directory and `Practice
 
 Put your knowledge to the test! We have compiled a comprehensive list of coding challenges covering all topics.
 
-- **[Go to Practice Assignments](./Practice_Assignments_Compiled.md)**
+- **[Go to Practice Assignments](Practice_Assignments_Compiled.md)**
 
 Each assignment includes:
 
