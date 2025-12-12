@@ -1,221 +1,166 @@
 # SQL Data Definition Language (DDL) Guide
 
-This guide focuses on SQL's Data Definition Language (DDL), which is used to define and manage database structures. DDL commands are essential for creating, modifying, and deleting database objects like tables, databases, and schemas.
+Data Definition Language (DDL) is a subset of SQL used to define and manage the structure of your database. Unlike DML (Data Manipulation Language) which deals with data (INSERT, UPDATE, DELETE), DDL deals with schemas (CREATE, ALTER, DROP).
 
----
+## 1. Creating a Database
 
-## 1. Introduction to Data Definition Language (DDL)
+In SQLite, creating a database is often as simple as connecting to a file that doesn't exist yet.
 
-DDL is a subset of SQL (Structured Query Language) used for creating and modifying the structure of database objects. Unlike DML (Data Manipulation Language) which deals with data within the tables, DDL deals with the schema itself.
-
-### Key DDL Commands
-*   `CREATE`: Used to create database objects (e.g., `CREATE TABLE`, `CREATE DATABASE`).
-*   `ALTER`: Used to modify the structure of existing database objects (e.g., `ALTER TABLE`).
-*   `DROP`: Used to delete database objects (e.g., `DROP TABLE`, `DROP DATABASE`).
-*   `TRUNCATE`: Used to remove all records from a table, including all spaces allocated for the records, but not the table structure itself.
-*   `RENAME`: Used to rename a database object.
-
----
-
-## 2. `CREATE` Statements
-
-### `CREATE DATABASE`
-
-Used to create a new SQL database.
-
-```sql
-CREATE DATABASE database_name;
+```bash
+# From command line
+sqlite3 my_database.db
 ```
 
-### `CREATE TABLE`
+## 2. The CREATE Statement
 
-Used to create a new table in a database. You must specify the table name and define each column's name, data type, and constraints.
+The `CREATE TABLE` statement is used to define a new table, its columns, and data types.
 
-#### Basic `CREATE TABLE` Syntax
-
+### Basic Syntax
 ```sql
 CREATE TABLE table_name (
-    column1_name DATATYPE CONSTRAINTS,
-    column2_name DATATYPE CONSTRAINTS,
-    column3_name DATATYPE CONSTRAINTS,
+    column1 datatype constraint,
+    column2 datatype constraint,
     ...
 );
 ```
 
-#### Common SQL Data Types
-
-| Type       | Description                                  |
-| :--------- | :------------------------------------------- |
-| `INT`      | Whole numbers                                |
-| `VARCHAR(size)`| Variable-length string, `size` is max length |
-| `TEXT`     | Variable-length string, long text            |
-| `BOOLEAN`  | True/False (often stored as 0/1 in some DBs) |
-| `DATE`     | Date in 'YYYY-MM-DD' format                  |
-| `DATETIME` | Date and time in 'YYYY-MM-DD HH:MM:SS' format|
-| `REAL`/`FLOAT`/`DOUBLE` | Floating-point numbers          |
-
-#### Common SQL Constraints
-
-| Constraint  | Description                                  |
-| :---------- | :------------------------------------------- |
-| `PRIMARY KEY`| Uniquely identifies each row (cannot be NULL) |
-| `FOREIGN KEY`| Links two tables together                     |
-| `NOT NULL`  | Ensures a column cannot have a NULL value    |
-| `UNIQUE`    | Ensures all values in a column are different |
-| `DEFAULT value`| Sets a default value for a column if no value is specified |
-| `AUTOINCREMENT`| Automatically generates a unique number for new records (e.g., `AUTO_INCREMENT` in MySQL, `AUTOINCREMENT` in SQLite, `IDENTITY(1,1)` in SQL Server) |
-
-#### `CREATE TABLE` Examples
-
-**Example 1: `Students` Table**
-
+### Example: Students Table
 ```sql
-CREATE TABLE Students (
-    student_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    email VARCHAR(100) UNIQUE,
-    enrollment_date DATE DEFAULT CURRENT_DATE
+CREATE TABLE students (
+    id INTEGER PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    dob DATE,
+    grade_level INTEGER
 );
 ```
 
-**Example 2: `PetClinic` Database Schema (from new data)**
+### Common Data Types (SQLite)
+*   `INTEGER`: Whole numbers.
+*   `TEXT`: Strings of text.
+*   `REAL`: Floating point numbers.
+*   `BLOB`: Binary data.
+*   `NULL`: Missing value.
 
+### Common Constraints
+*   `PRIMARY KEY`: Uniquely identifies each record.
+*   `NOT NULL`: Ensures the column cannot have a NULL value.
+*   `UNIQUE`: Ensures all values in a column are different.
+*   `DEFAULT value`: Sets a default value if none is specified.
+*   `FOREIGN KEY`: Links to another table.
+
+## 3. Relationships & Foreign Keys
+
+To link tables together, we use Foreign Keys. This enforces referential integrity.
+
+### Example: Pet Clinic Schema
+
+**Owners Table:**
 ```sql
--- Create Owners Table
-CREATE TABLE Owners (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    phone VARCHAR(20),
-    password VARCHAR(255) NOT NULL -- In real app, store hashed passwords
+CREATE TABLE owners (
+    id INTEGER PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL
 );
+```
 
--- Create Pets Table
-CREATE TABLE Pets (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(255) NOT NULL,
-    species VARCHAR(100),
-    breed VARCHAR(100),
+**Pets Table (One-to-Many):**
+Each pet belongs to one owner.
+```sql
+CREATE TABLE pets (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    species TEXT,
     age INTEGER,
-    owner_id INTEGER NOT NULL,
-    FOREIGN KEY (owner_id) REFERENCES Owners(id) ON DELETE CASCADE
-);
-
--- Create Vets Table
-CREATE TABLE Vets (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(255) NOT NULL,
-    specialization VARCHAR(255),
-    email VARCHAR(255) UNIQUE NOT NULL
-);
-
--- Create Appointments Table
-CREATE TABLE Appointments (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    pet_id INTEGER NOT NULL,
-    vet_id INTEGER NOT NULL,
-    owner_id INTEGER NOT NULL,
-    appointment_date DATE NOT NULL,
-    reason TEXT,
-    status VARCHAR(50) DEFAULT 'scheduled', -- e.g., 'scheduled', 'completed', 'cancelled'
-    FOREIGN KEY (pet_id) REFERENCES Pets(id) ON DELETE CASCADE,
-    FOREIGN KEY (vet_id) REFERENCES Vets(id) ON DELETE RESTRICT, -- Prevent deleting vet with active appts
-    FOREIGN KEY (owner_id) REFERENCES Owners(id) ON DELETE CASCADE
+    owner_id INTEGER,
+    FOREIGN KEY (owner_id) REFERENCES owners(id)
 );
 ```
 
----
+## 4. The ALTER Statement
 
-## 3. `ALTER` Statements
-
-Used to add, delete, or modify columns in an existing table.
+The `ALTER TABLE` statement is used to modify an existing table structure.
 
 ### Adding a Column
-
 ```sql
-ALTER TABLE table_name
-ADD COLUMN new_column_name DATATYPE CONSTRAINTS;
-
--- Example: Add a 'status' column to the Students table
-ALTER TABLE Students
-ADD COLUMN status VARCHAR(50) DEFAULT 'active';
+ALTER TABLE students ADD COLUMN email TEXT;
 ```
 
-### Dropping a Column
-
+### Renaming a Table
 ```sql
-ALTER TABLE table_name
-DROP COLUMN column_name;
-
--- Example: Drop the 'phone' column from the Owners table
-ALTER TABLE Owners
-DROP COLUMN phone;
+ALTER TABLE students RENAME TO learners;
 ```
 
-### Modifying a Column (Data Type, Constraints)
+*Note: SQLite has limited support for `ALTER TABLE` compared to PostgreSQL or MySQL. You often cannot drop a column or change constraints without recreating the table.*
 
-Syntax varies significantly across different SQL databases (MySQL, PostgreSQL, SQLite, SQL Server).
+## 5. The DROP Statement
+
+The `DROP TABLE` statement deletes a table and all of its data permanently.
 
 ```sql
--- Example (PostgreSQL/SQL Server): Change data type of 'email'
-ALTER TABLE Students
-ALTER COLUMN email TYPE VARCHAR(150);
-
--- Example (MySQL): Change data type of 'email'
-ALTER TABLE Students
-MODIFY COLUMN email VARCHAR(150);
-
--- Example (SQLite - more complex, usually involves recreating table)
--- SQLite often requires recreating the table, copying data, dropping old, renaming new.
+DROP TABLE IF EXISTS students;
 ```
 
----
+## 6. Practice Assignments
 
-## 4. `DROP` Statements
-
-Used to delete existing database objects. Be very careful with `DROP` commands as they permanently remove data and schema.
-
-### `DROP DATABASE`
-
-Deletes an entire database.
+### Assignment 1: Basic Table Setup
+**Goal:** Create a database for a school system.
+1.  Create a `assignment.db` file.
+2.  Create a `students` table with fields: `id`, `first_name`, `last_name`, `dob`, `grade_level`.
+3.  Insert 2 test students to verify the schema.
 
 ```sql
-DROP DATABASE database_name;
+-- Solution
+CREATE TABLE students (
+    id INTEGER PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    dob TEXT,
+    grade_level INTEGER
+);
 
--- Example: Delete the 'pet_clinic' database
--- (Specific syntax may vary per DB system)
+INSERT INTO students (first_name, last_name, grade_level) VALUES ('Alice', 'Wonder', 10);
+INSERT INTO students (first_name, last_name, grade_level) VALUES ('Bob', 'Builder', 11);
 ```
 
-### `DROP TABLE`
-
-Deletes an entire table, including all its data, indexes, constraints, and triggers.
+### Assignment 2: Pet Clinic Schema
+**Goal:** Create a related schema for a Vet Clinic.
+1.  Create an `owners` table (`id`, `first_name`, `last_name`, `email`).
+2.  Create a `pets` table (`id`, `owner_id`, `species`, `age`).
+3.  Ensure `owner_id` is a Foreign Key referencing `owners(id)`.
 
 ```sql
-DROP TABLE table_name;
+-- Solution
+CREATE TABLE owners (
+    id INTEGER PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    email TEXT
+);
 
--- Example: Delete the 'Appointments' table
-DROP TABLE Appointments;
+CREATE TABLE pets (
+    id INTEGER PRIMARY KEY,
+    owner_id INTEGER,
+    species TEXT,
+    age INTEGER,
+    FOREIGN KEY(owner_id) REFERENCES owners(id)
+);
 ```
 
----
-
-## 5. `TRUNCATE` Statement
-
-Removes all rows from a table. Unlike `DROP TABLE`, `TRUNCATE TABLE` keeps the table structure (schema, columns, constraints, indexes) intact. It is usually faster than `DELETE FROM table_name` because it doesn't log individual row deletions.
+### Assignment 3: Schema Modification
+**Goal:** Update the Pet Clinic schema.
+1.  Add a `phone_number` column to the `owners` table.
+2.  Rename the `pets` table to `animals` (just for practice, then rename it back if you want).
 
 ```sql
-TRUNCATE TABLE table_name;
-
--- Example: Remove all appointments
-TRUNCATE TABLE Appointments;
+-- Solution
+ALTER TABLE owners ADD COLUMN phone_number TEXT;
+ALTER TABLE pets RENAME TO animals;
 ```
 
 ---
 
 ## See Also
-
--   **[SQL and SQLAlchemy Cheat Sheet](../cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)** - General SQL concepts and Python ORM basics.
--   **[Database_and_ORM_Guide.md](../guides/Database_and_ORM_Guide.md)** - (If created) for broader database topics.
--   **[Interactive CLI with ORM Project Guide](../guides/Interactive_CLI_ORM_Project_Guide.md)** - Practical application of ORM in a CLI.
--   **[Pet Clinic ORM Project Guide](../guides/Pet_Clinic_ORM_Project_Guide.md)** - A complete project example using DDL concepts.
+- **[SQL and SQLAlchemy Cheat Sheet](../cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)**
+- **[SQL Advanced Queries Guide](SQL_Advanced_Queries_Guide.md)**

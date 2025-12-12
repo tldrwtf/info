@@ -249,6 +249,34 @@ console.log(item.parentElement.children);// All children elements of the parent
 
 ---
 
+## 8. Practical Assignments
+
+### Assignment 1: Profile Card Builder
+**Objective:** Create an interactive profile card that demonstrates DOM manipulation techniques.
+
+**Tasks:**
+1.  **Update Card Content:** Create a form with inputs for name, title, and bio. When a button is clicked, update the profile card's content with the input values.
+2.  **Theme Toggle:** Add a button to toggle between light and dark themes for the card.
+3.  **Update Counter:** Display a counter showing how many times the card has been updated.
+
+### Assignment 2: Style Switcher
+**Objective:** Create a style switcher that demonstrates CSS class manipulation.
+
+**Tasks:**
+1.  **Theme Buttons:** Create buttons for "Light", "Dark", and "Colorful" themes.
+2.  **Class Toggling:** When a button is clicked, apply the corresponding CSS class to the body or a container element.
+3.  **Dynamic Card Creation:** Add a button to dynamically create new cards with the current theme style.
+
+### Assignment 3: Shopping List
+**Objective:** Build a simple shopping list application.
+
+**Tasks:**
+1.  **Add Item:** Allow users to type an item name and add it to a list (ul/ol).
+2.  **Delete Item:** Add a "Delete" button next to each list item to remove it.
+3.  **Mark as Done:** Allow users to click on an item to toggle a "completed" style (strikethrough).
+
+---
+
 ## See Also
 
 - **[HTML Cheat Sheet](../cheatsheets/HTML_Cheat_Sheet.md)** - Structure of web pages

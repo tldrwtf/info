@@ -118,43 +118,64 @@ This file defines styles that apply across the entire website. This often includ
 ```css
 /* Root Variables */
 :root {
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
-    --text-color: #333;
-    --bg-color: #f4f4f4;
+    --primary-color: rgb(255, 133, 68);
+    --secondary-color: rgb(255, 251, 246);
+    --accent-color: rgb(255, 192, 158);
 }
 
 /* Universal box-sizing */
 *, *::before, *::after {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--secondary-color);
+    color: black;
 }
 
+/* NAVBAR */
 header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 1rem 0;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex; /* Flexbox for navigation */
+    background-color: black;
+    padding: 0 10vw;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
-nav ul li a {
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     color: white;
+    height: 7vh;
+    border-bottom: 1px solid gray;
+}
+
+.nav-links {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    margin: auto 0;
+}
+
+.nav-link {
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    color: grey;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.logo {
+    color: var(--primary-color);
 }
 ```
 
@@ -164,31 +185,71 @@ Styles unique to the landing page, often focusing on the hero section layout and
 *   **Section Layout:** Using Flexbox or Grid for arranging preview content.
 
 ```css
-#hero {
-    background-color: var(--secondary-color);
+.intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+    padding: 7vh 0;
+    gap: 40px;
+}
+
+.intro-text {
     color: white;
-    text-align: center;
-    padding: 4rem 1rem;
-    min-height: 80vh; /* Full viewport height */
+    height: 30vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
 }
 
-#hero h1 {
-    font-size: 3em;
-    margin-bottom: 0.5rem;
+.my-img {
+    min-width: 200px;
+    height: 200px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
 }
 
-.button {
-    display: inline-block;
+#my-name {
+    color: var(--primary-color);
+    font-family: monospace;
+    font-size: 40px;
+}
+
+.btn-shape {
+    height: 40px;
+    padding: 0 30px;
+    border-radius: 7px;
+    font-size: 15px;
+    font-family: monospace;
+    border: none;
+}
+
+.intro-btns {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-orange {
     background-color: var(--primary-color);
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-top: 1rem;
+    color: var(--secondary-color);
+}
+
+.btn-hollow {
+    background-color: black;
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+}
+
+.btn-orange:hover {
+    background-color: var(--accent-color);
+    color: black;
+}
+
+.btn-hollow:hover {
+    background-color: var(--accent-color);
+    color: black;
 }
 ```
 
@@ -196,11 +257,8 @@ Styles unique to the landing page, often focusing on the hero section layout and
 Styles for the about section, potentially using multi-column layouts.
 
 ```css
-/* Minimal example */
-#bio {
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
+body{
+  background-color: black;
 }
 ```
 
@@ -208,22 +266,74 @@ Styles for the about section, potentially using multi-column layouts.
 
 ## 4. Responsive Design
 
-Ensure the portfolio is viewable on various devices by using media queries.
+Ensure the portfolio is viewable on various devices by using media queries. This example shows how to handle a responsive navbar.
 
 ```css
 /* Example from styles/styles.css */
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-    nav ul li {
-        margin-bottom: 0.5rem;
-    }
-    #hero h1 {
-        font-size: 2em;
-    }
+@media (max-width: 780px) {
+  .intro {
+    flex-direction: column-reverse;
+    align-items: start;
+    justify-content: space-between;
+    width: 100%;
+    padding: 7vh 0;
+  }
+  .my-img {
+    min-width: 150px;
+    height: 150px;
+  }
+
+  /* Menu Icon for Mobile */
+  .menu-icon {
+    display: block;
+    font-size: 30px;
+  }
+
+  /* Hide default nav links */
+  .nav-links {
+    position: absolute;
+    top: 7vh;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.333);
+    border-radius: 0 0 10px 10px;
+  }
+
+  .nav-links li {
+    padding: 15px 0;
+  }
+
+  .nav-link {
+    color: white;
+  }
+
+  /* When checkbox is checked, show menu */
+  #menu-toggle:checked + .menu-icon + .nav-links {
+    display: flex;
+  }
 }
+```
+
+### Mobile Menu HTML (for responsive design)
+To make the CSS above work, your HTML needs a checkbox hack or JS toggling.
+
+```html
+<nav>
+    <a href="./index.html"><h2 class="logo">Allan Ahmed</h2></a>
+    <!-- Hidden checkbox for toggle state -->
+    <input type="checkbox" id="menu-toggle" style="display:none;" />
+    <!-- Label acts as the button -->
+    <label for="menu-toggle" class="menu-icon">&#9776;</label>
+    <ul class="nav-links">
+        <li><a href="./index.html" class="nav-link">HOME</a></li>
+        <li><a href="./about.html" class="nav-link">ABOUT</a></li>
+        <li><a href="" class="nav-link">PROJECTS</a></li>
+        <li><a href="" class="nav-link">CONTACT</a></li>
+    </ul>
+</nav>
 ```
 
 ---
