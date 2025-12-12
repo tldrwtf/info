@@ -356,7 +356,7 @@
 
 **Solution:** [HTML_Profile_Solution.html](./Practice_Solutions/HTML_CSS/HTML_Profile_Solution.html), [CSS_Card_Component_Solution.html](./Practice_Solutions/HTML_CSS/CSS_Card_Component_Solution.html), [Flexbox_Navbar_Solution.html](./Practice_Solutions/HTML_CSS/Flexbox_Navbar_Solution.html), [Grid_Gallery_Solution.html](./Practice_Solutions/HTML_CSS/Grid_Gallery_Solution.html)
 
-**Resources:** [HTML Cheat Sheet](./HTML_Cheat_Sheet.md), [CSS Cheat Sheet](./CSS_Cheat_Sheet.md), [CSS Layout Guide](./CSS_Layout_Guide.md)
+**Resources:** [HTML Cheat Sheet](cheatsheets/HTML_Cheat_Sheet.md), [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md), [CSS Layout Guide](guides/CSS_Layout_Guide.md)
 
 ### Task 14.1: Semantic HTML Profile
 
@@ -389,7 +389,7 @@
 
 **Solution:** [JavaScript_Basics_and_Functions_Solutions.js](./Practice_Solutions/JavaScript/JavaScript_Basics_and_Functions_Solutions.js), [JavaScript_Array_Manipulation_Solutions.js](./Practice_Solutions/JavaScript/JavaScript_Array_Manipulation_Solutions.js), [JavaScript_Object_Access_Solutions.js](./Practice_Solutions/JavaScript/JavaScript_Object_Access_Solutions.js)
 
-**Resources:** [JS Basics Cheat Sheet](./JavaScript_Basics_Cheat_Sheet.md), [JS Functions Guide](./JavaScript_Functions_Guide.md)
+**Resources:** [JS Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [JS Functions Guide](guides/JavaScript_Functions_Guide.md)
 
 ### Task 15.1: Hello World & Variables
 
