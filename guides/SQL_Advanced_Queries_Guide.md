@@ -478,6 +478,5 @@ Assume the following tables:
 ## See Also
 
 -   **[SQL and SQLAlchemy Cheat Sheet](../cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)** - Basic SQL syntax and ORM concepts.
--   **[SQL DDL Guide](../guides/SQL_DDL_Guide.md)** - For understanding how database structures are created and modified.
--   **[Database_and_ORM_Guide.md](../guides/Database_and_ORM_Guide.md)** - (If created) for a broader view of database design and ORM principles.
+-   **[SQL DDL Guide](../guides/SQL_DDL_Guide.md)** - For understanding how database structures are created and modified
 -   **[Big O Notation Cheat Sheet](../cheatsheets/Big_O_Notation_Cheat_Sheet.md)** - Understanding the performance implications of complex queries.
