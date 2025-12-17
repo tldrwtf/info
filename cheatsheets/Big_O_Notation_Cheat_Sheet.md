@@ -132,6 +132,38 @@ def print_elements(arr):
         print(element)
 ```
 
+### Practical Example: Stacked vs. Nested Loops
+
+It's important to distinguish between **stacked** loops (which remain linear) and **nested** loops (which become quadratic).
+
+```python
+# O(n) - Linear Time
+def double_split(list):
+    evens = []
+    odds = []
+
+    # Loop 1: O(n)
+    for num in list:
+        if num % 2 == 0:
+            evens.append(num * 2)
+    
+    # Loop 2: O(n)
+    for num in list:
+        if num % 2 == 1:
+            odds.append(num * 2)
+
+    return (evens, odds)
+    # Total: O(n) + O(n) = O(2n) -> O(n)
+
+# O(n^2) - Quadratic Time
+def find_pairs(list):
+    # Nested Loop
+    for i in list:          # O(n)
+        for j in list:      # O(n) inside O(n)
+            print(i, j)
+    # Total: O(n) * O(n) = O(n^2)
+```
+
 ### O(n log n) - Linearithmic Time
 
 The execution time grows proportionally to `n * log n`. This is typically seen in efficient sorting algorithms.

@@ -172,6 +172,20 @@ login_schema = UserSchema(only=['email', 'password']) # Partial schema
 
 The core logic of your API.
 
+### Request Flow
+```mermaid
+graph LR
+    A[Client] -->|HTTP Request| B(Route)
+    B -->|Process| C(Controller)
+    C -->|Validate| D(Schema)
+    D -->|Interact| E(Model)
+    E -->|Query| F[(Database)]
+    F -->|Result| E
+    E -->|Object| D
+    D -->|JSON| C
+    C -->|HTTP Response| A
+```
+
 ### Creating Data (POST)
 ```python
 @books_bp.route('', methods=['POST'])
@@ -330,4 +344,31 @@ class ProductionConfig(Config):
 Load it in `app.py` or `__init__.py`:
 ```python
 app.config.from_object('config.DevelopmentConfig')
+```
+
+---
+
+## Testing Your API
+
+Once your API is running, you can test it using tools like Postman or the command line with `curl`.
+
+### 1. Create a New User
+```bash
+curl -X POST http://localhost:5000/users/register \
+  -H "Content-Type: application/json" \
+  -d '{"username": "jdoe", "email": "jdoe@example.com", "password": "password123"}'
+```
+
+### 2. Login (Get Token)
+```bash
+curl -X POST http://localhost:5000/users/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "jdoe@example.com", "password": "password123"}'
+```
+
+### 3. Get Protected Resource
+Replace `<TOKEN>` with the token received from the login step.
+```bash
+curl -X GET http://localhost:5000/books \
+  -H "Authorization: Bearer <TOKEN>"
 ```

@@ -619,7 +619,70 @@ print(f"Queue size: {size}") # Output: 2
 
 ---
 
-## 7. Data Structure Comparison
+## 7. Trees
+
+A **Tree** is a hierarchical data structure consisting of nodes connected by edges.
+
+*   **Node:** An entity containing a key or value.
+*   **Root:** The topmost node (no parent).
+*   **Leaf:** A node with no children.
+*   **Edge:** The link between two nodes.
+
+### Binary Tree
+Each node has at most two children (Left and Right).
+
+```python
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+root = TreeNode("Book1")
+root.left = TreeNode("Book2")
+root.right = TreeNode("Book3")
+```
+
+---
+
+## 8. Graphs
+
+A **Graph** is a non-linear data structure consisting of **Vertices** (nodes) and **Edges** (connections). Used for maps, social networks, and routing.
+
+### Key Concepts
+*   **Directed Graph:** Edges have a direction (A -> B). Like a one-way street.
+*   **Undirected Graph:** Edges have no direction (A <-> B). Like a two-way street.
+*   **Weighted Graph:** Edges have values (weights), representing distance or cost.
+
+### Representations
+
+**1. Adjacency Matrix**
+A 2D array (table) where `matrix[i][j]` represents an edge from `i` to `j`. Good for dense graphs.
+
+```python
+# 0: No connection, 1: Connection
+matrix = [
+    [0, 1, 0], # Node 0 connects to 1
+    [1, 0, 1], # Node 1 connects to 0 and 2
+    [0, 1, 0]  # Node 2 connects to 1
+]
+```
+
+**2. Adjacency List**
+A dictionary where each key is a vertex and its value is a list of connected vertices. Good for sparse graphs (most common).
+
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D'],
+    'C': ['A'],
+    'D': ['B']
+}
+```
+
+---
+
+## 9. Data Structure Comparison
 
 | Operation      | List          | Dictionary     | Set             | Tuple         |
 | :------------- | :------------ | :------------- | :-------------- | :------------ |
