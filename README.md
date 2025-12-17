@@ -16,6 +16,7 @@ If you find this resource useful, please consider leaving a star!
   - [In-Depth Guides](#in-depth-guides)
   - [Real-World Examples](#real-world-examples)
   - [Practice Assignments](#practice-assignments)
+  - [Changelog](#changelog)
 
 ---
 
@@ -67,6 +68,7 @@ python app.py
 | **Functional Prog** | Lambda, Map, Filter, Reduce        | [Link](cheatsheets/Functional_Programming_Cheat_Sheet.md)|
 | **HTML Basics**     | Tags, Structure, Attributes        | [Link](cheatsheets/HTML_Cheat_Sheet.md)            |
 | **CSS Basics**      | Selectors, Box Model, Colors       | [Link](cheatsheets/CSS_Cheat_Sheet.md)             |
+| **Bootstrap**       | Grid, Components, Utilities        | [Link](cheatsheets/Bootstrap_Cheat_Sheet.md)       |
 | **JS Basics**       | Vars, Types, Loops                 | [Link](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)|
 | **JS Objects**      | Arrays, Objects, JSON              | [Link](cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md)|
 | **JS Functions**    | Arrow funcs, Scope, Callbacks      | [Link](guides/JavaScript_Functions_Guide.md)   |
@@ -92,6 +94,7 @@ For complex topics requiring architectural understanding:
 - **[CSS Layout Guide](guides/CSS_Layout_Guide.md)**: Mastering Flexbox and Grid for modern web layouts.
 - **[DOM Manipulation](guides/DOM_Manipulation_Guide.md)**: Interacting with the webpage using JavaScript.
 - **[Portfolio Development](guides/Portfolio_Web_Development_Guide.md)**: Building a personal developer portfolio.
+- **[JavaScript Workshops](guides/JavaScript_Workshops_Guide.md)**: Practical mini-projects (Color Picker, Shopping Cart, etc.).
 
 ---
 
@@ -118,3 +121,26 @@ Each assignment includes:
 - Clear objectives.
 - Context/Scenario.
 - Links to the specific solution file in `Practice_Solutions/`.
+
+---
+
+## Changelog
+
+**2025-12-16 Updates**
+
+- **Documentation:**
+    - Created `cheatsheets/Bootstrap_Cheat_Sheet.md` covering Grid, Components, and Utilities.
+    - Created `guides/JavaScript_Workshops_Guide.md` with 5 practical mini-projects (DOM, Logic, LocalStorage).
+    - Updated `guides/SQLAlchemy_Relationships_Guide.md` with conceptual diagrams and lazy loading performance charts.
+    - Updated `guides/Python_CLI_Applications_Guide.md` with packaging/distribution instructions (`setup.py`).
+    - Updated `guides/CSS_Layout_Guide.md` with Media Query responsive design patterns.
+    - Updated `cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md` with more array methods (`find`, `reduce`).
+    - Updated `guides/JavaScript_Functions_Guide.md` with practical exercises.
+    - Updated `guides/DOM_Manipulation_Guide.md` with modern selector examples.
+
+- **Curriculum:**
+    - Added "Section 16: Web Interactivity & Frameworks" to `Practice_Assignments_Compiled.md`.
+
+- **Maintenance:**
+    - Validated internal linking structure across all Markdown files.
+    - Standardized headers and formatting across new guides.

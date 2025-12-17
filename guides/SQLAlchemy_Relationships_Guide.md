@@ -56,6 +56,35 @@ posts = db.relationship('Post', backref='author')
 # Instead of defining relationship on both sides, backref does it for you
 ```
 
+### Conceptual Diagrams
+
+**One-to-Many (User -> Posts)**
+```
+[ User Table ]        [ Post Table ]
++----+-------+        +----+----------------+---------+
+| ID | Name  |        | ID | Title          | User_ID |
++----+-------+        +----+----------------+---------+
+| 1  | Alice | <----- | 10 | First Post     | 1       |
+| 2  | Bob   |    |   | 11 | Alice's 2nd    | 1       |
++----+-------+    |   | 12 | Bob's Post     | 2       |
+                  |   +----+----------------+---------+
+                  |
+    One User -----+---- Has Many Posts
+```
+
+**Many-to-Many (Students <-> Courses)**
+Requires a middle table (Association Table).
+```
+[ Student ]      [ Student_Course ]       [ Course ]
++----+-----+     +------------+-----------+     +----+---------+
+| ID | Name|     | Student_ID | Course_ID |     | ID | Title   |
++----+-----+     +------------+-----------+     +----+---------+
+| 1  | Ali | <---| 1          | 101       |---> | 101| Math    |
+| 2  | Bob | <---| 1          | 102       |---> | 102| History |
++----+-----+     | 2          | 101       |     +----+---------+
+                 +------------+-----------+
+```
+
 ---
 
 ## One-to-Many Relationships
@@ -785,71 +814,52 @@ for user in mutual_follows:
 ## Lazy Loading Strategies
 
 ### Understanding Lazy Loading
+Lazy loading controls *when* SQLAlchemy loads related data from the database. This is critical for performance tuning.
+
 ```python
 class User(db.Model):
-    __tablename__ = 'users'
-
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80))
-
-    # Different lazy loading strategies
-    posts_select = db.relationship('Post', lazy='select')      # Default
-    posts_joined = db.relationship('Post', lazy='joined')      # JOIN
-    posts_subquery = db.relationship('Post', lazy='subquery')  # Subquery
-    posts_dynamic = db.relationship('Post', lazy='dynamic')    # Query object
+    # ...
+    posts = db.relationship('Post', lazy='select') # Default
 ```
 
-### Lazy Options Explained
+### Performance Comparison
+
+| Strategy | `lazy=` | SQL Behavior | Best Use Case | Performance Impact |
+| :--- | :--- | :--- | :--- | :--- |
+| **Select** | `'select'` (Default) | Emits a **separate** SELECT statement when you access `user.posts`. | Accessing relationships rarely. | **N+1 Problem:** Looping through 100 users and accessing posts = 101 queries. |
+| **Joined** | `'joined'` | Emits a single **LEFT JOIN** when loading the parent. | Accessing relationships frequently/always. | **Efficient:** 1 query for 100 users and their posts. Data is loaded immediately. |
+| **Subquery** | `'subquery'` | Emits a second SELECT statement using a subquery IN clause. | Loading large collections where JOIN is too heavy. | 2 Queries total. Good balance for complex queries. |
+| **Dynamic** | `'dynamic'` | Returns a **Query object** instead of a list. Data is NOT loaded until you call `.all()`. | Huge collections (e.g., User has 10,000 logs). | Allows filtering (`user.logs.filter(...)`) before loading. |
+
+### Lazy Options Explained in Code
 ```python
 # 1. 'select' (default) - Load when accessed
 posts = db.relationship('Post', lazy='select')
-user = User.query.get(1)
-print(user.posts)  # Triggers separate query to load posts
+user = User.query.get(1) # Query 1: Get User
+print(user.posts)        # Query 2: Get Posts (Triggered here)
 
 # 2. 'joined' - Use JOIN to load in one query
 posts = db.relationship('Post', lazy='joined')
-user = User.query.get(1)  # Loads user and posts in one query
+user = User.query.get(1)  # Query 1: SELECT ... FROM user LEFT JOIN post ...
 
-# 3. 'subquery' - Load with a subquery
-posts = db.relationship('Post', lazy='subquery')
-users = User.query.all()  # Loads all users and their posts efficiently
-
-# 4. 'dynamic' - Return query object (not list)
+# 3. 'dynamic' - Return query object
 posts = db.relationship('Post', lazy='dynamic')
 user = User.query.get(1)
+# user.posts is not a list, it's a query builder:
 recent_posts = user.posts.filter(Post.created_at > '2024-01-01').all()
 ```
 
 ### Choosing the Right Strategy
 ```python
-# Use 'select' when:
-# - You don't always need related data
-# - Small number of relationships
+# Don't do this with default lazy='select' (N+1 Problem)
+users = User.query.all() # 1 Query
+for user in users:
+    print(user.posts)    # +1 Query per user! (100 users = 101 queries)
 
-# Use 'joined' when:
-# - You always need related data
-# - Avoid N+1 query problem
-
-# Use 'dynamic' when:
-# - Large number of related items
-# - Need to filter/sort related items
-# - Need pagination on relationships
-
-# Example: Blog with many comments
-class Post(db.Model):
-    __tablename__ = 'posts'
-
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200))
-
-    # Dynamic for large number of comments
-    comments = db.relationship('Comment', lazy='dynamic')
-
-# Can now filter/paginate comments
-post = Post.query.get(1)
-recent_comments = post.comments.filter(
-    Comment.created_at > datetime.now() - timedelta(days=7)
-).order_by(Comment.created_at.desc()).limit(10).all()
+# Do this instead (Eager Loading)
+# Even if model is lazy='select', you can override it in the query:
+users = User.query.options(db.joinedload(User.posts)).all()
+# Result: 1 Query total.
 ```
 
 ---

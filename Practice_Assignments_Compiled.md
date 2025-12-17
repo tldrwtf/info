@@ -17,6 +17,7 @@
 13. [AsyncIO & Generators](#13-asyncio--generators)
 14. [Frontend Development (HTML/CSS)](#14-frontend-development-htmlcss)
 15. [JavaScript Fundamentals](#15-javascript-fundamentals)
+16. [Web Interactivity & Frameworks](#16-web-interactivity--frameworks)
 
 ---
 
@@ -433,3 +434,44 @@
     1. Log the `make` and `model` combined.
     2. Loop through `features` and log each one.
     3. Add a new property `mileage` with value 50000.
+
+---
+
+## 16. Web Interactivity & Frameworks
+
+**Resources:** [Bootstrap Cheat Sheet](cheatsheets/Bootstrap_Cheat_Sheet.md), [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md), [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md)
+
+### Task 16.1: Bootstrap Grid & Layout
+
+- **Goal:** Create a responsive landing page using Bootstrap.
+- **Requirements:**
+    1. Include the Bootstrap CDN in your `<head>`.
+    2. Create a `navbar`.
+    3. Create a hero section with a centered `h1` and `button`.
+    4. Create a 3-column feature section using `.row` and `.col-md-4`.
+
+### Task 16.2: Color Picker (DOM Events)
+
+- **Goal:** Build an interactive color switcher.
+- **UI:** A set of `div`s with different colors and a large "Canvas" `div`.
+- **Logic:**
+    1. Select all color swatches using `document.querySelectorAll`.
+    2. Loop through them and add a `click` event listener.
+    3. When clicked, change the background color of the "Canvas" to match the clicked swatch.
+
+### Task 16.3: Local Storage Form
+
+- **Goal:** Persist user data across page reloads.
+- **UI:** A form with "Username" and "Theme Preference" (Light/Dark).
+- **Logic:**
+    1. Listen for the `submit` event.
+    2. Save the values to `localStorage` (e.g., `localStorage.setItem('user', ...)`).
+    3. On page load (`DOMContentLoaded`), check `localStorage`. If data exists, pre-fill the form.
+
+### Task 16.4: Advanced CSS Pseudo-Elements
+
+- **Goal:** Style a button with a "shine" effect or an underline animation.
+- **CSS:**
+    1. Use `::before` or `::after` to create a decorative element.
+    2. Use `:hover` to trigger a `transform` or `transition`.
+    3. Try styling `::first-letter` of a paragraph to look like a drop cap.
