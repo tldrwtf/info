@@ -5,8 +5,7 @@ author:
   url: "https://github.com/tldrwtf"
 
 # Theme Settings
-remote_theme: "mmistakes/minimal-mistakes-jekyll"
-minimal_mistakes_skin: "default" # Options: "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+remote_theme: pages-themes/hacker@v0.2.0
 
 # Plugins
 plugins:
