@@ -1133,7 +1133,64 @@ def example_function_with_logging(data_id):
 
 ---
 
-## Best Practices
+## 11. Packaging and Distribution
+
+Once your CLI tool is polished, you might want to share it or install it as a system-wide command.
+
+### Making Scripts Executable (Linux/Mac)
+Add a "shebang" line at the very top of your main script:
+```python
+#!/usr/bin/env python3
+```
+Then, make the file executable in the terminal:
+```bash
+chmod +x my_cli_app.py
+```
+You can now run it directly: `./my_cli_app.py`
+
+### Python Package Structure
+To install your CLI tool using `pip` (e.g., `pip install mycli`), organize your project like this:
+
+```
+my_project/
+├── mycli/
+│   ├── __init__.py
+│   └── main.py
+├── setup.py (or pyproject.toml)
+└── README.md
+```
+
+### Basic `setup.py`
+This configuration allows you to define an "entry point," which creates a command-line shortcut for your script.
+
+```python
+from setuptools import setup, find_packages
+
+setup(
+    name='my-awesome-cli',
+    version='0.1',
+    packages=find_packages(),
+    install_requires=[
+        'click',
+        'requests',
+        'colorama'
+    ],
+    entry_points={
+        'console_scripts': [
+            'mycli=mycli.main:main_cli_app', # Maps the command 'mycli' to the main_cli_app function
+        ],
+    },
+)
+```
+Install it locally in "editable" mode:
+```bash
+pip install -e .
+```
+Now you can just type `mycli` in your terminal!
+
+---
+
+## 12. Best Practices
 
 ### 1. Input Validation
 Always validate user input to prevent errors and ensure data integrity. This includes type checks, range checks, and format checks.

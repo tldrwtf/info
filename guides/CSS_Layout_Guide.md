@@ -265,6 +265,53 @@ While Flexbox and Grid manage the overall layout, CSS positioning is still essen
 
 ---
 
+## 5. Responsive Design with Media Queries
+
+While frameworks like Bootstrap handle responsiveness for you, understanding **Media Queries** is essential for custom CSS layouts. They allow you to apply CSS rules only when specific conditions (like viewport width) are met.
+
+### Basic Syntax
+
+```css
+@media (min-width: 768px) {
+    /* Rules here apply only if the screen is 768px or wider */
+    .container {
+        width: 750px;
+    }
+}
+```
+
+### Common Breakpoints
+These often align with device sizes (Phones, Tablets, Desktops).
+
+*   **Mobile First (Default):** `< 576px`
+*   **Small (Landscape Phones):** `≥ 576px`
+*   **Medium (Tablets):** `≥ 768px`
+*   **Large (Desktops):** `≥ 992px`
+*   **Extra Large:** `≥ 1200px`
+
+### Example: Responsive Flexbox
+
+Changing a layout from a vertical column (mobile) to a horizontal row (desktop).
+
+```css
+/* Default (Mobile) - Stacked vertically */
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Tablet and up - Horizontal row */
+@media (min-width: 768px) {
+    .nav-menu {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+```
+
+---
+
 ## See Also
 
 -   **[CSS Cheat Sheet](../cheatsheets/CSS_Cheat_Sheet.md)** - Basic CSS properties and selectors.
