@@ -1,6 +1,7 @@
 # Full Stack Learning - Complete Cheat Sheet Collection
 
 [![Maintenance](https://img.shields.io/badge/Maintained%20by-tldrwtf-blue)](https://github.com/tldrwtf)
+[![Version](https://img.shields.io/badge/Version-1.3.0-orange.svg)](#changelog)        
 
 If you find this resource useful, please consider leaving a star!
 
@@ -8,15 +9,15 @@ If you find this resource useful, please consider leaving a star!
 
 ## Table of Contents
 
-- [Full Stack Learning - Complete Cheat Sheet Collection](#full-stack-learning---complete-cheat-sheet-collection)
-  - [Table of Contents](#table-of-contents)
-  - [Quick Start](#quick-start)
-  - [Repository Structure](#repository-structure)
-  - [Available Cheat Sheets](#available-cheat-sheets)
-  - [In-Depth Guides](#in-depth-guides)
-  - [Real-World Examples](#real-world-examples)
-  - [Practice Assignments](#practice-assignments)
-  - [Changelog](#changelog)
+- [Quick Start](#quick-start)
+- [Repository Structure](#repository-structure)
+- [Available Cheat Sheets](#available-cheat-sheets)
+- [In-Depth Guides](#in-depth-guides)
+- [Real-World Examples](#real-world-examples)
+- [Glossary](#glossary)
+- [Troubleshooting](#troubleshooting)
+- [Versioning](#versioning)
+- [Changelog](#changelog)
 
 ---
 
@@ -27,14 +28,6 @@ Clone the repository to get started with the examples and guides locally:
 ```bash
 git clone https://github.com/tldrwtf/info.git
 cd info
-```
-
-For the **Library API** project (a complete Flask reference implementation):
-
-```bash
-cd library_api_code
-pip install -r requirements.txt
-python app.py
 ```
 
 ---
@@ -50,7 +43,8 @@ python app.py
 ├── library_api_code/          # Production-grade Flask Application
 │   ├── app/                   # Application factory & blueprints
 │   └── tests/                 # Unit testing suite
-└── README.md                  # You are here
+├── GLOSSARY.md                # Definitions of key terms
+└── README.md                  # Project documentation
 ```
 
 ---
@@ -60,87 +54,130 @@ python app.py
 | Topic               | Description                        | Link                                     |
 | ------------------- | ---------------------------------- | ---------------------------------------- |
 | **Python Basics**   | Variables, Loops, Functions        | [Link](cheatsheets/Python_Basics_Cheat_Sheet.md)   |
-| **Data Structures** | Lists, Dicts, Sets, Tuples         | [Link](cheatsheets/Data_Structures_Cheat_Sheet.md) |
+| **Data Structures** | Lists, Dicts, Trees, Graphs        | [Link](cheatsheets/Data_Structures_Cheat_Sheet.md) |
 | **OOP**             | Classes, Inheritance, Polymorphism | [Link](cheatsheets/OOP_Cheat_Sheet.md)             |
 | **Regex**           | Pattern Matching & Validation      | [Link](cheatsheets/Regex_Cheat_Sheet.md)           |
 | **Big O**           | Time & Space Complexity            | [Link](cheatsheets/Big_O_Notation_Cheat_Sheet.md)  |
-| **Decorators**      | Wrappers & Metaprogramming         | [Link](cheatsheets/Decorators_Cheat_Sheet.md)      |
-| **Functional Prog** | Lambda, Map, Filter, Reduce        | [Link](cheatsheets/Functional_Programming_Cheat_Sheet.md)|
 | **HTML Basics**     | Tags, Structure, Attributes        | [Link](cheatsheets/HTML_Cheat_Sheet.md)            |
 | **CSS Basics**      | Selectors, Box Model, Colors       | [Link](cheatsheets/CSS_Cheat_Sheet.md)             |
 | **Bootstrap**       | Grid, Components, Utilities        | [Link](cheatsheets/Bootstrap_Cheat_Sheet.md)       |
 | **JS Basics**       | Vars, Types, Loops                 | [Link](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)|
-| **JS Objects**      | Arrays, Objects, JSON              | [Link](cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md)|
-| **JS Functions**    | Arrow funcs, Scope, Callbacks      | [Link](guides/JavaScript_Functions_Guide.md)   |
-| **APIs**            | REST, JSON, Requests               | [Link](cheatsheets/APIs_and_Requests_Cheat_Sheet.md)|
-
-_(See file list for full collection)_
+| **JS Objects**      | Objects, Arrays, Methods           | [Link](cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md)|
+| **SQL & ORM**       | Queries, Joins, SQLAlchemy         | [Link](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)|
+| **APIs**            | Requests, REST, JSON               | [Link](cheatsheets/APIs_and_Requests_Cheat_Sheet.md)|
 
 ---
 
 ## In-Depth Guides
 
-For complex topics requiring architectural understanding:
+Explore complex topics with our detailed guides in the `guides/` directory.
 
-- **[Flask REST API Development](guides/Flask_REST_API_Development_Guide.md)**: Building scalable web APIs.
-- **[Library-Api Advanced Architecture](guides/Library-Api_Advanced_Architecture_Guide.md)**: Analysis of the `library_api_code` reference project.
-- **[SQLAlchemy Relationships](guides/SQLAlchemy_Relationships_Guide.md)**: Mastering One-to-Many and Many-to-Many patterns.
-- **[SQLAlchemy CRUD](guides/SQLAlchemy_CRUD_Guide.md)**: Create, Read, Update, Delete operations in depth.
-- **[Advanced SQL Queries](guides/SQL_Advanced_Queries_Guide.md)**: Joins, Subqueries, and Optimization.
-- **[API Authentication](guides/API_Authentication_Guide.md)**: Securing apps with JWT and OAuth2.
-- **[Python CLI Applications](guides/Python_CLI_Applications_Guide.md)**: Building interactive command-line tools.
-- **[Building AI-Ready APIs](guides/Building_AI_Ready_APIs_Guide.md)**: Designing Flask endpoints for consumption by AI agents and tools.
-- **[Flask AI Tools Integration](guides/Flask_AI_Tools_Integration_Guide.md)**: Integrating LLMs and AI services into Flask apps.
-- **[CSS Layout Guide](guides/CSS_Layout_Guide.md)**: Mastering Flexbox and Grid for modern web layouts.
-- **[DOM Manipulation](guides/DOM_Manipulation_Guide.md)**: Interacting with the webpage using JavaScript.
-- **[Portfolio Development](guides/Portfolio_Web_Development_Guide.md)**: Building a personal developer portfolio.
-- **[JavaScript Workshops](guides/JavaScript_Workshops_Guide.md)**: Practical mini-projects (Color Picker, Shopping Cart, etc.).
+- **Backend Architecture:** [Flask REST API Development](guides/Flask_REST_API_Development_Guide.md), [Production Workflow](guides/Library-Api_Production_Workflow_Guide.md)
+- **Frontend Development:** [React Basics](guides/React_Basics_Guide.md), [Modern Ecommerce](guides/Modern_React_Ecommerce_Guide.md)
+- **DevOps:** [CI/CD Pipelines](guides/CI_CD_Pipeline_Guide.md), [Docker (Coming Soon)]()
+- **Data & Algorithms:** [Algorithms Guide](guides/Algorithms_Guide.md), [Advanced SQL](guides/SQL_Advanced_Queries_Guide.md)
 
 ---
 
 ## Real-World Examples
 
-Explore production-ready code in the `library_api_code/` directory and `Practice_Solutions/` folder:
-
-- **Library API**: Full Flask app with Blueprints, Caching, Rate Limiting, and JWT.
-- **Mechanic Shop API**: Service ticket tracking and analytics.
-- **Inventory System**: "Item Definition" vs "Physical Instance" pattern.
-- **RPG Battle Game**: OOP inheritance and polymorphism demonstration.
-- **Spotify Auth**: Client Credentials Flow implementation.
+- **Library API:** A fully functional REST API for managing a library system. Located in `library_api_code/`.
+- **E-Commerce:** (In Progress) A full-stack React/Flask e-commerce application.
 
 ---
 
-## Practice Assignments
+## Glossary
 
-Put your knowledge to the test! We have compiled a comprehensive list of coding challenges covering all topics.
+Confused by a term? Check out our [Glossary of Terms](GLOSSARY.md) for definitions of acronyms and technical jargon used in this repository.
 
-- **[Go to Practice Assignments](Practice_Assignments_Compiled.md)**
+---
 
-Each assignment includes:
+## Troubleshooting
 
-- Clear objectives.
-- Context/Scenario.
-- Links to the specific solution file in `Practice_Solutions/`.
+Common issues when setting up the projects:
+
+**1. `ModuleNotFoundError` in Python**
+   - **Cause:** Virtual environment not activated or dependencies not installed.
+   - **Fix:** 
+     ```bash
+     source venv/bin/activate
+     pip install -r requirements.txt
+     ```
+
+**2. Flask App Not Starting**
+   - **Cause:** Port 5000 might be in use.
+   - **Fix:** Run on a different port:
+     ```bash
+     flask run --port=5001
+     ```
+
+**3. Database Connection Errors**
+   - **Cause:** Incorrect URI in `config.py` or database service not running.
+   - **Fix:** Verify your connection string and ensure your SQL server is active.
+
+---
+
+## Versioning
+
+- **v1.3.0**: Comprehensive documentation overhaul (Glossary, Troubleshooting, Diagrams).
+- **v1.2.0**: Added CI/CD and GraphQL guides.
+- **v1.1.0**: Added React and Ecommerce guides.
+- **v1.0.0**: Initial release with Python/Flask/SQL curriculum.
 
 ---
 
 ## Changelog
 
-**2025-12-16 Updates**
+```text
+commit v1.3.0
+Date:   Wed Dec 17 2025
 
-- **Documentation:**
-    - Created `cheatsheets/Bootstrap_Cheat_Sheet.md` covering Grid, Components, and Utilities.
-    - Created `guides/JavaScript_Workshops_Guide.md` with 5 practical mini-projects (DOM, Logic, LocalStorage).
-    - Updated `guides/SQLAlchemy_Relationships_Guide.md` with conceptual diagrams and lazy loading performance charts.
-    - Updated `guides/Python_CLI_Applications_Guide.md` with packaging/distribution instructions (`setup.py`).
-    - Updated `guides/CSS_Layout_Guide.md` with Media Query responsive design patterns.
-    - Updated `cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md` with more array methods (`find`, `reduce`).
-    - Updated `guides/JavaScript_Functions_Guide.md` with practical exercises.
-    - Updated `guides/DOM_Manipulation_Guide.md` with modern selector examples.
+docs: Comprehensive documentation overhaul
 
-- **Curriculum:**
-    - Added "Section 16: Web Interactivity & Frameworks" to `Practice_Assignments_Compiled.md`.
+- Created GLOSSARY.md with key technical definitions
+- Refined README.md with Contribution Guidelines and Troubleshooting
+- Enhanced Flask_REST_API_Development_Guide.md with Mermaid diagrams and curl examples
+- Standardized repository navigation and structure
+```
 
-- **Maintenance:**
-    - Validated internal linking structure across all Markdown files.
-    - Standardized headers and formatting across new guides.
+```text
+commit v1.2.0
+Date:   ???
+
+feat: Add DevOps and GraphQL integration modules
+
+- Created guides/CI_CD_Pipeline_Guide.md (GitHub Actions for Flask/React)
+- Created guides/GraphQL_Integration_Guide.md (Flask + Graphene)
+- Documented environment variable management and secrets
+```
+
+```text
+commit v1.1.0
+Date:   ???
+
+feat: Add Advanced Web and Testing modules
+
+- Created guides/Modern_React_Ecommerce_Guide.md
+- Created guides/Python_API_Testing_Guide.md
+- Enriched API_Authentication_Guide.md with Spotify example
+```
+
+```text
+commit v1.0.1
+Date:   ???
+
+feat: Add Real-Time and Frontend Basics
+- Created guides/Real_Time_Web_Guide.md (WebSockets)
+- Created guides/React_Basics_Guide.md
+```
+
+```text
+commit v1.0.0
+Date:   ???
+
+init: Initialize Core CS and Python curriculum
+
+- Ingested Data Structures, Algorithms, and Python Basics content
+- Created guides/Algorithms_Guide.md
+- Enriched Cheatsheets for Big O and Data Structures
+```
