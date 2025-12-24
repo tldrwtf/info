@@ -166,3 +166,74 @@ The project includes a GitHub Actions workflow (`.github/workflows/ci-cd.yml`) f
 2.  **Deploy:**
     *   Runs only if Build succeeds.
     *   Deploys to Vercel using the Vercel CLI.
+
+---
+
+## 7. Form Validation (Formik & Yup)
+
+E-commerce applications require robust form handling for checkouts and user profiles. This project compares manual validation against industrial libraries.
+
+### The "Old Way" (Manual State)
+Requires managing separate state for values and errors, plus a manual validation function.
+
+```javascript
+const [values, setValues] = useState({ email: '' });
+const [errors, setErrors] = useState({});
+
+const validate = () => {
+  const newErrors = {};
+  if (!values.email.includes('@')) newErrors.email = "Invalid email";
+  return newErrors;
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const validationErrors = validate();
+  if (Object.keys(validationErrors).length === 0) {
+    // Submit data
+  } else {
+    setErrors(validationErrors);
+  }
+};
+```
+
+### The "Industrial Way" (Formik + Yup)
+Using **Formik** for lifecycle and **Yup** for schema-based validation.
+
+```jsx
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object({
+  email: Yup.string().email('Invalid email').required('Required'),
+  password: Yup.string().min(6, 'Too short').required('Required'),
+});
+
+const SignupForm = () => {
+  const formik = useFormik({
+    initialValues: { email: '', password: '' },
+    validationSchema,
+    onSubmit: values => console.log(values),
+  });
+
+  return (
+    <form onSubmit={formik.handleSubmit}>
+      <input 
+        name="email" 
+        onChange={formik.handleChange} 
+        value={formik.values.email} 
+      />
+      {formik.errors.email && <div>{formik.errors.email}</div>}
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+```
+
+---
+
+## See Also
+- **[React Basics Guide](React_Basics_Guide.md)** - Components and State.
+- **[Modern Fullstack Guide](Modern_Fullstack_Guide.md)** - Next.js and Firebase Integration.
+- **[CI/CD Pipeline Guide](CI_CD_Pipeline_Guide.md)** - Deployment automation.
+

@@ -217,6 +217,77 @@ Attributes provide additional information about HTML elements.
 
 ---
 
+## 6. Advanced HTML5 & Semantics
+
+Semantic HTML conveys meaning to both the browser and the developer, improving accessibility and SEO.
+
+### Semantic Structure Elements
+
+| Tag | Description |
+| :--- | :--- |
+| `<header>` | Introductory content, typically containing navigation or logos. |
+| `<nav>` | A section of navigation links. |
+| `<main>` | The dominant content of the `<body>`. Unique to the page. |
+| `<section>` | A thematic grouping of content, usually with a heading. |
+| `<article>` | Independent, self-contained content (e.g., blog post, news item). |
+| `<aside>` | Content tangentially related to the main content (sidebar). |
+| `<footer>` | Footer for a section or page (copyright, contacts). |
+
+```html
+<body>
+  <header>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+  
+  <main>
+    <article>
+      <h2>Blog Post Title</h2>
+      <p>Content goes here...</p>
+    </article>
+    
+    <aside>
+      <h3>Related Links</h3>
+      <ul>...</ul>
+    </aside>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 Company Name</p>
+  </footer>
+</body>
+```
+
+### Advanced Forms
+
+Grouping related form data makes complex forms easier to manage and understand.
+
+*   **`<fieldset>`**: Groups related elements in a form.
+*   **`<legend>`**: Defines a caption for the `<fieldset>`.
+*   **`<datalist>`**: Specifies a list of pre-defined options for an `<input>`.
+
+```html
+<form>
+  <fieldset>
+    <legend>Personal Information</legend>
+    
+    <label for="browser">Choose a browser:</label>
+    <input list="browsers" name="browser" id="browser">
+    
+    <datalist id="browsers">
+      <option value="Chrome">
+      <option value="Firefox">
+      <option value="Safari">
+      <option value="Edge">
+    </datalist>
+  </fieldset>
+</form>
+```
+
+---
+
 ## See Also
 
 -   **[CSS Cheat Sheet](../cheatsheets/CSS_Cheat_Sheet.md)** - Styling your HTML
