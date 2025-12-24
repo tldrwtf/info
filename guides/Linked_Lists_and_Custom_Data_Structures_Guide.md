@@ -54,6 +54,35 @@ class LinkedList:
         while current:
             print(current.data)
             current = current.next
+
+### 2.2. Doubly Linked Lists
+
+Doubly Linked Lists add a second pointer to each node: `prev`. This allows traversal in both directions (forward and backward).
+
+```python
+class DoublyNode:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None # Points to the previous node
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def append(self, data):
+        """Add to end (O(1))"""
+        new_node = DoublyNode(data)
+        if not self.head:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            # Link new node to current tail
+            new_node.prev = self.tail
+            self.tail.next = new_node
+            # Move tail pointer
+            self.tail = new_node
 ```
 
 ### Advanced Operations
@@ -196,22 +225,12 @@ class Queue:
 
 ---
 
-## 6. Real-World Application: Music Playlist
+## 6. Real-World Applications
 
-A playlist is a classic Linked List.
-*   **Next Song**: `current = current.next`
-*   **Previous Song**: Requires a **Doubly Linked List** (nodes have `next` and `prev`).
-
-```python
-class MusicPlaylist:
-    def __init__(self, name):
-        self.songs = LinkedList()
-        self.current_pos = 0
-
-    def play_next(self):
-        # Logic to move pointer forward
-        pass
-```
+*   **Music Playlist:** A classic Singly Linked List (Next song) or Doubly Linked List (Next/Previous).
+*   **Browser History:** A Doubly Linked List allows moving "Back" and "Forward" through visited pages.
+*   **Undo/Redo Functionality:** Stacks (LIFO) are typically used, but a Doubly Linked List can represent the timeline of actions.
+*   **Task Scheduling:** Queues (FIFO) manage the order of processes in an operating system.
 
 ---
 

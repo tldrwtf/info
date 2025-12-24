@@ -9,12 +9,30 @@ This guide covers fundamental algorithms and advanced data structures essential 
 4. [Trees & Binary Search Trees](#trees--binary-search-trees)
 5. [Graph Algorithms](#graph-algorithms)
 
----
+## 1. Core Concepts
 
-## Recursion
+### 1.1. In-Place vs. Out-of-Place Algorithms
 
-Recursion is a technique where a function calls itself to solve a problem by breaking it down into smaller, self-similar sub-problems.
+Understanding how algorithms handle memory is crucial for optimization.
 
+*   **In-Place:** Modifies the original data structure directly in memory. It uses less memory because no copy is created.
+    *   *Example:* Python's `list.sort()` method.
+*   **Out-of-Place:** Creates a copy of the original data, modifies the copy, and returns it. The original data remains unchanged.
+    *   *Example:* Python's built-in `sorted(list)` function.
+
+```python
+nums = [3, 1, 4, 2]
+
+# Out-of-Place (Original nums remains [3, 1, 4, 2])
+new_nums = sorted(nums) 
+
+# In-Place (Original nums becomes [1, 2, 3, 4])
+nums.sort() 
+```
+
+### 1.2. Recursion
+
+Recursion is a technique where a function calls itself...
 ### Core Concepts
 *   **Base Case:** The condition that stops the recursion. Without it, you risk infinite loops and Stack Overflow errors.
 *   **Recursive Step:** The part where the function calls itself with a modified parameter, moving towards the base case.
@@ -109,9 +127,59 @@ nums.sort() # Modifies in-place
 print(nums) # [1, 2, 5, 5, 6, 9]
 ```
 
-### Bubble Sort (Conceptual)
-Repeatedly steps through the list, swaps adjacent elements if they are in the wrong order.
+### Bubble Sort
+Repeatedly steps through the list, swaps adjacent elements if they are in the wrong order. With each pass, the next largest element "bubbles up" to its correct position.
 *   **Time Complexity:** O(n^2) - **Inefficient** for large datasets.
+
+```python
+def bubble_sort(alist):
+    n = len(alist)
+    # Traverse through all array elements
+    for i in range(n):
+        # Last i elements are already in place
+        for j in range(0, n - i - 1):
+            # Swap if the element found is greater than the next
+            if alist[j] > alist[j+1]:
+                alist[j], alist[j+1] = alist[j+1], alist[j]
+    return alist
+```
+
+### Merge Sort
+A "Divide and Conquer" algorithm that recursively splits the list into halves, sorts them, and merges them back together.
+*   **Time Complexity:** O(n log n) - **Very Efficient**.
+
+```python
+def merge_sort(list_to_sort):
+    if len(list_to_sort) > 1:
+        mid = len(list_to_sort) // 2
+        left_half = list_to_sort[:mid]
+        right_half = list_to_sort[mid:]
+
+        # Recursive calls
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        # Merge process
+        i = j = k = 0
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                list_to_sort[k] = left_half[i]
+                i += 1
+            else:
+                list_to_sort[k] = right_half[j]
+                j += 1
+            k += 1
+
+        # Check for any remaining elements
+        while i < len(left_half):
+            list_to_sort[k] = left_half[i]
+            i += 1
+            k += 1
+        while j < len(right_half):
+            list_to_sort[k] = right_half[j]
+            j += 1
+            k += 1
+```
 
 ---
 

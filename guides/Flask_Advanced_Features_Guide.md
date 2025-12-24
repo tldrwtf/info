@@ -712,6 +712,21 @@ def handle_http_exception(e):
         "error": e.name,
         "message": e.description
     }), e.code
+
+### Custom 404 Behavior (SPA Pattern)
+
+In Single Page Applications (SPAs) like React or Vue, you often want the backend to ignore unknown routes and let the frontend handle them.
+
+```python
+from flask import redirect, url_for
+
+@app.errorhandler(404)
+def handle_404(e):
+    """Redirect unknown routes to the home page (SPA entry point)."""
+    # For APIs, you usually return JSON.
+    # For SPAs, you might want to redirect to the frontend route.
+    return redirect(url_for('home'))
+```
 ```
 
 ### Custom Exceptions

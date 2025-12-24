@@ -1,201 +1,159 @@
-# Real-Time Web Guide: WebSockets & Flask-SocketIO
+# Real-Time Web with Flask-SocketIO
 
-This guide covers the fundamental concepts of real-time web communication using WebSockets and demonstrates how to implement them using Python (Flask) and JavaScript.
+This guide covers building real-time applications using Flask-SocketIO, enabling bidirectional communication between clients and servers.
 
-## Table of Contents
-1. [Concepts: HTTP vs WebSockets](#concepts-http-vs-websockets)
-2. [The WebSocket Protocol](#the-websocket-protocol)
-3. [Server-Side Implementation (Flask-SocketIO)](#server-side-implementation-flask-socketio)
-4. [Client-Side Implementation (JavaScript)](#client-side-implementation-javascript)
-5. [Project: Real-Time Chat Room](#project-real-time-chat-room)
+## Quick Reference
 
----
-
-## Concepts: HTTP vs WebSockets
-
-### Traditional HTTP (Request-Response)
-*   **Model:** Client requests -> Server responds.
-*   **Limitation:** The server cannot "push" data to the client. The client must ask for updates (polling), which is inefficient and high-latency.
-*   **Analogy:** sending a letter and waiting for a reply.
-
-### WebSockets (Full-Duplex)
-*   **Model:** A persistent, open connection between client and server.
-*   **Advantage:** Both parties can send data at *any time*. Extremely low latency.
-*   **Analogy:** A phone call.
-
-| Feature | HTTP | WebSocket |
+| Feature | Concept | Implementation |
 | :--- | :--- | :--- |
-| **Connection** | Short-lived (per request) | Persistent (long-lived) |
-| **Communication** | One-way (Client initiates) | Two-way (Bidirectional) |
-| **Overhead** | High (Headers per request) | Low (Initial handshake only) |
-| **Use Cases** | REST APIs, Websites | Chat, Games, Live Feeds |
+| **Protocol** | WebSocket | Persistent TCP connection |
+| **Event** | Custom Signal | `socketio.emit('event_name', data)` |
+| **Namespace** | Channel | `@socketio.on('event', namespace='/chat')` |
+| **Room** | Group | `join_room(room_id)` / `to=room_id` |
 
 ---
 
-## The WebSocket Protocol
-
-1.  **Handshake:** The client sends a standard HTTP request with an `Upgrade: websocket` header. The server responds with `101 Switching Protocols`.
-2.  **Frames:** Data is exchanged in "frames" (binary packets).
-3.  **Events:** The protocol is event-driven (`onopen`, `onmessage`, `onclose`).
-
----
-
-## Server-Side Implementation (Flask-SocketIO)
-
-We use `flask-socketio` to handle WebSocket connections in a Flask app.
+## 1. Setup and Initialization
 
 ### Installation
 ```bash
-pip install flask flask-socketio eventlet
-```
-*Note: `eventlet` or `gevent` is recommended for production performance.*
-
-### Basic Server Structure (`app.py`)
-
-```python
-from flask import Flask, render_template
-from flask_socketio import SocketIO, emit
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
-# cors_allowed_origins='*' allows connections from any domain (dev only)
-socketio = SocketIO(app, cors_allowed_origins='*')
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-# --- Event Handlers ---
-
-@socketio.on('connect')
-def handle_connect():
-    print('Client Connected')
-    # Optional: Send a welcome message just to this client
-    emit('message', {'data': 'Welcome to the server!'})
-
-@socketio.on('disconnect')
-def handle_disconnect():
-    print('Client Disconnected')
-
-@socketio.on('message') # Custom event name 'message'
-def handle_custom_message(data):
-    print(f"Received: {data}")
-    # Broadcast to ALL clients
-    emit('message', data, broadcast=True)
-
-if __name__ == '__main__':
-    # Use socketio.run instead of app.run
-    socketio.run(app, debug=True)
+pip install flask-socketio
 ```
 
----
-
-## Client-Side Implementation (JavaScript)
-
-Modern browsers support the native `WebSocket` API, but the `Socket.IO` client library is preferred when using Flask-SocketIO because it handles reconnection and fallbacks automatically.
-
-### HTML Setup
-Include the Socket.IO client library (CDN):
-```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-```
-
-### JavaScript Logic
-```javascript
-// Connect to the server
-const socket = io();
-
-// Listen for connection
-socket.on('connect', () => {
-    console.log("Connected to server!");
-    socket.emit('message', 'Hello from Client!');
-});
-
-// Listen for incoming messages
-socket.on('message', (data) => {
-    console.log("Server says:", data);
-    // Update UI here
-});
-
-// Send a message
-function sendMessage(text) {
-    socket.emit('message', text);
-}
-```
-
----
-
-## Project: Real-Time Chat Room
-
-This simple project demonstrates a chat interface where multiple users can talk in real-time.
-
-### 1. Backend (`app.py`)
+### Application Factory Pattern
 ```python
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 
-app = Flask(__name__)
-socketio = SocketIO(app, cors_allowed_origins='*')
+socketio = SocketIO()
 
-@app.route("/")
-def home():
-    return render_template('base.html')
+def create_app():
+    app = Flask(__name__)
+    app.config['SECRET_KEY'] = 'secret!'
+    
+    # Initialize SocketIO with the app
+    socketio.init_app(app, cors_allowed_origins="*")
+    
+    # Register blueprints/routes
+    from .routes import main_bp
+    app.register_blueprint(main_bp)
+    
+    return app
 
-@socketio.on('message')
-def handle_message(msg):
-    print(f'Message: {msg}')
-    # Broadcast the message back to all clients so they see it
-    socketio.emit('message', msg)
-
+# In run.py
 if __name__ == '__main__':
+    app = create_app()
     socketio.run(app, debug=True)
 ```
 
-### 2. Frontend (`templates/base.html`)
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>WebSocket Chat</title>
-</head>
-<body>
-    <h1>Chat Room</h1>
-    <div id="chat-box" style="border:1px solid #ccc; height:300px; overflow-y:scroll; padding:10px;">
-        <!-- Messages appear here -->
-    </div>
-    
-    <form id="message-form">
-        <input type="text" id="message-input" autocomplete="off" placeholder="Type a message...">
-        <button type="submit">Send</button>
-    </form>
+---
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-    <script>
-        const socket = io();
-        const chatBox = document.getElementById('chat-box');
-        const form = document.getElementById('message-form');
-        const input = document.getElementById('message-input');
+## 2. Handling Events
 
-        // 1. Handle Form Submit
-        form.onsubmit = (e) => {
-            e.preventDefault();
-            const msg = input.value;
-            if (msg) {
-                socket.emit('message', msg); // Send to server
-                input.value = ''; // Clear input
-            }
-        };
+### Server-Side
+```python
+from flask_socketio import emit
 
-        // 2. Handle Incoming Messages
-        socket.on('message', (msg) => {
-            const p = document.createElement('p');
-            p.textContent = msg;
-            chatBox.appendChild(p);
-            // Auto-scroll to bottom
-            chatBox.scrollTop = chatBox.scrollHeight;
-        });
-    </script>
-</body>
-</html>
+@socketio.on('connect')
+def handle_connect():
+    print('Client connected')
+    emit('server_message', {'data': 'Connected successfully'})
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('Client disconnected')
+
+@socketio.on('chat_message')
+def handle_chat(data):
+    # Broadcast to all connected clients
+    emit('new_message', data, broadcast=True)
 ```
+
+### Client-Side (JavaScript)
+Include the Socket.IO client library:
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+```
+
+```javascript
+const socket = io();
+
+// Listen for connection
+socket.on('connect', () => {
+    console.log("Connected to server");
+    socket.emit('chat_message', { user: "User1", text: "Hello!" });
+});
+
+// Listen for custom events
+socket.on('new_message', (data) => {
+    console.log("New message:", data.text);
+    // Update DOM here
+});
+```
+
+---
+
+## 3. Rooms and Namespaces
+
+### Rooms
+Rooms allow you to target messages to a subset of connected clients (e.g., a specific chat room).
+
+```python
+from flask_socketio import join_room, leave_room
+
+@socketio.on('join')
+def on_join(data):
+    username = data['username']
+    room = data['room']
+    join_room(room)
+    emit('status', {'msg': f'{username} has entered the room.'}, to=room)
+
+@socketio.on('leave')
+def on_leave(data):
+    username = data['username']
+    room = data['room']
+    leave_room(room)
+    emit('status', {'msg': f'{username} has left the room.'}, to=room)
+```
+
+### Sending to a Room
+```python
+@socketio.on('message')
+def handle_room_message(data):
+    room = data['room']
+    emit('message', data, to=room)
+```
+
+---
+
+## 4. Context & Authentication
+
+### Accessing Request Context
+SocketIO events run within a request context, so you can access `request`, `session`, and `current_user` (if using Flask-Login).
+
+```python
+from flask import request
+from flask_login import current_user
+
+@socketio.on('connect')
+def connect_handler():
+    if current_user.is_authenticated:
+        print(f"User {current_user.id} connected")
+    else:
+        return False  # Reject connection
+```
+
+---
+
+## 5. Deployment Considerations
+
+*   **Async Mode:** Flask-SocketIO supports Eventlet, Gevent, and Werkzeug (dev only). Install `eventlet` or `gevent` for production.
+*   **Gunicorn:** Use a worker class compatible with your async mode (e.g., `gunicorn -k eventlet -w 1 module:app`).
+*   **Sticky Sessions:** If using multiple workers/nodes, sticky sessions (IP affinity) are required for the polling transport.
+
+---
+
+## See Also
+
+- **[Flask REST API Development Guide](Flask_REST_API_Development_Guide.md)** - Traditional HTTP APIs.
+- **[Intro to WebSockets Repo](../library_api_code/)** - (Reference implementation details).
