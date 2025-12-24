@@ -475,6 +475,63 @@ Assume the following tables:
 
 ---
 
+## 9. Practice Scenario: Social Network Analysis
+
+**Schema:**
+*   `Users`: `(id, username, created_at)`
+*   `Follows`: `(follower_id, followee_id, created_at)`
+*   `Posts`: `(id, user_id, content, created_at)`
+*   `Comments`: `(id, post_id, user_id, content)`
+
+**Task 1: Follower Count Leaderboard**
+Find the top 5 users with the most followers, including their username and account age.
+
+```sql
+SELECT 
+    U.username,
+    U.created_at,
+    COUNT(F.follower_id) as follower_count
+FROM Users U
+LEFT JOIN Follows F ON U.id = F.followee_id
+GROUP BY U.id
+ORDER BY follower_count DESC
+LIMIT 5;
+```
+
+**Task 2: High Engagement Posts**
+Find posts that have more than 10 comments, showing the post content, author name, and comment count.
+
+```sql
+SELECT 
+    P.content,
+    U.username AS author,
+    COUNT(C.id) AS comment_count
+FROM Posts P
+JOIN Users U ON P.user_id = U.id
+JOIN Comments C ON P.id = C.post_id
+GROUP BY P.id
+HAVING COUNT(C.id) > 10
+ORDER BY comment_count DESC;
+```
+
+**Task 3: Mutual Follows (Self-Join)**
+Find pairs of users who follow each other.
+
+```sql
+SELECT 
+    U1.username AS User_A,
+    U2.username AS User_B
+FROM Follows F1
+JOIN Follows F2 
+    ON F1.follower_id = F2.followee_id 
+    AND F1.followee_id = F2.follower_id
+JOIN Users U1 ON F1.follower_id = U1.id
+JOIN Users U2 ON F1.followee_id = U2.id
+WHERE F1.follower_id < F1.followee_id; -- Avoid duplicates (A-B and B-A)
+```
+
+---
+
 ## See Also
 
 -   **[SQL and SQLAlchemy Cheat Sheet](../cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)** - Basic SQL syntax and ORM concepts.

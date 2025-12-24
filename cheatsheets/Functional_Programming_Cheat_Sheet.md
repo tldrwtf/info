@@ -741,6 +741,64 @@ total = sum(x**2 for x in numbers if x % 2 == 0)
 
 ---
 
+## Practical Data Processing
+
+Functional programming is extremely powerful for "cleaning" and analyzing real-world datasets.
+
+### 1. Data Normalization (Map)
+Standardizing inconsistent user input.
+
+```python
+users = [
+    {'name': 'alice smith', 'email': 'ALICE@Email.com'},
+    {'name': 'BOB jones', 'email': 'bob@REDO.org'}
+]
+
+def clean_user(user):
+    return {
+        'name': user['name'].title(),
+        'email': user['email'].lower(),
+        'username': user['name'].lower().replace(" ", "_")
+    }
+
+cleaned = list(map(clean_user, users))
+# Result: [{'name': 'Alice Smith', 'email': 'alice@email.com', 'username': 'alice_smith'}, ...]
+```
+
+### 2. Transaction Analysis (Filter)
+Finding specific patterns in financial data.
+
+```python
+transactions = [
+    {'id': 1, 'amount': 150.0, 'type': 'credit', 'status': 'valid'},
+    {'id': 2, 'amount': -50.0, 'type': 'debit', 'status': 'invalid'},
+    {'id': 3, 'amount': 500.0, 'type': 'credit', 'status': 'valid'}
+]
+
+# Find valid credits over 100
+high_value = list(filter(
+    lambda t: t['type'] == 'credit' and t['amount'] > 100 and t['status'] == 'valid', 
+    transactions
+))
+```
+
+### 3. Multi-level Sorting (Lambda)
+Sorting by multiple fields (e.g., Category first, then Price).
+
+```python
+products = [
+    {'name': 'Laptop', 'price': 999, 'cat': 'Electronics'},
+    {'name': 'Mouse', 'price': 25, 'cat': 'Electronics'},
+    {'name': 'Shoes', 'price': 80, 'cat': 'Apparel'}
+]
+
+# Sort by Category (asc), then Price (desc)
+# Note: Use negative price for descending numerical sort within lambda
+sorted_products = sorted(products, key=lambda p: (p['cat'], -p['price']))
+```
+
+---
+
 ## See Also
 
 - **[Python Basics Cheat Sheet](Python_Basics_Cheat_Sheet.md)** - Functions and basic concepts
