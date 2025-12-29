@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/hacker-glass.css' | relative_url }}">
+  <!-- Optional: Highlight.js for code syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+</head>
+<body class="layout-{{ page.layout }}">
+
+  <div class="site-wrapper">
+    {% include nav.html %}
+
+    <main>
+      {{ content }}
+    </main>
+
+    <footer class="site-footer glass-panel">
+      <p>tldrwtf/info // SYSTEM_ONLINE</p>
+      <p>
+        <a href="{{ site.github.repository_url }}">View Source</a> | 
+        <a href="{{ site.github.issues_url }}">Report Bug</a>
+      </p>
+    </footer>
+  </div>
+
+</body>
+</html>

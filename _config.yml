@@ -1,12 +1,38 @@
-title: "Full Stack Learning Hub"
-description: "Comprehensive guides, cheat sheets, and code examples for full stack development."
-author:
-  name: "tldrwtf"
-  url: "https://github.com/tldrwtf"
+title: tldrwtf/info
+email: your-email@example.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Curated learning resources, battle-tested cheatsheets, and coding guides. 
+  System Archive v1.0.
 
-# Theme Settings
-remote_theme: pages-themes/hacker@v0.2.0
+# URL SETTINGS
+# 'url' is your main domain
+url: "https://github.com/tldrwtf" 
+# 'baseurl' is the subpath of your repository (required for GH Pages project sites)
+baseurl: "/info" 
 
-# Plugins
+# THEME SETTINGS
+# CRITICAL: Do not use a remote theme. We are using local layouts.
+# theme: minima 
+# remote_theme: pages-themes/minimal@v0.2.0
+
+# BUILD SETTINGS
+markdown: kramdown
 plugins:
-  - jekyll-remote-theme
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# SASS/SCSS CONFIGURATION
+sass:
+  sass_dir: assets/css
+  style: compressed
+
+# EXCLUDES
+# Things you don't want in the final site
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/

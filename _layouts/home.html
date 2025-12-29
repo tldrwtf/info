@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+<div class="glass-panel" style="text-align: center; padding: 4rem 2rem;">
+  <h1 style="border: none; margin-bottom: 0.5rem;">{{ page.title | default: "Knowledge Archive" }}</h1>
+  <p style="color: var(--text-muted); font-size: 1.2rem;">
+    {{ page.description | default: "Select a module to begin compilation." }}
+  </p>
+  {% if page.content %}
+    <div style="margin-top: 2rem; color: var(--text-muted);">
+      {{ content }}
+    </div>
+  {% endif %}
+</div>
+
+<h2 style="font-family: var(--font-mono); color: var(--accent-color); margin-bottom: 1.5rem;">
+  // RECENT_UPLOADS
+</h2>
+
+<div class="dashboard-grid">
+  <!-- Loop through pages with titles, excluding main layouts -->
+  {% for item in site.pages limit:9 %}
+    {% if item.title and item.layout != 'home' and item.layout != 'default' %}
+    <a href="{{ item.url | relative_url }}" class="glass-panel dashboard-item">
+      <div>
+        <h3>{{ item.title }}</h3>
+        <p>
+          {% if item.description %}
+            {{ item.description | truncate: 100 }}
+          {% else %}
+             Click to access file data.
+          {% endif %}
+        </p>
+      </div>
+      <span class="meta-tag">
+        >> OPEN_{{ item.layout | upcase }}
+      </span>
+    </a>
+    {% endif %}
+  {% endfor %}
+</div>

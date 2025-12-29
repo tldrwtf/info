@@ -1,0 +1,13 @@
+<header class="site-header glass-panel">
+  <a href="{{ '/' | relative_url }}" class="logo">
+    ~/tldrwtf/info
+  </a>
+  
+  <nav class="nav-links">
+    <!-- Customize paths based on your actual folder structure -->
+    <a href="{{ '/' | relative_url }}" {% if page.layout == 'home' %}class="active"{% endif %}>Home</a>
+    <a href="{{ '/guides' | relative_url }}" {% if page.layout == 'guide' %}class="active"{% endif %}>Guides</a>
+    <a href="{{ '/cheatsheets' | relative_url }}" {% if page.layout == 'cheatsheet' %}class="active"{% endif %}>Cheatsheets</a>
+    <a href="{{ '/GLOSSARY' | relative_url }}" {% if page.layout == 'glossary' %}class="active"{% endif %}>Glossary</a>
+  </nav>
+</header>
