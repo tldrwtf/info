@@ -1,202 +1,325 @@
 # Glossary of Terms
 
-This glossary defines key terms and acronyms used throughout the Full Stack Learning Hub.
+This glossary defines key terms and acronyms used throughout the Full Stack Learning Hub. Definitions focus on what the term is, why it matters, and how it is used in practice.
 
 ## A
-*   **API (Application Programming Interface):** A set of rules that allows different software applications to communicate with each other.
+
+*   **API (Application Programming Interface):** A set of rules and conventions that lets different software systems communicate. In web apps, an API exposes endpoints that accept HTTP methods and return structured data (often JSON), keeping clients decoupled from server internals.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [API Authentication Guide](guides/API_Authentication_Guide.md), [Building AI Ready APIs Guide](guides/Building_AI_Ready_APIs_Guide.md), [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md), [Library API Code Examples](library_api_code/)
-*   **Asynchronous:** A programming pattern where operations can occur independently of the main program flow, allowing tasks to run in the background (e.g., JavaScript `async/await`).
+*   **Algorithm:** A step-by-step procedure for solving a problem, such as sorting data or searching a list. The right algorithm reduces time and memory use as input sizes grow.
+    *See also:* [Algorithms Guide](guides/Algorithms_Guide.md), [Big O Notation Cheat Sheet](cheatsheets/Big_O_Notation_Cheat_Sheet.md)
+*   **Array:** An ordered collection of items accessed by index. Arrays give fast reads but can be slower to insert or remove in the middle.
+    *See also:* [JavaScript Objects Arrays Cheat Sheet](cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md), [Data Structures Cheat Sheet](cheatsheets/Data_Structures_Cheat_Sheet.md)
+*   **Asynchronous:** A programming pattern where operations run without blocking the main flow. In JavaScript, `async`/`await` and Promises let I/O work happen in the background so UIs stay responsive.
     *See also:* [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md)
-*   **Authentication:** The process of verifying the identity of a user or system.
+*   **Authentication:** Verifying the identity of a user or system, typically using credentials, tokens, or OAuth providers. It answers "who are you?" so the app can safely associate actions with a user.
     *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md), [OAuth2 and Token Management Guide](guides/OAuth2_and_Token_Management_Guide.md), [Auth Utilities](library_api_code/app/util/auth.py)
-*   **Authorization:** The process of determining what an authenticated user is allowed to do.
+*   **Authorization:** Determining what an authenticated user is allowed to do, often via roles, scopes, or ACLs. It answers "what can you do?" and protects resources from overreach.
     *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md), [OAuth2 and Token Management Guide](guides/OAuth2_and_Token_Management_Guide.md)
 
 ## B
-*   **Backend:** The server-side of an application that handles business logic, database operations, and API endpoints.
+
+*   **Backend:** The server-side of an application that handles business logic, data access, and API endpoints. It is responsible for enforcing rules, validating input, and securing data.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [Flask Advanced Features Guide](guides/Flask_Advanced_Features_Guide.md), [Library API Code Examples](library_api_code/)
-*   **Big O Notation:** A mathematical notation used to describe the efficiency of an algorithm, specifically how its runtime or space requirements scale with the size of the input.
+*   **Big O Notation:** A way to describe how runtime or memory grows as input size increases. It helps you compare approaches (for example, O(n) versus O(n^2)) before performance becomes a bottleneck.
     *See also:* [Big O Notation Cheat Sheet](cheatsheets/Big_O_Notation_Cheat_Sheet.md), [Algorithms Guide](guides/Algorithms_Guide.md)
-*   **Blueprint (Flask):** A way to organize a group of related views and other code. Blueprints register operations on an application later when they are registered on the application.
+*   **Blueprint (Flask):** A Flask feature for grouping related routes and logic into reusable modules. Blueprints help large apps stay organized and integrate cleanly with the app factory pattern.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [Library API Flask Patterns Guide](guides/Library-Api_Flask_Patterns_Guide.md), [Blueprint Examples](library_api_code/app/blueprints/)
-*   **Bootstrap:** A popular CSS framework for developing responsive and mobile-first websites.
+*   **Bootstrap:** A popular CSS framework that provides a grid system and ready-made components. It speeds up layout and styling for responsive sites.
     *See also:* [Bootstrap Cheat Sheet](cheatsheets/Bootstrap_Cheat_Sheet.md), [HTML Cheat Sheet](cheatsheets/HTML_Cheat_Sheet.md)
 
 ## C
-*   **Callback:** A function passed as an argument to another function, to be executed at a later time.
+
+*   **Callback:** A function passed into another function to be called later, often after an asynchronous event completes. Callbacks are common in event handling and in older async code.
     *See also:* [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
-*   **CI/CD (Continuous Integration/Continuous Deployment):** A method to frequently deliver apps to customers by introducing automation into the stages of app development.
+*   **Cache (Caching):** Temporary storage for data that is expensive to compute or fetch. Caching speeds up responses but requires careful invalidation to avoid stale data.
+    *See also:* [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
+*   **CI/CD (Continuous Integration/Continuous Deployment):** Automation that builds, tests, and ships code changes quickly and safely. CI runs tests on every change, while CD automates releases.
     *See also:* [CI/CD Pipeline Guide](guides/CI_CD_Pipeline_Guide.md)
-*   **Client-Side:** Code that runs in the user's web browser rather than on a server.
+*   **CLI (Command Line Interface):** A text-based interface used to run commands, pass flags, and automate tasks. CLIs are ideal for scripting and repeatable workflows.
+    *See also:* [Python CLI Applications Guide](guides/Python_CLI_Applications_Guide.md), [Interactive CLI ORM Project Guide](guides/Interactive_CLI_ORM_Project_Guide.md)
+*   **Client-Side:** Code that runs in the user's browser, handling interactivity and local state. It depends on server APIs for data but controls UI behavior.
     *See also:* [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md), [React Basics Guide](guides/React_Basics_Guide.md)
-*   **CORS (Cross-Origin Resource Sharing):** A security mechanism that allows or restricts resources on a web page to be requested from another domain.
+*   **Component:** A reusable unit of UI that encapsulates structure, styling, and behavior. In React, components receive props and return JSX.
+    *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [Modern React Ecommerce Guide](guides/Modern_React_Ecommerce_Guide.md)
+*   **Container:** A lightweight, isolated runtime that packages an app with its dependencies. Containers improve portability and consistency between dev and production.
+    *See also:* [Docker and Containerization Guide](guides/Docker_and_Containerization_Guide.md)
+*   **Cookie:** A small key-value store in the browser that is sent with HTTP requests. Cookies are commonly used for sessions and can be secured with `HttpOnly`, `Secure`, and `SameSite` flags.
+    *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md)
+*   **CORS (Cross-Origin Resource Sharing):** A browser security policy that controls which origins may access a resource. Servers enable CORS with headers to allow trusted domains.
     *See also:* [Flask Advanced Features Guide](guides/Flask_Advanced_Features_Guide.md), [API Authentication Guide](guides/API_Authentication_Guide.md)
-*   **CRUD (Create, Read, Update, Delete):** The four basic operations of persistent storage.
+*   **CRUD (Create, Read, Update, Delete):** The four basic operations for persistent data. Many APIs and database workflows are organized around CRUD patterns.
     *See also:* [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md), [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md)
-*   **CSS (Cascading Style Sheets):** A language used to describe the presentation and styling of HTML documents.
+*   **CSS (Cascading Style Sheets):** The language used to style HTML, including layout, typography, and responsive behavior. CSS works by applying rules that cascade based on specificity.
     *See also:* [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md), [CSS Layout Guide](guides/CSS_Layout_Guide.md), [Bootstrap Cheat Sheet](cheatsheets/Bootstrap_Cheat_Sheet.md)
+*   **CSRF (Cross-Site Request Forgery):** An attack where a malicious site causes a browser to perform unwanted actions on another site. CSRF protection uses tokens and strict cookie settings.
+    *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md)
 
 ## D
-*   **Database:** An organized collection of structured data, typically stored electronically in a computer system.
+
+*   **Data Structure:** A way to organize data for efficient access and modification (arrays, stacks, hash maps, trees). The choice of structure affects speed and memory use.
+    *See also:* [Data Structures Cheat Sheet](cheatsheets/Data_Structures_Cheat_Sheet.md), [Linked Lists and Custom Data Structures Guide](guides/Linked_Lists_and_Custom_Data_Structures_Guide.md)
+*   **Database:** An organized collection of data that supports queries, updates, and transactions. Databases are designed to store data reliably and serve it efficiently.
     *See also:* [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md), [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)
-*   **Debugging:** The process of finding and fixing errors or bugs in code.
+*   **Debugging:** The process of finding, understanding, and fixing errors. Effective debugging relies on logs, breakpoints, test cases, and isolating variables.
     *See also:* [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md), [Error Handling Cheat Sheet](cheatsheets/Error_Handling_Cheat_Sheet.md), [Python API Testing Guide](guides/Python_API_Testing_Guide.md)
-*   **Deployment:** The process of making an application available for use, typically by moving it to a production environment.
+*   **Decorator:** A function wrapper that adds behavior to another function without changing its source code. In Python, decorators use the `@` syntax for logging, auth, or validation.
+    *See also:* [Decorators Cheat Sheet](cheatsheets/Decorators_Cheat_Sheet.md)
+*   **Deployment:** Making an application available to users in a production environment. This includes building artifacts, migrating databases, and configuring infrastructure.
     *See also:* [CI/CD Pipeline Guide](guides/CI_CD_Pipeline_Guide.md), [Docker and Containerization Guide](guides/Docker_and_Containerization_Guide.md), [Library API Production Workflow Guide](guides/Library-Api_Production_Workflow_Guide.md)
-*   **Docker:** A platform for developing, shipping, and running applications in containers.
+*   **Docker:** A platform for building and running containers so applications behave consistently across environments. It packages runtime, dependencies, and configuration together.
     *See also:* [Docker and Containerization Guide](guides/Docker_and_Containerization_Guide.md), [CI/CD Pipeline Guide](guides/CI_CD_Pipeline_Guide.md)
-*   **DOM (Document Object Model):** A programming interface for web documents that represents the page structure as a tree of objects.
+*   **DOM (Document Object Model):** A tree-based representation of an HTML document that scripts can read and modify. DOM manipulation powers dynamic UIs in the browser.
     *See also:* [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [HTML Cheat Sheet](cheatsheets/HTML_Cheat_Sheet.md)
+*   **DDL (Data Definition Language):** The subset of SQL used to define or change database structure, such as `CREATE`, `ALTER`, and `DROP`.
+    *See also:* [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)
 
 ## E
-*   **Endpoint:** A specific URL in an API where a resource can be accessed.
+
+*   **Endpoint:** A specific API URL where a resource can be accessed or an action can be performed. Endpoints usually map to HTTP methods like GET or POST.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [API Authentication Guide](guides/API_Authentication_Guide.md), [Blueprint Examples](library_api_code/app/blueprints/)
-*   **Environment Variables:** Variables stored outside of your code that can change depending on the environment (development, testing, production).
+*   **Environment Variables:** Configuration values stored outside of code so behavior can change per environment. They are commonly used for secrets, URLs, and feature flags.
     *See also:* [Flask Advanced Features Guide](guides/Flask_Advanced_Features_Guide.md), [Library API Production Workflow Guide](guides/Library-Api_Production_Workflow_Guide.md)
-*   **Express:** A minimal and flexible Node.js web application framework.
+*   **Error Handling:** Practices for detecting, responding to, and recovering from errors. Good error handling returns clear messages and avoids exposing sensitive details.
+    *See also:* [Error Handling Cheat Sheet](cheatsheets/Error_Handling_Cheat_Sheet.md), [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md)
+*   **Exception:** An error event that interrupts normal control flow. Well-handled exceptions make failures predictable and easier to debug.
+    *See also:* [Error Handling Cheat Sheet](cheatsheets/Error_Handling_Cheat_Sheet.md)
+*   **Express:** A minimal Node.js web framework used to build APIs and web apps. It provides routing, middleware, and request/response helpers.
     *See also:* [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
 
 ## F
-*   **Framework:** A platform providing a foundation of pre-written code to help build and deploy applications more efficiently.
+
+*   **File I/O (Input/Output):** Reading from or writing to files on disk. File I/O is often asynchronous in modern runtimes to keep apps responsive.
+    *See also:* [File Operations Cheat Sheet](cheatsheets/File_Operations_Cheat_Sheet.md)
+*   **Flexbox:** A one-dimensional CSS layout system for arranging items in a row or column with powerful alignment controls.
+    *See also:* [CSS Layout Guide](guides/CSS_Layout_Guide.md), [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md)
+*   **Framework:** A platform that provides structure and reusable components to speed development. Frameworks standardize patterns so teams can build consistently.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [React Basics Guide](guides/React_Basics_Guide.md), [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
-*   **Frontend:** The client-side of an application that users interact with directly, typically involving HTML, CSS, and JavaScript.
+*   **Frontend:** The client-side of an application that users interact with. It includes HTML for structure, CSS for styling, and JavaScript for interactivity.
     *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [Modern React Ecommerce Guide](guides/Modern_React_Ecommerce_Guide.md), [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md), [Portfolio Web Development Guide](guides/Portfolio_Web_Development_Guide.md), [React Starter Code](react_starter_code/)
-*   **Function:** A reusable block of code designed to perform a specific task.
+*   **Function:** A reusable block of code that performs a specific task. Functions improve readability and allow logic to be tested in isolation.
     *See also:* [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md), [Python Basics Cheat Sheet](cheatsheets/Python_Basics_Cheat_Sheet.md), [Functional Programming Cheat Sheet](cheatsheets/Functional_Programming_Cheat_Sheet.md)
+*   **Functional Programming:** A paradigm focused on pure functions, immutability, and composition. It reduces side effects and can make code easier to test.
+    *See also:* [Functional Programming Cheat Sheet](cheatsheets/Functional_Programming_Cheat_Sheet.md)
+*   **Foreign Key:** A database column that references a primary key in another table. Foreign keys enforce relationships and data integrity.
+    *See also:* [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)
 
 ## G
-*   **Git:** A distributed version control system for tracking changes in source code during software development.
+
+*   **Generator:** A function that yields values lazily as you iterate. Generators are memory-efficient for large or infinite sequences.
+    *See also:* [Iterators and Generators Cheat Sheet](cheatsheets/Iterators_and_Generators_Cheat_Sheet.md)
+*   **Git:** A distributed version control system that tracks changes and enables collaboration. It supports branching and merging so teams can work in parallel.
     *See also:* [CI/CD Pipeline Guide](guides/CI_CD_Pipeline_Guide.md), [Library API Production Workflow Guide](guides/Library-Api_Production_Workflow_Guide.md)
-*   **GitHub:** A web-based platform for version control and collaboration using Git.
+*   **GitHub:** A hosting platform for Git repositories with tools for issues, pull requests, and CI integration. It is commonly used for collaboration and code review.
     *See also:* [CI/CD Pipeline Guide](guides/CI_CD_Pipeline_Guide.md)
-*   **GraphQL:** A query language for APIs and a runtime for executing those queries with existing data.
+*   **GraphQL:** A query language and runtime that lets clients request exactly the data they need. It reduces over-fetching and enables flexible client-driven queries.
+    *See also:* [GraphQL Integration Guide](guides/GraphQL_Integration_Guide.md)
+*   **GraphQL Schema:** The type system that defines available objects, fields, and operations. It acts as a contract between clients and the API.
+    *See also:* [GraphQL Integration Guide](guides/GraphQL_Integration_Guide.md)
+*   **GraphQL Resolver:** A function that supplies the data for a schema field. Resolvers often fetch from databases or other APIs and should be optimized to avoid N+1 queries.
     *See also:* [GraphQL Integration Guide](guides/GraphQL_Integration_Guide.md)
 
 ## H
-*   **HTML (HyperText Markup Language):** The standard markup language for creating web pages.
+
+*   **HTML (HyperText Markup Language):** The standard markup language used to structure web pages. HTML defines content and semantics that CSS and JavaScript build upon.
     *See also:* [HTML Cheat Sheet](cheatsheets/HTML_Cheat_Sheet.md), [Portfolio Web Development Guide](guides/Portfolio_Web_Development_Guide.md), [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md)
-*   **HTTP (HyperText Transfer Protocol):** The protocol used for transmitting data over the web.
+*   **HTTP (HyperText Transfer Protocol):** The protocol used for web communication via requests and responses. It defines methods, headers, and status codes.
     *See also:* [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md), [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md)
-*   **HTTPS (HTTP Secure):** An encrypted version of HTTP that provides secure communication over a network.
+*   **HTTP Method:** An action verb that describes how to handle a resource, such as GET, POST, PUT, PATCH, or DELETE. Method choice affects caching, safety, and idempotency.
+    *See also:* [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md)
+*   **HTTPS (HTTP Secure):** An encrypted version of HTTP that protects data in transit. HTTPS is required for modern authentication flows and secure cookies.
     *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md), [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md)
+*   **Header:** Metadata sent with HTTP requests and responses (for example, `Content-Type` or `Authorization`). Headers control content negotiation, auth, caching, and CORS.
+    *See also:* [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md)
+*   **Hook (React):** A function that lets React components use state or lifecycle behavior (for example, `useState`, `useEffect`). Hooks make logic reusable without classes.
+    *See also:* [React Basics Guide](guides/React_Basics_Guide.md)
 
 ## I
-*   **IDE (Integrated Development Environment):** A software application that provides comprehensive facilities for software development.
-*   **Inheritance:** An object-oriented programming concept where a class derives properties and methods from another class.
+
+*   **IDE (Integrated Development Environment):** A software tool that provides code editing, debugging, and project management in one place. IDEs speed up development with autocomplete and refactors.
+    *See also:* [Python CLI Applications Guide](guides/Python_CLI_Applications_Guide.md)
+*   **Idempotency:** An operation that can be repeated without changing the result after the first success. This matters for safe retries and webhook processing.
+    *See also:* [Building AI Ready APIs Guide](guides/Building_AI_Ready_APIs_Guide.md)
+*   **Inheritance:** An OOP concept where a class derives properties and methods from another class. It promotes reuse but should be balanced with composition.
     *See also:* [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md), [Python Basics Cheat Sheet](cheatsheets/Python_Basics_Cheat_Sheet.md)
-*   **IP Address:** A unique numerical identifier assigned to each device connected to a network.
+*   **Integration Test:** A test that checks multiple components working together (for example, API routes with a real database). It catches issues that unit tests miss.
+    *See also:* [Python API Testing Guide](guides/Python_API_Testing_Guide.md), [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md)
+*   **IP Address:** A unique numeric identifier assigned to devices on a network. It enables routing so devices can find and communicate with each other.
+*   **Iterator:** An object that yields items one at a time, enabling lazy traversal of data. In Python, iterators implement `__iter__` and `__next__`.
+    *See also:* [Iterators and Generators Cheat Sheet](cheatsheets/Iterators_and_Generators_Cheat_Sheet.md)
 
 ## J
-*   **JavaScript:** A high-level programming language commonly used for creating interactive web pages.
+
+*   **JavaScript:** A high-level programming language used for interactive web interfaces and server-side development with Node.js. It supports asynchronous I/O and event-driven design.
     *See also:* [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [JavaScript Objects Arrays Cheat Sheet](cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md), [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md), [JavaScript Workshops Guide](guides/JavaScript_Workshops_Guide.md), [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md)
-*   **JSON (JavaScript Object Notation):** A lightweight data interchange format that's easy for humans to read and write.
+*   **JSON (JavaScript Object Notation):** A lightweight data format that is easy to read and parse. It is the default payload format for most web APIs.
     *See also:* [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md), [JavaScript Objects Arrays Cheat Sheet](cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md)
-*   **JWT (JSON Web Token):** A compact, URL-safe means of representing claims to be transferred between two parties for authentication.
+*   **JSX:** A syntax extension for JavaScript that lets you write UI markup inside code. JSX is compiled into function calls (for example, React elements).
+    *See also:* [React Basics Guide](guides/React_Basics_Guide.md)
+*   **JWT (JSON Web Token):** A compact, URL-safe token used for authentication and claims. JWTs are signed to prevent tampering and often stored in headers or cookies.
     *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md), [OAuth2 and Token Management Guide](guides/OAuth2_and_Token_Management_Guide.md)
 
 ## K
-*   **Kubernetes:** An open-source container orchestration platform for automating deployment, scaling, and management of containerized applications.
+
+*   **Kubernetes:** A container orchestration platform for deploying, scaling, and managing containerized apps. It automates scheduling, networking, and self-healing.
     *See also:* [Docker and Containerization Guide](guides/Docker_and_Containerization_Guide.md), [CI/CD Pipeline Guide](guides/CI_CD_Pipeline_Guide.md)
 
 ## L
-*   **Library:** A collection of pre-written code that developers can use to optimize tasks.
+
+*   **Library:** A collection of reusable code that solves common problems. Libraries give you building blocks without enforcing a full structure like frameworks.
     *See also:* [Standard Library Essentials Cheat Sheet](cheatsheets/Standard_Library_Essentials_Cheat_Sheet.md)
-*   **Linux:** An open-source operating system commonly used for servers and development environments.
+*   **Linked List:** A linear data structure made of nodes that point to the next node. It makes insertions easy but does not support fast random access.
+    *See also:* [Linked Lists and Custom Data Structures Guide](guides/Linked_Lists_and_Custom_Data_Structures_Guide.md), [Data Structures Cheat Sheet](cheatsheets/Data_Structures_Cheat_Sheet.md)
+*   **Linux:** An open-source operating system widely used in servers and development. Many production deployments and containers run on Linux.
     *See also:* [Docker and Containerization Guide](guides/Docker_and_Containerization_Guide.md)
-*   **Load Balancing:** Distributing network traffic across multiple servers to ensure no single server becomes overwhelmed.
+*   **Load Balancing:** Distributing network traffic across multiple servers to improve performance and reliability. It helps avoid single points of failure.
     *See also:* [Library API Advanced Architecture Guide](guides/Library-Api_Advanced_Architecture_Guide.md)
+*   **Logging:** Recording runtime events so systems can be monitored and debugged. Structured logs are easier to search and analyze.
+    *See also:* [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md)
 
 ## M
-*   **Middleware:** Software that acts as a bridge between an operating system or database and applications, often used in web servers to process requests.
+
+*   **Middleware:** Code that runs between a request and a response. It is often used for authentication, logging, and request transformation.
     *See also:* [Flask Advanced Features Guide](guides/Flask_Advanced_Features_Guide.md), [Library API Flask Patterns Guide](guides/Library-Api_Flask_Patterns_Guide.md)
-*   **Migration:** The process of moving data or changing database schema in a controlled way.
+*   **Migration:** A controlled change to database schema or data. Migrations keep environments in sync and provide a history of structural changes.
     *See also:* [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md), [SQL DDL Guide](guides/SQL_DDL_Guide.md), [Library API Production Workflow Guide](guides/Library-Api_Production_Workflow_Guide.md)
-*   **MVC (Model-View-Controller):** A software architectural pattern that separates an application into three interconnected components.
+*   **Mocking:** Replacing real dependencies with fake ones during tests so behavior is predictable. Mocks help isolate code under test.
+    *See also:* [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md), [Python API Testing Guide](guides/Python_API_Testing_Guide.md)
+*   **MVC (Model-View-Controller):** An architecture pattern that separates data (Model), UI (View), and request handling (Controller). It improves separation of concerns.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [Library API Flask Patterns Guide](guides/Library-Api_Flask_Patterns_Guide.md)
 
 ## N
-*   **Node.js:** A JavaScript runtime built on Chrome's V8 JavaScript engine, allowing JavaScript to run on the server-side.
+
+*   **Node.js:** A JavaScript runtime built on the V8 engine that runs JS on the server. It is popular for APIs, tooling, and real-time apps.
     *See also:* [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
-*   **NoSQL:** A category of database management systems that don't use traditional relational database structures.
+*   **NoSQL:** A category of databases that use non-relational models such as documents or key-value stores. They scale well for certain workloads but trade off strict relational features.
     *See also:* [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)
-*   **NPM (Node Package Manager):** The default package manager for Node.js, used to install and manage JavaScript packages.
+*   **NPM (Node Package Manager):** The default package manager for Node.js. It installs and manages dependencies for JavaScript projects.
     *See also:* [React Starter Code](react_starter_code/), [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
 
 ## O
-*   **ORM (Object-Relational Mapping):** A programming technique that converts data between incompatible type systems in object-oriented programming languages.
+
+*   **Object-Oriented Programming (OOP):** A programming paradigm based on objects, classes, encapsulation, and inheritance. OOP models real-world entities and their interactions.
+    *See also:* [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md), [Python Basics Cheat Sheet](cheatsheets/Python_Basics_Cheat_Sheet.md)
+*   **ORM (Object-Relational Mapping):** A technique that maps database tables to objects in code. ORMs improve productivity and safety but require understanding of generated queries.
     *See also:* [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md), [SQLAlchemy Relationships Guide](guides/SQLAlchemy_Relationships_Guide.md), [SQLAlchemy Advanced Patterns Guide](guides/SQLAlchemy_Advanced_Patterns_Guide.md), [Pet Clinic ORM Project Guide](guides/Pet_Clinic_ORM_Project_Guide.md), [ORM Models](library_api_code/app/models.py)
-*   **OAuth:** An open standard for access delegation, commonly used for token-based authentication.
+*   **OAuth:** An open standard for delegated authorization. It lets users grant limited access to their data without sharing passwords.
     *See also:* [OAuth2 and Token Management Guide](guides/OAuth2_and_Token_Management_Guide.md), [API Authentication Guide](guides/API_Authentication_Guide.md)
+*   **OAuth2:** A version of OAuth that defines token-based flows such as Authorization Code and Client Credentials. It uses scopes and refresh tokens to control access.
+    *See also:* [OAuth2 and Token Management Guide](guides/OAuth2_and_Token_Management_Guide.md)
 
 ## P
-*   **Package Manager:** A tool that automates the process of installing, upgrading, configuring, and removing software packages.
+
+*   **Package Manager:** A tool that installs, upgrades, and removes software dependencies. It keeps project versions consistent across environments.
     *See also:* [React Starter Code](react_starter_code/package.json), [Library API Requirements](library_api_code/requirements.txt)
-*   **Promise:** A JavaScript object representing the eventual completion or failure of an asynchronous operation.
+*   **Pagination:** Splitting large result sets into smaller pages for faster responses and better UX. Common patterns are limit/offset and cursor-based pagination.
+    *See also:* [SQL Advanced Queries Guide](guides/SQL_Advanced_Queries_Guide.md)
+*   **Primary Key:** A column (or set of columns) that uniquely identifies each row in a table. Primary keys are used for indexing and relationships.
+    *See also:* [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)
+*   **Props:** Inputs passed into a React component to customize its behavior or rendering. Props are read-only and flow from parent to child.
+    *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [Modern React Ecommerce Guide](guides/Modern_React_Ecommerce_Guide.md)
+*   **Promise:** A JavaScript object representing the eventual completion or failure of an async operation. Promises can be chained and awaited for cleaner async code.
     *See also:* [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
-*   **Python:** A high-level, interpreted programming language known for its readability and versatility.
+*   **Python:** A high-level language known for readability and a huge ecosystem. It is widely used for APIs, automation, data work, and scripting.
     *See also:* [Python Basics Cheat Sheet](cheatsheets/Python_Basics_Cheat_Sheet.md), [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md), [Functional Programming Cheat Sheet](cheatsheets/Functional_Programming_Cheat_Sheet.md), [Standard Library Essentials Cheat Sheet](cheatsheets/Standard_Library_Essentials_Cheat_Sheet.md), [Python CLI Applications Guide](guides/Python_CLI_Applications_Guide.md)
+*   **Proxy:** A server that forwards requests to another service, often adding routing, caching, or authentication. Proxies can simplify architectures and improve security.
+    *See also:* [Library API Advanced Architecture Guide](guides/Library-Api_Advanced_Architecture_Guide.md)
 
 ## Q
-*   **Query:** A request for data or information from a database.
+
+*   **Query:** A request for information from a database or API. Queries often include filters, sorting, and pagination.
     *See also:* [SQL Advanced Queries Guide](guides/SQL_Advanced_Queries_Guide.md), [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md), [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)
-*   **Query String:** Parameters added to the end of a URL to send additional information to the server.
+*   **Query String:** URL parameters appended after `?` and separated by `&`. Query strings are commonly used for filters and pagination.
     *See also:* [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md), [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md)
+*   **Queue:** A First-In, First-Out (FIFO) data structure used to manage tasks in order. Queues are common in background job systems.
+    *See also:* [Data Structures Cheat Sheet](cheatsheets/Data_Structures_Cheat_Sheet.md)
 
 ## R
-*   **React:** A JavaScript library for building user interfaces, particularly single-page applications.
+
+*   **React:** A JavaScript library for building user interfaces using components and state. It enables declarative UI and efficient updates via a virtual DOM.
     *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [Modern React Ecommerce Guide](guides/Modern_React_Ecommerce_Guide.md), [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md), [React Starter Code](react_starter_code/)
-*   **Recursion:** A programming technique where a function calls itself to solve smaller instances of the same problem.
+*   **Recursion:** A technique where a function calls itself to solve smaller subproblems. It is common in tree traversal and divide-and-conquer algorithms.
     *See also:* [Algorithms Guide](guides/Algorithms_Guide.md), [Data Structures Cheat Sheet](cheatsheets/Data_Structures_Cheat_Sheet.md)
-*   **REST (Representational State Transfer):** An architectural style for providing standards between computer systems on the web.
+*   **Regex (Regular Expression):** A pattern language for matching and manipulating strings. Regex is useful for validation, searching, and text extraction.
+    *See also:* [Regex Cheat Sheet](cheatsheets/Regex_Cheat_Sheet.md)
+*   **REST (Representational State Transfer):** An API style based on resources, stateless requests, and HTTP methods. REST APIs are easy to consume and cache when designed well.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [Building AI Ready APIs Guide](guides/Building_AI_Ready_APIs_Guide.md), [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md), [Library API Code Examples](library_api_code/)
-*   **Routing:** The mechanism by which requests are directed to the code that handles them in a web application.
+*   **Routing:** The process of mapping incoming requests to code handlers or pages. Good routing keeps APIs predictable and UIs easy to navigate.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [React Basics Guide](guides/React_Basics_Guide.md), [Blueprint Examples](library_api_code/app/blueprints/)
+*   **Rate Limiting:** Controlling how many requests a client can make in a time window. It protects APIs from abuse and helps keep systems stable.
+    *See also:* [Flask Advanced Features Guide](guides/Flask_Advanced_Features_Guide.md)
+*   **Request/Response:** The core HTTP exchange where a client sends a request and the server returns a response. Understanding this cycle helps with debugging APIs and UI data flows.
+    *See also:* [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md)
 
 ## S
-*   **Schema:** The organization or structure for a database or API response.
+
+*   **Schema:** The structure of data, such as database tables or API response shapes. Schemas act as contracts so systems agree on data formats.
     *See also:* [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md), [SQL DDL Guide](guides/SQL_DDL_Guide.md), [Library API Flask Patterns Guide](guides/Library-Api_Flask_Patterns_Guide.md), [Schema Examples](library_api_code/app/blueprints/)
-*   **Server:** A computer or program that provides functionality or resources to other programs or devices (clients).
+*   **Schema Validation:** Checking data against a defined shape before using it. Validation prevents invalid input from reaching business logic or the database.
+    *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md)
+*   **Server:** A machine or program that provides resources or services to clients. Servers handle requests, run business logic, and talk to databases.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [Library API Production Workflow Guide](guides/Library-Api_Production_Workflow_Guide.md)
-*   **SQL (Structured Query Language):** A programming language used to manage and manipulate relational databases.
+*   **Server-Side:** Code that runs on the server rather than the browser. It can access databases and secrets and is trusted to enforce business rules.
+    *See also:* [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
+*   **Session:** Server- or client-stored data that persists between requests, often used for login state. Sessions are commonly tracked with cookies or tokens.
+    *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md)
+*   **SQL (Structured Query Language):** The standard language for querying and manipulating relational databases. SQL is used for reads, writes, and schema changes.
     *See also:* [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md), [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQL Advanced Queries Guide](guides/SQL_Advanced_Queries_Guide.md)
-*   **SQLAlchemy:** The Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.
+*   **SQLAlchemy:** A Python toolkit and ORM that provides both SQL expression building and object mapping. It balances low-level SQL control with high-level productivity.
     *See also:* [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md), [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md), [SQLAlchemy Relationships Guide](guides/SQLAlchemy_Relationships_Guide.md), [SQLAlchemy Advanced Patterns Guide](guides/SQLAlchemy_Advanced_Patterns_Guide.md), [ORM Models](library_api_code/app/models.py)
-*   **State:** Data that represents the current condition of an application or component.
+*   **State:** Data that represents the current condition of an application or component. Managing state correctly is key to predictable UI behavior.
     *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [Modern React Ecommerce Guide](guides/Modern_React_Ecommerce_Guide.md)
+*   **Static Site Generation (SSG):** Pre-rendering pages at build time so they can be served as static files. SSG is fast and cache-friendly for content that changes infrequently.
+    *See also:* [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
 
 ## T
-*   **TDD (Test-Driven Development):** A software development process relying on the repetition of a very short development cycle: first the developer writes an (initially failing) automated test case that defines a desired improvement or new function, then produces the minimum amount of code to pass that test.
+
+*   **TDD (Test-Driven Development):** A workflow where you write a failing test first, then write code to pass it, then refactor. It encourages small, verifiable steps.
     *See also:* [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md), [Python API Testing Guide](guides/Python_API_Testing_Guide.md), [Test Examples](library_api_code/tests/)
-*   **TypeScript:** A typed superset of JavaScript that compiles to plain JavaScript, adding optional static typing.
+*   **Token:** A credential string that represents authentication or authorization claims. Tokens are often short-lived and sent in headers or cookies.
+    *See also:* [OAuth2 and Token Management Guide](guides/OAuth2_and_Token_Management_Guide.md)
+*   **Transaction:** A group of database operations that must all succeed or all fail. Transactions protect data consistency during complex updates.
+    *See also:* [SQLAlchemy Advanced Patterns Guide](guides/SQLAlchemy_Advanced_Patterns_Guide.md)
+*   **TypeScript:** A typed superset of JavaScript that adds static typing. It helps catch errors early and improves IDE support.
     *See also:* [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
 
 ## U
-*   **UI (User Interface):** The means by which a user interacts with a computer, application, or website.
+
+*   **UI (User Interface):** The visual and interactive layer users see and use. UI design affects clarity, usability, and task completion.
     *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [HTML Cheat Sheet](cheatsheets/HTML_Cheat_Sheet.md), [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md), [Portfolio Web Development Guide](guides/Portfolio_Web_Development_Guide.md)
-*   **URL (Uniform Resource Locator):** The address used to access resources on the internet.
+*   **Unit Test:** A test that verifies a small, isolated unit of code (a function or class). Unit tests are fast and help catch regressions early.
+    *See also:* [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md)
+*   **URL (Uniform Resource Locator):** The address used to access resources on the internet. URLs include a scheme, domain, path, and optional query string.
     *See also:* [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md), [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md)
-*   **UX (User Experience):** The overall experience a user has when interacting with a product or service.
+*   **UX (User Experience):** The overall experience a user has when interacting with a product, including ease, satisfaction, and flow.
     *See also:* [Portfolio Web Development Guide](guides/Portfolio_Web_Development_Guide.md), [Modern React Ecommerce Guide](guides/Modern_React_Ecommerce_Guide.md)
 
 ## V
-*   **Version Control:** A system that records changes to files over time so you can recall specific versions later.
+
+*   **Version Control:** A system that tracks changes to files over time. It enables collaboration, rollback, and safe experimentation.
     *See also:* [CI/CD Pipeline Guide](guides/CI_CD_Pipeline_Guide.md), [Library API Production Workflow Guide](guides/Library-Api_Production_Workflow_Guide.md)
-*   **Virtual Environment (venv):** A self-contained directory tree that contains a Python installation for a particular version of Python, plus a number of additional packages.
+*   **Virtual Environment (venv):** An isolated Python environment that keeps dependencies separate per project. It prevents version conflicts between projects.
     *See also:* [Python Basics Cheat Sheet](cheatsheets/Python_Basics_Cheat_Sheet.md), [Library API Production Workflow Guide](guides/Library-Api_Production_Workflow_Guide.md)
 
 ## W
-*   **Webpack:** A module bundler for JavaScript applications that bundles assets, scripts, images, and styles.
+
+*   **Webhook:** An HTTP callback triggered by an event, such as a payment or form submission. Webhooks let systems notify each other in near real time.
+    *See also:* [Building AI Ready APIs Guide](guides/Building_AI_Ready_APIs_Guide.md)
+*   **Webpack:** A module bundler that builds dependency graphs and produces optimized assets. It handles JavaScript, CSS, images, and more via loaders.
     *See also:* [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md), [React Starter Code](react_starter_code/)
-*   **WebSocket:** A computer communications protocol, providing full-duplex communication channels over a single TCP connection.
+*   **WebSocket:** A protocol that provides full-duplex communication over a single TCP connection. WebSockets enable real-time features like chat and live dashboards.
     *See also:* [Real Time Web Guide](guides/Real_Time_Web_Guide.md)
 
 ## X
-*   **XML (eXtensible Markup Language):** A markup language that defines rules for encoding documents in a format that is both human-readable and machine-readable.
+
+*   **XML (eXtensible Markup Language):** A markup language for structured documents and data exchange. It is more verbose than JSON but still used in legacy systems.
     *See also:* [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md)
 
 ## Y
-*   **YAML (YAML Ain't Markup Language):** A human-readable data serialization language commonly used for configuration files.
+
+*   **YAML (YAML Ain't Markup Language):** A human-readable format for configuration files. YAML is commonly used in CI configs and Docker Compose files.
     *See also:* [Docker and Containerization Guide](guides/Docker_and_Containerization_Guide.md), [CI/CD Pipeline Guide](guides/CI_CD_Pipeline_Guide.md)
 
 ## Z
-*   **Zero-Day:** A software vulnerability that is unknown to those who should be interested in mitigating it.
+
+*   **Zero-Day:** A software vulnerability that is unknown to defenders at the time of discovery. Zero-days are high risk because no patch exists yet.
