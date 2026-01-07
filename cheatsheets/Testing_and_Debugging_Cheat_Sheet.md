@@ -216,6 +216,44 @@ def test_query(database):
     assert len(result) > 0
 ```
 
+### Patterns from `testing` repo (pytest-first)
+- Parametrized cases keep input/output tables close to the test.
+- `xfail` marks known failures so the suite documents gaps without breaking CI.
+- Use fixtures for seed data instead of global state; prefer factory helpers to raw dicts for readability.
+
+```python
+import pytest
+
+@pytest.mark.parametrize(
+    "gross,discount,expected",
+    [
+        (100, 0.10, 90),
+        (50, 0.00, 50),
+        (10, 0.50, 5),
+    ],
+)
+def test_calculate_total(gross, discount, expected):
+    assert calculate_total(gross, discount) == expected
+
+@pytest.mark.xfail(reason="Edge case not implemented: negative totals should clamp to 0")
+def test_negative_total_clamps():
+    assert calculate_total(-5, 0.2) == 0
+
+@pytest.fixture
+def user_payload():
+    """Reusable payload for auth tests."""
+    return {"email": "dev@example.com", "password": "s3cret"}
+
+def test_login_round_trip(api_client, user_payload):
+    api_client.post("/users", json=user_payload)  # seed user
+    res = api_client.post("/login", json=user_payload)
+    assert res.status_code == 200
+    token = res.json()["access_token"]
+    res_me = api_client.get("/users/me", headers={"Authorization": f"Bearer {token}"})
+    assert res_me.status_code == 200
+```
+- Wire these into CI (see `Library-Api` workflow) so auth/cart/order flows fail fast.
+
 ### Fixture Scopes
 
 ```python

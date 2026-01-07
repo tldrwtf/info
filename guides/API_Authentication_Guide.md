@@ -409,6 +409,14 @@ if __name__ == '__main__':
     app.run(debug=True)
 ```
 
+### Spotify PKCE in practice (API-Authentication-Spotify- repo)
+- Use PKCE when you cannot safely store a client secret (SPA/mobile). The repo `API-Authentication-Spotify-` follows this pattern:
+  - Generate `code_verifier` (random 43-128 chars) and `code_challenge` (`base64url(sha256(verifier))`) client-side.
+  - Redirect users to Spotify `authorize` with `response_type=code`, `code_challenge`, `code_challenge_method=S256`, scopes (playlists/profile), and `redirect_uri`.
+  - On callback, exchange `code` for tokens by sending `grant_type=authorization_code`, `code_verifier`, and `redirect_uri` to the token endpoint. No client secret is sent from the browser.
+  - Store `access_token` + `refresh_token`; refresh by POSTing `grant_type=refresh_token` with the original `code_verifier`.
+- Tie-in: map this flow to the playlist/profile calls demonstrated in the repo and log token expiry so the UI can refresh before 401s. See also [OAuth2_and_Token_Management_Guide.md](OAuth2_and_Token_Management_Guide.md) for refresh and rotation tactics.
+
 ### GitHub OAuth Example
 ```python
 import requests

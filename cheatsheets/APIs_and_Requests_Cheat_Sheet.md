@@ -838,6 +838,39 @@ if __name__ == "__main__":
 # We navigate this structure to extract just what we need
 ```
 
+### Fetch to UI (js-api-in-class / Poke-API-Game)
+```javascript
+// Fetch → map → render cards; cache for fast reloads
+const cacheKey = 'pokemon-cache';
+const root = document.querySelector('#cards');
+
+const renderCard = (p) => `
+  <article class="card">
+    <h3>${p.name}</h3>
+    <img src="${p.sprite}" alt="${p.name}">
+    <p>Type: ${p.type}</p>
+  </article>`;
+
+const paint = (list) => {
+  root.innerHTML = list.map(renderCard).join('');
+};
+
+const load = async () => {
+  const cached = localStorage.getItem(cacheKey);
+  if (cached) paint(JSON.parse(cached)); // fast path from cache
+
+  const res = await fetch('/api/pokemon');
+  if (!res.ok) throw new Error('Fetch failed');
+  const data = await res.json();
+  paint(data);
+  localStorage.setItem(cacheKey, JSON.stringify(data)); // refresh cache
+};
+
+load().catch(err => console.error(err));
+```
+- Patterns: cache-first then refresh, pure render helper, single DOM write (`innerHTML`) to avoid many reflows.
+- Applies to the class repos `js-api-in-class` and `Poke-API-Game`; pair with DOM delegation from the DOM guide for interactive controls.
+
 ### RESTful CRUD Operations
 ```python
 import requests

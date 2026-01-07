@@ -224,7 +224,47 @@ It's good practice to remove event listeners if the element or event handler is 
 myBtn.removeEventListener('click', handleClick);
 ```
 
----
+### Patterns from class labs (JS-DOM-Events, JS-DOM-Local-Storage)
+- Event delegation: attach one listener high in the DOM to handle dynamic lists.
+- LocalStorage cache: read cache first, then fetch and refresh the DOM plus cache.
+- Fetch-to-card flow: fetch JSON, map to DOM nodes, and batch-insert with fragments to reduce reflows.
+
+```javascript
+// Event delegation for dynamic lists
+const list = document.querySelector('#todo-list');
+list.addEventListener('click', (event) => {
+  if (event.target.matches('.todo-delete')) {
+    event.target.closest('li').remove();
+  }
+});
+
+// localStorage-backed fetch (Poke-API-Game/js-api-in-class style)
+const cacheKey = 'pokedex-cache-v1';
+const render = (pokemon) => {
+  const card = document.createElement('article');
+  card.className = 'card';
+  card.innerHTML = `<h3>${pokemon.name}</h3><img src="${pokemon.sprite}" alt="">`;
+  return card;
+};
+
+const container = document.querySelector('#cards');
+const bootstrap = async () => {
+  const cached = localStorage.getItem(cacheKey);
+  if (cached) {
+    JSON.parse(cached).forEach(p => container.appendChild(render(p)));
+  }
+  const response = await fetch('/api/pokemon');
+  const data = await response.json();
+  container.replaceChildren(); // clear stale cache render
+  const frag = document.createDocumentFragment(); // minimizes reflow
+  data.forEach(p => frag.appendChild(render(p)));
+  container.appendChild(frag);
+  localStorage.setItem(cacheKey, JSON.stringify(data));
+};
+bootstrap();
+```
+
+--- 
 
 ## 7. DOM Traversal
 
