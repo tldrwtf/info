@@ -6,15 +6,14 @@
 
 1. [Introduction to OAuth2](#introduction-to-oauth2)
 2. [Client Credentials Flow](#client-credentials-flow)
-3. [PKCE Authorization Code Flow](#pkce-authorization-code-flow)
-4. [Base64 Encoding for Credentials](#base64-encoding-for-credentials)
-5. [Token Acquisition and Storage](#token-acquisition-and-storage)
-6. [Bearer Token Usage](#bearer-token-usage)
-7. [Token Lifecycle Management](#token-lifecycle-management)
-8. [Error Handling](#error-handling)
-9. [Security Best Practices](#security-best-practices)
-10. [Complete Implementation Example](#complete-implementation-example)
-11. [Common Pitfalls and Solutions](#common-pitfalls-and-solutions)
+3. [Base64 Encoding for Credentials](#base64-encoding-for-credentials)
+4. [Token Acquisition and Storage](#token-acquisition-and-storage)
+5. [Bearer Token Usage](#bearer-token-usage)
+6. [Token Lifecycle Management](#token-lifecycle-management)
+7. [Error Handling](#error-handling)
+8. [Security Best Practices](#security-best-practices)
+9. [Complete Implementation Example](#complete-implementation-example)
+10. [Common Pitfalls and Solutions](#common-pitfalls-and-solutions)
 
 ---
 
@@ -165,41 +164,6 @@ data = {
     "scope": "user-read-private user-read-email"
 }
 ```
-
-## PKCE Authorization Code Flow
-
-Use PKCE when you cannot keep a client secret (SPAs/mobile). The `API-Authentication-Spotify-` repo demonstrates this flow for Spotify. Core steps:
-
-1. Generate a high-entropy `code_verifier` on the client and derive `code_challenge = base64url(sha256(verifier))` (no padding).
-2. Redirect to the provider's authorize URL with `response_type=code`, `code_challenge`, `code_challenge_method=S256`, requested scopes, and `redirect_uri`.
-3. On callback, send `grant_type=authorization_code`, the `code`, the original `code_verifier`, and `redirect_uri` to the token endpoint. No client secret is sent from the browser.
-4. Persist `access_token` and `refresh_token`; refresh with `grant_type=refresh_token` plus the same `code_verifier` when `expires_in` is near zero.
-
-Minimal generator (JavaScript) for verifier/challenge:
-
-```javascript
-// Generate verifier and challenge for PKCE (client-side)
-const generateVerifier = () =>
-  [...crypto.getRandomValues(new Uint8Array(64))]
-    .map(v => ("0" + v.toString(16)).slice(-2))
-    .join("");
-
-const generateChallenge = async (verifier) => {
-  const data = new TextEncoder().encode(verifier);
-  const digest = await crypto.subtle.digest("SHA-256", data);
-  // base64url encode without padding
-  return btoa(String.fromCharCode(...new Uint8Array(digest)))
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
-};
-```
-
-Operational tips:
-
-- Store tokens securely (session storage for browser, secure storage for mobile) and track expiry timestamps to refresh before a 401 occurs.
-- Keep scopes minimal; for Spotify, profile scopes differ from playlist scopes. Match your redirect URI to the registered app entry exactly.
-- Cross-link with [API_Authentication_Guide.md](API_Authentication_Guide.md) for end-to-end examples and error handling patterns.
 
 ---
 

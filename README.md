@@ -152,15 +152,13 @@ Unlike typical code repositories that just show *what* works, I explain:
 
 ## In-Depth Guides
 
-Explore complex topics with the detailed guides in the `guides/` directory.
+Explore complex topics with the consolidated handbooks in `guides/` (individual legacy guides remain for targeted reference).
 
-- **Backend Architecture:** [Flask REST API Development](guides/Flask_REST_API_Development_Guide.md), [Pet Clinic ORM Walkthrough](guides/Pet_Clinic_ORM_Project_Guide.md), [Flask Advanced Features](guides/Flask_Advanced_Features_Guide.md)
-- **Frontend Development:** [React Basics](guides/React_Basics_Guide.md), [JavaScript Workshops](guides/JavaScript_Workshops_Guide.md), [CSS Layouts](guides/CSS_Layout_Guide.md), [Modern Ecommerce](guides/Modern_React_Ecommerce_Guide.md)
-- **Modern Fullstack:** [Next.js & Firebase Auth](guides/Modern_Fullstack_Guide.md), [GraphQL Integration](guides/GraphQL_Integration_Guide.md)
-- **Real-Time & APIs:** [WebSockets (SocketIO)](guides/Real_Time_Web_Guide.md), [API Auth Guide](guides/API_Authentication_Guide.md)
-- **DevOps & Testing:** [CI/CD Pipelines](guides/CI_CD_Pipeline_Guide.md), [Docker & Containers](guides/Docker_and_Containerization_Guide.md), [Python API Testing](guides/Python_API_Testing_Guide.md)
-- **Data & Algorithms:** [Algorithms Guide](guides/Algorithms_Guide.md), [Advanced SQL](guides/SQL_Advanced_Queries_Guide.md), [Linked Lists & Custom Structures](guides/Linked_Lists_and_Custom_Data_Structures_Guide.md)
-
+- **Backend build/secure/ship:** [Flask API Build, Secure, Ship Handbook](guides/Flask_API_Build_Secure_Ship_Handbook.md) and [SQL & SQLAlchemy Deep Dive](guides/SQL_ORM_Deep_Dive.md)
+- **Frontend foundations:** [Frontend Fundamentals Workbook (JS + DOM + CSS)](guides/Frontend_Fundamentals_Workbook.md)
+- **React to fullstack:** [React to Fullstack Track (React 19 + Next.js 16)](guides/React_to_Fullstack_Track.md)
+- **Python practice path:** [Python Practice to Projects Path](guides/Python_Practice_to_Projects_Path.md)
+- **Still need a specific topic?** Legacy guides like [API Authentication](guides/API_Authentication_Guide.md), [OAuth2](guides/OAuth2_and_Token_Management_Guide.md), and others remain available.
 ---
 
 ## Real-World Examples

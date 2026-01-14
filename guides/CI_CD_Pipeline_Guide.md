@@ -71,13 +71,7 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_*.py'
 ```
 
-### Library-Api workflow (real repo)
-- Location: `.github/workflows/main.yaml` in `Library-Api`; uses `ubuntu-latest`, caches `pip`, installs from `requirements.txt`, and runs `pytest -q`.
-- Why `pytest -q`: faster output and richer fixtures; it still discovers `unittest` while you migrate.
-- Extend it: add Postman/contract tests for the ecommerce flow (register → login → add product → cart → checkout) so API regressions fail CI before deployment.
-- Secret handling: set `SPOTIFY_CLIENT_ID/SECRET` or DB URLs via GitHub Actions secrets and reference them in `env:` blocks instead of committing defaults.
-
---- 
+---
 
 ## 4. Handling Environment Variables
 

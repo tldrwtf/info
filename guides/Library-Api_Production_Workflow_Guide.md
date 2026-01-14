@@ -23,7 +23,6 @@ This guide expands on the code architecture to cover the "Hidden" parts of a pro
 - [4. Performance Case Study: SQL vs Python](#4-performance-case-study-sql-vs-python)
 - [5. Production Resilience Strategy](#5-production-resilience-strategy)
 - [6. Safe Programming, Environment Variables, and Private Properties](#6-safe-programming-environment-variables-and-private-properties)
-- [7. Ecommerce API Blueprint (User Stories to Routes)](#7-ecommerce-api-blueprint-user-stories-to-routes)
 
 ---
 
@@ -253,30 +252,6 @@ Best practices:
 - Inputs: validated and schema-enforced.
 - DB: parameterized queries and least-privilege credentials.
 - Logging: avoid logging secrets and rotate logs/keys regularly.
-
----
-
-## 7. Ecommerce API Blueprint (User Stories to Routes)
-
-The repository includes `user_stories.txt` that outlines a full ecommerce flow. Converting those stories to explicit routes keeps scope clear and makes your client-server contract testable.
-
-### Route sketch per domain
-
-- Users: `POST /users` (register), `POST /login` (issue JWT), `GET /users/me` (profile), `PATCH /users/me` (update), `DELETE /users/me` (delete).
-- Products: `POST /products` (create), `PATCH /products/{id}` (update), `DELETE /products/{id}` (delete), `GET /products` (list/browse), `GET /products/{id}` (detail).
-- Cart: `POST /cart/items` (add item with quantity), `PATCH /cart/items/{id}` (update quantity), `DELETE /cart/items/{id}` (remove item), `GET /cart` (view staging area).
-- Orders: `POST /orders` (checkout and persist items + shipping), `GET /orders/{id}` (order detail), `GET /orders` (user history). Checkout should atomically clear the cart items that were purchased.
-
-### Validation and auth touchpoints
-
-- Use Marshmallow schemas to enforce payloads: user registration, product body, cart item body, order submission with shipping address.
-- Enforce ownership: cart/order routes must use the authenticated user id from JWT. Pair this with the patterns in [Library-Api_Patterns_Summary.md](Library-Api_Patterns_Summary.md) and [API_Authentication_Guide.md](API_Authentication_Guide.md).
-- Inventory/consistency: during checkout, lock or verify product availability before creating order lines; return 409 on conflicts to keep the client honest.
-
-### CI/CD fit
-
-- Add Postman or pytest contract tests that walk the story: register → login → add products → add to cart → checkout → verify cart cleared. Wire them into `.github/workflows/main.yaml` so regressions break the build.
-- Include negative tests (invalid JWT, missing fields, unauthorized product edits) to keep the quality gate meaningful.
 
 ---
 
