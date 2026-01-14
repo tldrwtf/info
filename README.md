@@ -241,7 +241,6 @@ STYLE AND QUALITY:
 - All code examples include comprehensive type hints
 - Detailed docstrings with Args, Returns, Examples sections
 - BAD/GOOD pattern comparisons for anti-patterns
-- No emojis or em-dashes (humanized, educational writing)
 - Cross-references to related cheat sheets and guides
 - Quick Reference Card table for fast lookups
 
