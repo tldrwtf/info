@@ -10,8 +10,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [Algorithms Guide](guides/Algorithms_Guide.md), [Big O Notation Cheat Sheet](cheatsheets/Big_O_Notation_Cheat_Sheet.md)
 *   **Array:** An ordered collection of items accessed by index. Arrays give fast reads but can be slower to insert or remove in the middle.
     *See also:* [JavaScript Objects Arrays Cheat Sheet](cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md), [Data Structures Cheat Sheet](cheatsheets/Data_Structures_Cheat_Sheet.md)
-*   **Asynchronous:** A programming pattern where operations run without blocking the main flow. In JavaScript, `async`/`await` and Promises let I/O work happen in the background so UIs stay responsive.
-    *See also:* [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md)
+*   **Asynchronous:** A programming pattern where operations run without blocking the main flow. In JavaScript, `async`/`await` and Promises let I/O work happen in the background so UIs stay responsive. In Python, asyncio enables concurrent I/O operations for network requests and file operations.
+    *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md)
 *   **Authentication:** Verifying the identity of a user or system, typically using credentials, tokens, or OAuth providers. It answers "who are you?" so the app can safely associate actions with a user.
     *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md), [OAuth2 and Token Management Guide](guides/OAuth2_and_Token_Management_Guide.md), [Auth Utilities](library_api_code/app/util/auth.py)
 *   **Authorization:** Determining what an authenticated user is allowed to do, often via roles, scopes, or ACLs. It answers "what can you do?" and protects resources from overreach.
@@ -38,6 +38,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [CI/CD Pipeline Guide](guides/CI_CD_Pipeline_Guide.md)
 *   **CLI (Command Line Interface):** A text-based interface used to run commands, pass flags, and automate tasks. CLIs are ideal for scripting and repeatable workflows.
     *See also:* [Python CLI Applications Guide](guides/Python_CLI_Applications_Guide.md), [Interactive CLI ORM Project Guide](guides/Interactive_CLI_ORM_Project_Guide.md)
+*   **Context Manager:** A Python construct that ensures resource cleanup happens automatically, even when exceptions occur. Context managers use the `with` statement and implement `__enter__` and `__exit__` methods, making them essential for file I/O, database connections, and locks.
+    *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [Error Handling Cheat Sheet](cheatsheets/Error_Handling_Cheat_Sheet.md)
 *   **Client-Side:** Code that runs in the user's browser, handling interactivity and local state. It depends on server APIs for data but controls UI behavior.
     *See also:* [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md), [React Basics Guide](guides/React_Basics_Guide.md)
 *   **Component:** A reusable unit of UI that encapsulates structure, styling, and behavior. In React, components receive props and return JSX.
@@ -59,12 +61,16 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 *   **Data Structure:** A way to organize data for efficient access and modification (arrays, stacks, hash maps, trees). The choice of structure affects speed and memory use.
     *See also:* [Data Structures Cheat Sheet](cheatsheets/Data_Structures_Cheat_Sheet.md), [Linked Lists and Custom Data Structures Guide](guides/Linked_Lists_and_Custom_Data_Structures_Guide.md)
+*   **Dataclass:** A Python decorator that automatically generates special methods like `__init__`, `__repr__`, and `__eq__` for classes that primarily store data. Dataclasses reduce boilerplate and make data containers cleaner and more maintainable.
+    *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md)
 *   **Database:** An organized collection of data that supports queries, updates, and transactions. Databases are designed to store data reliably and serve it efficiently.
     *See also:* [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md), [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)
 *   **Debugging:** The process of finding, understanding, and fixing errors. Effective debugging relies on logs, breakpoints, test cases, and isolating variables.
     *See also:* [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md), [Error Handling Cheat Sheet](cheatsheets/Error_Handling_Cheat_Sheet.md), [Python API Testing Guide](guides/Python_API_Testing_Guide.md)
-*   **Decorator:** A function wrapper that adds behavior to another function without changing its source code. In Python, decorators use the `@` syntax for logging, auth, or validation.
-    *See also:* [Decorators Cheat Sheet](cheatsheets/Decorators_Cheat_Sheet.md)
+*   **Decorator:** A function wrapper that adds behavior to another function without changing its source code. In Python, decorators use the `@` syntax for logging, auth, or validation. Advanced patterns include decorators with arguments, class-based decorators, and decorator stacking.
+    *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [Decorators Cheat Sheet](cheatsheets/Decorators_Cheat_Sheet.md)
+*   **Descriptor:** A Python object that controls attribute access through `__get__`, `__set__`, and `__delete__` methods. Descriptors power properties, methods, and validation patterns by intercepting attribute access at the class level.
+    *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md)
 *   **Deployment:** Making an application available to users in a production environment. This includes building artifacts, migrating databases, and configuring infrastructure.
     *See also:* [CI/CD Pipeline Guide](guides/CI_CD_Pipeline_Guide.md), [Docker and Containerization Guide](guides/Docker_and_Containerization_Guide.md), [Library API Production Workflow Guide](guides/Library-Api_Production_Workflow_Guide.md)
 *   **Docker:** A platform for building and running containers so applications behave consistently across environments. It packages runtime, dependencies, and configuration together.
@@ -106,8 +112,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 ## G
 
-*   **Generator:** A function that yields values lazily as you iterate. Generators are memory-efficient for large or infinite sequences.
-    *See also:* [Iterators and Generators Cheat Sheet](cheatsheets/Iterators_and_Generators_Cheat_Sheet.md)
+*   **Generator:** A function that yields values lazily as you iterate. Generators are memory-efficient for large or infinite sequences. Advanced patterns include generator pipelines, `yield from` for delegation, and generator expressions for concise iteration.
+    *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [Iterators and Generators Cheat Sheet](cheatsheets/Iterators_and_Generators_Cheat_Sheet.md)
 *   **Git:** A distributed version control system that tracks changes and enables collaboration. It supports branching and merging so teams can work in parallel.
     *See also:* [CI/CD Pipeline Guide](guides/CI_CD_Pipeline_Guide.md), [Library API Production Workflow Guide](guides/Library-Api_Production_Workflow_Guide.md)
 *   **GitHub:** A hosting platform for Git repositories with tools for issues, pull requests, and CI integration. It is commonly used for collaboration and code review.
@@ -145,8 +151,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 *   **Integration Test:** A test that checks multiple components working together (for example, API routes with a real database). It catches issues that unit tests miss.
     *See also:* [Python API Testing Guide](guides/Python_API_Testing_Guide.md), [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md)
 *   **IP Address:** A unique numeric identifier assigned to devices on a network. It enables routing so devices can find and communicate with each other.
-*   **Iterator:** An object that yields items one at a time, enabling lazy traversal of data. In Python, iterators implement `__iter__` and `__next__`.
-    *See also:* [Iterators and Generators Cheat Sheet](cheatsheets/Iterators_and_Generators_Cheat_Sheet.md)
+*   **Iterator:** An object that yields items one at a time, enabling lazy traversal of data. In Python, iterators implement `__iter__` and `__next__`. Iterators provide memory-efficient iteration over large datasets and enable custom iteration protocols.
+    *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [Iterators and Generators Cheat Sheet](cheatsheets/Iterators_and_Generators_Cheat_Sheet.md)
 
 ## J
 
@@ -179,6 +185,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 ## M
 
+*   **Metaclass:** A class of a class that controls class creation and behavior. Metaclasses are used in framework development for patterns like singleton enforcement, automatic registration, and class validation. They implement `__new__` and `__call__` to customize how classes are constructed.
+    *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md)
 *   **Middleware:** Code that runs between a request and a response. It is often used for authentication, logging, and request transformation.
     *See also:* [Flask Advanced Features Guide](guides/Flask_Advanced_Features_Guide.md), [Library API Flask Patterns Guide](guides/Library-Api_Flask_Patterns_Guide.md)
 *   **Migration:** A controlled change to database schema or data. Migrations keep environments in sync and provide a history of structural changes.
@@ -220,8 +228,10 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [Modern React Ecommerce Guide](guides/Modern_React_Ecommerce_Guide.md)
 *   **Promise:** A JavaScript object representing the eventual completion or failure of an async operation. Promises can be chained and awaited for cleaner async code.
     *See also:* [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
-*   **Python:** A high-level language known for readability and a huge ecosystem. It is widely used for APIs, automation, data work, and scripting.
-    *See also:* [Python Basics Cheat Sheet](cheatsheets/Python_Basics_Cheat_Sheet.md), [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md), [Functional Programming Cheat Sheet](cheatsheets/Functional_Programming_Cheat_Sheet.md), [Standard Library Essentials Cheat Sheet](cheatsheets/Standard_Library_Essentials_Cheat_Sheet.md), [Python CLI Applications Guide](guides/Python_CLI_Applications_Guide.md)
+*   **Protocol (Python):** A structural subtyping mechanism that enables duck typing with type safety. Protocols define interfaces through method signatures without requiring explicit inheritance, making them ideal for type hints in flexible APIs.
+    *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md)
+*   **Python:** A high-level language known for readability and a huge ecosystem. It is widely used for APIs, automation, data work, and scripting. Advanced features include metaclasses, descriptors, context managers, and async/await patterns.
+    *See also:* [Python Basics Cheat Sheet](cheatsheets/Python_Basics_Cheat_Sheet.md), [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md), [Functional Programming Cheat Sheet](cheatsheets/Functional_Programming_Cheat_Sheet.md), [Standard Library Essentials Cheat Sheet](cheatsheets/Standard_Library_Essentials_Cheat_Sheet.md), [Python CLI Applications Guide](guides/Python_CLI_Applications_Guide.md)
 *   **Proxy:** A server that forwards requests to another service, often adding routing, caching, or authentication. Proxies can simplify architectures and improve security.
     *See also:* [Library API Advanced Architecture Guide](guides/Library-Api_Advanced_Architecture_Guide.md)
 
@@ -276,6 +286,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 *   **TDD (Test-Driven Development):** A workflow where you write a failing test first, then write code to pass it, then refactor. It encourages small, verifiable steps.
     *See also:* [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md), [Python API Testing Guide](guides/Python_API_Testing_Guide.md), [Test Examples](library_api_code/tests/)
+*   **Type Hints:** Python annotations that specify expected types for function parameters and return values. Type hints enable static type checkers like mypy to catch type errors before runtime, improve IDE autocomplete, and serve as documentation.
+    *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [Python Basics Cheat Sheet](cheatsheets/Python_Basics_Cheat_Sheet.md)
 *   **Token:** A credential string that represents authentication or authorization claims. Tokens are often short-lived and sent in headers or cookies.
     *See also:* [OAuth2 and Token Management Guide](guides/OAuth2_and_Token_Management_Guide.md)
 *   **Transaction:** A group of database operations that must all succeed or all fail. Transactions protect data consistency during complex updates.

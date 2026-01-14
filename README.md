@@ -1,11 +1,11 @@
 # Full Stack Learning - Complete Cheat Sheet Collection
 
 [![Maintenance](https://img.shields.io/badge/Maintained%20by-tldrwtf-blue)](https://github.com/tldrwtf)
-[![Version](https://img.shields.io/badge/Version-1.9.0-orange.svg)](#changelog)
+[![Version](https://img.shields.io/badge/Version-1.10.0-orange.svg)](#changelog)
 
 If you find this resource useful, please consider leaving a star!
 
-**NEW in v1.9.0**: Enhanced glossary with comprehensive cross-references linking every term to relevant guides, cheat sheets, and code examples throughout the repository!
+**NEW in v1.10.0**: Added comprehensive Advanced Python Cheat Sheet covering metaclasses, descriptors, context managers, generators, decorators, async/await, type hints, protocols, and performance patterns!
 
 ---
 
@@ -136,6 +136,7 @@ Unlike typical code repositories that just show *what* works, I explain:
 | Topic               | Description                        | Link                                     |
 | ------------------- | ---------------------------------- | ---------------------------------------- |
 | **Python Basics**   | Variables, Loops, Functions        | [Link](cheatsheets/Python_Basics_Cheat_Sheet.md)   |
+| **Advanced Python** | Metaclasses, Descriptors, Context Managers | [Link](cheatsheets/Advanced_Python_Cheat_Sheet.md) |
 | **Data Structures** | Lists, Dicts, Trees, Graphs        | [Link](cheatsheets/Data_Structures_Cheat_Sheet.md) |
 | **OOP**             | Classes, Inheritance, Polymorphism | [Link](cheatsheets/OOP_Cheat_Sheet.md)             |
 | **Regex**           | Pattern Matching & Validation      | [Link](cheatsheets/Regex_Cheat_Sheet.md)           |
@@ -207,6 +208,7 @@ Common issues when setting up the projects:
 
 ## Versioning
 
+- **v1.10.0**: Added comprehensive Advanced Python Cheat Sheet covering metaclasses, descriptors, context managers, async/await, and more.
 - **v1.9.0**: Enhanced glossary with comprehensive cross-reference links to guides, cheat sheets, and code examples.
 - **v1.8.0**: Comprehensive code documentation expansion with heavily commented examples across all materials.
 - **v1.7.0**: Added Containerization (Docker) and functional React Reference Implementation.
@@ -218,6 +220,41 @@ Common issues when setting up the projects:
 ---
 
 ## Changelog
+
+```text
+commit v1.10.0
+Date:   2026-01-14
+feat: Advanced Python Cheat Sheet and glossary enhancements
+
+CHEAT SHEETS:
+- Created Advanced_Python_Cheat_Sheet.md covering advanced Python patterns
+  * Metaclasses and Type System (singleton pattern, class registration, enforcement)
+  * Descriptors and Properties (validation, type checking, lazy loading)
+  * Context Managers (resource management, timing, state management)
+  * Advanced Generators and Iterators (pipelines, yield from, memory efficiency)
+  * Advanced Decorators (retry logic, memoization, class-based decorators)
+  * Async/Await and Concurrency (async functions, gather, async context managers)
+  * Type Hints and Protocols (generics, structural subtyping, dataclasses, ABCs)
+  * Performance Patterns (slots, local variable optimization, generator efficiency)
+
+STYLE AND QUALITY:
+- All code examples include comprehensive type hints
+- Detailed docstrings with Args, Returns, Examples sections
+- BAD/GOOD pattern comparisons for anti-patterns
+- No emojis or em-dashes (humanized, educational writing)
+- Cross-references to related cheat sheets and guides
+- Quick Reference Card table for fast lookups
+
+GLOSSARY:
+- Updated with cross-references to Advanced Python Cheat Sheet
+- Added entries for metaclass, descriptor, context manager, protocol, dataclass
+- Enhanced existing Python-related terms with links to advanced concepts
+
+DOCUMENTATION:
+- Updated README.md with Advanced Python entry in cheat sheets table
+- Updated version badge to v1.10.0
+- Added v1.10.0 to versioning and changelog sections
+```
 
 ```text
 commit v1.9.0
