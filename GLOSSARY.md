@@ -4,6 +4,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 ## A
 
+*   **Align-items:** A CSS Flexbox property that controls alignment along the cross axis (perpendicular to flex-direction). Values include flex-start, flex-end, center, stretch, and baseline for positioning items within their flex lines.
+    *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md), [CSS Layout Guide](guides/CSS_Layout_Guide.md)
 *   **API (Application Programming Interface):** A set of rules and conventions that lets different software systems communicate. In web apps, an API exposes endpoints that accept HTTP methods and return structured data (often JSON), keeping clients decoupled from server internals.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [API Authentication Guide](guides/API_Authentication_Guide.md), [Building AI Ready APIs Guide](guides/Building_AI_Ready_APIs_Guide.md), [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md), [Library API Code Examples](library_api_code/)
 *   **Algorithm:** A step-by-step procedure for solving a problem, such as sorting data or searching a list. The right algorithm reduces time and memory use as input sizes grow.
@@ -11,7 +13,11 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 *   **Array:** An ordered collection of items accessed by index. Arrays give fast reads but can be slower to insert or remove in the middle.
     *See also:* [JavaScript Objects Arrays Cheat Sheet](cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md), [Data Structures Cheat Sheet](cheatsheets/Data_Structures_Cheat_Sheet.md)
 *   **Asynchronous:** A programming pattern where operations run without blocking the main flow. In JavaScript, `async`/`await` and Promises let I/O work happen in the background so UIs stay responsive. In Python, asyncio enables concurrent I/O operations for network requests and file operations.
-    *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md)
+    *See also:* [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md), [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
+*   **Auto-fill:** A CSS Grid keyword used with repeat() that creates as many tracks as will fit in the container. When combined with minmax(), it creates responsive grids that automatically add or remove columns based on available space.
+    *See also:* [CSS Grid Advanced Guide](guides/CSS_Grid_Advanced_Guide.md)
+*   **Auto-fit:** A CSS Grid keyword similar to auto-fill, but collapses empty tracks to zero width. This makes remaining items expand to fill the container, ideal for galleries where item count varies.
+    *See also:* [CSS Grid Advanced Guide](guides/CSS_Grid_Advanced_Guide.md)
 *   **Authentication:** Verifying the identity of a user or system, typically using credentials, tokens, or OAuth providers. It answers "who are you?" so the app can safely associate actions with a user.
     *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md), [OAuth2 and Token Management Guide](guides/OAuth2_and_Token_Management_Guide.md), [Auth Utilities](library_api_code/app/util/auth.py)
 *   **Authorization:** Determining what an authenticated user is allowed to do, often via roles, scopes, or ACLs. It answers "what can you do?" and protects resources from overreach.
@@ -50,15 +56,21 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md)
 *   **CORS (Cross-Origin Resource Sharing):** A browser security policy that controls which origins may access a resource. Servers enable CORS with headers to allow trusted domains.
     *See also:* [Flask Advanced Features Guide](guides/Flask_Advanced_Features_Guide.md), [API Authentication Guide](guides/API_Authentication_Guide.md)
+*   **Cross Axis:** In CSS Flexbox, the axis perpendicular to the main axis. When flex-direction is row, the cross axis runs vertically. Controlled by align-items, align-self, and align-content properties.
+    *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
 *   **CRUD (Create, Read, Update, Delete):** The four basic operations for persistent data. Many APIs and database workflows are organized around CRUD patterns.
     *See also:* [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md), [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md)
 *   **CSS (Cascading Style Sheets):** The language used to style HTML, including layout, typography, and responsive behavior. CSS works by applying rules that cascade based on specificity.
     *See also:* [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md), [CSS Layout Guide](guides/CSS_Layout_Guide.md), [Bootstrap Cheat Sheet](cheatsheets/Bootstrap_Cheat_Sheet.md)
+*   **Closest():** A JavaScript DOM method that searches up the element tree to find the nearest ancestor matching a selector. Essential for event delegation patterns when you need to find parent elements regardless of which child element was clicked.
+    *See also:* [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
 *   **CSRF (Cross-Site Request Forgery):** An attack where a malicious site causes a browser to perform unwanted actions on another site. CSRF protection uses tokens and strict cookie settings.
     *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md)
 
 ## D
 
+*   **Data Attributes:** HTML attributes prefixed with `data-` that store custom metadata on elements. Accessed via the `dataset` property in JavaScript, they enable clean separation between presentation and behavior, and are essential for event delegation patterns.
+    *See also:* [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md)
 *   **Data Structure:** A way to organize data for efficient access and modification (arrays, stacks, hash maps, trees). The choice of structure affects speed and memory use.
     *See also:* [Data Structures Cheat Sheet](cheatsheets/Data_Structures_Cheat_Sheet.md), [Linked Lists and Custom Data Structures Guide](guides/Linked_Lists_and_Custom_Data_Structures_Guide.md)
 *   **Dataclass:** A Python decorator that automatically generates special methods like `__init__`, `__repr__`, and `__eq__` for classes that primarily store data. Dataclasses reduce boilerplate and make data containers cleaner and more maintainable.
@@ -86,6 +98,10 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [API Authentication Guide](guides/API_Authentication_Guide.md), [Blueprint Examples](library_api_code/app/blueprints/)
 *   **Environment Variables:** Configuration values stored outside of code so behavior can change per environment. They are commonly used for secrets, URLs, and feature flags.
     *See also:* [Flask Advanced Features Guide](guides/Flask_Advanced_Features_Guide.md), [Library API Production Workflow Guide](guides/Library-Api_Production_Workflow_Guide.md)
+*   **Event Bubbling:** The process where events propagate up the DOM tree from the target element to its ancestors. Event bubbling enables event delegation by allowing parent elements to handle events from their children.
+    *See also:* [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
+*   **Event Delegation:** A pattern that leverages event bubbling to handle events at a parent element rather than attaching individual listeners to each child. Improves performance with many similar elements and automatically works with dynamically added elements.
+    *See also:* [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
 *   **Error Handling:** Practices for detecting, responding to, and recovering from errors. Good error handling returns clear messages and avoids exposing sensitive details.
     *See also:* [Error Handling Cheat Sheet](cheatsheets/Error_Handling_Cheat_Sheet.md), [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md)
 *   **Exception:** An error event that interrupts normal control flow. Well-handled exceptions make failures predictable and easier to debug.
@@ -97,8 +113,16 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 *   **File I/O (Input/Output):** Reading from or writing to files on disk. File I/O is often asynchronous in modern runtimes to keep apps responsive.
     *See also:* [File Operations Cheat Sheet](cheatsheets/File_Operations_Cheat_Sheet.md)
-*   **Flexbox:** A one-dimensional CSS layout system for arranging items in a row or column with powerful alignment controls.
-    *See also:* [CSS Layout Guide](guides/CSS_Layout_Guide.md), [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md)
+*   **Fetch API:** A modern JavaScript interface for making HTTP requests that returns Promises. It replaces older XMLHttpRequest with cleaner syntax, supports async/await, and provides fine-grained control over requests and responses.
+    *See also:* [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md), [JavaScript Async Programming Guide](guides/JavaScript_Async_Programming_Guide.md)
+*   **Flex-direction:** A CSS Flexbox property that defines the main axis direction. Values are row (default, left to right), row-reverse, column (top to bottom), and column-reverse, determining how flex items flow in the container.
+    *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
+*   **Flex-wrap:** A CSS Flexbox property that controls whether flex items stay on one line or wrap to multiple lines. Values are nowrap (default, items shrink to fit), wrap (items wrap to new lines), and wrap-reverse (wrap in reverse order).
+    *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
+*   **Flexbox:** A one-dimensional CSS layout system for arranging items in a row or column. Flexbox uses main axis (justify-content) and cross axis (align-items) alignment, flex-direction to control flow, and flex-wrap for responsive layouts.
+    *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md), [CSS Layout Guide](guides/CSS_Layout_Guide.md), [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md)
+*   **Fr Unit:** A fractional unit in CSS Grid that distributes available space proportionally. 1fr takes one fraction of remaining space, making grids flexible and responsive without fixed pixel widths.
+    *See also:* [CSS Grid Advanced Guide](guides/CSS_Grid_Advanced_Guide.md)
 *   **Framework:** A platform that provides structure and reusable components to speed development. Frameworks standardize patterns so teams can build consistently.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [React Basics Guide](guides/React_Basics_Guide.md), [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
 *   **Frontend:** The client-side of an application that users interact with. It includes HTML for structure, CSS for styling, and JavaScript for interactivity.
@@ -112,6 +136,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 ## G
 
+*   **Gap:** A CSS property that sets spacing between flex or grid items. Replaces margin-based spacing with cleaner syntax. Works in both Flexbox (gap between items) and Grid (row-gap and column-gap combined).
+    *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md), [CSS Grid Advanced Guide](guides/CSS_Grid_Advanced_Guide.md)
 *   **Generator:** A function that yields values lazily as you iterate. Generators are memory-efficient for large or infinite sequences. Advanced patterns include generator pipelines, `yield from` for delegation, and generator expressions for concise iteration.
     *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [Iterators and Generators Cheat Sheet](cheatsheets/Iterators_and_Generators_Cheat_Sheet.md)
 *   **Git:** A distributed version control system that tracks changes and enables collaboration. It supports branching and merging so teams can work in parallel.
@@ -124,6 +150,10 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [GraphQL Integration Guide](guides/GraphQL_Integration_Guide.md)
 *   **GraphQL Resolver:** A function that supplies the data for a schema field. Resolvers often fetch from databases or other APIs and should be optimized to avoid N+1 queries.
     *See also:* [GraphQL Integration Guide](guides/GraphQL_Integration_Guide.md)
+*   **Grid (CSS Grid):** A two-dimensional CSS layout system for creating complex layouts with rows and columns. Grid uses template areas for semantic layouts, supports item spanning, and enables responsive reconfiguration with media queries.
+    *See also:* [CSS Grid Advanced Guide](guides/CSS_Grid_Advanced_Guide.md), [CSS Layout Guide](guides/CSS_Layout_Guide.md)
+*   **Grid Template Areas:** A CSS Grid feature that lets you name regions of a layout and visualize structure in code. Template areas make layouts semantic and easy to reconfigure responsively.
+    *See also:* [CSS Grid Advanced Guide](guides/CSS_Grid_Advanced_Guide.md)
 
 ## H
 
@@ -160,8 +190,14 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [JavaScript Objects Arrays Cheat Sheet](cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md), [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md), [JavaScript Workshops Guide](guides/JavaScript_Workshops_Guide.md), [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md)
 *   **JSON (JavaScript Object Notation):** A lightweight data format that is easy to read and parse. It is the default payload format for most web APIs.
     *See also:* [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md), [JavaScript Objects Arrays Cheat Sheet](cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md)
+*   **JSON.stringify():** A JavaScript method that converts objects to JSON strings for storage or transmission. Required when saving objects to LocalStorage or sending data in HTTP requests.
+    *See also:* [JavaScript LocalStorage Guide](guides/JavaScript_LocalStorage_Guide.md), [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md)
+*   **JSON.parse():** A JavaScript method that converts JSON strings back into objects. Used to deserialize data from LocalStorage or API responses.
+    *See also:* [JavaScript LocalStorage Guide](guides/JavaScript_LocalStorage_Guide.md), [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md)
 *   **JSX:** A syntax extension for JavaScript that lets you write UI markup inside code. JSX is compiled into function calls (for example, React elements).
     *See also:* [React Basics Guide](guides/React_Basics_Guide.md)
+*   **Justify-content:** A CSS Flexbox property that controls alignment along the main axis. Values include flex-start, flex-end, center, space-between (equal space between items), space-around (equal space around items), and space-evenly (equal space between and around items).
+    *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md), [CSS Layout Guide](guides/CSS_Layout_Guide.md)
 *   **JWT (JSON Web Token):** A compact, URL-safe token used for authentication and claims. JWTs are signed to prevent tampering and often stored in headers or cookies.
     *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md), [OAuth2 and Token Management Guide](guides/OAuth2_and_Token_Management_Guide.md)
 
@@ -180,11 +216,15 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [Docker and Containerization Guide](guides/Docker_and_Containerization_Guide.md)
 *   **Load Balancing:** Distributing network traffic across multiple servers to improve performance and reliability. It helps avoid single points of failure.
     *See also:* [Library API Advanced Architecture Guide](guides/Library-Api_Advanced_Architecture_Guide.md)
+*   **LocalStorage:** A browser API for storing key-value pairs persistently across page reloads and browser sessions. Data is stored as strings (use JSON.stringify/parse for objects), has 5-10MB limit per domain, and persists until explicitly deleted.
+    *See also:* [JavaScript LocalStorage Guide](guides/JavaScript_LocalStorage_Guide.md), [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md)
 *   **Logging:** Recording runtime events so systems can be monitored and debugged. Structured logs are easier to search and analyze.
     *See also:* [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md)
 
 ## M
 
+*   **Main Axis:** In CSS Flexbox, the primary axis along which flex items flow. When flex-direction is row, the main axis runs horizontally. Controlled by justify-content and affected by flex-direction changes.
+    *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
 *   **Metaclass:** A class of a class that controls class creation and behavior. Metaclasses are used in framework development for patterns like singleton enforcement, automatic registration, and class validation. They implement `__new__` and `__call__` to customize how classes are constructed.
     *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md)
 *   **Middleware:** Code that runs between a request and a response. It is often used for authentication, logging, and request transformation.
@@ -198,6 +238,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 ## N
 
+*   **Network Error:** A failure to reach the server or establish a connection, distinct from HTTP errors. Fetch API throws network errors for connection failures, DNS issues, or CORS blocks, which must be caught separately from HTTP status code errors.
+    *See also:* [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md)
 *   **Node.js:** A JavaScript runtime built on the V8 engine that runs JS on the server. It is popular for APIs, tooling, and real-time apps.
     *See also:* [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
 *   **NoSQL:** A category of databases that use non-relational models such as documents or key-value stores. They scale well for certain workloads but trade off strict relational features.
@@ -252,6 +294,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [Algorithms Guide](guides/Algorithms_Guide.md), [Data Structures Cheat Sheet](cheatsheets/Data_Structures_Cheat_Sheet.md)
 *   **Regex (Regular Expression):** A pattern language for matching and manipulating strings. Regex is useful for validation, searching, and text extraction.
     *See also:* [Regex Cheat Sheet](cheatsheets/Regex_Cheat_Sheet.md)
+*   **Response (HTTP):** An object returned by Fetch API representing the server's reply. Contains status code, headers, and methods like .json() and .text() to parse the body. The response must be parsed (double-await pattern) before accessing data.
+    *See also:* [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md), [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md)
 *   **REST (Representational State Transfer):** An API style based on resources, stateless requests, and HTTP methods. REST APIs are easy to consume and cache when designed well.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [Building AI Ready APIs Guide](guides/Building_AI_Ready_APIs_Guide.md), [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md), [Library API Code Examples](library_api_code/)
 *   **Routing:** The process of mapping incoming requests to code handlers or pages. Good routing keeps APIs predictable and UIs easy to navigate.
@@ -269,18 +313,28 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md)
 *   **Server:** A machine or program that provides resources or services to clients. Servers handle requests, run business logic, and talk to databases.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [Library API Production Workflow Guide](guides/Library-Api_Production_Workflow_Guide.md)
+*   **Serialization:** Converting data structures or objects into a format that can be stored or transmitted, then reconstructed later. In JavaScript, JSON.stringify() serializes objects to strings for LocalStorage or HTTP requests.
+    *See also:* [JavaScript LocalStorage Guide](guides/JavaScript_LocalStorage_Guide.md), [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md)
 *   **Server-Side:** Code that runs on the server rather than the browser. It can access databases and secrets and is trusted to enforce business rules.
     *See also:* [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
 *   **Session:** Server- or client-stored data that persists between requests, often used for login state. Sessions are commonly tracked with cookies or tokens.
     *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md)
+*   **SetTimeout/SetInterval:** JavaScript timing functions for delayed or repeated code execution. setTimeout runs code once after a delay, setInterval runs code repeatedly at fixed intervals. Both return timer IDs that can be cleared with clearTimeout/clearInterval.
+    *See also:* [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md)
+*   **SessionStorage:** A browser API for storing key-value pairs that persist only until the browser tab is closed. Unlike LocalStorage, data is cleared when the tab/window closes, making it suitable for temporary session data.
+    *See also:* [JavaScript LocalStorage Guide](guides/JavaScript_LocalStorage_Guide.md)
 *   **SQL (Structured Query Language):** The standard language for querying and manipulating relational databases. SQL is used for reads, writes, and schema changes.
     *See also:* [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md), [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQL Advanced Queries Guide](guides/SQL_Advanced_Queries_Guide.md)
 *   **SQLAlchemy:** A Python toolkit and ORM that provides both SQL expression building and object mapping. It balances low-level SQL control with high-level productivity.
     *See also:* [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md), [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md), [SQLAlchemy Relationships Guide](guides/SQLAlchemy_Relationships_Guide.md), [SQLAlchemy Advanced Patterns Guide](guides/SQLAlchemy_Advanced_Patterns_Guide.md), [ORM Models](library_api_code/app/models.py)
+*   **Stacking Context:** A three-dimensional conceptualization of HTML elements along an imaginary z-axis. Created by positioned elements with z-index values, transforms, opacity, or other CSS properties. Parent-child relationships within stacking contexts affect element layering.
+    *See also:* [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md), [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
 *   **State:** Data that represents the current condition of an application or component. Managing state correctly is key to predictable UI behavior.
     *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [Modern React Ecommerce Guide](guides/Modern_React_Ecommerce_Guide.md)
 *   **Static Site Generation (SSG):** Pre-rendering pages at build time so they can be served as static files. SSG is fast and cache-friendly for content that changes infrequently.
     *See also:* [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
+*   **Status Code:** A three-digit number in HTTP responses indicating the result of a request. Common codes include 200 (success), 404 (not found), 500 (server error). Fetch API does not throw errors for non-2xx status codes, requiring manual checking with response.ok.
+    *See also:* [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md), [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md)
 
 ## T
 
@@ -334,4 +388,6 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 ## Z
 
+*   **Z-index:** A CSS property that controls the stacking order of positioned elements (non-static position values). Higher z-index values appear in front of lower values. Only works on positioned elements and is affected by stacking contexts.
+    *See also:* [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md), [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
 *   **Zero-Day:** A software vulnerability that is unknown to defenders at the time of discovery. Zero-days are high risk because no patch exists yet.

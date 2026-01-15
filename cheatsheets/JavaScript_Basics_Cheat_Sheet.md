@@ -295,9 +295,158 @@ if (null === undefined) {
 
 ---
 
+## DOM Manipulation Essentials
+
+### Data Attributes (dataset)
+HTML data attributes (prefixed with `data-`) allow you to store custom data on elements. Access them via the `dataset` property.
+
+**HTML:**
+```html
+<button data-id="123" data-action="delete" data-user-name="Alice">Delete</button>
+<div data-product-id="456" data-price="29.99">Product Card</div>
+```
+
+**JavaScript:**
+```javascript
+const button = document.querySelector('button');
+
+// Reading data attributes
+console.log(button.dataset.id);        // "123"
+console.log(button.dataset.action);    // "delete"
+console.log(button.dataset.userName);  // "Alice" (note: camelCase conversion)
+
+// Setting data attributes
+button.dataset.confirmed = "true";
+
+// Example: Event delegation with dataset
+document.addEventListener('click', (event) => {
+  if (event.target.dataset.action === "delete") {
+    const userId = event.target.dataset.id;
+    console.log(`Deleting user ${userId}`);
+  }
+});
+```
+
+**Why use data attributes:**
+- Store metadata without affecting visible content
+- Avoid cluttering JavaScript with configuration
+- Enable event delegation patterns
+- CSS can select elements by data attributes: `[data-status="active"]`
+
+### Element.remove()
+Modern method to remove an element from the DOM.
+
+```javascript
+// Old way (still works)
+const oldElement = document.getElementById('old-item');
+oldElement.parentNode.removeChild(oldElement);
+
+// Modern way (preferred)
+const element = document.getElementById('my-item');
+element.remove();  // Much cleaner!
+
+// Example: Remove all items with a specific class
+document.querySelectorAll('.temporary').forEach(el => el.remove());
+
+// Example: Remove based on condition
+const items = document.querySelectorAll('.todo-item');
+items.forEach(item => {
+  if (item.dataset.completed === "true") {
+    item.remove();
+  }
+});
+```
+
+### setTimeout and setInterval
+Execute code after a delay or repeatedly.
+
+**setTimeout** - Run code once after a delay:
+```javascript
+// Basic syntax: setTimeout(callback, delayInMilliseconds)
+
+setTimeout(() => {
+  console.log("This runs after 2 seconds");
+}, 2000);
+
+// With parameters
+function greet(name, greeting) {
+  console.log(`${greeting}, ${name}!`);
+}
+
+setTimeout(greet, 1000, "Alice", "Hello"); // "Hello, Alice!" after 1 second
+
+// Canceling a timeout
+const timeoutId = setTimeout(() => {
+  console.log("This might not run");
+}, 5000);
+
+clearTimeout(timeoutId); // Cancels the timeout
+
+// Real-world example: Delayed notification
+function showNotification(message) {
+  const notification = document.createElement('div');
+  notification.className = 'notification';
+  notification.textContent = message;
+  document.body.appendChild(notification);
+
+  // Auto-remove after 3 seconds
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
+}
+```
+
+**setInterval** - Run code repeatedly:
+```javascript
+// Runs every second
+const intervalId = setInterval(() => {
+  console.log("Tick");
+}, 1000);
+
+// Stop after 5 seconds
+setTimeout(() => {
+  clearInterval(intervalId);
+  console.log("Timer stopped");
+}, 5000);
+
+// Real-world example: Auto-save draft
+let draftContent = "";
+
+const autoSave = setInterval(() => {
+  if (draftContent.length > 0) {
+    localStorage.setItem('draft', draftContent);
+    console.log("Draft saved");
+  }
+}, 30000); // Save every 30 seconds
+
+// Update content when user types
+document.getElementById('editor').addEventListener('input', (e) => {
+  draftContent = e.target.value;
+});
+```
+
+**Common Pitfalls:**
+```javascript
+// BAD: Delay is in milliseconds, not seconds!
+setTimeout(myFunction, 5); // Runs after 5 milliseconds, not 5 seconds
+
+// BAD: Don't forget to clear intervals
+setInterval(() => console.log("Forever!"), 1000); // Memory leak!
+
+// GOOD: Always store and clear when done
+const timerId = setInterval(updateUI, 1000);
+// Later, when component unmounts or condition met:
+clearInterval(timerId);
+```
+
+---
+
 ## See Also
 
-- **[JavaScript Functions Guide](../guides/JavaScript_Functions_Guide.md)** - Functions, callbacks, and scope
-- **[JavaScript Objects and Arrays Cheat Sheet](JavaScript_Objects_Arrays_Cheat_Sheet.md)** - Detailed guide on Objects and Arrays
-- **[HTML Cheat Sheet](../cheatsheets/HTML_Cheat_Sheet.md)** - Structure of web pages
-- **[CSS Cheat Sheet](../cheatsheets/CSS_Cheat_Sheet.md)** - Styling web pages
+- [JavaScript Functions Guide](../guides/JavaScript_Functions_Guide.md) - Functions, callbacks, and scope in depth
+- [JavaScript Objects and Arrays Cheat Sheet](JavaScript_Objects_Arrays_Cheat_Sheet.md) - Detailed guide on Objects and Arrays
+- [DOM Manipulation Guide](../guides/DOM_Manipulation_Guide.md) - Practical DOM manipulation patterns and event handling
+- [JavaScript Async Programming Guide](../guides/JavaScript_Async_Programming_Guide.md) - Async/await and Promise patterns
+- [JavaScript LocalStorage Guide](../guides/JavaScript_LocalStorage_Guide.md) - Persisting data across sessions
+- [HTML Cheat Sheet](HTML_Cheat_Sheet.md) - Structure of web pages
+- [CSS Cheat Sheet](CSS_Cheat_Sheet.md) - Styling web pages

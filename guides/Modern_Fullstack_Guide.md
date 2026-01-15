@@ -424,7 +424,7 @@ export default function LikeButton({ postId }: { postId: string }) {
 
   return (
     <button onClick={handleLike}>
-      {liked ? '❤️' : '🤍'} Like
+      {liked ? 'Unlike' : 'Like'}
     </button>
   );
 }

@@ -171,39 +171,157 @@ h2 {
 
 ## 6. Positioning
 
-The `position` property is used to control the exact position of an element on a web page.
+The `position` property controls the exact position of an element on a web page. Use `top`, `right`, `bottom`, `left` to adjust position.
 
-*   `static`: (Default) Elements are positioned according to the normal flow of the document. `top`, `right`, `bottom`, `left` properties have no effect.
-*   `relative`: The element is positioned relative to its normal position. `top`, `right`, `bottom`, `left` will nudge it from its original spot.
-*   `absolute`: The element is positioned relative to its *nearest positioned ancestor* (an ancestor with a position other than `static`). If no such ancestor exists, it's positioned relative to the initial containing block (usually the `<html>` element).
-*   `fixed`: The element is positioned relative to the viewport, meaning it always stays in the same place even if the page is scrolled.
-*   `sticky`: Toggles between `relative` and `fixed` depending on the scroll position. It's positioned relative until a certain scroll position is met, then it becomes fixed.
+### Position Values
+
+| Value      | Behavior | Use Case |
+| :--------- | :------- | :------- |
+| `static`   | Normal document flow (default) | Most elements |
+| `relative` | Relative to its normal position | Small adjustments |
+| `absolute` | Relative to nearest positioned ancestor | Tooltips, dropdowns, overlays |
+| `fixed`    | Relative to viewport (stays on scroll) | Headers, floating buttons |
+| `sticky`   | Relative until scroll threshold, then fixed | Sticky navigation |
+
+**Complete Examples:**
 
 ```css
-.container {
-    position: relative; /* Establishes a positioning context for absolute children */
-    width: 300px;
-    height: 200px;
-    border: 1px solid grey;
+/* 1. Static (default) - no positioning needed */
+.normal-element {
+    position: static; /* Can be omitted, this is default */
 }
 
-.absolute-box {
+/* 2. Relative - nudge from normal position */
+.badge {
+    position: relative;
+    top: -5px; /* Moves up 5px from normal position */
+    left: 10px; /* Moves right 10px */
+}
+
+/* 3. Absolute - position relative to nearest positioned parent */
+.container {
+    position: relative; /* Creates positioning context */
+    width: 300px;
+    height: 200px;
+}
+
+.tooltip {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: lightblue;
-    padding: 10px;
+    top: 0;    /* 0px from top of .container */
+    right: 0;  /* 0px from right of .container */
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+}
+
+/* 4. Fixed - stays in viewport */
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #007bff;
 }
 
 .fixed-header {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     background-color: #333;
     color: white;
-    text-align: center;
-    padding: 10px 0;
-    z-index: 1000; /* Controls stacking order */
+    z-index: 1000;
+}
+
+/* 5. Sticky - relative until scroll threshold */
+nav {
+    position: sticky;
+    top: 0; /* Becomes fixed when scrolled to top */
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+```
+
+### Z-Index and Stacking Context
+
+The `z-index` property controls the stacking order of overlapping positioned elements. Higher values appear in front of lower values.
+
+**Key Rules:**
+- Only works on positioned elements (`position` other than `static`)
+- Default z-index is `auto` (same as 0)
+- Parent-child relationships affect stacking
+
+**Stacking Order (lowest to highest):**
+1. Background and borders of root element
+2. Non-positioned elements (in source order)
+3. Positioned elements with negative z-index
+4. Positioned elements with z-index: auto or 0
+5. Positioned elements with positive z-index
+
+```css
+/* Example: Modal overlay pattern */
+.page-content {
+    position: relative;
+    z-index: 1; /* Normal content layer */
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Above page content */
+}
+
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    z-index: 1001; /* Above backdrop */
+}
+
+.dropdown-menu {
+    position: absolute;
+    z-index: 100; /* Above normal content, below modals */
+}
+
+/* Common z-index scale */
+.base-layer { z-index: 1; }
+.dropdowns { z-index: 100; }
+.sticky-header { z-index: 500; }
+.modals { z-index: 1000; }
+.tooltips { z-index: 2000; }
+```
+
+**Common Pitfall:**
+```css
+/* BAD: Parent with lower z-index blocks child */
+.parent {
+    position: relative;
+    z-index: 1;
+}
+
+.child {
+    position: absolute;
+    z-index: 9999; /* Still behind elements with z-index: 2 outside parent! */
+}
+
+/* GOOD: Keep stacking contexts in mind */
+.parent {
+    position: relative;
+    /* No z-index = doesn't create stacking context */
+}
+
+.child {
+    position: absolute;
+    z-index: 9999; /* Now works as expected */
 }
 ```
 
@@ -218,11 +336,95 @@ The `display` property is one of the most important CSS properties. It controls 
 *   `flex`: Turns an element into a flex container, enabling Flexbox layout for its direct children.
 *   `grid`: Turns an element into a grid container, enabling Grid layout for its direct children.
 
+## 8. Alignment Properties Quick Reference
+
+Modern CSS provides powerful alignment properties for Flexbox and Grid layouts. Here's a quick reference for the most common ones.
+
+### Flexbox Alignment
+
+| Property | Applies To | What It Controls | Common Values |
+| :------- | :--------- | :--------------- | :------------ |
+| `justify-content` | Flex container | Main axis alignment (horizontal for row) | `flex-start`, `center`, `flex-end`, `space-between`, `space-around`, `space-evenly` |
+| `align-items` | Flex container | Cross axis alignment (vertical for row) | `stretch`, `flex-start`, `center`, `flex-end`, `baseline` |
+| `align-self` | Flex item | Override align-items for single item | Same as `align-items` |
+| `flex-direction` | Flex container | Main axis direction | `row`, `row-reverse`, `column`, `column-reverse` |
+| `gap` | Flex container | Space between items | Any length value (e.g., `10px`, `1rem`) |
+
+**Common Flexbox Patterns:**
+
+```css
+/* Perfect centering */
+.center-box {
+    display: flex;
+    justify-content: center; /* Horizontal center */
+    align-items: center;     /* Vertical center */
+    height: 100vh;
+}
+
+/* Space between items */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Items at edges, space in middle */
+    align-items: center;
+}
+
+/* Column layout */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between items */
+}
+```
+
+### Grid Alignment
+
+| Property | Applies To | What It Controls | Common Values |
+| :------- | :--------- | :--------------- | :------------ |
+| `justify-items` | Grid container | Horizontal alignment of items within their cells | `start`, `center`, `end`, `stretch` |
+| `align-items` | Grid container | Vertical alignment of items within their cells | `start`, `center`, `end`, `stretch` |
+| `justify-content` | Grid container | Horizontal alignment of entire grid | `start`, `center`, `end`, `space-between`, `space-around`, `space-evenly` |
+| `align-content` | Grid container | Vertical alignment of entire grid | `start`, `center`, `end`, `space-between`, `space-around`, `space-evenly` |
+| `justify-self` | Grid item | Override justify-items for single item | Same as `justify-items` |
+| `align-self` | Grid item | Override align-items for single item | Same as `align-items` |
+| `gap` | Grid container | Space between grid cells | Any length value or two values for row/column gap |
+
+**Common Grid Patterns:**
+
+```css
+/* Centered grid items */
+.grid-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-items: center; /* Center items horizontally in cells */
+    align-items: center;   /* Center items vertically in cells */
+}
+
+/* Center entire grid on page */
+.container {
+    display: grid;
+    grid-template-columns: 300px 300px;
+    justify-content: center; /* Center the grid horizontally */
+    align-content: center;   /* Center the grid vertically */
+    height: 100vh;
+    gap: 10px;
+}
+```
+
+**Key Differences:**
+
+- **Flexbox** is one-dimensional (row OR column). `justify-content` controls the main axis, `align-items` controls the cross axis.
+- **Grid** is two-dimensional (rows AND columns). `justify-*` always controls horizontal, `align-*` always controls vertical.
+- For detailed examples and responsive layouts, see the dedicated guides below.
+
 ---
 
 ## See Also
 
--   **[HTML Cheat Sheet](../cheatsheets/HTML_Cheat_Sheet.md)** - HTML5 structure and tags
--   **[CSS Layout Guide](../guides/CSS_Layout_Guide.md)** - In-depth guide to Flexbox and Grid
--   **[JavaScript Basics Cheat Sheet](../cheatsheets/JavaScript_Basics_Cheat_Sheet.md)** - Adding interactivity
--   **[Portfolio Web Development Guide](../guides/Portfolio_Web_Development_Guide.md)** - Practical guide to building a web portfolio
+- [HTML Cheat Sheet](HTML_Cheat_Sheet.md) - HTML5 structure and semantic tags
+- [CSS Layout Guide](../guides/CSS_Layout_Guide.md) - In-depth guide to Flexbox and Grid
+- [CSS Flexbox Complete Guide](../guides/CSS_Flexbox_Complete_Guide.md) - Complete flexbox patterns and real-world examples
+- [CSS Grid Advanced Guide](../guides/CSS_Grid_Advanced_Guide.md) - Advanced grid layouts with template areas
+- [Bootstrap Cheat Sheet](Bootstrap_Cheat_Sheet.md) - CSS framework with pre-built components
+- [JavaScript Basics Cheat Sheet](JavaScript_Basics_Cheat_Sheet.md) - Adding interactivity
+- [Portfolio Web Development Guide](../guides/Portfolio_Web_Development_Guide.md) - Practical guide to building a web portfolio

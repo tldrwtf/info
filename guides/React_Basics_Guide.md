@@ -263,6 +263,86 @@ export function useAuth() {
 }
 ```
 
+**Context with LocalStorage Persistence:**
+
+Persist context state across page reloads using localStorage.
+
+```jsx
+// contexts/ThemeContext.jsx
+import { createContext, useContext, useState, useEffect } from 'react';
+
+const ThemeContext = createContext();
+
+export function ThemeProvider({ children }) {
+  // Initialize theme from localStorage or default to 'light'
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const saved = localStorage.getItem('theme');
+    return saved === 'dark'; // Returns true if dark, false otherwise
+  });
+
+  // Persist theme to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode(prev => !prev);
+  };
+
+  const value = {
+    isDarkMode,
+    toggleTheme,
+    theme: isDarkMode ? 'dark' : 'light'
+  };
+
+  return (
+    <ThemeContext.Provider value={value}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+// Custom hook for consuming theme context
+export function useTheme() {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error('useTheme must be used within ThemeProvider');
+  }
+  return context;
+}
+
+// Usage in components:
+function App() {
+  return (
+    <ThemeProvider>
+      <Header />
+      <Content />
+    </ThemeProvider>
+  );
+}
+
+function Header() {
+  const { isDarkMode, toggleTheme } = useTheme();
+
+  return (
+    <header style={{
+      backgroundColor: isDarkMode ? '#333' : '#fff',
+      color: isDarkMode ? '#fff' : '#000'
+    }}>
+      <button onClick={toggleTheme}>
+        Toggle to {isDarkMode ? 'Light' : 'Dark'} Mode
+      </button>
+    </header>
+  );
+}
+```
+
+**Why This Pattern Works:**
+- useState initializer runs only once on mount, reading from localStorage
+- useEffect syncs to localStorage on every theme change
+- Custom hook provides clean API and error checking
+- Theme persists across browser sessions and page reloads
+
 ---
 
 ### useMemo - Memoize Expensive Calculations
@@ -613,12 +693,12 @@ function App() {
 ### Avoid Inline Functions and Objects
 
 ```jsx
-// ❌ BAD: Creates new function on every render
+// BAD: Creates new function on every render
 function BadExample() {
   return <ChildComponent onClick={() => console.log('clicked')} />;
 }
 
-// ✅ GOOD: Function reference is stable
+// GOOD: Function reference is stable
 function GoodExample() {
   const handleClick = useCallback(() => {
     console.log('clicked');
@@ -627,10 +707,10 @@ function GoodExample() {
   return <ChildComponent onClick={handleClick} />;
 }
 
-// ❌ BAD: Creates new object on every render
+// BAD: Creates new object on every render
 <ChildComponent style={{ color: 'red' }} />
 
-// ✅ GOOD: Define outside component or use useMemo
+// GOOD: Define outside component or use useMemo
 const style = { color: 'red' };
 <ChildComponent style={style} />
 ```
@@ -700,19 +780,19 @@ function App() {
 ### 1. Mutating State Directly
 
 ```jsx
-// ❌ WRONG: Mutating state array
+// WRONG: Mutating state array
 const [items, setItems] = useState([1, 2, 3]);
 items.push(4); // DON'T DO THIS!
 setItems(items);
 
-// ✅ CORRECT: Create new array
+// CORRECT: Create new array
 setItems([...items, 4]); // or items.concat(4)
 ```
 
 ### 2. Stale Closure in useEffect
 
 ```jsx
-// ❌ WRONG: count is stale (always 0)
+// WRONG: count is stale (always 0)
 useEffect(() => {
   const interval = setInterval(() => {
     setCount(count + 1); // count is captured as 0
@@ -720,7 +800,7 @@ useEffect(() => {
   return () => clearInterval(interval);
 }, []); // Empty deps - count never updates!
 
-// ✅ CORRECT: Use functional update
+// CORRECT: Use functional update
 useEffect(() => {
   const interval = setInterval(() => {
     setCount(c => c + 1); // Gets current count
@@ -732,12 +812,12 @@ useEffect(() => {
 ### 3. Missing Keys in Lists
 
 ```jsx
-// ❌ WRONG: Using index as key
+// WRONG: Using index as key
 {items.map((item, index) => (
   <div key={index}>{item.name}</div>
 ))}
 
-// ✅ CORRECT: Use stable unique identifier
+// CORRECT: Use stable unique identifier
 {items.map(item => (
   <div key={item.id}>{item.name}</div>
 ))}
@@ -746,12 +826,12 @@ useEffect(() => {
 ### 4. Not Cleaning Up Effects
 
 ```jsx
-// ❌ WRONG: Memory leak - no cleanup
+// WRONG: Memory leak - no cleanup
 useEffect(() => {
   const subscription = props.source.subscribe();
 }, [props.source]);
 
-// ✅ CORRECT: Return cleanup function
+// CORRECT: Return cleanup function
 useEffect(() => {
   const subscription = props.source.subscribe();
   return () => subscription.unsubscribe();
@@ -761,12 +841,12 @@ useEffect(() => {
 ### 5. Conditional Hooks
 
 ```jsx
-// ❌ WRONG: Hooks must be called unconditionally
+// WRONG: Hooks must be called unconditionally
 if (condition) {
   useEffect(() => { /* ... */ });
 }
 
-// ✅ CORRECT: Condition inside hook
+// CORRECT: Condition inside hook
 useEffect(() => {
   if (condition) {
     // Do something
@@ -777,12 +857,12 @@ useEffect(() => {
 ### 6. Forgetting Dependency Arrays
 
 ```jsx
-// ❌ WRONG: Runs on every render
+// WRONG: Runs on every render
 useEffect(() => {
   fetchData();
 }); // No dependency array!
 
-// ✅ CORRECT: Specify dependencies
+// CORRECT: Specify dependencies
 useEffect(() => {
   fetchData();
 }, [someValue]); // Or [] for run-once
@@ -824,7 +904,10 @@ useEffect(() => {
 
 ## See Also
 
-- **[JavaScript Functions Guide](JavaScript_Functions_Guide.md)** - Arrow functions and closures essential for React.
-- **[JavaScript Objects/Arrays](../cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md)** - Destructuring and map/filter methods.
-- **[Modern React Ecommerce Guide](Modern_React_Ecommerce_Guide.md)** - Advanced patterns with shopping cart and checkout flow.
-- **[Modern Fullstack Guide](Modern_Fullstack_Guide.md)** - Next.js and fullstack patterns.
+- [JavaScript Functions Guide](JavaScript_Functions_Guide.md) - Arrow functions and closures essential for React
+- [JavaScript Objects/Arrays](../cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md) - Destructuring and map/filter methods
+- [JavaScript Async Programming Guide](JavaScript_Async_Programming_Guide.md) - Async/await patterns for useEffect and data fetching
+- [JavaScript LocalStorage Guide](JavaScript_LocalStorage_Guide.md) - Persisting React state with localStorage
+- [React Router Guide](React_Router_Guide.md) - Navigation and routing in React applications
+- [Modern React Ecommerce Guide](Modern_React_Ecommerce_Guide.md) - Advanced patterns with shopping cart and checkout flow
+- [Modern Fullstack Guide](Modern_Fullstack_Guide.md) - Next.js and fullstack patterns

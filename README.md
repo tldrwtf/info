@@ -1,11 +1,11 @@
 # Full Stack Learning - Complete Cheat Sheet Collection
 
 [![Maintenance](https://img.shields.io/badge/Maintained%20by-tldrwtf-blue)](https://github.com/tldrwtf)
-[![Version](https://img.shields.io/badge/Version-1.10.0-orange.svg)](#changelog)
+[![Version](https://img.shields.io/badge/Version-1.11.0-orange.svg)](#changelog)
 
 If you find this resource useful, please consider leaving a star!
 
-**NEW in v1.10.0**: Added comprehensive Advanced Python Cheat Sheet covering metaclasses, descriptors, context managers, generators, decorators, async/await, type hints, protocols, and performance patterns!
+**NEW in v1.11.0**: Added comprehensive JavaScript and CSS guides covering Fetch API, LocalStorage, CSS Grid Advanced techniques, and complete Flexbox patterns with real-world examples!
 
 ---
 
@@ -37,7 +37,7 @@ cd info
 
 ## What Makes This Different
 
-This isn't just another code repository—it's a **comprehensive learning system**.
+This isn't just another code repository - it's a **comprehensive learning system**.
 
 ### Heavily Commented Code Examples
 
@@ -159,6 +159,8 @@ Explore complex topics with the consolidated handbooks in `guides/` (individual 
 - **Frontend foundations:** [Frontend Fundamentals Workbook (JS + DOM + CSS)](guides/Frontend_Fundamentals_Workbook.md)
 - **React to fullstack:** [React to Fullstack Track (React 19 + Next.js 16)](guides/React_to_Fullstack_Track.md)
 - **Python practice path:** [Python Practice to Projects Path](guides/Python_Practice_to_Projects_Path.md)
+- **JavaScript deep dives:** [Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md) and [LocalStorage Guide](guides/JavaScript_LocalStorage_Guide.md)
+- **CSS layout mastery:** [CSS Grid Advanced Guide](guides/CSS_Grid_Advanced_Guide.md) and [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
 - **Still need a specific topic?** Legacy guides like [API Authentication](guides/API_Authentication_Guide.md), [OAuth2](guides/OAuth2_and_Token_Management_Guide.md), and others remain available.
 ---
 
@@ -208,6 +210,7 @@ Common issues when setting up the projects:
 
 ## Versioning
 
+- **v1.11.0**: Added comprehensive JavaScript and CSS guides covering Fetch API, LocalStorage, CSS Grid advanced patterns, and complete Flexbox reference.
 - **v1.10.0**: Added comprehensive Advanced Python Cheat Sheet covering metaclasses, descriptors, context managers, async/await, and more.
 - **v1.9.0**: Enhanced glossary with comprehensive cross-reference links to guides, cheat sheets, and code examples.
 - **v1.8.0**: Comprehensive code documentation expansion with heavily commented examples across all materials.
@@ -220,6 +223,67 @@ Common issues when setting up the projects:
 ---
 
 ## Changelog
+
+```text
+commit v1.11.0
+Date:   2026-01-15
+feat: JavaScript and CSS comprehensive guides
+
+NEW GUIDES:
+- Created JavaScript_Fetch_API_Guide.md covering modern HTTP requests
+  * Basic GET and POST requests with complete examples
+  * Double await pattern (fetch response, then parse JSON)
+  * HTTP error handling and status code checking
+  * LocalStorage integration for data persistence
+  * Pokemon API real-world example with caching
+  * Common pitfalls and best practices
+
+- Created JavaScript_LocalStorage_Guide.md covering browser storage
+  * JSON serialization and deserialization patterns
+  * Cross-page data persistence workflows
+  * Form data collection and validation
+  * Storage limits and quota management
+  * Security considerations for client-side storage
+  * Registration to profile flow example
+
+- Created CSS_Grid_Advanced_Guide.md covering modern layout techniques
+  * Grid template areas for semantic layouts
+  * Line-based placement and span notation
+  * Responsive grid reconfiguration with media queries
+  * Gallery patterns and nested grids
+  * Blog layout complete example
+  * ASCII diagrams for visual understanding
+
+- Created CSS_Flexbox_Complete_Guide.md covering flex layout system
+  * flex-direction (row, column, and reverse variations)
+  * justify-content (all 6 alignment values)
+  * align-items (all 5 alignment values)
+  * flex-wrap for responsive multi-line layouts
+  * Gap property for modern spacing
+  * Positioning comparison (static, relative, absolute, fixed, sticky)
+  * Navigation bar with sticky positioning example
+
+STYLE AND QUALITY:
+- All code examples follow humanized, conversational educational tone
+- No emojis or typographic dashes per style guidelines
+- Comprehensive real-world patterns section in each guide
+- Common pitfalls and troubleshooting sections
+- Quick Reference Card tables for fast lookups
+- Cross-references to related guides and cheat sheets
+
+GLOSSARY:
+- Added 9 new terms with definitions and cross-references
+  * Fetch API, Flexbox (enhanced), Fr Unit, Grid (CSS Grid)
+  * Grid Template Areas, JSON.stringify(), JSON.parse()
+  * LocalStorage, SessionStorage
+- All entries include "See also" links to new guides
+
+DOCUMENTATION:
+- Updated README.md with JavaScript deep dives and CSS layout mastery sections
+- Updated version badge to v1.11.0
+- Added v1.11.0 to versioning and changelog sections
+
+```
 
 ```text
 commit v1.10.0
@@ -241,7 +305,6 @@ STYLE AND QUALITY:
 - All code examples include comprehensive type hints
 - Detailed docstrings with Args, Returns, Examples sections
 - BAD/GOOD pattern comparisons for anti-patterns
-- No emojis or em-dashes (humanized, educational writing)
 - Cross-references to related cheat sheets and guides
 - Quick Reference Card table for fast lookups
 

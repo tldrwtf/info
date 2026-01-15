@@ -233,7 +233,12 @@ const SignupForm = () => {
 ---
 
 ## See Also
-- **[React Basics Guide](React_Basics_Guide.md)** - Components and State.
-- **[Modern Fullstack Guide](Modern_Fullstack_Guide.md)** - Next.js and Firebase Integration.
-- **[CI/CD Pipeline Guide](CI_CD_Pipeline_Guide.md)** - Deployment automation.
+
+- [React Basics Guide](React_Basics_Guide.md) - Components, state management, and hooks fundamentals
+- [React Router Guide](React_Router_Guide.md) - Navigation and routing for multi-page ecommerce sites
+- [JavaScript Async Programming Guide](JavaScript_Async_Programming_Guide.md) - Async/await for API calls and data fetching
+- [JavaScript LocalStorage Guide](JavaScript_LocalStorage_Guide.md) - Persisting cart state across sessions
+- [JavaScript Fetch API Guide](JavaScript_Fetch_API_Guide.md) - Fetching product data from APIs
+- [Modern Fullstack Guide](Modern_Fullstack_Guide.md) - Next.js and Firebase integration
+- [CI/CD Pipeline Guide](CI_CD_Pipeline_Guide.md) - Deployment automation
 

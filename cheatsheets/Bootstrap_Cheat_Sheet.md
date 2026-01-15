@@ -174,6 +174,7 @@ Standard navigation header.
 ### Cards
 Container for content.
 
+**Basic Card:**
 ```html
 <div class="card" style="width: 18rem;">
   <img src="..." class="card-img-top" alt="...">
@@ -181,6 +182,64 @@ Container for content.
     <h5 class="card-title">Card title</h5>
     <p class="card-text">Some quick example text.</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+```
+
+**Card Grid Layout:**
+Use Bootstrap grid to create responsive card layouts.
+
+```html
+<div class="container">
+  <div class="row">
+    <!-- Three cards in a row on large screens, stack on mobile -->
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card 1</h5>
+          <p class="card-text">First card content.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card 2</h5>
+          <p class="card-text">Second card content.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4 mb-3">
+      <div class="card">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card 3</h5>
+          <p class="card-text">Third card content.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+**Horizontal Card (Image + Content Side-by-Side):**
+```html
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="..." class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This card shows image and content side-by-side.</p>
+        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
   </div>
 </div>
 ```
@@ -228,5 +287,10 @@ Image slider.
 ---
 
 ## See Also
-- **[CSS Cheat Sheet](CSS_Cheat_Sheet.md)** - Pure CSS reference.
-- **[CSS Layout Guide](../guides/CSS_Layout_Guide.md)** - Flexbox and Grid deep dive.
+
+- [CSS Cheat Sheet](CSS_Cheat_Sheet.md) - Pure CSS reference for styling fundamentals
+- [CSS Layout Guide](../guides/CSS_Layout_Guide.md) - Flexbox and Grid deep dive
+- [CSS Flexbox Complete Guide](../guides/CSS_Flexbox_Complete_Guide.md) - Master flexbox patterns Bootstrap uses internally
+- [CSS Grid Advanced Guide](../guides/CSS_Grid_Advanced_Guide.md) - Advanced grid layouts beyond Bootstrap
+- [HTML Cheat Sheet](HTML_Cheat_Sheet.md) - HTML structure and semantic markup
+- [Portfolio Web Development Guide](../guides/Portfolio_Web_Development_Guide.md) - Practical guide using Bootstrap components

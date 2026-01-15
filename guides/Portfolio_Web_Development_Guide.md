@@ -340,7 +340,11 @@ To make the CSS above work, your HTML needs a checkbox hack or JS toggling.
 
 ## See Also
 
--   **[HTML Cheat Sheet](../cheatsheets/HTML_Cheat_Sheet.md)** - Learn basic and advanced HTML elements.
--   **[CSS Cheat Sheet](../cheatsheets/CSS_Cheat_Sheet.md)** - Essential CSS properties for styling.
--   **[CSS Layout Guide](../guides/CSS_Layout_Guide.md)** - Master Flexbox and Grid for complex layouts.
--   **[JavaScript Basics Cheat Sheet](../cheatsheets/JavaScript_Basics_Cheat_Sheet.md)** - Fundamental JavaScript concepts for interactivity.
+- [HTML Cheat Sheet](../cheatsheets/HTML_Cheat_Sheet.md) - Learn basic and advanced HTML elements
+- [CSS Cheat Sheet](../cheatsheets/CSS_Cheat_Sheet.md) - Essential CSS properties for styling
+- [CSS Layout Guide](CSS_Layout_Guide.md) - Master Flexbox and Grid for complex layouts
+- [CSS Flexbox Complete Guide](CSS_Flexbox_Complete_Guide.md) - Complete flexbox patterns for responsive designs
+- [CSS Grid Advanced Guide](CSS_Grid_Advanced_Guide.md) - Advanced grid layouts with template areas
+- [Bootstrap Cheat Sheet](../cheatsheets/Bootstrap_Cheat_Sheet.md) - Rapid prototyping with pre-built components
+- [JavaScript Basics Cheat Sheet](../cheatsheets/JavaScript_Basics_Cheat_Sheet.md) - Fundamental JavaScript concepts for interactivity
+- [DOM Manipulation Guide](DOM_Manipulation_Guide.md) - Adding interactive features to your portfolio

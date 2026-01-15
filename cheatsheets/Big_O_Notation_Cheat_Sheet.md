@@ -18,7 +18,8 @@ Big O Notation is a mathematical notation that describes the limiting behavior o
 
 ## Table of Contents
 - [1. What is Big O Notation?](#1-what-is-big-o-notation)
-- [2. Common Time Complexities](#2-common-time-complexities)
+- [2. Practical Time Complexity Examples](#2-practical-time-complexity-examples)
+- [3. Common Time Complexities](#3-common-time-complexities)
     - [O(1) - Constant Time](#o1---constant-time)
     - [O(log n) - Logarithmic Time](#olog-n---logarithmic-time)
     - [O(n) - Linear Time](#on---linear-time)
@@ -26,10 +27,10 @@ Big O Notation is a mathematical notation that describes the limiting behavior o
     - [O(n²) - Quadratic Time](#on²---quadratic-time)
     - [O(2ⁿ) - Exponential Time](#o2ⁿ---exponential-time)
     - [O(n!) - Factorial Time](#on---factorial-time)
-- [3. Analyzing Algorithm Complexity](#3-analyzing-algorithm-complexity)
-- [4. Space Complexity](#4-space-complexity)
-- [5. Data Structure Operation Complexities](#5-data-structure-operation-complexities)
-- [6. Best Practices for Optimization](#6-best-practices-for-optimization)
+- [4. Analyzing Algorithm Complexity](#4-analyzing-algorithm-complexity)
+- [5. Space Complexity](#5-space-complexity)
+- [6. Data Structure Operation Complexities](#6-data-structure-operation-complexities)
+- [7. Best Practices for Optimization](#7-best-practices-for-optimization)
 
 ---
 
@@ -50,7 +51,155 @@ Understanding Big O helps in:
 
 ---
 
-## 2. Common Time Complexities
+## 2. Practical Time Complexity Examples
+
+Before diving into theoretical complexity classes, let's see how Big O impacts real-world performance with concrete examples.
+
+### Dictionary Operations (O(1) - Constant Time)
+
+```python
+# O(1) - Dictionary access
+user_dict = {"alice": 25, "bob": 30, "charlie": 28}
+age = user_dict["alice"]  # Instant lookup, no matter how many users
+
+# O(1) - Dictionary membership check
+if "alice" in user_dict:  # Fast check using hash table
+    print("Found!")
+
+# Why this matters: Even with 1,000,000 users, lookup is still instant
+```
+
+**Why this matters**: Dictionaries use hash tables for O(1) access regardless of size. With 1 million items, dictionary lookup takes the same time as with 10 items.
+
+### List Operations Comparison
+
+```python
+# O(1) - Append to list (amortized)
+numbers = [1, 2, 3]
+numbers.append(4)  # Fast! Just adds to the end
+
+# O(n) - Insert at beginning
+numbers.insert(0, 0)  # Slow! Must shift all elements right
+# [0, 1, 2, 3, 4]  All elements had to move
+
+# Performance Impact:
+# List with 1,000 items:
+# - append(x): ~0.0001ms
+# - insert(0, x): ~0.05ms  (500x slower!)
+```
+
+### Real-World Optimization Example
+
+```python
+# BAD: O(n) membership check with list
+def check_membership_slow(item, items_list):
+    """Check if item exists in list - O(n)"""
+    return item in items_list  # Linear search through entire list
+
+# GOOD: O(1) membership check with set
+def check_membership_fast(item, items_set):
+    """Check if item exists in set - O(1)"""
+    return item in items_set  # Hash lookup, instant
+
+# Performance Comparison:
+items_list = list(range(1_000_000))  # 1 million items
+items_set = set(range(1_000_000))
+
+# List lookup (worst case - item not in list):
+# Average time: ~50ms  (checks all 1,000,000 items)
+
+# Set lookup (any case):
+# Average time: ~0.0001ms  (hash table lookup)
+
+# Speedup: 500,000x faster!
+```
+
+### Dictionary vs List for Data Lookup
+
+```python
+# Scenario: Find user by ID from 10,000 users
+
+# BAD: O(n) - List of dictionaries
+users_list = [
+    {"id": 1, "name": "Alice"},
+    {"id": 2, "name": "Bob"},
+    # ... 10,000 users
+]
+
+def find_user_slow(user_id):
+    for user in users_list:  # O(n) - scans entire list
+        if user["id"] == user_id:
+            return user
+    return None
+
+# Average lookups per second: ~2,000
+
+# GOOD: O(1) - Dictionary by ID
+users_dict = {
+    1: {"id": 1, "name": "Alice"},
+    2: {"id": 2, "name": "Bob"},
+    # ... 10,000 users
+}
+
+def find_user_fast(user_id):
+    return users_dict.get(user_id)  # O(1) - hash lookup
+
+# Average lookups per second: ~1,000,000 (500x faster!)
+```
+
+### Time Complexity Practice Problems
+
+Try optimizing these common scenarios:
+
+1. **Find duplicate numbers in a list** (Hint: use a set for O(n) instead of nested loops O(n²))
+2. **Count word frequency in text** (Hint: use a dictionary for O(n) counting)
+3. **Remove duplicates from list while preserving order** (Hint: set for tracking, list for order)
+
+**Solutions:**
+
+```python
+# Problem 1: Find duplicates - O(n) solution
+def find_duplicates(nums):
+    seen = set()
+    duplicates = set()
+    for num in nums:
+        if num in seen:  # O(1) lookup
+            duplicates.add(num)
+        seen.add(num)  # O(1) insertion
+    return list(duplicates)
+# Time: O(n), Space: O(n)
+
+# Problem 2: Word frequency - O(n) solution
+def word_frequency(text):
+    words = text.lower().split()
+    frequency = {}
+    for word in words:  # O(n) loop
+        frequency[word] = frequency.get(word, 0) + 1  # O(1) operations
+    return frequency
+# Time: O(n), Space: O(n)
+
+# Problem 3: Remove duplicates preserving order - O(n) solution
+def remove_duplicates_ordered(items):
+    seen = set()
+    result = []
+    for item in items:  # O(n) loop
+        if item not in seen:  # O(1) check
+            seen.add(item)  # O(1) insertion
+            result.append(item)  # O(1) amortized append
+    return result
+# Time: O(n), Space: O(n)
+```
+
+### Key Takeaway
+
+**Choosing the right data structure matters!**
+- Lists: Great for ordered data, append operations
+- Dictionaries/Sets: Great for lookups, uniqueness checks
+- The difference can be 100x-500,000x faster
+
+---
+
+## 3. Common Time Complexities
 
 This section details the most common Big O time complexities, ordered from most efficient to least efficient.
 
@@ -310,7 +459,7 @@ def get_permutations(arr):
 
 ---
 
-## 3. Analyzing Algorithm Complexity
+## 4. Analyzing Algorithm Complexity
 
 ### Drop Constants
 Constant factors are ignored in Big O Notation because as `n` grows very large, their impact becomes negligible.
@@ -369,7 +518,7 @@ For example, Quick Sort has an average time complexity of O(n log n), but a wors
 
 ---
 
-## 4. Space Complexity
+## 5. Space Complexity
 
 Space complexity describes the amount of memory an algorithm needs to run as a function of the input size `n`.
 
@@ -432,7 +581,7 @@ def fibonacci_iterative_space_o1(n):
 
 ---
 
-## 5. Data Structure Operation Complexities
+## 6. Data Structure Operation Complexities
 
 Understanding the Big O of basic operations on common data structures is crucial for writing efficient algorithms.
 
@@ -472,7 +621,7 @@ Understanding the Big O of basic operations on common data structures is crucial
 
 ---
 
-## 6. Best Practices for Optimization
+## 7. Best Practices for Optimization
 
 ### Choose the Right Data Structure
 The choice of data structure significantly impacts algorithm performance. Always consider the complexity of the operations you'll perform most frequently.

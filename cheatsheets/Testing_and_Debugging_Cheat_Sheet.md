@@ -106,7 +106,7 @@ The `unittest` library is part of the standard library and is fully supported, b
 - Learn how to write fixtures for setup/teardown and how to parametrize tests.
 - Practice converting `unittest.TestCase` tests to `pytest` style incrementally.
 
-Quick conversion example — `unittest` to `pytest`:
+Quick conversion example - `unittest` to `pytest`:
 
 ```python
 # unittest style
@@ -123,7 +123,7 @@ def test_add():
 
 Why prefer `pytest`?
 
-- Use plain `assert` statements — no boilerplate `TestCase` classes or `self` in tests.
+- Use plain `assert` statements - no boilerplate `TestCase` classes or `self` in tests.
 - Fixtures provide flexible setup/teardown with scoped lifetimes and composition.
 - Parametrization reduces repetitive tests and improves coverage of edge cases.
 - Excellent plugin ecosystem (`pytest-cov`, `pytest-mock`, `pytest-asyncio`, `pytest-xdist`).

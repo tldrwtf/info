@@ -62,7 +62,7 @@ The project includes a workflow configuration in `.github/workflows/main.yaml`. 
     - **Checkout**: Pulls the latest code.
     - **Setup Python**: Installs the specified Python version.
     - **Install Dependencies**: Runs `pip install -r requirements.txt`.
-    - **Run Tests**: Executes `pytest -q` (preferred) — faster, richer output, better fixtures and plugins.
+    - **Run Tests**: Executes `pytest -q` (preferred) - faster, richer output, better fixtures and plugins.
 
 Why `pytest`?
 
@@ -71,7 +71,7 @@ Why `pytest`?
 - Rich ecosystem: plugins for coverage, mocking, asyncio, Django/Flask integration (`pytest-cov`, `pytest-mock`, `pytest-asyncio`).
 - Better failure introspection with detailed assertion introspection.
 
-Migration tip: Convert existing `unittest.TestCase` tests by removing the class wrapper and using simple functions, or run `pytest` directly — it still discovers `unittest` tests while you convert incrementally.
+Migration tip: Convert existing `unittest.TestCase` tests by removing the class wrapper and using simple functions, or run `pytest` directly - it still discovers `unittest` tests while you convert incrementally.
 
 ### The "Quality Gate"
 
@@ -217,7 +217,7 @@ Validation and safety:
 
 ### Private Properties in Classes (Python)
 
-Python's encapsulation is cooperative — prefer clear conventions and small public APIs over trying to make members truly private.
+Python's encapsulation is cooperative - prefer clear conventions and small public APIs over trying to make members truly private.
 
 - Single underscore (`_attr`): convention that attribute is internal and not part of public API. No language-enforced privacy.
 - Double underscore (`__attr`): triggers name-mangling (`_ClassName__attr`) which makes accidental access harder but not impossible. Use it sparingly when you want to avoid subclass collisions.

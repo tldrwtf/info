@@ -314,7 +314,10 @@ Changing a layout from a vertical column (mobile) to a horizontal row (desktop).
 
 ## See Also
 
--   **[CSS Cheat Sheet](../cheatsheets/CSS_Cheat_Sheet.md)** - Basic CSS properties and selectors.
--   **[HTML Cheat Sheet](../cheatsheets/HTML_Cheat_Sheet.md)** - HTML structure and tags.
--   **[Portfolio Web Development Guide](../guides/Portfolio_Web_Development_Guide.md)** - Practical guide to building a web portfolio.
--   **[DOM Manipulation Guide](../guides/DOM_Manipulation_Guide.md)** - Learn how to interact with HTML elements using JavaScript.
+- [CSS Cheat Sheet](../cheatsheets/CSS_Cheat_Sheet.md) - Basic CSS properties and selectors
+- [CSS Flexbox Complete Guide](CSS_Flexbox_Complete_Guide.md) - Complete flexbox patterns with detailed examples
+- [CSS Grid Advanced Guide](CSS_Grid_Advanced_Guide.md) - Advanced grid layouts with template areas
+- [HTML Cheat Sheet](../cheatsheets/HTML_Cheat_Sheet.md) - HTML structure and tags
+- [Bootstrap Cheat Sheet](../cheatsheets/Bootstrap_Cheat_Sheet.md) - Pre-built layout components with Bootstrap
+- [Portfolio Web Development Guide](Portfolio_Web_Development_Guide.md) - Practical guide to building a web portfolio
+- [DOM Manipulation Guide](DOM_Manipulation_Guide.md) - Learn how to interact with HTML elements using JavaScript

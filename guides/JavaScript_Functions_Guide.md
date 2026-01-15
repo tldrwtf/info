@@ -386,6 +386,9 @@ console.log("Discount (30, 100):", calculateDiscount(30, 100)); // 100
 
 ## See Also
 
-- **[JavaScript Basics Cheat Sheet](../cheatsheets/JavaScript_Basics_Cheat_Sheet.md)** - Core syntax and data types
-- **[JavaScript Objects and Arrays Cheat Sheet](../cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md)** - Detailed guide on Objects and Arrays
-- **[Functional Programming Cheat Sheet](../cheatsheets/Functional_Programming_Cheat_Sheet.md)** - Concepts like map/filter/reduce (Python context, but relevant)
+- [JavaScript Basics Cheat Sheet](../cheatsheets/JavaScript_Basics_Cheat_Sheet.md) - Core syntax and data types
+- [JavaScript Objects and Arrays Cheat Sheet](../cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md) - Detailed guide on Objects and Arrays
+- [JavaScript Async Programming Guide](JavaScript_Async_Programming_Guide.md) - Async functions and Promise patterns
+- [DOM Manipulation Guide](DOM_Manipulation_Guide.md) - Using functions in event handlers and DOM operations
+- [React Basics Guide](React_Basics_Guide.md) - Functions as React components
+- [Functional Programming Cheat Sheet](../cheatsheets/Functional_Programming_Cheat_Sheet.md) - Concepts like map/filter/reduce

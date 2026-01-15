@@ -224,6 +224,155 @@ It's good practice to remove event listeners if the element or event handler is 
 myBtn.removeEventListener('click', handleClick);
 ```
 
+### Event Delegation
+
+Event delegation is a powerful pattern that leverages event bubbling to handle events at a higher level in the DOM rather than attaching listeners to individual elements. This is especially useful for:
+- Handling events on dynamically added elements
+- Improving performance with many similar elements
+- Reducing memory usage
+
+**How Event Delegation Works:**
+When an event occurs on an element, it first runs the handlers on it, then on its parent, then all the way up on other ancestors. This is called event bubbling.
+
+**Basic Event Delegation Pattern:**
+
+```javascript
+// BAD: Attaching individual listeners to many elements
+const buttons = document.querySelectorAll('.delete-btn');
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    console.log('Delete clicked');
+  });
+});
+// Problem: What if new buttons are added later? They won't have listeners!
+
+// GOOD: Event delegation with single listener on parent
+const container = document.getElementById('button-container');
+container.addEventListener('click', (event) => {
+  // Check if the clicked element matches our target
+  if (event.target.classList.contains('delete-btn')) {
+    console.log('Delete clicked');
+    // Access the specific button that was clicked
+    const clickedButton = event.target;
+  }
+});
+// Works for current AND future buttons!
+```
+
+**Event Delegation with Data Attributes:**
+
+Using data attributes makes event delegation even more powerful and maintainable.
+
+```javascript
+// HTML:
+// <div id="todo-list">
+//   <button data-action="complete" data-id="1">Complete</button>
+//   <button data-action="delete" data-id="1">Delete</button>
+//   <button data-action="complete" data-id="2">Complete</button>
+//   <button data-action="delete" data-id="2">Delete</button>
+// </div>
+
+const todoList = document.getElementById('todo-list');
+
+todoList.addEventListener('click', (event) => {
+  const action = event.target.dataset.action;
+  const itemId = event.target.dataset.id;
+
+  if (action === 'delete') {
+    console.log(`Deleting todo item ${itemId}`);
+    event.target.parentElement.remove(); // Remove the item
+  } else if (action === 'complete') {
+    console.log(`Completing todo item ${itemId}`);
+    event.target.classList.add('completed');
+  }
+});
+```
+
+**Real-World Example: Dynamic List Management**
+
+```javascript
+// HTML:
+// <div id="shopping-list">
+//   <input type="text" id="item-input" placeholder="Add item...">
+//   <button id="add-btn">Add</button>
+//   <ul id="items"></ul>
+// </div>
+
+const itemInput = document.getElementById('item-input');
+const addBtn = document.getElementById('add-btn');
+const itemsList = document.getElementById('items');
+
+// Add new items
+addBtn.addEventListener('click', () => {
+  const itemText = itemInput.value.trim();
+  if (itemText === '') return;
+
+  const li = document.createElement('li');
+  li.innerHTML = `
+    ${itemText}
+    <button class="remove-btn" data-item="${itemText}">Remove</button>
+  `;
+  itemsList.appendChild(li);
+  itemInput.value = ''; // Clear input
+});
+
+// Event delegation for dynamically added remove buttons
+itemsList.addEventListener('click', (event) => {
+  if (event.target.classList.contains('remove-btn')) {
+    const itemName = event.target.dataset.item;
+    console.log(`Removing ${itemName}`);
+    event.target.parentElement.remove();
+  }
+});
+
+// Works for ALL future remove buttons automatically!
+```
+
+**Event Delegation Best Practices:**
+
+1. **Use `event.target`** to identify the actual clicked element
+2. **Use `event.currentTarget`** to reference the element with the listener
+3. **Check the target** before running your code using classes, IDs, or data attributes
+4. **Prevent default** when needed with `event.preventDefault()`
+5. **Stop propagation sparingly** - only use `event.stopPropagation()` when absolutely necessary
+
+**Advanced Pattern: Closest() Method**
+
+The `closest()` method is perfect for event delegation when you need to find the nearest ancestor matching a selector.
+
+```javascript
+// HTML:
+// <div id="cards-container">
+//   <div class="card" data-id="1">
+//     <h3>Card Title</h3>
+//     <button class="delete-card-btn">Delete</button>
+//   </div>
+// </div>
+
+const cardsContainer = document.getElementById('cards-container');
+
+cardsContainer.addEventListener('click', (event) => {
+  // Find the nearest .delete-card-btn ancestor (works even if we click child elements)
+  const deleteBtn = event.target.closest('.delete-card-btn');
+
+  if (deleteBtn) {
+    // Find the parent card
+    const card = deleteBtn.closest('.card');
+    const cardId = card.dataset.id;
+
+    console.log(`Deleting card ${cardId}`);
+    card.remove();
+  }
+});
+```
+
+**Why Event Delegation Matters:**
+
+- **Performance**: One listener instead of hundreds
+- **Dynamic content**: Works with elements added after page load
+- **Memory efficiency**: Fewer event listeners = less memory
+- **Cleaner code**: Centralized event handling logic
+
 ---
 
 ## 7. DOM Traversal
@@ -251,8 +400,11 @@ console.log(item.parentElement.children);// All children elements of the parent
 
 ## See Also
 
-- **[HTML Cheat Sheet](../cheatsheets/HTML_Cheat_Sheet.md)** - Structure of web pages
-- **[CSS Cheat Sheet](../cheatsheets/CSS_Cheat_Sheet.md)** - Styling web pages
-- **[JavaScript Basics Cheat Sheet](../cheatsheets/JavaScript_Basics_Cheat_Sheet.md)** - Core JavaScript syntax
-- **[JavaScript Objects and Arrays Cheat Sheet](../cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md)** - Working with JavaScript data structures
-- **[JavaScript Functions Guide](../guides/JavaScript_Functions_Guide.md)** - Deeper dive into functions and scope
+- [HTML Cheat Sheet](../cheatsheets/HTML_Cheat_Sheet.md) - Structure of web pages and HTML elements
+- [CSS Cheat Sheet](../cheatsheets/CSS_Cheat_Sheet.md) - Styling web pages dynamically
+- [JavaScript Basics Cheat Sheet](../cheatsheets/JavaScript_Basics_Cheat_Sheet.md) - Core JavaScript syntax and DOM essentials
+- [JavaScript Objects and Arrays Cheat Sheet](../cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md) - Working with JavaScript data structures
+- [JavaScript Functions Guide](JavaScript_Functions_Guide.md) - Deeper dive into functions and scope
+- [JavaScript LocalStorage Guide](JavaScript_LocalStorage_Guide.md) - Persisting DOM state across sessions
+- [JavaScript Fetch API Guide](JavaScript_Fetch_API_Guide.md) - Fetching data and displaying it in the DOM
+- [JavaScript Async Programming Guide](JavaScript_Async_Programming_Guide.md) - Async operations with DOM manipulation
