@@ -21,7 +21,7 @@ marshmallow-sqlalchemy==1.4.2
 mdurl==0.1.2
 ordered-set==4.1.0
 packaging==25.0
-pyasn1==0.6.1
+pyasn1==0.6.2
 Pygments==2.19.2
 python-jose==3.5.0
 rich==14.2.0
