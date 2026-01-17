@@ -8,6 +8,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md), [CSS Layout Guide](guides/CSS_Layout_Guide.md)
 *   **API (Application Programming Interface):** A set of rules and conventions that lets different software systems communicate. In web apps, an API exposes endpoints that accept HTTP methods and return structured data (often JSON), keeping clients decoupled from server internals.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [API Authentication Guide](guides/API_Authentication_Guide.md), [Building AI Ready APIs Guide](guides/Building_AI_Ready_APIs_Guide.md), [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md), [Library API Code Examples](library_api_code/)
+*   **Association Object:** A SQLAlchemy pattern where a many-to-many relationship is represented by a full model class instead of a simple Table. Association objects are needed when the relationship itself has attributes (e.g., quantity in a shopping cart, grade in a course enrollment, price snapshot in an order). They enable tracking metadata about the relationship and provide a primary key for the relationship itself.
+    *See also:* [SQLAlchemy Advanced Patterns Guide](guides/SQLAlchemy_Advanced_Patterns_Guide.md), [SQLAlchemy Relationships Guide](guides/SQLAlchemy_Relationships_Guide.md), [ORM Models](library_api_code/app/models.py)
 *   **Algorithm:** A step-by-step procedure for solving a problem, such as sorting data or searching a list. The right algorithm reduces time and memory use as input sizes grow.
     *See also:* [Algorithms Guide](guides/Algorithms_Guide.md), [Big O Notation Cheat Sheet](cheatsheets/Big_O_Notation_Cheat_Sheet.md)
 *   **Array:** An ordered collection of items accessed by index. Arrays give fast reads but can be slower to insert or remove in the middle.
@@ -27,6 +29,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 *   **Backend:** The server-side of an application that handles business logic, data access, and API endpoints. It is responsible for enforcing rules, validating input, and securing data.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [Flask Advanced Features Guide](guides/Flask_Advanced_Features_Guide.md), [Library API Code Examples](library_api_code/)
+*   **Bearer Token:** An authentication scheme where the token itself grants access without additional credentials. In HTTP, Bearer tokens are sent in the Authorization header with the format "Bearer <token>". Commonly used with JWT for stateless authentication in REST APIs. The bearer token pattern simplifies token transmission and is the standard approach for OAuth 2.0 and modern API authentication.
+    *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md), [OAuth2 and Token Management Guide](guides/OAuth2_and_Token_Management_Guide.md)
 *   **Big O Notation:** A way to describe how runtime or memory grows as input size increases. It helps you compare approaches (for example, O(n) versus O(n^2)) before performance becomes a bottleneck.
     *See also:* [Big O Notation Cheat Sheet](cheatsheets/Big_O_Notation_Cheat_Sheet.md), [Algorithms Guide](guides/Algorithms_Guide.md)
 *   **Blueprint (Flask):** A Flask feature for grouping related routes and logic into reusable modules. Blueprints help large apps stay organized and integrate cleanly with the app factory pattern.
@@ -115,6 +119,10 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [File Operations Cheat Sheet](cheatsheets/File_Operations_Cheat_Sheet.md)
 *   **Fetch API:** A modern JavaScript interface for making HTTP requests that returns Promises. It replaces older XMLHttpRequest with cleaner syntax, supports async/await, and provides fine-grained control over requests and responses.
     *See also:* [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md), [JavaScript Async Programming Guide](guides/JavaScript_Async_Programming_Guide.md)
+*   **flush() (SQLAlchemy):** A Session method that sends pending changes to the database without committing the transaction. Unlike commit(), flush() keeps the transaction open and makes auto-generated IDs available (like primary keys, timestamps) for use within the same transaction. Critical for multi-step operations where you need database-generated values before the final commit. Always follow flush() with commit() eventually, and handle exceptions to rollback properly.
+    *See also:* [SQLAlchemy Advanced Patterns Guide](guides/SQLAlchemy_Advanced_Patterns_Guide.md), [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md)
+*   **Foreign Key:** A database column that references a primary key in another table. Foreign keys enforce relationships and data integrity.
+    *See also:* [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)
 *   **Flex-direction:** A CSS Flexbox property that defines the main axis direction. Values are row (default, left to right), row-reverse, column (top to bottom), and column-reverse, determining how flex items flow in the container.
     *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
 *   **Flex-wrap:** A CSS Flexbox property that controls whether flex items stay on one line or wrap to multiple lines. Values are nowrap (default, items shrink to fit), wrap (items wrap to new lines), and wrap-reverse (wrap in reverse order).
@@ -198,7 +206,9 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [React Basics Guide](guides/React_Basics_Guide.md)
 *   **Justify-content:** A CSS Flexbox property that controls alignment along the main axis. Values include flex-start, flex-end, center, space-between (equal space between items), space-around (equal space around items), and space-evenly (equal space between and around items).
     *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md), [CSS Layout Guide](guides/CSS_Layout_Guide.md)
-*   **JWT (JSON Web Token):** A compact, URL-safe token used for authentication and claims. JWTs are signed to prevent tampering and often stored in headers or cookies.
+*   **Join Conditions (SQLAlchemy):** Explicit conditions that specify how tables are related in a relationship. In self-referential many-to-many relationships, primaryjoin defines how to join from the parent table to the association table, while secondaryjoin defines how to join from the association table to the related records. Required when SQLAlchemy cannot automatically determine the relationship direction (e.g., follower vs following in a social network).
+    *See also:* [SQLAlchemy Relationships Guide](guides/SQLAlchemy_Relationships_Guide.md), [SQLAlchemy Advanced Patterns Guide](guides/SQLAlchemy_Advanced_Patterns_Guide.md)
+*   **JWT (JSON Web Token):** A compact, URL-safe token used for authentication and claims. JWTs are signed to prevent tampering and often stored in headers or cookies. Modern JWT implementations use the Bearer token scheme with decorators for route protection, include standard claims (exp, iat, sub), and follow security best practices like short expiration times and HTTPS-only transmission.
     *See also:* [API Authentication Guide](guides/API_Authentication_Guide.md), [OAuth2 and Token Management Guide](guides/OAuth2_and_Token_Management_Guide.md)
 
 ## K
@@ -262,8 +272,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 *   **Package Manager:** A tool that installs, upgrades, and removes software dependencies. It keeps project versions consistent across environments.
     *See also:* [React Starter Code](react_starter_code/package.json), [Library API Requirements](library_api_code/requirements.txt)
-*   **Pagination:** Splitting large result sets into smaller pages for faster responses and better UX. Common patterns are limit/offset and cursor-based pagination.
-    *See also:* [SQL Advanced Queries Guide](guides/SQL_Advanced_Queries_Guide.md)
+*   **Pagination:** Splitting large result sets into smaller pages for faster responses and better UX. Common patterns are limit/offset and cursor-based pagination. When caching paginated routes, avoid caching the entire page response as it creates stale data issues - instead use strategies like caching individual items, very short TTL, or separate metadata caching.
+    *See also:* [SQL Advanced Queries Guide](guides/SQL_Advanced_Queries_Guide.md), [Flask Advanced Features Guide](guides/Flask_Advanced_Features_Guide.md)
 *   **Primary Key:** A column (or set of columns) that uniquely identifies each row in a table. Primary keys are used for indexing and relationships.
     *See also:* [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)
 *   **Props:** Inputs passed into a React component to customize its behavior or rendering. Props are read-only and flow from parent to child.
@@ -325,7 +335,7 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [JavaScript LocalStorage Guide](guides/JavaScript_LocalStorage_Guide.md)
 *   **SQL (Structured Query Language):** The standard language for querying and manipulating relational databases. SQL is used for reads, writes, and schema changes.
     *See also:* [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md), [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQL Advanced Queries Guide](guides/SQL_Advanced_Queries_Guide.md)
-*   **SQLAlchemy:** A Python toolkit and ORM that provides both SQL expression building and object mapping. It balances low-level SQL control with high-level productivity.
+*   **SQLAlchemy:** A Python toolkit and ORM that provides both SQL expression building and object mapping. It balances low-level SQL control with high-level productivity. Advanced patterns include session.flush() for mid-transaction ID access, association objects for many-to-many relationships with metadata, and primaryjoin/secondaryjoin for self-referential relationships.
     *See also:* [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md), [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md), [SQLAlchemy Relationships Guide](guides/SQLAlchemy_Relationships_Guide.md), [SQLAlchemy Advanced Patterns Guide](guides/SQLAlchemy_Advanced_Patterns_Guide.md), [ORM Models](library_api_code/app/models.py)
 *   **Stacking Context:** A three-dimensional conceptualization of HTML elements along an imaginary z-axis. Created by positioned elements with z-index values, transforms, opacity, or other CSS properties. Parent-child relationships within stacking contexts affect element layering.
     *See also:* [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md), [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
@@ -391,3 +401,7 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 *   **Z-index:** A CSS property that controls the stacking order of positioned elements (non-static position values). Higher z-index values appear in front of lower values. Only works on positioned elements and is affected by stacking contexts.
     *See also:* [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md), [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
 *   **Zero-Day:** A software vulnerability that is unknown to defenders at the time of discovery. Zero-days are high risk because no patch exists yet.
+
+---
+
+[Back to Main](README.md)

@@ -751,6 +751,102 @@ class Posts(Base):
 Base.metadata.create_all(engine)
 ```
 
+#### Understanding primaryjoin and secondaryjoin (Deep Dive)
+
+Self-referential many-to-many relationships require explicit join conditions because SQLAlchemy can't automatically determine which foreign key column represents "follower" vs "followed".
+
+**The Challenge:**
+
+Both `follower_id` and `following_id` reference the same table (`users.id`), so SQLAlchemy needs you to specify:
+1. How to join FROM the current user TO the association table (primaryjoin)
+2. How to join FROM the association table TO the related users (secondaryjoin)
+
+**Visual Explanation:**
+
+```
+User (Alice, id=1)  wants to know: "Who am I following?"
+
+Step 1 (primaryjoin): Find rows in user_follows where I am the follower
+    user_follows.c.follower_id == 1
+
+    Result: [(follower_id=1, following_id=2), (follower_id=1, following_id=3)]
+
+Step 2 (secondaryjoin): For each row, get the user being followed
+    user_follows.c.following_id == users.id
+
+    Result: [User(id=2, Bob), User(id=3, Charlie)]
+```
+
+**The Code:**
+
+```python
+following: Mapped[list["Users"]] = relationship(
+    "Users",
+    secondary=user_follows,
+    primaryjoin=(user_follows.c.follower_id == id),      # I am the follower
+    secondaryjoin=(user_follows.c.following_id == id),   # They are being followed
+    backref="followers"
+)
+```
+
+**Breaking Down primaryjoin:**
+- `user_follows.c.follower_id` - Column in association table representing "who is following"
+- `==` - Equality condition
+- `id` - Current user's ID (the `self` in this relationship)
+
+**Breaking Down secondaryjoin:**
+- `user_follows.c.following_id` - Column representing "who is being followed"
+- `==` - Equality condition
+- `id` - The related user's ID (the target of the relationship)
+
+**Common Mistakes:**
+
+```python
+# MISTAKE 1: Swapping primaryjoin and secondaryjoin
+following: Mapped[list["Users"]] = relationship(
+    "Users",
+    secondary=user_follows,
+    primaryjoin=(user_follows.c.following_id == id),     # WRONG!
+    secondaryjoin=(user_follows.c.follower_id == id),    # WRONG!
+)
+# This returns "who follows me" instead of "who I follow"
+
+# MISTAKE 2: Using same column for both joins
+primaryjoin=(user_follows.c.follower_id == id),
+secondaryjoin=(user_follows.c.follower_id == id),  # WRONG!
+# This creates circular reference
+
+# MISTAKE 3: Forgetting == and using =
+primaryjoin=(user_follows.c.follower_id = id),  # WRONG! SyntaxError
+```
+
+**Debugging Tips:**
+
+If you get the wrong users, check:
+1. Is primaryjoin using the column that identifies YOU?
+2. Is secondaryjoin using the column that identifies THEM?
+3. Does backref create the reverse relationship correctly?
+
+**Testing the Relationship:**
+
+```python
+# Create users
+alice = Users(username="alice")
+bob = Users(username="bob")
+charlie = Users(username="charlie")
+
+# Alice follows Bob and Charlie
+alice.following.append(bob)
+alice.following.append(charlie)
+
+db.session.commit()
+
+# Verify
+print(alice.following)  # [Bob, Charlie]
+print(bob.followers)    # [Alice] (from backref)
+print(charlie.followers) # [Alice] (from backref)
+```
+
 **Using the Social Media System:**
 
 ```python
@@ -1321,3 +1417,5 @@ session.commit()
 - **[Data Structures Cheat Sheet](../cheatsheets/Data_Structures_Cheat_Sheet.md)** - Data modeling concepts
 
 ---
+
+[Back to Main](../README.md)

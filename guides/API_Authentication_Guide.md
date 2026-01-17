@@ -838,6 +838,241 @@ response = requests.get(
 print(response.json())
 ```
 
+### JWT Bearer Token Pattern with Decorator
+
+This section shows production-ready JWT implementation with the Bearer token scheme and decorator pattern for protecting routes.
+
+#### Authorization Header Format
+
+JWT tokens are typically sent using the Bearer authentication scheme:
+
+```
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+The format is: `Bearer <token>`
+
+#### Token Payload Structure
+
+A well-structured JWT payload includes:
+
+```python
+import jwt
+from datetime import datetime, timedelta, timezone
+
+def encode_token(user_id, role="user"):
+    """Create JWT token with user information."""
+    payload = {
+        'exp': datetime.now(timezone.utc) + timedelta(hours=1),  # Expiration
+        'iat': datetime.now(timezone.utc),                       # Issued at
+        'sub': str(user_id),                                     # Subject (user ID)
+        'role': role                                             # Custom claim
+    }
+
+    token = jwt.encode(
+        payload,
+        app.config['SECRET_KEY'],
+        algorithm='HS256'
+    )
+
+    return token
+```
+
+**Payload Fields:**
+- `exp` (expiration): When token expires (Unix timestamp)
+- `iat` (issued at): When token was created
+- `sub` (subject): User identifier (user ID as string)
+- `role`: Custom claim for authorization
+
+#### Decorator Pattern Implementation
+
+Create a reusable decorator to protect routes:
+
+```python
+from functools import wraps
+from flask import request, jsonify
+import jwt
+
+def token_required(f):
+    """Decorator to require valid JWT token."""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        token = None
+
+        # Extract token from Authorization header
+        if 'Authorization' in request.headers:
+            auth_header = request.headers['Authorization']
+            try:
+                # Split "Bearer <token>" and get token part
+                token = auth_header.split(' ')[1]
+            except IndexError:
+                return jsonify({'error': 'Invalid Authorization header format'}), 401
+
+        if not token:
+            return jsonify({'error': 'Token is missing'}), 401
+
+        try:
+            # Decode and verify token
+            data = jwt.decode(
+                token,
+                app.config['SECRET_KEY'],
+                algorithms=['HS256']
+            )
+
+            # Make user info available to route
+            request.user_id = data['sub']
+            request.user_role = data.get('role', 'user')
+
+        except jwt.ExpiredSignatureError:
+            return jsonify({'error': 'Token has expired'}), 401
+        except jwt.InvalidTokenError:
+            return jsonify({'error': 'Invalid token'}), 401
+
+        return f(*args, **kwargs)
+
+    return decorated_function
+```
+
+#### Using the Decorator
+
+```python
+@app.route('/api/profile')
+@token_required
+def get_profile():
+    """Protected route requiring valid token."""
+    user_id = request.user_id
+    role = request.user_role
+
+    user = db.session.get(User, user_id)
+    return jsonify({
+        'username': user.username,
+        'email': user.email,
+        'role': role
+    })
+
+@app.route('/api/admin/users')
+@token_required
+def admin_get_users():
+    """Route with role-based access control."""
+    if request.user_role != 'admin':
+        return jsonify({'error': 'Admin access required'}), 403
+
+    users = User.query.all()
+    return jsonify([user.to_dict() for user in users])
+```
+
+#### Complete Authentication Flow
+
+**1. User Registration:**
+```python
+@app.route('/api/register', methods=['POST'])
+def register():
+    data = request.get_json()
+
+    # Create user
+    user = User(
+        username=data['username'],
+        email=data['email']
+    )
+    user.set_password(data['password'])
+
+    db.session.add(user)
+    db.session.commit()
+
+    return jsonify({'message': 'User created'}), 201
+```
+
+**2. User Login (Get Token):**
+```python
+@app.route('/api/login', methods=['POST'])
+def login():
+    data = request.get_json()
+
+    user = User.query.filter_by(email=data['email']).first()
+
+    if not user or not user.check_password(data['password']):
+        return jsonify({'error': 'Invalid credentials'}), 401
+
+    # Generate token
+    token = encode_token(user.id, user.role)
+
+    return jsonify({
+        'access_token': token,
+        'token_type': 'Bearer'
+    }), 200
+```
+
+**3. Access Protected Route:**
+```python
+import requests
+
+# Login to get token
+response = requests.post('http://localhost:5000/api/login', json={
+    'email': 'alice@example.com',
+    'password': 'password123'
+})
+
+token = response.json()['access_token']
+
+# Use token in subsequent requests
+headers = {'Authorization': f'Bearer {token}'}
+profile = requests.get('http://localhost:5000/api/profile', headers=headers)
+print(profile.json())
+```
+
+#### Security Best Practices
+
+1. **Use HTTPS in production** - Never send tokens over HTTP
+2. **Short expiration times** - 1 hour for access tokens, longer for refresh tokens
+3. **Strong secret keys** - Use cryptographically random SECRET_KEY
+4. **Token refresh strategy** - Implement refresh tokens for better UX
+5. **Token storage (client)** - Use httpOnly cookies or secure localStorage
+6. **Invalidation strategy** - Implement token blacklist for logout
+
+#### Common Mistakes
+
+**Mistake 1: Hardcoded Secret Key**
+```python
+# BAD
+SECRET_KEY = "mysecret"
+
+# GOOD
+SECRET_KEY = os.environ.get('SECRET_KEY')
+```
+
+**Mistake 2: Not Handling Token Expiration**
+```python
+# BAD - No expiration handling
+token = jwt.decode(token, SECRET_KEY)
+
+# GOOD - Catch expiration
+try:
+    token = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+except jwt.ExpiredSignatureError:
+    return jsonify({'error': 'Token expired'}), 401
+```
+
+**Mistake 3: Wrong Header Format**
+```python
+# BAD - Missing Bearer prefix
+headers = {'Authorization': token}
+
+# GOOD - Proper format
+headers = {'Authorization': f'Bearer {token}'}
+```
+
+#### Error Response Format
+
+Consistent error responses help clients:
+
+```python
+{
+    "error": "Token has expired",
+    "code": "TOKEN_EXPIRED",
+    "timestamp": "2025-01-16T10:30:00Z"
+}
+```
+
 ---
 
 ## Session-Based Authentication
@@ -1105,3 +1340,5 @@ if __name__ == '__main__':
 - **[Python Basics Cheat Sheet](../cheatsheets/Python_Basics_Cheat_Sheet.md)** - Python fundamentals
 
 ---
+
+[Back to Main](../README.md)

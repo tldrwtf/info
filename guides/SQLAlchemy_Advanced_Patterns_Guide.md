@@ -52,6 +52,118 @@ def create_user(user_data):
         return None
 ```
 
+### Using flush() vs commit()
+
+Understanding when to use flush() instead of commit() is critical for working with auto-generated IDs and multi-step transactions.
+
+#### The Difference
+
+**commit():**
+- Sends SQL to database AND commits the transaction
+- Makes changes permanent
+- Releases locks
+- Cannot be rolled back
+
+**flush():**
+- Sends SQL to database but does NOT commit
+- Makes auto-generated IDs available (id, created_at, etc.)
+- Keeps transaction open
+- Can still be rolled back
+
+#### Pattern: Accessing Auto-Generated IDs
+
+Common scenario: Create a user and immediately create their cart using the user's ID.
+
+```python
+from sqlalchemy.orm import Session
+from models import User, Cart
+
+def register_user_with_cart(session: Session, user_data):
+    """Register user and create cart in same transaction."""
+    try:
+        # Create user
+        user = User(**user_data)
+        session.add(user)
+
+        # flush() to get auto-generated user.id
+        session.flush()
+
+        # Now user.id is available!
+        new_cart = Cart(user_id=user.id)
+        session.add(new_cart)
+
+        # Commit both together
+        session.commit()
+
+        return user
+    except Exception as e:
+        session.rollback()
+        raise e
+```
+
+#### Why This Matters
+
+Without flush(), trying to access `user.id` before commit would fail:
+
+```python
+# WRONG - This fails!
+user = User(username="alice")
+session.add(user)
+cart = Cart(user_id=user.id)  # ERROR: user.id is None!
+```
+
+#### Common Use Cases
+
+1. **Multi-entity creation with foreign keys**
+   ```python
+   order = Order(user_id=current_user.id)
+   session.add(order)
+   session.flush()  # Get order.id
+
+   item1 = OrderItem(order_id=order.id, product_id=1)
+   item2 = OrderItem(order_id=order.id, product_id=2)
+   session.add_all([item1, item2])
+   session.commit()
+   ```
+
+2. **Enforcing database constraints before final commit**
+   ```python
+   user = User(email="test@example.com")
+   session.add(user)
+   session.flush()  # Check unique constraint immediately
+   # If constraint violated, exception raised here
+   ```
+
+3. **Logging or audit trails**
+   ```python
+   record = AuditRecord(action="create_user")
+   session.add(record)
+   session.flush()  # Get timestamp and ID
+
+   # Use record.id for related entries
+   detail = AuditDetail(audit_id=record.id, field="email")
+   session.add(detail)
+   session.commit()
+   ```
+
+#### Best Practices
+
+- Use flush() when you need auto-generated values mid-transaction
+- Always follow flush() with commit() eventually
+- Handle exceptions to rollback properly
+- Don't overuse - commit() when the transaction is complete
+
+#### Key Differences Table
+
+| Aspect | flush() | commit() |
+|--------|---------|----------|
+| Sends SQL to DB | Yes | Yes |
+| Commits transaction | No | Yes |
+| Makes changes permanent | No | Yes |
+| Auto-generated IDs available | Yes | Yes |
+| Can rollback after | Yes | No |
+| Typical use | Mid-transaction | End of transaction |
+
 **READ:**
 ```python
 # Get by primary key (most efficient)
@@ -470,6 +582,253 @@ enrollment = session.query(Enrollments).where(
 enrollment.grade = "A+"
 session.commit()
 ```
+
+---
+
+### Real-World Example: Shopping Cart with Association Object
+
+Association objects are needed when the many-to-many relationship itself has attributes. This example shows when and how to use them.
+
+#### The Scenario
+
+**Requirement:** Users can add products to their cart
+- Many carts can contain many products
+- BUT we need to track HOW MANY of each product
+
+**Wrong Approach - Simple Association Table:**
+
+```python
+# This only tracks which products are in which carts
+cart_products = Table('cart_products',
+    Column('cart_id', ForeignKey('carts.id')),
+    Column('product_id', ForeignKey('products.id'))
+)
+```
+
+**Problem:** Where do we store quantity? We can't add columns to a relationship table.
+
+#### The Solution - Association Object Pattern
+
+Create a full model class for the relationship:
+
+```python
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import Integer, ForeignKey, UniqueConstraint
+
+class Cart(Base):
+    __tablename__ = "carts"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
+
+    # Relationship to items (association objects)
+    items: Mapped[list["CartItem"]] = relationship(
+        "CartItem",
+        back_populates="cart",
+        cascade="all, delete-orphan"  # Delete items when cart is deleted
+    )
+
+    # Convenience property to get products directly
+    @property
+    def products(self):
+        return [item.product for item in self.items]
+
+class Product(Base):
+    __tablename__ = "products"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    price: Mapped[float]
+
+    # Relationship back to cart items
+    cart_items: Mapped[list["CartItem"]] = relationship(
+        "CartItem",
+        back_populates="product"
+    )
+
+class CartItem(Base):  # ASSOCIATION OBJECT
+    """
+    Represents one product in a cart with quantity.
+    This is NOT a simple Table - it's a full model.
+    """
+    __tablename__ = "cart_items"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+
+    # Foreign keys to both sides
+    cart_id: Mapped[int] = mapped_column(ForeignKey('carts.id'))
+    product_id: Mapped[int] = mapped_column(ForeignKey('products.id'))
+
+    # EXTRA ATTRIBUTE - This is why we need association object!
+    quantity: Mapped[int] = mapped_column(Integer, default=1)
+
+    # Relationships to both sides
+    cart: Mapped["Cart"] = relationship("Cart", back_populates="items")
+    product: Mapped["Product"] = relationship("Product", back_populates="cart_items")
+
+    # Prevent duplicate products in same cart
+    __table_args__ = (
+        UniqueConstraint('cart_id', 'product_id', name='_cart_product_uc'),
+    )
+
+    def __repr__(self):
+        return f"<CartItem cart={self.cart_id} product={self.product_id} qty={self.quantity}>"
+```
+
+#### Using the Association Object
+
+**Add product to cart:**
+
+```python
+from sqlalchemy.orm import Session
+
+def add_to_cart(session: Session, cart_id: int, product_id: int, quantity: int = 1):
+    """Add product to cart or update quantity."""
+
+    # Check if item already in cart
+    existing = session.query(CartItem)\
+        .filter_by(cart_id=cart_id, product_id=product_id)\
+        .first()
+
+    if existing:
+        # Update quantity
+        existing.quantity += quantity
+    else:
+        # Create new cart item
+        item = CartItem(
+            cart_id=cart_id,
+            product_id=product_id,
+            quantity=quantity
+        )
+        session.add(item)
+
+    session.commit()
+```
+
+**View cart with details:**
+
+```python
+def get_cart_total(session: Session, cart_id: int):
+    """Calculate cart total price."""
+    cart = session.get(Cart, cart_id)
+
+    total = 0
+    for item in cart.items:
+        item_total = item.product.price * item.quantity
+        print(f"{item.product.name}: ${item.product.price} x {item.quantity} = ${item_total}")
+        total += item_total
+
+    print(f"Total: ${total}")
+    return total
+
+# Example output:
+# Laptop: $999.99 x 2 = $1999.98
+# Mouse: $24.99 x 5 = $124.95
+# Total: $2124.93
+```
+
+**Remove item from cart:**
+
+```python
+def remove_from_cart(session: Session, cart_id: int, product_id: int):
+    """Remove product from cart."""
+    item = session.query(CartItem)\
+        .filter_by(cart_id=cart_id, product_id=product_id)\
+        .first()
+
+    if item:
+        session.delete(item)
+        session.commit()
+```
+
+#### When to Use Association Object vs Table
+
+| Use Association **Table** | Use Association **Object** |
+|---------------------------|----------------------------|
+| **Simple linking only** | **Need extra attributes** |
+| No timestamps needed | Track created_at, updated_at |
+| No status/state tracking | Store status, notes, metadata |
+| No quantity/count | Track quantity, score, rating |
+| **Examples:** | **Examples:** |
+| - Student enrolls in courses | - Student in course (with grade) |
+| - User likes posts | - Product in cart (with quantity) |
+| - User follows user | - User rates movie (with rating) |
+| - Tags on articles | - Order items (with price snapshot) |
+
+**Decision Tree:**
+
+```
+Do you need to store data ABOUT the relationship?
+    │
+    ├─ No  → Use Association Table (Table object)
+    │
+    └─ Yes → Use Association Object (Model class)
+           │
+           └─ Examples of "data about relationship":
+              - Quantity (how many in cart)
+              - Grade (what score in course)
+              - Timestamp (when was relationship created)
+              - Status (active/inactive relationship)
+              - Metadata (notes, tags on relationship)
+```
+
+#### Advanced Pattern: Price Snapshots in Orders
+
+Association objects are critical for e-commerce order items:
+
+```python
+class OrderItem(Base):
+    """
+    Order item with price snapshot.
+    Stores price AT TIME OF PURCHASE, not current product price.
+    """
+    __tablename__ = "order_items"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    order_id: Mapped[int] = mapped_column(ForeignKey('orders.id'))
+    product_id: Mapped[int] = mapped_column(ForeignKey('products.id'))
+
+    quantity: Mapped[int]
+    price_at_purchase: Mapped[float]  # Snapshot! Important for historical accuracy
+
+    order: Mapped["Order"] = relationship("Order", back_populates="items")
+    product: Mapped["Product"] = relationship("Product")
+
+    @property
+    def subtotal(self):
+        return self.quantity * self.price_at_purchase
+```
+
+**Why price snapshot matters:**
+
+```python
+# Create order
+order = Order(user_id=user.id)
+item = OrderItem(
+    order=order,
+    product=laptop,
+    quantity=1,
+    price_at_purchase=laptop.price  # $999 today
+)
+
+db.session.add_all([order, item])
+db.session.commit()
+
+# 1 year later, price changes
+laptop.price = 1299  # Price increased
+
+# Order still shows original price
+print(item.price_at_purchase)  # $999 (correct historical record)
+print(item.product.price)      # $1299 (current price)
+```
+
+#### Common Patterns Summary
+
+1. **cart_items:** quantity
+2. **order_items:** quantity, price_at_purchase
+3. **student_courses:** grade, enrolled_date
+4. **user_ratings:** rating_value, review_text, created_at
+5. **project_memberships:** role, joined_date, permissions
 
 ---
 

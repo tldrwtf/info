@@ -1,11 +1,11 @@
 # Full Stack Learning - Complete Cheat Sheet Collection
 
 [![Maintenance](https://img.shields.io/badge/Maintained%20by-tldrwtf-blue)](https://github.com/tldrwtf)
-[![Version](https://img.shields.io/badge/Version-1.11.0-orange.svg)](#changelog)
+[![Version](https://img.shields.io/badge/Version-1.12.0-orange.svg)](#changelog)
 
 If you find this resource useful, please consider leaving a star!
 
-**NEW in v1.11.0**: Added comprehensive JavaScript and CSS guides covering Fetch API, LocalStorage, CSS Grid Advanced techniques, and complete Flexbox patterns with real-world examples!
+**NEW in v1.12.0**: Enhanced SQLAlchemy and Flask guides with advanced patterns including session.flush() vs commit(), JWT Bearer token authentication with decorators, caching pagination strategies, self-referential many-to-many relationships, and association objects with real-world examples!
 
 ---
 
@@ -210,6 +210,7 @@ Common issues when setting up the projects:
 
 ## Versioning
 
+- **v1.12.0**: Enhanced SQLAlchemy and Flask guides with advanced production patterns including flush() vs commit(), JWT authentication decorators, caching pagination strategies, and association objects.
 - **v1.11.0**: Added comprehensive JavaScript and CSS guides covering Fetch API, LocalStorage, CSS Grid advanced patterns, and complete Flexbox reference.
 - **v1.10.0**: Added comprehensive Advanced Python Cheat Sheet covering metaclasses, descriptors, context managers, async/await, and more.
 - **v1.9.0**: Enhanced glossary with comprehensive cross-reference links to guides, cheat sheets, and code examples.
@@ -223,6 +224,83 @@ Common issues when setting up the projects:
 ---
 
 ## Changelog
+
+```text
+commit v1.12.0
+Date:   2026-01-16
+feat: SQLAlchemy and Flask advanced patterns enhancement
+
+GUIDE ENHANCEMENTS:
+- Enhanced SQLAlchemy_Advanced_Patterns_Guide.md with production patterns
+  * Added "Using flush() vs commit()" section explaining transaction control
+    - Pattern for accessing auto-generated IDs mid-transaction
+    - Common use cases: multi-entity creation, constraint checking, audit trails
+    - Best practices table comparing flush() vs commit()
+    - Real-world examples with error handling
+
+  * Added "Real-World Example: Shopping Cart with Association Object"
+    - Complete shopping cart implementation with quantity tracking
+    - Decision tree for association objects vs association tables
+    - Advanced pattern: price snapshots for e-commerce order items
+    - Common patterns summary (cart_items, order_items, student_courses, etc.)
+
+- Enhanced API_Authentication_Guide.md with production JWT implementation
+  * Added "JWT Bearer Token Pattern with Decorator" section
+    - Authorization header format (Bearer scheme)
+    - Token payload structure with standard claims (exp, iat, sub, role)
+    - Reusable decorator pattern for protecting routes
+    - Complete authentication flow (register, login, protected routes)
+    - Role-based access control examples
+    - Security best practices (HTTPS, short expiration, secret management)
+    - Common mistakes section with BAD/GOOD comparisons
+    - Error response formatting standards
+
+- Enhanced Flask_Advanced_Features_Guide.md with caching strategies
+  * Expanded "Caching Pagination: Common Pitfalls and Solutions" section
+    - The core problem: single page snapshot caching
+    - Warning signs of improper pagination caching
+    - 5 solution strategies with trade-offs:
+      1. No caching (recommended for dynamic data)
+      2. Very short TTL (10-30s for semi-static data)
+      3. Cache individual items, not pages
+      4. Smart cache invalidation
+      5. Separate metadata cache
+    - Decision matrix for choosing the right approach
+    - Production pattern combining multiple strategies
+    - Testing examples for cache behavior validation
+
+- Enhanced SQLAlchemy_Relationships_Guide.md with self-referential patterns
+  * Added "Understanding primaryjoin and secondaryjoin (Deep Dive)"
+    - Visual step-by-step explanation of self-referential M2M
+    - Breaking down primaryjoin and secondaryjoin syntax
+    - Common mistakes with examples (swapping joins, circular references)
+    - Debugging tips for relationship issues
+    - Testing relationship patterns with examples
+
+CONTENT QUALITY:
+- All examples include comprehensive error handling
+- Production-ready patterns with security considerations
+- Real-world use cases for each pattern
+- Common mistakes sections to avoid pitfalls
+- Best practices tables for quick reference
+- Cross-references to related guides
+- Code examples with type hints and docstrings
+
+GLOSSARY:
+- Will be updated with new terms:
+  * flush() (SQLAlchemy), Association Object, Bearer Token
+  * Self-Referential Relationship, primaryjoin/secondaryjoin
+- Enhanced existing SQLAlchemy and Flask entries with new cross-references
+
+TECHNICAL FOCUS:
+- Session lifecycle management (flush vs commit)
+- JWT authentication with decorator pattern
+- Pagination caching strategies and invalidation
+- Self-referential many-to-many relationships
+- Association objects vs association tables decision framework
+- Price snapshot patterns for e-commerce
+- Production-grade error handling and security
+```
 
 ```text
 commit v1.11.0
@@ -319,124 +397,3 @@ DOCUMENTATION:
 - Added v1.10.0 to versioning and changelog sections
 ```
 
-```text
-commit v1.9.0
-Date:   ???
-feat: Enhanced glossary with comprehensive cross-reference navigation
-
-GLOSSARY ENHANCEMENTS:
-- Enhanced GLOSSARY.md with cross-reference links for all 60+ terms
-  * Added "See also" sections linking each term to relevant resources
-  * Connected API term to 5 guides/cheatsheets (Flask REST API, API Auth, Building AI Ready APIs, etc.)
-  * Connected React term to 4 guides and starter code (React Basics, Modern Ecommerce, Fullstack, etc.)
-  * Connected SQLAlchemy term to 4 guides and model code examples
-  * Connected all Database terms to SQL guides and ORM documentation
-  * Connected all DevOps terms to Docker and CI/CD guides
-  * Connected all Frontend terms to HTML/CSS/JS/React resources
-  * Connected all Backend terms to Flask guides and library API code
-  * Connected Authentication terms to OAuth2 and API Auth guides
-
-NAVIGATION IMPROVEMENTS:
-- Glossary now serves as central navigation hub
-- Direct links from definitions to learning materials
-- Multiple resource types per term (guides, cheatsheets, code examples)
-- Consistent markdown link format for easy GitHub/local browsing
-
-DOCUMENTATION UPDATES:
-- Updated README.md with enhanced glossary description
-- Added glossary features section highlighting cross-references
-- Updated version badge to v1.9.0
-- Added v1.9.0 to versioning and changelog sections
-```
-
-```text
-commit v1.8.0
-Date:   ???
-
-feat: Comprehensive code documentation expansion
-
-PYTHON PRACTICE SOLUTIONS:
-- Enhanced Practice_Solutions/Python_Basics/Intro_Practice_Solutions.py
-  * Added comprehensive docstrings with Args, Returns, Examples, and Notes
-  * Added type hints for all functions (-> None, parameter types)
-
-- Enhanced Practice_Solutions/Python_Basics/Control_Flow_Solutions.py
-  * Comprehensive docstrings for all 7 functions
-  * Type hints throughout
-  * Detailed algorithm explanations with step-by-step logic
-  * Security notes (password example) and real-world context
-
-- Enhanced Practice_Solutions/Data_Structures/Lists_Dicts_Solutions.py
-  * Full typing support with List, Dict, Optional, Set
-  * Docstrings for all functions explaining data structure operations
-  * Mathematical context for set operations
-  * Alternative implementation suggestions (list comprehension)
-  * Best practice callouts throughout
-
-FLASK API CODE:
-- Enhanced library_api_code/app/models.py (ORM Documentation)
-  * Module-level docstring with ASCII schema diagrams
-  * Class docstrings for all 6 models (Users, Loans, Books, Orders, Items, ItemDescription)
-  * Comprehensive relationship documentation (One-to-Many, Many-to-Many)
-  * Association table explanation with visual table structure
-  * End-of-file guide on SQLAlchemy 2.0 concepts
-  * Query examples demonstrating relationship usage
-  * Cascade and lazy loading explanations
-
-REACT GUIDES:
-- Massively expanded guides/React_Basics_Guide.md
-  * Added Advanced Hooks section:
-    - useReducer with complete counter example
-    - useContext with theme and auth patterns
-    - useMemo with performance examples
-    - useCallback with React.memo integration
-  * Added Custom Hooks section with 3 complete examples:
-    - useLocalStorage (localStorage sync)
-    - useFetch (API data fetching)
-    - useToggle (boolean state management)
-  * Added Component Composition Patterns:
-    - Render Props pattern
-    - Compound Components pattern (Tabs example)
-  * Added Performance Optimization section:
-    - React.memo usage
-    - Lazy loading with Suspense
-    - Avoiding inline functions/objects
-  * Added Error Boundaries section with class component example
-  * Added Common React Mistakes section (6 pitfalls with examples)
-  * Added Best Practices Summary
-  * Cross-references to related guides
-
-DOCUMENTATION STANDARDS ESTABLISHED:
-- Consistent docstring format across all Python code
-- Type hints for better IDE support and type safety
-- Educational comments explaining WHY and WHEN, not just WHAT
-- Best practices callouts throughout
-- Common pitfalls and gotchas sections
-- Real-world usage examples
-- Cross-referencing between related content
-
-```
-
-```text
-commit v1.7.0
-Date:   ???
-
-feat: Docker & React Implementation
-
-- Created guides/Docker_and_Containerization_Guide.md (Basics, Dockerfile, Compose)
-- Created react_starter_code/ (Functional Vite + React boilerplate project)
-- Documented multi-container stack patterns
-```
-
-```text
-commit v1.6.0
-Date:   ???
-
-feat: Curriculum polish and advanced topic expansion
-
-- Enriched guides/Algorithms_Guide.md with full Bubble Sort and Merge Sort implementations
-- Enriched guides/Linked_Lists_and_Custom_Data_Structures_Guide.md with Doubly Linked Lists and real-world use cases (Browser History)
-- Enhanced guides/Modern_React_Ecommerce_Guide.md with industrial Form Validation (Formik + Yup)
-- Updated GLOSSARY.md with Big O, Recursion, and TDD definitions
-- Standardized navigation index in README.md
-```
