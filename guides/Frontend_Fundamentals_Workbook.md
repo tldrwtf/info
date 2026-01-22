@@ -63,7 +63,7 @@ Unified path through JavaScript essentials, DOM manipulation, and CSS layouts wi
 - [JavaScript Functions Guide](JavaScript_Functions_Guide.md) - Deep dive into functions, closures, and higher-order functions
 - [JavaScript Basics Cheat Sheet](../cheatsheets/JavaScript_Basics_Cheat_Sheet.md) - Core JavaScript syntax and data types
 - [DOM Manipulation Guide](DOM_Manipulation_Guide.md) - Comprehensive DOM manipulation patterns
-- [JavaScript Async Programming Guide](JavaScript_Async_Programming_Guide.md) - Promises, async/await, and error handling
+- [JavaScript Async Programming Guide](JavaScript_Fetch_API_Guide.md) - Promises, async/await, and error handling
 - [JavaScript Fetch API Guide](JavaScript_Fetch_API_Guide.md) - Fetching and rendering data from APIs
 - [JavaScript LocalStorage Guide](JavaScript_LocalStorage_Guide.md) - Persisting data across sessions
 - [CSS Layout Guide](CSS_Layout_Guide.md) - Flexbox and Grid fundamentals

@@ -179,6 +179,83 @@ if __name__ == '__main__':
     app.run(debug=True)
 ```
 
+### Rate Limit Headers
+
+Include rate limit information in response headers to help clients track their usage:
+
+```python
+from flask import Flask, jsonify, request, g
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
+app = Flask(__name__)
+
+limiter = Limiter(
+    app=app,
+    key_func=get_remote_address,
+    default_limits=["100 per hour"],
+    headers_enabled=True  # Enable built-in headers
+)
+
+# For custom header control
+@app.after_request
+def add_rate_limit_headers(response):
+    """Add rate limit headers to all responses."""
+    try:
+        # These headers inform clients about their rate limit status
+        if hasattr(g, 'view_rate_limit'):
+            response.headers['X-RateLimit-Limit'] = g.view_rate_limit.limit
+            response.headers['X-RateLimit-Remaining'] = g.view_rate_limit.remaining
+            response.headers['X-RateLimit-Reset'] = g.view_rate_limit.reset
+    except Exception:
+        pass
+    return response
+```
+
+**Common Rate Limit Headers:**
+
+| Header | Description |
+|--------|-------------|
+| `X-RateLimit-Limit` | Maximum requests allowed in window |
+| `X-RateLimit-Remaining` | Requests remaining in current window |
+| `X-RateLimit-Reset` | Unix timestamp when the window resets |
+| `Retry-After` | Seconds until the client can retry (on 429) |
+
+### Production Redis Configuration
+
+For distributed deployments with multiple Flask instances, use Redis as the storage backend:
+
+```python
+from flask import Flask
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+import redis
+
+app = Flask(__name__)
+
+# Redis connection pool for better performance
+redis_pool = redis.ConnectionPool(
+    host='localhost',
+    port=6379,
+    db=0,
+    max_connections=10
+)
+
+limiter = Limiter(
+    app=app,
+    key_func=get_remote_address,
+    storage_uri="redis://localhost:6379",
+    storage_options={"connection_pool": redis_pool},
+    default_limits=["200 per day", "50 per hour"]
+)
+```
+
+**Why Redis for Production:**
+- Shared state across multiple application instances
+- Persistent rate limit counters (survives restarts)
+- Faster than database queries
+- Built-in key expiration
+
 ---
 
 ## Caching with Flask-Caching

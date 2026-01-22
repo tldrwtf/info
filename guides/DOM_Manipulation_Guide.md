@@ -407,4 +407,4 @@ console.log(item.parentElement.children);// All children elements of the parent
 - [JavaScript Functions Guide](JavaScript_Functions_Guide.md) - Deeper dive into functions and scope
 - [JavaScript LocalStorage Guide](JavaScript_LocalStorage_Guide.md) - Persisting DOM state across sessions
 - [JavaScript Fetch API Guide](JavaScript_Fetch_API_Guide.md) - Fetching data and displaying it in the DOM
-- [JavaScript Async Programming Guide](JavaScript_Async_Programming_Guide.md) - Async operations with DOM manipulation
+- [JavaScript Fetch API Guide](JavaScript_Fetch_API_Guide.md) - Async operations with DOM manipulation

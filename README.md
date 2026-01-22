@@ -1,11 +1,11 @@
 # Full Stack Learning - Complete Cheat Sheet Collection
 
 [![Maintenance](https://img.shields.io/badge/Maintained%20by-tldrwtf-blue)](https://github.com/tldrwtf)
-[![Version](https://img.shields.io/badge/Version-1.12.0-orange.svg)](#changelog)
+[![Version](https://img.shields.io/badge/Version-1.14.0-orange.svg)](#changelog)
 
 If you find this resource useful, please consider leaving a star!
 
-**NEW in v1.12.0**: Enhanced SQLAlchemy and Flask guides with advanced patterns including session.flush() vs commit(), JWT Bearer token authentication with decorators, caching pagination strategies, self-referential many-to-many relationships, and association objects with real-world examples!
+**NEW in v1.14.0**: Added Learning Progression Guide with a structured 9-stage learning path from web foundations to production deployment, expanded Flask rate limiting documentation with Redis and dynamic tier patterns, and new glossary entry for Learning Progression!
 
 ---
 
@@ -16,6 +16,7 @@ If you find this resource useful, please consider leaving a star!
 - [Repository Structure](#repository-structure)
 - [Available Cheat Sheets](#available-cheat-sheets)
 - [In-Depth Guides](#in-depth-guides)
+- [Learning Path](#learning-path)
 - [Real-World Examples](#real-world-examples)
 - [Glossary](#glossary)
 - [Troubleshooting](#troubleshooting)
@@ -37,7 +38,7 @@ cd info
 
 ## What Makes This Different
 
-This isn't just another code repository - it's a **comprehensive learning system**.
+This isn't just another code repository. It's a **comprehensive learning system**.
 
 ### Heavily Commented Code Examples
 
@@ -100,6 +101,8 @@ class Users(Base):
 ### Modern React Patterns
 
 The React guides now include:
+- **Lifting State Up** pattern for sharing state between sibling components
+- **Controlled Components** for form handling with real-time validation
 - **Advanced Hooks** (useReducer, useContext, useMemo, useCallback) with complete examples
 - **Custom Hooks** showing reusable logic extraction
 - **Performance optimization** strategies
@@ -162,6 +165,23 @@ Explore complex topics with the consolidated handbooks in `guides/` (individual 
 - **JavaScript deep dives:** [Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md) and [LocalStorage Guide](guides/JavaScript_LocalStorage_Guide.md)
 - **CSS layout mastery:** [CSS Grid Advanced Guide](guides/CSS_Grid_Advanced_Guide.md) and [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
 - **Still need a specific topic?** Legacy guides like [API Authentication](guides/API_Authentication_Guide.md), [OAuth2](guides/OAuth2_and_Token_Management_Guide.md), and others remain available.
+
+---
+
+## Learning Path
+
+New to the repo? Follow the recommended [Learning Progression Guide](guides/Learning_Progression_Guide.md) for a structured path from foundations to production deployment. The guide covers 9 stages:
+
+1. Web Foundations (HTML, CSS)
+2. Python Fundamentals
+3. Data Structures and Algorithms
+4. Object-Oriented Programming
+5. Databases and ORM
+6. Backend Development (Flask)
+7. JavaScript and DOM
+8. React and Modern Frontend
+9. DevOps and Production
+
 ---
 
 ## Real-World Examples
@@ -209,7 +229,10 @@ Common issues when setting up the projects:
 ---
 
 ## Versioning
+<details>
 
+- **v1.14.0**: Added Learning Progression Guide with structured 9-stage learning path, expanded Flask rate limiting with Redis and dynamic tier patterns, new glossary entry.
+- **v1.13.0**: React Basics Guide expanded with Lifting State Up and Controlled Components patterns, new glossary entries, and enhanced CSS pseudo-class/element examples.
 - **v1.12.0**: Enhanced SQLAlchemy and Flask guides with advanced production patterns including flush() vs commit(), JWT authentication decorators, caching pagination strategies, and association objects.
 - **v1.11.0**: Added comprehensive JavaScript and CSS guides covering Fetch API, LocalStorage, CSS Grid advanced patterns, and complete Flexbox reference.
 - **v1.10.0**: Added comprehensive Advanced Python Cheat Sheet covering metaclasses, descriptors, context managers, async/await, and more.
@@ -221,11 +244,81 @@ Common issues when setting up the projects:
 - **v1.4.0**: Massive expansion of Advanced Data Structures, WebSockets, and CLI Architecture.
 - **v1.3.0**: Comprehensive documentation overhaul.
 
----
+</details>
 
 ## Changelog
+<details>
 
 ```text
+commit v1.14.0
+Date:   2026-01-22
+feat: Learning Progression Guide and Flask rate limiting expansion
+
+NEW GUIDE:
+- Created Learning_Progression_Guide.md with structured 9-stage learning path
+  * Stage 1: Web Foundations (HTML, CSS)
+  * Stage 2: Python Fundamentals
+  * Stage 3: Data Structures and Algorithms
+  * Stage 4: Object-Oriented Programming
+  * Stage 5: Databases and ORM
+  * Stage 6: Backend Development (Flask)
+  * Stage 7: JavaScript and DOM
+  * Stage 8: React and Modern Frontend
+  * Stage 9: DevOps and Production
+  * Includes learning goals for each stage
+  * Practical project suggestions
+  * Tips for success
+
+GUIDE ENHANCEMENTS:
+- Expanded Flask_Advanced_Features_Guide.md rate limiting section
+  * Added "Rate Limit Headers" section with X-RateLimit-* headers
+  * Added "Production Redis Configuration" with connection pooling
+  * Common rate limit headers reference table
+
+README UPDATES:
+- Added Learning Path section to Table of Contents
+- Added Learning Path section with 9-stage overview
+- Updated version badge to v1.14.0
+
+GLOSSARY ADDITIONS:
+- Added "Learning Progression" definition with cross-references
+
+---
+
+commit v1.13.0
+Date:   2026-01-21
+feat: React state patterns and CSS pseudo-class documentation expansion
+
+GUIDE ENHANCEMENTS:
+- Enhanced React_Basics_Guide.md with core state management patterns
+  * Added "Lifting State Up" section
+    - Single source of truth principle
+    - Parent-child state sharing pattern with code examples
+    - Decision table for when to lift state vs use Context
+  * Added "Controlled Components" section
+    - Controlled vs Uncontrolled comparison table
+    - Basic controlled input with real-time validation example
+    - Multiple inputs with single handler pattern
+    - Common patterns: derived state, format enforcement, conditional rendering
+
+- Enhanced CSS_Cheat_Sheet.md with practical examples
+  * Added "Pseudo-Class Combinations" section
+    - First/last child styling patterns
+    - Nth-child patterns for zebra striping
+    - Form state styling (valid, invalid, disabled)
+    - Interactive state chaining with :not()
+  * Added "Pseudo-Element Practical Examples" section
+    - Custom bullet points with ::before
+    - Clearfix pattern with ::after
+    - Tooltip implementation using data attributes and pseudo-elements
+
+GLOSSARY ADDITIONS:
+- Added "Controlled Component" definition with cross-references
+- Added "Lifting State Up" definition with cross-references
+- Added "Uncontrolled Component" definition with cross-references
+
+---
+
 commit v1.12.0
 Date:   2026-01-16
 feat: SQLAlchemy and Flask advanced patterns enhancement
@@ -396,4 +489,4 @@ DOCUMENTATION:
 - Updated version badge to v1.10.0
 - Added v1.10.0 to versioning and changelog sections
 ```
-
+</details>

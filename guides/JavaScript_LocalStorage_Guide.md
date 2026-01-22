@@ -897,7 +897,7 @@ const user = loadData('user');
 ## See Also
 
 - [JavaScript Fetch API Guide](./JavaScript_Fetch_API_Guide.md) - Fetch data and store in localStorage
-- [JavaScript Async Programming Guide](./JavaScript_Async_Programming_Guide.md) - Async patterns for data loading
+- [JavaScript Fetch API Guide](./JavaScript_Fetch_API_Guide.md) - Async patterns for data loading
 - [React Basics Guide](./React_Basics_Guide.md) - React state management with localStorage persistence
 - [DOM Manipulation Guide](./DOM_Manipulation_Guide.md) - Display and manage localStorage data in the DOM
 - [JavaScript Basics Cheat Sheet](../cheatsheets/JavaScript_Basics_Cheat_Sheet.md) - Core JavaScript syntax

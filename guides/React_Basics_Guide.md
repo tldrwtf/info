@@ -86,6 +86,114 @@ function Counter() {
 }
 ```
 
+### Lifting State Up
+
+When multiple components need to share and modify the same state, lift that state up to their closest common ancestor.
+
+**Why Lift State?**
+- **Single source of truth**: Avoid duplicate state that can get out of sync
+- **Predictable data flow**: State flows down via props, changes flow up via callbacks
+- **Easier debugging**: State changes happen in one place
+
+```jsx
+// Parent holds shared state
+function Parent() {
+  const [sharedValue, setSharedValue] = useState('');
+
+  return (
+    <>
+      <ChildA value={sharedValue} onChange={setSharedValue} />
+      <ChildB value={sharedValue} />
+    </>
+  );
+}
+
+// Child A can modify state via callback
+function ChildA({ value, onChange }) {
+  return <input value={value} onChange={e => onChange(e.target.value)} />;
+}
+
+// Child B receives state as prop
+function ChildB({ value }) {
+  return <p>Current value: {value}</p>;
+}
+```
+
+| Scenario | Action |
+|----------|--------|
+| Two siblings need same data | Lift to parent |
+| Child needs to update parent's display | Pass callback prop |
+| Deeply nested components share state | Consider Context API |
+
+*See also:* [React Context State Management Guide](./React_Context_State_Management_Guide.md)
+
+### Controlled Components
+
+A controlled component is a form element whose value is controlled by React state.
+
+| Type | Value Source | When to Use |
+|------|-------------|-------------|
+| Controlled | React state | Validation, conditional logic, format enforcement |
+| Uncontrolled | DOM directly | Simple forms, file inputs, integration with non-React code |
+
+**Basic Controlled Input**
+```jsx
+function ControlledForm() {
+  const [email, setEmail] = useState('');
+  const [isValid, setIsValid] = useState(true);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    setIsValid(value.includes('@')); // Real-time validation
+  };
+
+  return (
+    <form>
+      <input
+        type="email"
+        value={email}
+        onChange={handleChange}
+        className={isValid ? '' : 'error'}
+      />
+      {!isValid && <span>Please enter a valid email</span>}
+    </form>
+  );
+}
+```
+
+**Multiple Inputs with Single Handler**
+```jsx
+function MultiInputForm() {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  return (
+    <form>
+      <input name="username" value={formData.username} onChange={handleChange} />
+      <input name="email" value={formData.email} onChange={handleChange} />
+      <input name="password" type="password" value={formData.password} onChange={handleChange} />
+    </form>
+  );
+}
+```
+
+**Common Patterns**
+- **Derived state**: Compute values from controlled inputs (e.g., password strength)
+- **Format enforcement**: Force uppercase, phone number formatting
+- **Conditional rendering**: Show/hide fields based on input values
+
 ---
 
 ## 4. Effects (Side Effects)
@@ -906,8 +1014,8 @@ useEffect(() => {
 
 - [JavaScript Functions Guide](JavaScript_Functions_Guide.md) - Arrow functions and closures essential for React
 - [JavaScript Objects/Arrays](../cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md) - Destructuring and map/filter methods
-- [JavaScript Async Programming Guide](JavaScript_Async_Programming_Guide.md) - Async/await patterns for useEffect and data fetching
+- [JavaScript Fetch API Guide](JavaScript_Fetch_API_Guide.md) - Async/await patterns for useEffect and data fetching
 - [JavaScript LocalStorage Guide](JavaScript_LocalStorage_Guide.md) - Persisting React state with localStorage
-- [React Router Guide](React_Router_Guide.md) - Navigation and routing in React applications
+- [React Router Navigation Guide](React_Router_Navigation_Guide.md) - Navigation and routing in React applications
 - [Modern React Ecommerce Guide](Modern_React_Ecommerce_Guide.md) - Advanced patterns with shopping cart and checkout flow
 - [Modern Fullstack Guide](Modern_Fullstack_Guide.md) - Next.js and fullstack patterns

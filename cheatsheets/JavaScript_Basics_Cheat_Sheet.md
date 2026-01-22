@@ -446,7 +446,7 @@ clearInterval(timerId);
 - [JavaScript Functions Guide](../guides/JavaScript_Functions_Guide.md) - Functions, callbacks, and scope in depth
 - [JavaScript Objects and Arrays Cheat Sheet](JavaScript_Objects_Arrays_Cheat_Sheet.md) - Detailed guide on Objects and Arrays
 - [DOM Manipulation Guide](../guides/DOM_Manipulation_Guide.md) - Practical DOM manipulation patterns and event handling
-- [JavaScript Async Programming Guide](../guides/JavaScript_Async_Programming_Guide.md) - Async/await and Promise patterns
+- [JavaScript Async Programming Guide](../guides/JavaScript_Fetch_API_Guide.md) - Async/await and Promise patterns
 - [JavaScript LocalStorage Guide](../guides/JavaScript_LocalStorage_Guide.md) - Persisting data across sessions
 - [HTML Cheat Sheet](HTML_Cheat_Sheet.md) - Structure of web pages
 - [CSS Cheat Sheet](CSS_Cheat_Sheet.md) - Styling web pages

@@ -113,6 +113,66 @@ input::placeholder {
 }
 ```
 
+### Pseudo-Class Combinations
+
+```css
+/* First and last child styling */
+li:first-child { font-weight: bold; }
+li:last-child { border-bottom: none; }
+
+/* Nth-child patterns */
+tr:nth-child(odd) { background: #f9f9f9; }  /* Zebra striping */
+tr:nth-child(3n) { color: blue; }           /* Every third */
+
+/* Form states */
+input:valid { border-color: green; }
+input:invalid { border-color: red; }
+input:disabled { opacity: 0.5; }
+
+/* Interactive states chain */
+button:hover:not(:disabled) {
+    background: #0056b3;
+    cursor: pointer;
+}
+```
+
+### Pseudo-Element Practical Examples
+
+```css
+/* Custom bullet points */
+li::before {
+    content: '>';
+    color: #007bff;
+    margin-right: 8px;
+}
+
+/* Clearfix pattern */
+.clearfix::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/* Tooltip with pseudo-element */
+.tooltip::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+}
+```
+
 ## 3. The Box Model
 
 Every HTML element is essentially a box. The CSS box model is a box that wraps around every HTML element. It consists of:

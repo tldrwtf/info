@@ -686,7 +686,7 @@ const fetchData = async (url) => {
 
 ## See Also
 
-- [JavaScript Async Programming Guide](./JavaScript_Async_Programming_Guide.md) - Async/await fundamentals and Promise patterns
+- [Frontend Fundamentals Workbook](./Frontend_Fundamentals_Workbook.md) - Promises, async/await, and error handling
 - [JavaScript LocalStorage Guide](./JavaScript_LocalStorage_Guide.md) - Persisting fetched data across sessions
 - [React Basics Guide](./React_Basics_Guide.md) - Using Fetch in React components with useEffect
 - [DOM Manipulation Guide](./DOM_Manipulation_Guide.md) - Displaying fetched data in the DOM

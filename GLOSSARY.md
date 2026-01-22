@@ -54,6 +54,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md), [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md), [React Basics Guide](guides/React_Basics_Guide.md)
 *   **Component:** A reusable unit of UI that encapsulates structure, styling, and behavior. In React, components receive props and return JSX.
     *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [Modern React Ecommerce Guide](guides/Modern_React_Ecommerce_Guide.md)
+*   **Controlled Component:** A form element whose value is driven by React state rather than the DOM. The component receives its current value via props and notifies changes via callbacks, enabling real-time validation and conditional logic.
+    *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [React to Fullstack Track](guides/React_to_Fullstack_Track.md)
 *   **Container:** A lightweight, isolated runtime that packages an app with its dependencies. Containers improve portability and consistency between dev and production.
     *See also:* [Docker and Containerization Guide](guides/Docker_and_Containerization_Guide.md)
 *   **Cookie:** A small key-value store in the browser that is sent with HTTP requests. Cookies are commonly used for sessions and can be secured with `HttpOnly`, `Secure`, and `SameSite` flags.
@@ -118,7 +120,7 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 *   **File I/O (Input/Output):** Reading from or writing to files on disk. File I/O is often asynchronous in modern runtimes to keep apps responsive.
     *See also:* [File Operations Cheat Sheet](cheatsheets/File_Operations_Cheat_Sheet.md)
 *   **Fetch API:** A modern JavaScript interface for making HTTP requests that returns Promises. It replaces older XMLHttpRequest with cleaner syntax, supports async/await, and provides fine-grained control over requests and responses.
-    *See also:* [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md), [JavaScript Async Programming Guide](guides/JavaScript_Async_Programming_Guide.md)
+    *See also:* [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md), [Frontend Fundamentals Workbook](guides/Frontend_Fundamentals_Workbook.md)
 *   **flush() (SQLAlchemy):** A Session method that sends pending changes to the database without committing the transaction. Unlike commit(), flush() keeps the transaction open and makes auto-generated IDs available (like primary keys, timestamps) for use within the same transaction. Critical for multi-step operations where you need database-generated values before the final commit. Always follow flush() with commit() eventually, and handle exceptions to rollback properly.
     *See also:* [SQLAlchemy Advanced Patterns Guide](guides/SQLAlchemy_Advanced_Patterns_Guide.md), [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md)
 *   **Foreign Key:** A database column that references a primary key in another table. Foreign keys enforce relationships and data integrity.
@@ -220,6 +222,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 *   **Library:** A collection of reusable code that solves common problems. Libraries give you building blocks without enforcing a full structure like frameworks.
     *See also:* [Standard Library Essentials Cheat Sheet](cheatsheets/Standard_Library_Essentials_Cheat_Sheet.md)
+*   **Lifting State Up:** A React pattern where shared state is moved to the closest common ancestor of components that need it. State flows down as props, and changes flow up via callback functions, maintaining a single source of truth.
+    *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [React Context State Management Guide](guides/React_Context_State_Management_Guide.md)
 *   **Linked List:** A linear data structure made of nodes that point to the next node. It makes insertions easy but does not support fast random access.
     *See also:* [Linked Lists and Custom Data Structures Guide](guides/Linked_Lists_and_Custom_Data_Structures_Guide.md), [Data Structures Cheat Sheet](cheatsheets/Data_Structures_Cheat_Sheet.md)
 *   **Linux:** An open-source operating system widely used in servers and development. Many production deployments and containers run on Linux.
@@ -230,6 +234,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [JavaScript LocalStorage Guide](guides/JavaScript_LocalStorage_Guide.md), [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md)
 *   **Logging:** Recording runtime events so systems can be monitored and debugged. Structured logs are easier to search and analyze.
     *See also:* [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md)
+*   **Learning Progression:** A structured approach to learning that sequences topics from foundational to advanced, ensuring prerequisite knowledge is built before tackling complex subjects. In this repo, the Learning Progression Guide provides a 9-stage path from web foundations through production deployment.
+    *See also:* [Learning Progression Guide](guides/Learning_Progression_Guide.md), [Python Practice to Projects Path](guides/Python_Practice_to_Projects_Path.md)
 
 ## M
 
@@ -365,6 +371,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [HTML Cheat Sheet](cheatsheets/HTML_Cheat_Sheet.md), [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md), [Portfolio Web Development Guide](guides/Portfolio_Web_Development_Guide.md)
 *   **Unit Test:** A test that verifies a small, isolated unit of code (a function or class). Unit tests are fast and help catch regressions early.
     *See also:* [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md)
+*   **Uncontrolled Component:** A form element that maintains its own internal state in the DOM. Values are accessed via refs rather than React state. Useful for simple forms, file inputs, or integrating with non-React libraries.
+    *See also:* [React Basics Guide](guides/React_Basics_Guide.md)
 *   **URL (Uniform Resource Locator):** The address used to access resources on the internet. URLs include a scheme, domain, path, and optional query string.
     *See also:* [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md), [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md)
 *   **UX (User Experience):** The overall experience a user has when interacting with a product, including ease, satisfaction, and flow.
