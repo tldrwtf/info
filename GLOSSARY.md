@@ -6,6 +6,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 
 *   **Align-items:** A CSS Flexbox property that controls alignment along the cross axis (perpendicular to flex-direction). Values include flex-start, flex-end, center, stretch, and baseline for positioning items within their flex lines.
     *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md), [CSS Layout Guide](guides/CSS_Layout_Guide.md)
+*   **AbortController:** A browser API used to cancel asynchronous operations such as `fetch` requests. It helps prevent stale responses from updating UI state, supports request timeouts, and is especially useful for search-as-you-type interfaces.
+    *See also:* [Asynchronous JavaScript Guide](guides/Asynchronous_JavaScript_Guide.md), [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md)
 *   **API (Application Programming Interface):** A set of rules and conventions that lets different software systems communicate. In web apps, an API exposes endpoints that accept HTTP methods and return structured data (often JSON), keeping clients decoupled from server internals.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [API Authentication Guide](guides/API_Authentication_Guide.md), [Building AI Ready APIs Guide](guides/Building_AI_Ready_APIs_Guide.md), [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md), [Library API Code Examples](library_api_code/)
 *   **Association Object:** A SQLAlchemy pattern where a many-to-many relationship is represented by a full model class instead of a simple Table. Association objects are needed when the relationship itself has attributes (e.g., quantity in a shopping cart, grade in a course enrollment, price snapshot in an order). They enable tracking metadata about the relationship and provide a primary key for the relationship itself.
@@ -15,7 +17,7 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 *   **Array:** An ordered collection of items accessed by index. Arrays give fast reads but can be slower to insert or remove in the middle.
     *See also:* [JavaScript Objects Arrays Cheat Sheet](cheatsheets/JavaScript_Objects_Arrays_Cheat_Sheet.md), [Data Structures Cheat Sheet](cheatsheets/Data_Structures_Cheat_Sheet.md)
 *   **Asynchronous:** A programming pattern where operations run without blocking the main flow. In JavaScript, `async`/`await` and Promises let I/O work happen in the background so UIs stay responsive. In Python, asyncio enables concurrent I/O operations for network requests and file operations.
-    *See also:* [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md), [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
+    *See also:* [Asynchronous JavaScript Guide](guides/Asynchronous_JavaScript_Guide.md), [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md), [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
 *   **Auto-fill:** A CSS Grid keyword used with repeat() that creates as many tracks as will fit in the container. When combined with minmax(), it creates responsive grids that automatically add or remove columns based on available space.
     *See also:* [CSS Grid Advanced Guide](guides/CSS_Grid_Advanced_Guide.md)
 *   **Auto-fit:** A CSS Grid keyword similar to auto-fill, but collapses empty tracks to zero width. This makes remaining items expand to fill the container, ideal for galleries where item count varies.
@@ -35,13 +37,13 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [Big O Notation Cheat Sheet](cheatsheets/Big_O_Notation_Cheat_Sheet.md), [Algorithms Guide](guides/Algorithms_Guide.md)
 *   **Blueprint (Flask):** A Flask feature for grouping related routes and logic into reusable modules. Blueprints help large apps stay organized and integrate cleanly with the app factory pattern.
     *See also:* [Flask REST API Development Guide](guides/Flask_REST_API_Development_Guide.md), [Library API Flask Patterns Guide](guides/Library-Api_Flask_Patterns_Guide.md), [Blueprint Examples](library_api_code/app/blueprints/)
-*   **Bootstrap:** A popular CSS framework that provides a grid system and ready-made components. It speeds up layout and styling for responsive sites.
-    *See also:* [Bootstrap Cheat Sheet](cheatsheets/Bootstrap_Cheat_Sheet.md), [HTML Cheat Sheet](cheatsheets/HTML_Cheat_Sheet.md)
+*   **Bootstrap:** A popular CSS framework that provides a responsive grid system, utility classes, and ready-made components. It speeds up interface development and is often paired with custom CSS Grid for page-level layout control.
+    *See also:* [Bootstrap Cheat Sheet](cheatsheets/Bootstrap_Cheat_Sheet.md), [Bootstrap Components and Custom Grid Guide](guides/Bootstrap_Components_and_Grid_Guide.md), [HTML Cheat Sheet](cheatsheets/HTML_Cheat_Sheet.md)
 
 ## C
 
 *   **Callback:** A function passed into another function to be called later, often after an asynchronous event completes. Callbacks are common in event handling and in older async code.
-    *See also:* [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
+    *See also:* [Asynchronous JavaScript Guide](guides/Asynchronous_JavaScript_Guide.md), [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
 *   **Cache (Caching):** Temporary storage for data that is expensive to compute or fetch. Caching speeds up responses but requires careful invalidation to avoid stale data.
     *See also:* [Modern Fullstack Guide](guides/Modern_Fullstack_Guide.md)
 *   **CI/CD (Continuous Integration/Continuous Deployment):** Automation that builds, tests, and ships code changes quickly and safely. CI runs tests on every change, while CD automates releases.
@@ -108,6 +110,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
 *   **Event Delegation:** A pattern that leverages event bubbling to handle events at a parent element rather than attaching individual listeners to each child. Improves performance with many similar elements and automatically works with dynamically added elements.
     *See also:* [DOM Manipulation Guide](guides/DOM_Manipulation_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
+*   **Event Loop:** The mechanism in JavaScript that handles asynchronous callbacks, ensuring non-blocking I/O operations by pushing queued tasks to the call stack when it is empty.
+    *See also:* [Asynchronous JavaScript Guide](guides/Asynchronous_JavaScript_Guide.md)
 *   **Error Handling:** Practices for detecting, responding to, and recovering from errors. Good error handling returns clear messages and avoids exposing sensitive details.
     *See also:* [Error Handling Cheat Sheet](cheatsheets/Error_Handling_Cheat_Sheet.md), [Testing and Debugging Cheat Sheet](cheatsheets/Testing_and_Debugging_Cheat_Sheet.md)
 *   **Exception:** An error event that interrupts normal control flow. Well-handled exceptions make failures predictable and easier to debug.
@@ -123,6 +127,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md), [Frontend Fundamentals Workbook](guides/Frontend_Fundamentals_Workbook.md)
 *   **flush() (SQLAlchemy):** A Session method that sends pending changes to the database without committing the transaction. Unlike commit(), flush() keeps the transaction open and makes auto-generated IDs available (like primary keys, timestamps) for use within the same transaction. Critical for multi-step operations where you need database-generated values before the final commit. Always follow flush() with commit() eventually, and handle exceptions to rollback properly.
     *See also:* [SQLAlchemy Advanced Patterns Guide](guides/SQLAlchemy_Advanced_Patterns_Guide.md), [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md)
+*   **Focus-visible (`:focus-visible`):** A CSS pseudo-class that applies styles when an element receives keyboard-like focus indication. It improves accessibility by showing focus rings for keyboard users without always showing them for mouse clicks.
+    *See also:* [CSS Pseudo-Selectors Guide](guides/CSS_Pseudo_Selectors_Guide.md), [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md)
 *   **Foreign Key:** A database column that references a primary key in another table. Foreign keys enforce relationships and data integrity.
     *See also:* [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)
 *   **Flex-direction:** A CSS Flexbox property that defines the main axis direction. Values are row (default, left to right), row-reverse, column (top to bottom), and column-reverse, determining how flex items flow in the container.
@@ -141,9 +147,6 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md), [Python Basics Cheat Sheet](cheatsheets/Python_Basics_Cheat_Sheet.md), [Functional Programming Cheat Sheet](cheatsheets/Functional_Programming_Cheat_Sheet.md)
 *   **Functional Programming:** A paradigm focused on pure functions, immutability, and composition. It reduces side effects and can make code easier to test.
     *See also:* [Functional Programming Cheat Sheet](cheatsheets/Functional_Programming_Cheat_Sheet.md)
-*   **Foreign Key:** A database column that references a primary key in another table. Foreign keys enforce relationships and data integrity.
-    *See also:* [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md)
-
 ## G
 
 *   **Gap:** A CSS property that sets spacing between flex or grid items. Replaces margin-based spacing with cleaner syntax. Works in both Flexbox (gap between items) and Grid (row-gap and column-gap combined).
@@ -179,7 +182,6 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [APIs and Requests Cheat Sheet](cheatsheets/APIs_and_Requests_Cheat_Sheet.md)
 *   **Hook (React):** A function that lets React components use state or lifecycle behavior (for example, `useState`, `useEffect`). Hooks make logic reusable without classes.
     *See also:* [React Basics Guide](guides/React_Basics_Guide.md)
-
 ## I
 
 *   **IDE (Integrated Development Environment):** A software tool that provides code editing, debugging, and project management in one place. IDEs speed up development with autocomplete and refactors.
@@ -243,6 +245,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
 *   **Metaclass:** A class of a class that controls class creation and behavior. Metaclasses are used in framework development for patterns like singleton enforcement, automatic registration, and class validation. They implement `__new__` and `__call__` to customize how classes are constructed.
     *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md)
+*   **Microtask Queue:** A high-priority queue used by the JavaScript event loop for Promise callbacks, `await` continuations, and `queueMicrotask`. Microtasks run after the current call stack and before the next task queue item, which affects execution ordering and UI update timing.
+    *See also:* [Asynchronous JavaScript Guide](guides/Asynchronous_JavaScript_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
 *   **Middleware:** Code that runs between a request and a response. It is often used for authentication, logging, and request transformation.
     *See also:* [Flask Advanced Features Guide](guides/Flask_Advanced_Features_Guide.md), [Library API Flask Patterns Guide](guides/Library-Api_Flask_Patterns_Guide.md)
 *   **Migration:** A controlled change to database schema or data. Migrations keep environments in sync and provide a history of structural changes.
@@ -285,9 +289,17 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
 *   **Props:** Inputs passed into a React component to customize its behavior or rendering. Props are read-only and flow from parent to child.
     *See also:* [React Basics Guide](guides/React_Basics_Guide.md), [Modern React Ecommerce Guide](guides/Modern_React_Ecommerce_Guide.md)
 *   **Promise:** A JavaScript object representing the eventual completion or failure of an async operation. Promises can be chained and awaited for cleaner async code.
-    *See also:* [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
+    *See also:* [Asynchronous JavaScript Guide](guides/Asynchronous_JavaScript_Guide.md), [JavaScript Functions Guide](guides/JavaScript_Functions_Guide.md), [JavaScript Basics Cheat Sheet](cheatsheets/JavaScript_Basics_Cheat_Sheet.md)
+*   **Promise.allSettled():** A Promise utility that waits for all input Promises to settle (fulfilled or rejected) and returns status objects for each result. Useful when you need partial success data rather than fail-fast behavior.
+    *See also:* [Asynchronous JavaScript Guide](guides/Asynchronous_JavaScript_Guide.md), [JavaScript Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md)
 *   **Protocol (Python):** A structural subtyping mechanism that enables duck typing with type safety. Protocols define interfaces through method signatures without requiring explicit inheritance, making them ideal for type hints in flexible APIs.
     *See also:* [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md)
+*   **:has() (CSS Pseudo-class):** A relational pseudo-class that selects an element if it contains, or is followed by, a matching descendant or relative selector. It enables parent-aware styling such as highlighting a form group when an input inside it is focused.
+    *See also:* [CSS Pseudo-Selectors Guide](guides/CSS_Pseudo_Selectors_Guide.md), [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md)
+*   **Pseudo-class:** A CSS keyword added to a selector that specifies a special state or condition of selected elements, such as `:hover`, `:focus-visible`, `:nth-child()`, or `:not()`.
+    *See also:* [CSS Pseudo-Selectors Guide](guides/CSS_Pseudo_Selectors_Guide.md), [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md)
+*   **Pseudo-element:** A CSS keyword added to a selector that lets you style a specific part of the selected element(s), such as `::before` or `::first-letter`.
+    *See also:* [CSS Pseudo-Selectors Guide](guides/CSS_Pseudo_Selectors_Guide.md), [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md)
 *   **Python:** A high-level language known for readability and a huge ecosystem. It is widely used for APIs, automation, data work, and scripting. Advanced features include metaclasses, descriptors, context managers, and async/await patterns.
     *See also:* [Python Basics Cheat Sheet](cheatsheets/Python_Basics_Cheat_Sheet.md), [Advanced Python Cheat Sheet](cheatsheets/Advanced_Python_Cheat_Sheet.md), [OOP Cheat Sheet](cheatsheets/OOP_Cheat_Sheet.md), [Functional Programming Cheat Sheet](cheatsheets/Functional_Programming_Cheat_Sheet.md), [Standard Library Essentials Cheat Sheet](cheatsheets/Standard_Library_Essentials_Cheat_Sheet.md), [Python CLI Applications Guide](guides/Python_CLI_Applications_Guide.md)
 *   **Proxy:** A server that forwards requests to another service, often adding routing, caching, or authentication. Proxies can simplify architectures and improve security.
@@ -343,6 +355,8 @@ This glossary defines key terms and acronyms used throughout the Full Stack Lear
     *See also:* [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md), [SQL DDL Guide](guides/SQL_DDL_Guide.md), [SQL Advanced Queries Guide](guides/SQL_Advanced_Queries_Guide.md)
 *   **SQLAlchemy:** A Python toolkit and ORM that provides both SQL expression building and object mapping. It balances low-level SQL control with high-level productivity. Advanced patterns include session.flush() for mid-transaction ID access, association objects for many-to-many relationships with metadata, and primaryjoin/secondaryjoin for self-referential relationships.
     *See also:* [SQL and SQLAlchemy Cheat Sheet](cheatsheets/SQL_and_SQLAlchemy_Cheat_Sheet.md), [SQLAlchemy CRUD Guide](guides/SQLAlchemy_CRUD_Guide.md), [SQLAlchemy Relationships Guide](guides/SQLAlchemy_Relationships_Guide.md), [SQLAlchemy Advanced Patterns Guide](guides/SQLAlchemy_Advanced_Patterns_Guide.md), [ORM Models](library_api_code/app/models.py)
+*   **Specificity (CSS):** The scoring system browsers use to decide which CSS rule wins when multiple selectors match the same element. Selectors like IDs carry more weight than classes or elements; pseudo-classes increase specificity, while `:where()` contributes zero specificity.
+    *See also:* [CSS Pseudo-Selectors Guide](guides/CSS_Pseudo_Selectors_Guide.md), [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md), [CSS Layout Guide](guides/CSS_Layout_Guide.md)
 *   **Stacking Context:** A three-dimensional conceptualization of HTML elements along an imaginary z-axis. Created by positioned elements with z-index values, transforms, opacity, or other CSS properties. Parent-child relationships within stacking contexts affect element layering.
     *See also:* [CSS Cheat Sheet](cheatsheets/CSS_Cheat_Sheet.md), [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
 *   **State:** Data that represents the current condition of an application or component. Managing state correctly is key to predictable UI behavior.

@@ -1,11 +1,11 @@
 # Full Stack Learning - Complete Cheat Sheet Collection
 
 [![Maintenance](https://img.shields.io/badge/Maintained%20by-tldrwtf-blue)](https://github.com/tldrwtf)
-[![Version](https://img.shields.io/badge/Version-1.14.0-orange.svg)](#changelog)
+[![Version](https://img.shields.io/badge/Version-1.15.0-orange.svg)](#changelog)
 
 If you find this resource useful, please consider leaving a star!
 
-**NEW in v1.14.0**: Added Learning Progression Guide with a structured 9-stage learning path from web foundations to production deployment, expanded Flask rate limiting documentation with Redis and dynamic tier patterns, and new glossary entry for Learning Progression!
+**NEW in v1.15.0**: Added comprehensive guides for Asynchronous JavaScript, CSS Pseudo-selectors, and Bootstrap component integration within custom CSS Grids. Expanded glossary.
 
 ---
 
@@ -76,7 +76,7 @@ def list_statistics(numbers: List[float]) -> Optional[Dict[str, float]]:
 
 ### Production-Quality Flask Examples
 
-the `library_api_code/` demonstrates real-world patterns:
+The `library_api_code/` demonstrates real-world patterns:
 - **Fully documented ORM models** with relationship diagrams
 - **Blueprint architecture** with clear separation of concerns
 - **Authentication patterns** with security best practices explained
@@ -159,11 +159,13 @@ Unlike typical code repositories that just show *what* works, I explain:
 Explore complex topics with the consolidated handbooks in `guides/` (individual legacy guides remain for targeted reference).
 
 - **Backend build/secure/ship:** [Flask API Build, Secure, Ship Handbook](guides/Flask_API_Build_Secure_Ship_Handbook.md) and [SQL & SQLAlchemy Deep Dive](guides/SQL_ORM_Deep_Dive.md)
-- **Frontend foundations:** [Frontend Fundamentals Workbook (JS + DOM + CSS)](guides/Frontend_Fundamentals_Workbook.md)
+- **Frontend foundations:** [Frontend Fundamentals Workbook (JS + DOM + CSS)](guides/Frontend_Fundamentals_Workbook.md), [Asynchronous JavaScript Guide](guides/Asynchronous_JavaScript_Guide.md)
+  - Covers event loop fundamentals, Promise concurrency (`all`, `allSettled`, `race`, `any`), cancellation via `AbortController`, timeout/retry patterns, and UI loading/error state design.
 - **React to fullstack:** [React to Fullstack Track (React 19 + Next.js 16)](guides/React_to_Fullstack_Track.md)
 - **Python practice path:** [Python Practice to Projects Path](guides/Python_Practice_to_Projects_Path.md)
 - **JavaScript deep dives:** [Fetch API Guide](guides/JavaScript_Fetch_API_Guide.md) and [LocalStorage Guide](guides/JavaScript_LocalStorage_Guide.md)
-- **CSS layout mastery:** [CSS Grid Advanced Guide](guides/CSS_Grid_Advanced_Guide.md) and [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md)
+- **CSS layout mastery:** [CSS Grid Advanced Guide](guides/CSS_Grid_Advanced_Guide.md), [CSS Flexbox Complete Guide](guides/CSS_Flexbox_Complete_Guide.md), [CSS Pseudo-Selectors Guide](guides/CSS_Pseudo_Selectors_Guide.md), [Bootstrap Components & Grid Guide](guides/Bootstrap_Components_and_Grid_Guide.md)
+  - Includes accessibility-first interaction states (`:focus-visible`), modern selector strategy (`:is`, `:where`, `:not`, `:has`), and hybrid Bootstrap + CSS Grid architecture patterns.
 - **Still need a specific topic?** Legacy guides like [API Authentication](guides/API_Authentication_Guide.md), [OAuth2](guides/OAuth2_and_Token_Management_Guide.md), and others remain available.
 
 ---
@@ -196,7 +198,7 @@ New to the repo? Follow the recommended [Learning Progression Guide](guides/Lear
 ## Glossary
 
 Confused by a term? Check out the comprehensive [Glossary of Terms](GLOSSARY.md) featuring:
-- **60+ full-stack development terms** covering frontend, backend, databases, DevOps, and more
+- **100+ full-stack development terms** covering frontend, backend, databases, DevOps, and more
 - **Cross-reference links** connecting every definition to relevant guides, cheat sheets, and code examples
 - **Navigation hub** allowing you to jump from concepts to learning materials instantly
 
@@ -231,6 +233,7 @@ Common issues when setting up the projects:
 ## Versioning
 <details>
 
+- **v1.15.0**: Added advanced Asynchronous JavaScript, CSS pseudo-selector, and Bootstrap + custom Grid guides; expanded glossary with modern async and selector terminology.
 - **v1.14.0**: Added Learning Progression Guide with structured 9-stage learning path, expanded Flask rate limiting with Redis and dynamic tier patterns, new glossary entry.
 - **v1.13.0**: React Basics Guide expanded with Lifting State Up and Controlled Components patterns, new glossary entries, and enhanced CSS pseudo-class/element examples.
 - **v1.12.0**: Enhanced SQLAlchemy and Flask guides with advanced production patterns including flush() vs commit(), JWT authentication decorators, caching pagination strategies, and association objects.
@@ -249,6 +252,44 @@ Common issues when setting up the projects:
 ## Changelog
 <details>
 
+```text
+commit v1.15.0
+Date:   2026-02-28
+feat: Async JavaScript, CSS pseudo-selector, and Bootstrap/Grid guide expansion
+
+NEW GUIDES:
+- Created Asynchronous_JavaScript_Guide.md with production-ready async patterns
+  * Event loop model: call stack, task queue, microtasks
+  * Promise utilities: all, allSettled, race, any
+  * Cancellation with AbortController and stale request handling
+  * Timeout and retry strategies with backoff
+  * UI state patterns: loading, empty, error, and duplicate submit protection
+
+- Created CSS_Pseudo_Selectors_Guide.md with modern selector strategy
+  * Pseudo-class vs pseudo-element mental model
+  * Accessibility-focused interaction states with :focus-visible
+  * Structural selectors and form validation states
+  * Specificity-aware selectors: :is(), :where(), :not(), :has()
+  * Practical UI patterns and browser support considerations
+
+- Created Bootstrap_Components_and_Grid_Guide.md for hybrid layout architecture
+  * Bootstrap components for UI primitives (navbar, cards, forms, carousel)
+  * CSS Grid template areas for macro layout control
+  * Responsive reconfiguration across breakpoints
+  * Accessibility and performance checklist for production pages
+
+GLOSSARY:
+- Expanded cross-referenced entries for async JavaScript and CSS selector ecosystems
+- Added terms including AbortController, Promise concurrency helpers, focus-visible, and selector specificity
+- Cleaned duplicate entries and aligned definitions with new guide content
+
+README:
+- Updated versioning and changelog to v1.15.0
+- Expanded guide descriptions to reflect practical depth and production focus
+
+---
+
+```
 ```text
 commit v1.14.0
 Date:   2026-01-22
